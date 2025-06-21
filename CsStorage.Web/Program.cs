@@ -1,8 +1,15 @@
+using CsStorage.IoC;
 using CsStorage.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
+
 // Add services to the container.
+builder.Services.AddInfrastructure(configuration);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 

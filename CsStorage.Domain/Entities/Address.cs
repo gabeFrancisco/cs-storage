@@ -22,7 +22,7 @@ namespace CsStorage.Domain.Entities
 
         public Address(int id, string road, string number, string complement, string neighborhood, string city, string state)
         {
-            DomainExceptionValidation.When(id > 0, "Invalid id");
+            DomainExceptionValidation.When(id < 0, "Invalid id");
             Id = id;
             ValidateDomain(road, number, complement, neighborhood, city, state);
         }
