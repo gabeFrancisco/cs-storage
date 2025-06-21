@@ -14,7 +14,7 @@ namespace CsStorage.IoC
 
                 b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName))
             );
-
+            
             return services;
         }
     }

@@ -14,7 +14,12 @@ namespace CsStorage.Data.Configuration
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Value).HasPrecision(10, 2).IsRequired();
-            builder.Property(x => x.Forecast).IsRequired().HasColumnType("date");
+            builder.Property(x => x.Forecast)
+                .HasColumnType("timestamp without time zone")
+                .IsRequired();
+            builder.Property(x => x.PaidDate)
+                .HasColumnType("timestamp without time zone")
+                .IsRequired();
 
             builder.HasOne(x => x.Customer);
         }
