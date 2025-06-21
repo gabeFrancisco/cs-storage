@@ -18,7 +18,6 @@ namespace CsStorage.Data.Configuration
             builder.Property(p => p.Cpf_cnpj).HasMaxLength(20).HasColumnName("cpf_cnpj");
 
             builder.HasOne(p => p.Address);
-
         }
     }
 }

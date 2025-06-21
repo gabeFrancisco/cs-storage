@@ -6,7 +6,7 @@ using CsStorage.Domain.Validation;
 
 namespace CsStorage.Domain.Entities
 {
-    public class Customer : Entity
+    public sealed class Customer : Entity
     {
         public string Name { get; private set; }
         public string Phone { get; private set; }
@@ -34,6 +34,7 @@ namespace CsStorage.Domain.Entities
             Name = name;
             Phone = phone;
             Cpf_cnpj = cpf_cnpj;
+            CreatedAt = DateTime.Now;
         }
     }
 }
