@@ -10,7 +10,7 @@ namespace CsStorage.Domain.Entities
     {
         public string Name { get; private set; }
         public string Phone { get; private set; }
-        public string? CPF_CNPJ { get; private set; }
+        public string Cpf_cnpj { get; private set; }
         public Address Address { get; set; }
         public int AddressId { get; set; }
 
@@ -26,14 +26,14 @@ namespace CsStorage.Domain.Entities
             ValidateDomain(name, phone, cpf_cnpj);
         }
 
-        private void ValidateDomain(string name, string phone, string? cpf_cnpj)
+        private void ValidateDomain(string name, string phone, string cpf_cnpj)
         {
             DomainExceptionValidation.When(string.IsNullOrEmpty(name), "Name is required");
             DomainExceptionValidation.When(string.IsNullOrEmpty(phone), "Phone is required");
 
             Name = name;
             Phone = phone;
-            CPF_CNPJ = cpf_cnpj;
+            Cpf_cnpj = cpf_cnpj;
         }
     }
 }
