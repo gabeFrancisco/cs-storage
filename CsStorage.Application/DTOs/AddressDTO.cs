@@ -10,6 +10,7 @@ namespace CsStorage.Application.DTOs
     public class AddressDTO
     {
         public int Id { get; set; }
+        
         [Required(ErrorMessage = "The Road field is required!")]
         [MaxLength(100)]
         [DisplayName("Road")]
