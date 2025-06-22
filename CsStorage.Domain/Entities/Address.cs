@@ -8,7 +8,7 @@ namespace CsStorage.Domain.Entities
 {
     public sealed class Address : Entity
     {
-        public string Road { get; protected set; }
+        public string Road { get; private set; }
         public string Number { get; private set; }
         public string Complement { get; private set; }
         public string Neighborhood { get; private set; }
