@@ -13,6 +13,7 @@ namespace CsStorage.Data.Context
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Debt> Debts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

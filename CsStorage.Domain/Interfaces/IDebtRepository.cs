@@ -11,8 +11,8 @@ namespace CsStorage.Domain.Interfaces
         
         Task<IEnumerable<Debt>> GetDebts();
         Task<Debt> GetById(int? id);
-        Task<Debt> Create(Debt product);
-        Task<Debt> Update(Debt product);
-        Task<Debt> Remove(Debt product);
+        Task<Debt> Create(Debt debt);
+        Task<Debt> Update(Debt debt);
+        Task<Debt> Remove(Debt debt);
     }
 }
