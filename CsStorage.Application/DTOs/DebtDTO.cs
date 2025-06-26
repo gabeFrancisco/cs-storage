@@ -17,15 +17,15 @@ namespace CsStorage.Application.DTOs
         [DisplayFormat(DataFormatString = "{0:C2}")]
         [DataType(DataType.Currency)]
         [DisplayName("Value")]
-        public decimal Value { get; private set; }
+        public decimal Value { get; set; }
 
         [Required(ErrorMessage = "The Forecast field is required!")]
         [DisplayName("Forecast")]
-        public DateTime Forecast { get; private set; }
+        public DateTime Forecast { get; set; }
 
         [Required(ErrorMessage = "The PaidDate field is required!")]
         [DisplayName("PaidDate")]
-        public DateTime? PaidDate { get; private set; }
+        public DateTime? PaidDate { get; set; }
         public CustomerDTO CustomerDto { get; set; }
 
         [DisplayName("Customer")]

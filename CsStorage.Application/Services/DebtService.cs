@@ -24,6 +24,8 @@ namespace CsStorage.Application.Services
             var debt = _mapper.Map<Debt>(debtDto);
             await _debtRepository.Create(debt);
 
+            Console.WriteLine("Gotcha here!");
+
             return debtDto;
         }
 
