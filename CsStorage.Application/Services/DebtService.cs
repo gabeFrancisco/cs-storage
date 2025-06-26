@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CsStorage.Application.DTOs;
 using CsStorage.Application.Interfaces;
+using CsStorage.Domain.Entities;
 using CsStorage.Domain.Interfaces;
 
 namespace CsStorage.Application.Services
@@ -11,13 +13,18 @@ namespace CsStorage.Application.Services
     public class DebtService : IDebtService
     {
         private readonly IDebtRepository _debtRepository;
-        public DebtService(IDebtRepository debtRepository)
+        private readonly IMapper _mapper;
+        public DebtService(IDebtRepository debtRepository, IMapper mapper)
         {
             _debtRepository = debtRepository;
+            _mapper = mapper;
         }
-        public Task<DebtDTO> Create(DebtDTO debt)
+        public async Task<DebtDTO> Create(DebtDTO debtDto)
         {
-            throw new NotImplementedException();
+            var debt = _mapper.Map<Debt>(debtDto);
+            await _debtRepository.Create(debt);
+
+            return debtDto;
         }
 
         public Task<DebtDTO> GetById(int? id)

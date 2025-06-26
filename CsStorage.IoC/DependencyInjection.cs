@@ -1,4 +1,9 @@
-﻿using CsStorage.Data.Context;
+﻿using CsStorage.Application.Interfaces;
+using CsStorage.Application.Mappings;
+using CsStorage.Application.Services;
+using CsStorage.Data;
+using CsStorage.Data.Context;
+using CsStorage.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +20,11 @@ namespace CsStorage.IoC
                 b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName))
             );
 
-            // services.AddAutoMapper(typeof)
+            services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+
+            services.AddScoped<IDebtRepository, DebtRepository>();
+            services.AddScoped<IDebtService, DebtService>();
+
             return services;
         }
     }
