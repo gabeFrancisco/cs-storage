@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using CsStorage.Domain.Entities;
 
 namespace CsStorage.Application.DTOs
 {
@@ -26,7 +27,7 @@ namespace CsStorage.Application.DTOs
         [Required(ErrorMessage = "The PaidDate field is required!")]
         [DisplayName("PaidDate")]
         public DateTime? PaidDate { get; set; }
-        public CustomerDTO CustomerDto { get; set; }
+        public Customer Customer { get; set; }
 
         [DisplayName("Customer")]
         public int CustomerId { get; set; }

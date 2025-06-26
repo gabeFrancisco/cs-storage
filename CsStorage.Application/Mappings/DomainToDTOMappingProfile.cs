@@ -13,6 +13,8 @@ namespace CsStorage.Application.Mappings
         public DomainToDTOMappingProfile()
         {
             CreateMap<Debt, DebtDTO>().ReverseMap();
+            CreateMap<Customer, CustomerDTO>().ReverseMap();
+            CreateMap<Address, AddressDTO>().ReverseMap();
         }
     }
 }

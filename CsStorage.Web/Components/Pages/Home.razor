@@ -1,15 +1,18 @@
 ﻿@page "/"
 @using CsStorage.Application.DTOs
 @using CsStorage.Application.Interfaces
+@using System.Text.Json;
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
-<h1>@debtDTO</h1>
 but
 
 Welcome to your new app.
 
+<br/>
+<code>@JsonSerializer.Serialize(debtDTO)</code>
+<br/>
 @code {
     [Inject]
     protected IDebtService debtService { get; set; }

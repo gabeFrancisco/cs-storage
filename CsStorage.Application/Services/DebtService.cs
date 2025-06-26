@@ -29,9 +29,10 @@ namespace CsStorage.Application.Services
             return debtDto;
         }
 
-        public Task<DebtDTO> GetById(int? id)
+        public async Task<DebtDTO> GetById(int? id)
         {
-            throw new NotImplementedException();
+            var debt = await _debtRepository.GetById(id);
+            return _mapper.Map<DebtDTO>(debt);
         }
 
         public Task<IEnumerable<DebtDTO>> GetDebts()

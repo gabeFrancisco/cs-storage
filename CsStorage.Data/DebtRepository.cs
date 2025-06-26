@@ -26,7 +26,13 @@ namespace CsStorage.Data
 
         public async Task<Debt> GetById(int? id)
         {
-            return await _context.Debts.FindAsync(id);
+            var debt = await _context.Debts
+                .Where(x => x.Id == id)
+                .Include(x => x.Customer)
+                .ThenInclude(y => y.Address)
+                .FirstOrDefaultAsync();
+
+            return debt;
         }
 
         public async Task<IEnumerable<Debt>> GetDebts()
