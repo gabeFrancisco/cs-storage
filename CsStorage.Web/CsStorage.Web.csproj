@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CsStorage.IoC\CsStorage.IoC.csproj" />
+    <ProjectReference Include="..\CsStorage.Application\CsStorage.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

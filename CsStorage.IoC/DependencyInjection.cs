@@ -14,7 +14,8 @@ namespace CsStorage.IoC
 
                 b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName))
             );
-            
+
+            // services.AddAutoMapper(typeof)
             return services;
         }
     }
