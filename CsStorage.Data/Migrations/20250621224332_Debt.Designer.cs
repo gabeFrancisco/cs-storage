@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CsStorage.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250621224332_Debt")]
-    partial class Debt
+    [Migration("20250621224332_Debts")]
+    partial class Debts
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,7 +128,7 @@ namespace CsStorage.Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("CsStorage.Domain.Entities.Debt", b =>
+            modelBuilder.Entity("CsStorage.Domain.Entities.Debts", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,7 +159,7 @@ namespace CsStorage.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Debt");
+                    b.ToTable("Debts");
                 });
 
             modelBuilder.Entity("CsStorage.Domain.Entities.Customer", b =>
@@ -173,7 +173,7 @@ namespace CsStorage.Data.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("CsStorage.Domain.Entities.Debt", b =>
+            modelBuilder.Entity("CsStorage.Domain.Entities.Debts", b =>
                 {
                     b.HasOne("CsStorage.Domain.Entities.Customer", "Customer")
                         .WithMany()

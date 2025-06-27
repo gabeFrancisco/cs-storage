@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CsStorage.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CsStorage.Data.Configuration
+{
+    public class MissingProductConfiguration : IEntityTypeConfiguration<MissingProduct>
+    {
+        public void Configure(EntityTypeBuilder<MissingProduct> builder)
+        {
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.NeededDay)
+                .HasColumnType("timestamp without time zone");
+            builder.Property(x => x.IsBought).IsRequired();
+
+            builder.HasOne(x => x.Customer);
+        }
+    }
+}

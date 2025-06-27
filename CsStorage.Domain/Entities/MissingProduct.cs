@@ -12,7 +12,7 @@ namespace CsStorage.Domain.Entities
         public Customer? Customer { get; set; }
         public int? CustomerId { get; set; }
         public DateTime NeededDay { get; private set; }
-        public Boolean IsBought { get; private set; }
+        public bool IsBought { get; private set; }
 
         public MissingProduct(string name, DateTime neededDay)
         {

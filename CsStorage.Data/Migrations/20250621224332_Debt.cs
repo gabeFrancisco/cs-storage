@@ -7,13 +7,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CsStorage.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Debt : Migration
+    public partial class Debts : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Debt",
+                name: "Debts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -27,9 +27,9 @@ namespace CsStorage.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Debt", x => x.Id);
+                    table.PrimaryKey("PK_Debts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Debt_Customers_CustomerId",
+                        name: "FK_Debts_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
@@ -44,8 +44,8 @@ namespace CsStorage.Data.Migrations
                 value: new DateTime(2025, 6, 21, 19, 43, 31, 525, DateTimeKind.Local).AddTicks(7841));
 
             migrationBuilder.CreateIndex(
-                name: "IX_Debt_CustomerId",
-                table: "Debt",
+                name: "IX_Debts_CustomerId",
+                table: "Debts",
                 column: "CustomerId");
         }
 
@@ -53,7 +53,7 @@ namespace CsStorage.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Debt");
+                name: "Debts");
 
             migrationBuilder.UpdateData(
                 table: "Addresses",
