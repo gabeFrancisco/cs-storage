@@ -1,16 +1,19 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
+    @* <div class="sidebar">
         <NavMenu />
-    </div>
+    </div> *@
 
     <main>
-        <header class="top-row px-4 flex">
-            <div>
-                
+        <header class="flex flex-row items-center bg-gray-50 py-1 px-7 shadow-sm border-b">
+            <div class="flex flex-row items-center mr-10">
+                <img src="@Assets["logo.png"]" class="w-9 rounded">
             </div>
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <NavLink class="mr-5 hover:text-sky-700" href="/">Painel</NavLink>
+            <NavLink class="mr-5 hover:text-sky-700" href="/debitos">Débitos</NavLink>
+            <NavLink class="mr-5 hover:text-sky-700" href="/produtosemfalta">Produtos em Falta</NavLink>
+            <NavLink class="mr-5 hover:text-sky-700" href="/ordens">Ordens de Serviço</NavLink>
         </header>
 
         <article class="content px-4">
@@ -24,3 +27,8 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+
+@code {
+
+}
