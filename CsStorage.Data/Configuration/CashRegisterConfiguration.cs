@@ -12,5 +12,7 @@ public class CashRegisterConfiguration : IEntityTypeConfiguration<CashRegister>
         builder.Property(x => x.PaymentType).IsRequired();
         builder.Property(x => x.Value).HasPrecision(10, 2).IsRequired();
         builder.Property(x => x.Description).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.CreatedAt).HasColumnType("timestamp without time zone").IsRequired();
+        builder.Property(x => x.UpdatedAt).HasColumnType("timestamp without time zone");
     }
 }

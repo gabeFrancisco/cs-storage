@@ -16,6 +16,8 @@ namespace CsStorage.Data.Configuration
             builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
             builder.Property(p => p.Phone).HasMaxLength(20).IsRequired();
             builder.Property(p => p.Cpf_cnpj).HasMaxLength(20).HasColumnName("cpf_cnpj");
+            builder.Property(x => x.CreatedAt).HasColumnType("timestamp without time zone").IsRequired();
+            builder.Property(x => x.UpdatedAt).HasColumnType("timestamp without time zone");
 
             builder.HasOne(p => p.Address);
         }

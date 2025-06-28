@@ -19,10 +19,12 @@ namespace CsStorage.Data.Configuration
             builder.Property(x => x.Neighborhood).HasMaxLength(50);
             builder.Property(x => x.City).HasMaxLength(50);
             builder.Property(x => x.State).HasMaxLength(50);
+            builder.Property(x => x.CreatedAt).HasColumnType("timestamp without time zone").IsRequired();
+            builder.Property(x => x.UpdatedAt).HasColumnType("timestamp without time zone");
 
-            builder.HasData(
-                new Address(1, "Road Three", "12N", "", "Saint Mary", "Some American City", "NY")
-            );
+            // builder.HasData(
+            //     new Address(1, "Road Three", "12N", "", "Saint Mary", "Some American City", "NY")
+            // );
         }
     }
 }

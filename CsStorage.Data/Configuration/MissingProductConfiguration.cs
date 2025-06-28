@@ -18,6 +18,9 @@ namespace CsStorage.Data.Configuration
                 .HasColumnType("timestamp without time zone");
             builder.Property(x => x.IsBought).IsRequired();
 
+            builder.Property(x => x.CreatedAt).HasColumnType("timestamp without time zone").IsRequired();
+            builder.Property(x => x.UpdatedAt).HasColumnType("timestamp without time zone");
+
             builder.HasOne(x => x.Customer);
         }
     }

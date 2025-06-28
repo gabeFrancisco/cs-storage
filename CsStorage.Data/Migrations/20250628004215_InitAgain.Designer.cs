@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CsStorage.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250627011228_MissingProduct")]
-    partial class MissingProduct
+    [Migration("20250628004215_InitAgain")]
+    partial class InitAgain
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,7 +44,7 @@ namespace CsStorage.Data.Migrations
                         .HasColumnType("character varying(30)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Neighborhood")
                         .IsRequired()
@@ -67,24 +67,42 @@ namespace CsStorage.Data.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Some American City",
-                            Complement = "",
-                            CreatedAt = new DateTime(2025, 6, 26, 22, 12, 27, 478, DateTimeKind.Local).AddTicks(1441),
-                            Neighborhood = "Saint Mary",
-                            Number = "12N",
-                            Road = "Road Three",
-                            State = "NY"
-                        });
+            modelBuilder.Entity("CsStorage.Domain.Entities.CashRegister", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<decimal>("Value")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("numeric(10,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CashRegisters");
                 });
 
             modelBuilder.Entity("CsStorage.Domain.Entities.Customer", b =>
@@ -105,7 +123,7 @@ namespace CsStorage.Data.Migrations
                         .HasColumnName("cpf_cnpj");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -118,13 +136,47 @@ namespace CsStorage.Data.Migrations
                         .HasColumnType("character varying(20)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("CsStorage.Domain.Entities.Debt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Forecast")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("PaidDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<decimal>("Value")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("numeric(10,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Debts");
                 });
 
             modelBuilder.Entity("CsStorage.Domain.Entities.MissingProduct", b =>
@@ -136,7 +188,7 @@ namespace CsStorage.Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("CustomerId")
                         .HasColumnType("integer");
@@ -153,7 +205,7 @@ namespace CsStorage.Data.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -171,6 +223,17 @@ namespace CsStorage.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("CsStorage.Domain.Entities.Debt", b =>
+                {
+                    b.HasOne("CsStorage.Domain.Entities.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("CsStorage.Domain.Entities.MissingProduct", b =>
