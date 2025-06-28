@@ -35,9 +35,10 @@ namespace CsStorage.Application.Services
             return _mapper.Map<DebtDTO>(debt);
         }
 
-        public Task<IEnumerable<DebtDTO>> GetDebts()
+        public async Task<IEnumerable<DebtDTO>> GetDebts()
         {
-            throw new NotImplementedException();
+            var debts = await _debtRepository.GetDebts();
+            return _mapper.Map<IEnumerable<DebtDTO>>(debts);
         }
 
         public Task<DebtDTO> Remove(DebtDTO debt)

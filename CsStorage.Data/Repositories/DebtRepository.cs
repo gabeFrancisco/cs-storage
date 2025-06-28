@@ -32,12 +32,15 @@ namespace CsStorage.Data
                 .ThenInclude(y => y.Address)
                 .FirstOrDefaultAsync();
 
-            return debt;
+            return debt!;
         }
 
         public async Task<IEnumerable<Debt>> GetDebts()
         {
-            return await _context.Debts.ToListAsync();
+            return await _context.Debts
+                .Include(x => x.Customer)
+                .ThenInclude(y => y.Address)
+                .ToListAsync();
         }
 
         public async Task<Debt> Remove(Debt debt)

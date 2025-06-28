@@ -16,18 +16,18 @@ Welcome to your new app.
 @code {
     [Inject]
     protected IDebtService debtService { get; set; }
-    protected DebtDTO debtDTO;
+    protected IEnumerable<DebtDTO> debtDTO;
     public DebtDTO dTO = new DebtDTO
     {
         Value = 30,
-        CustomerId = 3,
+        CustomerId = 1,
         PaidDate = DateTime.Now,
         Forecast = DateTime.Now.AddDays(3)
     };
 
     protected async override Task OnInitializedAsync(){
         Console.WriteLine("It's working! Ahhhhhhhhhhhhhhh!");
-        Console.WriteLine(await debtService.Create(dTO));
-        debtDTO = await debtService.GetById(1);
+        @* Console.WriteLine(await debtService.Create(dTO)); *@
+        debtDTO = await debtService.GetDebts();
     }
 }
