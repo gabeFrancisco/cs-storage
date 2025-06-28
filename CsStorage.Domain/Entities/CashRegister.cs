@@ -25,6 +25,10 @@ namespace CsStorage.Domain.Entities
         {
             DomainExceptionValidation.When(value < 0, "Value must be greather than 0");
             DomainExceptionValidation.When(string.IsNullOrEmpty(description), "Description cannot be null");
+
+            PaymentType = paymentType;
+            Value = value;
+            Description = description;
         }
     }
 }
