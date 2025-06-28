@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStorage.Domain", "CsStora
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStorage.IoC", "CsStorage.IoC\CsStorage.IoC.csproj", "{CA0B4C4F-5162-4A49-833A-E50F5EB71CBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStorage.Tests", "CsStorage.Tests\CsStorage.Tests.csproj", "{13580F5B-8A89-4084-893E-646595E9BC0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{CA0B4C4F-5162-4A49-833A-E50F5EB71CBE}.Release|x64.Build.0 = Release|Any CPU
 		{CA0B4C4F-5162-4A49-833A-E50F5EB71CBE}.Release|x86.ActiveCfg = Release|Any CPU
 		{CA0B4C4F-5162-4A49-833A-E50F5EB71CBE}.Release|x86.Build.0 = Release|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Debug|x64.Build.0 = Debug|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Debug|x86.Build.0 = Debug|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Release|x64.ActiveCfg = Release|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Release|x64.Build.0 = Release|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Release|x86.ActiveCfg = Release|Any CPU
+		{13580F5B-8A89-4084-893E-646595E9BC0A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
