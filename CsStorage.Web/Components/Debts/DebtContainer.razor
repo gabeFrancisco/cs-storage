@@ -1,0 +1,24 @@
+@using CsStorage.Application.DTOs
+@rendermode InteractiveServer
+
+<div class="w-full border border-gray-300 rounded">
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-600 dark:text-gray-400">
+            <thead class="text-sm p-1 text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th class="font-thin">Id</th>
+                    <th class="font-thin">Cliente</th>
+                    <th class="font-thin">Previsão</th>
+                    <th class="font-thin">Valor</th>
+                    <th class="font-thin">Pago</th>
+                    <th class="font-thin">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(DebtDTO debtDTO in Debts){
+                    <DebtRow Debt=debtDTO/>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

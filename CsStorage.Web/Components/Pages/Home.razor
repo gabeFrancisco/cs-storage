@@ -3,7 +3,11 @@
 @using CsStorage.Application.Interfaces
 @using System.Text.Json;
 @using CsStorage.Web.Components.Cash;
+@using CsStorage.Web.Components.Debts;
 
 <PageTitle>Home</PageTitle>
 
-<CashContainer/>
+<div class="grid grid-cols-2 gap-2">
+    <CashContainer />
+    <DebtContainer />
+</div>
