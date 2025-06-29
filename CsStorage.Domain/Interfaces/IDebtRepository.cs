@@ -6,13 +6,8 @@ using CsStorage.Domain.Entities;
 
 namespace CsStorage.Domain.Interfaces
 {
-    public interface IDebtRepository
+    public interface IDebtRepository : IBaseRepository<Debt>
     {
-        
-        Task<IEnumerable<Debt>> GetDebts();
-        Task<Debt> GetById(int? id);
-        Task<Debt> Create(Debt debt);
-        Task<Debt> Update(Debt debt);
-        Task<Debt> Remove(Debt debt);
+
     }
 }

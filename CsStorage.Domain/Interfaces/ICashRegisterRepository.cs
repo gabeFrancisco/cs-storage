@@ -6,12 +6,8 @@ using CsStorage.Domain.Entities;
 
 namespace CsStorage.Domain.Interfaces
 {
-    public interface ICashRegisterRepository
+    public interface ICashRegisterRepository : IBaseRepository<CashRegister>
     {
-         Task<IEnumerable<CashRegister>> GetRegisters();
-        Task<CashRegister> GetById(int? id);
-        Task<CashRegister> Create(CashRegister register);
-        Task<CashRegister> Update(CashRegister register);
-        Task<CashRegister> Remove(CashRegister register);
+       
     }
 }

@@ -6,12 +6,8 @@ using CsStorage.Application.DTOs;
 
 namespace CsStorage.Application.Interfaces
 {
-    public interface ICashRegisterService
+    public interface ICashRegisterService : IBaseService<CashRegisterDTO>
     {
-        Task<IEnumerable<CashRegisterDTO>> GetRegisters();
-        Task<CashRegisterDTO> GetById(int? id);
-        Task<CashRegisterDTO> Create(CashRegisterDTO register);
-        Task<CashRegisterDTO> Update(CashRegisterDTO register);
-        Task<CashRegisterDTO> Remove(CashRegisterDTO register);
+       
     }
 }

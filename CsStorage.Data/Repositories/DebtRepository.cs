@@ -35,7 +35,7 @@ namespace CsStorage.Data
             return debt!;
         }
 
-        public async Task<IEnumerable<Debt>> GetDebts()
+        public async Task<IEnumerable<Debt>> GetAll()
         {
             return await _context.Debts
                 .Include(x => x.Customer)
