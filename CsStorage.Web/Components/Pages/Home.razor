@@ -25,9 +25,9 @@ Welcome to your new app.
         Forecast = DateTime.Now.AddDays(3)
     };
 
-    protected async override Task OnInitializedAsync(){
+    protected override async Task OnInitializedAsync(){
         Console.WriteLine("It's working! Ahhhhhhhhhhhhhhh!");
         @* Console.WriteLine(await debtService.Create(dTO)); *@
-        debtDTO = await debtService.GetDebts();
+        debtDTO = await debtService.GetAll();
     }
 }

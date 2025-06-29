@@ -24,8 +24,6 @@ namespace CsStorage.Application.Services
             var debt = _mapper.Map<Debt>(debtDto);
             await _debtRepository.Create(debt);
 
-            Console.WriteLine("Gotcha here!");
-
             return debtDto;
         }
 
@@ -35,7 +33,7 @@ namespace CsStorage.Application.Services
             return _mapper.Map<DebtDTO>(debt);
         }
 
-        public async Task<IEnumerable<DebtDTO>> GetDebts()
+        public async Task<IEnumerable<DebtDTO>> GetAll()
         {
             var debts = await _debtRepository.GetAll();
             return _mapper.Map<IEnumerable<DebtDTO>>(debts);

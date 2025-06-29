@@ -12,9 +12,7 @@ namespace CsStorage.Data
 {
     public class DebtRepository : BaseRepository<Debt>, IDebtRepository
     {
-        public DebtRepository(AppDbContext context) : base(context)
-        {
-        }
+        public DebtRepository(AppDbContext context) : base(context) { }
 
         public override async Task<Debt> GetById(int? id)
         {

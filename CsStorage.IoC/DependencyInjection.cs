@@ -3,6 +3,7 @@ using CsStorage.Application.Mappings;
 using CsStorage.Application.Services;
 using CsStorage.Data;
 using CsStorage.Data.Context;
+using CsStorage.Data.Repositories;
 using CsStorage.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,9 +22,14 @@ namespace CsStorage.IoC
             );
 
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
-
+            
+            //Repositories
             services.AddScoped<IDebtRepository, DebtRepository>();
+            services.AddScoped<ICashRegisterRepository, CashRegisterRepository>();
+
+            //Services
             services.AddScoped<IDebtService, DebtService>();
+            services.AddScoped<ICashRegisterService, CashRegisterService>();
 
             return services;
         }
