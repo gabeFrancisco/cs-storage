@@ -18,7 +18,8 @@ namespace CsStorage.IoC
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
 
-                b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName))
+                b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)),
+                ServiceLifetime.Transient
             );
 
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
