@@ -3,28 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CsStorage.Data.Context;
+using CsStorage.Data.Repositories;
 using CsStorage.Domain.Entities;
 using CsStorage.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace CsStorage.Data
 {
-    public class DebtRepository : IDebtRepository
+    public class DebtRepository : BaseRepository<Debt>, IDebtRepository
     {
-        private readonly AppDbContext _context;
-        public DebtRepository(AppDbContext context)
+        public DebtRepository(AppDbContext context) : base(context)
         {
-            _context = context;
-        }
-        public async Task<Debt> Create(Debt debt)
-        {
-            _context.Debts.Add(debt);
-            await _context.SaveChangesAsync();
-            
-            return debt;
         }
 
-        public async Task<Debt> GetById(int? id)
+        public override async Task<Debt> GetById(int? id)
         {
             var debt = await _context.Debts
                 .Where(x => x.Id == id)
@@ -35,28 +27,12 @@ namespace CsStorage.Data
             return debt!;
         }
 
-        public async Task<IEnumerable<Debt>> GetAll()
+        public override async Task<IEnumerable<Debt>> GetAll()
         {
             return await _context.Debts
                 .Include(x => x.Customer)
                 .ThenInclude(y => y.Address)
                 .ToListAsync();
-        }
-
-        public async Task<Debt> Remove(Debt debt)
-        {
-            _context.Debts.Remove(debt);
-            await _context.SaveChangesAsync();
-
-            return debt;
-        }
-
-        public async Task<Debt> Update(Debt debt)
-        {
-            _context.Debts.Update(debt);
-            await _context.SaveChangesAsync();
-
-            return debt;
         }
     }
 }

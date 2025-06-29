@@ -37,7 +37,7 @@ namespace CsStorage.Application.Services
 
         public async Task<IEnumerable<DebtDTO>> GetDebts()
         {
-            var debts = await _debtRepository.GetDebts();
+            var debts = await _debtRepository.GetAll();
             return _mapper.Map<IEnumerable<DebtDTO>>(debts);
         }
 

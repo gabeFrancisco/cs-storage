@@ -23,12 +23,12 @@ namespace CsStorage.Data.Repositories
             return entity;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAll()
         {
             return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<TEntity> GetById(int? id)
+        public virtual async Task<TEntity> GetById(int? id)
         {
             return _context.Set<TEntity>().Find(id)!;
         }
