@@ -10,7 +10,7 @@ namespace CsStorage.Application.DTOs
     public class AddressDTO
     {
         public int Id { get; set; }
-        
+
         [Required(ErrorMessage = "The Road field is required!")]
         [MaxLength(100)]
         [DisplayName("Road")]
@@ -32,5 +32,6 @@ namespace CsStorage.Application.DTOs
 
         [DisplayName("State")]
         public string State { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

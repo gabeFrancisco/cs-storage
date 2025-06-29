@@ -28,5 +28,6 @@ namespace CsStorage.Application.DTOs
 
         [DisplayName("Address")]
         public int AddressId { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

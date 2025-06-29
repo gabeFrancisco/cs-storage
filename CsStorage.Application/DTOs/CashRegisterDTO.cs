@@ -27,6 +27,7 @@ namespace CsStorage.Application.DTOs
         [MaxLength(50)]
         [DisplayName("Description")]
         public string Description { get; set; }
+        public DateTime CreatedAt { get; set; }
 
     }
 }

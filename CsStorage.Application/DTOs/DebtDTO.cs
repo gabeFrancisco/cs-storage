@@ -31,5 +31,6 @@ namespace CsStorage.Application.DTOs
 
         [DisplayName("Customer")]
         public int CustomerId { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
