@@ -2,32 +2,8 @@
 @using CsStorage.Application.DTOs
 @using CsStorage.Application.Interfaces
 @using System.Text.Json;
+@using CsStorage.Web.Components.Cash;
 
 <PageTitle>Home</PageTitle>
 
-<h1 class="bg-blue-500">Hello, world!</h1>
-but
-
-Welcome to your new app.
-
-<br/>
-<code>@JsonSerializer.Serialize(debtDTO)</code>
-<br/>
-@code {
-    [Inject]
-    protected IDebtService debtService { get; set; }
-    protected IEnumerable<DebtDTO> debtDTO;
-    public DebtDTO dTO = new DebtDTO
-    {
-        Value = 30,
-        CustomerId = 1,
-        PaidDate = DateTime.Now,
-        Forecast = DateTime.Now.AddDays(3)
-    };
-
-    protected override async Task OnInitializedAsync(){
-        Console.WriteLine("It's working! Ahhhhhhhhhhhhhhh!");
-        @* Console.WriteLine(await debtService.Create(dTO)); *@
-        debtDTO = await debtService.GetAll();
-    }
-}
+<CashContainer/>

@@ -1,0 +1,12 @@
+@rendermode InteractiveServer
+
+<tr>
+    <th scope="col" class="py-1">@Register.Id</th>
+    <th scope="col" class="py-1">@Register.Description</th>
+    <th scope="col" class="py-1">@Register.PaymentType.ToString()</th>
+    <th scope="col" class="py-1">@Register.Value</th>
+    <th scope="col" class="py-1">
+        <button class="btn-primary font-thin py-1 px-3 rounded">Editar</button>
+        <button class="btn-red py-1 font-thin px-3 rounded">Remover</button>
+    </th>
+</tr>
