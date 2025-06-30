@@ -1,21 +1,25 @@
 <form class="flex flex-row p-1 justify-between items-center flex-wrap">
-    <div class="mr-1">
-        <label class="text-sm" for="description">Descrição</label>
-        <InputText @bind-Value=Register.Description class="border border-gray-400" />
-    </div>
-    <div class="mr-1">
-        <label class="text-sm" for="paymenttype">Tipo</label>
-        <InputSelect @bind-Value=Register.PaymentType>
-            @foreach (var paymentType in PaymentTypes)
-            {
-                <option value=@paymentType.Value>@paymentType.Key</option>
-            }
-        </InputSelect>
+    <div class="flex flex-col">
+        <div class="mr-1">
+            <label class="text-sm" for="description">Descrição</label>
+            <InputText @bind-Value=Register.Description class="border border-gray-400" />
+        </div>
+        <div class="mr-1">
+            <label class="text-sm" for="paymenttype">Tipo</label>
+            <InputSelect @bind-Value=Register.PaymentType>
+                @foreach (var paymentType in PaymentTypes)
+                {
+                    <option value=@paymentType.Value>@paymentType.Key</option>
+                }
+            </InputSelect>
 
+        </div>
     </div>
-    <div class="mr-1">
+
+    <div class="flex flex-col">
         <label class="text-sm" for="value">Valor</label>
         <InputNumber type="text" @bind-Value=Register.Value class="border border-gray-400 w-2/4" />
+        <InputDate @bind-Value=Register.CreatedAt />
     </div>
     <button class="btn-green font-bold text-xl">+</button>
 </form>
