@@ -1,22 +1,21 @@
 <form class="flex flex-row p-1 justify-between items-center flex-wrap">
     <div class="mr-1">
         <label class="text-sm" for="description">Descrição</label>
-        <InputText type="text" class="border border-gray-400" name="description" id="description"/>
+        <InputText @bind-Value=Register.Description class="border border-gray-400" />
     </div>
     <div class="mr-1">
         <label class="text-sm" for="paymenttype">Tipo</label>
-        <InputSelect name="paymenttype" id="paymenttype">
-            <option value="">Dinheiro</option>
-            <option value="">Débito</option>
-            <option value="">Crédito</option>
-            <option value="">Pix</option>
-            <option value="">Depósito</option>
+        <InputSelect @bind-Value=Register.PaymentType>
+            @foreach (var paymentType in PaymentTypes)
+            {
+                <option value=@paymentType.Value>@paymentType.Key</option>
+            }
         </InputSelect>
 
     </div>
     <div class="mr-1">
         <label class="text-sm" for="value">Valor</label>
-        <input type="text" class="border border-gray-400 w-2/4" name="value" id="value">
+        <InputNumber type="text" @bind-Value=Register.Value class="border border-gray-400 w-2/4" />
     </div>
     <button class="btn-green font-bold text-xl">+</button>
 </form>
