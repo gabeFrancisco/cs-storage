@@ -26,7 +26,7 @@ namespace CsStorage.Application.DTOs
 
         [Required(ErrorMessage = "The PaidDate field is required!")]
         [DisplayName("PaidDate")]
-        public DateTime? PaidDate { get; set; }
+        public DateTime PaidDate { get; set; }
         public Customer Customer { get; set; }
 
         [DisplayName("Customer")]
