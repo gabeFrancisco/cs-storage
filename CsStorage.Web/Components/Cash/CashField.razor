@@ -1,17 +1,17 @@
 <form class="flex flex-row p-1 justify-between items-center flex-wrap">
     <div class="mr-1">
         <label class="text-sm" for="description">Descrição</label>
-        <input type="text" class="border border-gray-400" name="description" id="description">
+        <InputText type="text" class="border border-gray-400" name="description" id="description"/>
     </div>
     <div class="mr-1">
         <label class="text-sm" for="paymenttype">Tipo</label>
-        <select name="paymenttype" id="paymenttype">
+        <InputSelect name="paymenttype" id="paymenttype">
             <option value="">Dinheiro</option>
             <option value="">Débito</option>
             <option value="">Crédito</option>
             <option value="">Pix</option>
             <option value="">Depósito</option>
-        </select>
+        </InputSelect>
 
     </div>
     <div class="mr-1">
