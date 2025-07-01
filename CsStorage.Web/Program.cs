@@ -16,7 +16,7 @@ builder.Services.AddRazorComponents()
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-builder.Services.AddTransient<FormEventService>();
+builder.Services.AddSingleton<FormEventService>();
 
 var app = builder.Build();
 

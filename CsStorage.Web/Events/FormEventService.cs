@@ -7,7 +7,7 @@ namespace CsStorage.Web.Events
 {
     public class FormEventService
     {
-        public event Action OnCashFormSubmitted;
+        public event Func<Task> OnCashFormSubmitted;
 
         public void FormSubmitted()
         {

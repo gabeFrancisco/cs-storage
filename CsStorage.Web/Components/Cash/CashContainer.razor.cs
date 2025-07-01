@@ -22,11 +22,11 @@ namespace CsStorage.Web.Components.Cash
 
         protected override async Task OnInitializedAsync()
         {
-            _eventService.OnCashFormSubmitted += Reload;
+            _eventService.OnCashFormSubmitted += async () => await InvokeAsync(Reload);
             Registers = await _cashRegisterService.GetAll();
         }
 
-        private async void Reload()
+        private async Task Reload()
         {
             Registers = await _cashRegisterService.GetAll();
             StateHasChanged();
