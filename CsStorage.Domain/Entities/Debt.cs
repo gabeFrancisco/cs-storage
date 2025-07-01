@@ -29,7 +29,7 @@ namespace CsStorage.Domain.Entities
         private void ValidateDomain(decimal value, DateTime forecast, DateTime? paidDate)
         {
             DomainExceptionValidation.When(value < 0, "Value must be greater than 0");
-            DomainExceptionValidation.When(forecast.CompareTo(DateTime.Now) < 0, "Forecast must be greater than actual data");
+            // DomainExceptionValidation.When(forecast.CompareTo(DateTime.Now) < 0, "Forecast must be greater than actual data");
 
             Value = value;
             Forecast = forecast;

@@ -1,5 +1,6 @@
 using CsStorage.IoC;
 using CsStorage.Web.Components;
+using CsStorage.Web.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+builder.Services.AddTransient<FormEventService>();
 
 var app = builder.Build();
 
