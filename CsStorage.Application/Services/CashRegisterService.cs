@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CsStorage.Application.DTOs;
 using CsStorage.Application.Interfaces;
+using CsStorage.Domain.Entities;
 using CsStorage.Domain.Interfaces;
 
 namespace CsStorage.Application.Services
@@ -18,9 +19,12 @@ namespace CsStorage.Application.Services
             _cashRegisterRepository = cashRegisterRepository;
             _mapper = mapper;
         }
-        public Task<CashRegisterDTO> Create(CashRegisterDTO dto)
+        public async Task<CashRegisterDTO> Create(CashRegisterDTO dto)
         {
-            throw new NotImplementedException();
+            var register = _mapper.Map<CashRegister>(dto);
+            await _cashRegisterRepository.Create(register);
+
+            return dto;
         }
 
         public async Task<IEnumerable<CashRegisterDTO>> GetAll()
