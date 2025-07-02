@@ -25,7 +25,9 @@ namespace CsStorage.Data.Repositories
 
         public virtual async Task<IEnumerable<TEntity>> GetAll()
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            return await _context.Set<TEntity>()
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public virtual async Task<TEntity> GetById(int? id)
