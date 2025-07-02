@@ -11,7 +11,7 @@ namespace CsStorage.Web.Events
 
         public void FormSubmitted()
         {
-            OnCashFormSubmitted?.Invoke();
+            OnCashFormSubmitted.Invoke();
             
         }
     }
