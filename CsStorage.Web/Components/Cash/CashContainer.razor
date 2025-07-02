@@ -1,24 +1,28 @@
 @using CsStorage.Application.DTOs
 @rendermode InteractiveServer
 
-<div style="height: 50vh" class="w-full border border-gray-300 overflow-y-scroll rounded">
+<div class="w-full border border-gray-300 rounded">
+        <div class="p-2 font-bold text-center text-gray-700 bg-gray-100">Caixa</div>
     <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-left rtl:text-right  dark:text-gray-400">
-            <thead class="text-sm p-1  bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th class="font-thin">Data</th>
-                    <th class="font-thin">Descrição</th>
-                    <th class="font-thin">Tipo</th>
-                    <th class="font-thin">Valor</th>
-                    <th class="font-thin">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(CashRegisterDTO registerDTO in Registers){
-                    <CashRow Register=registerDTO/>
-                }
-            </tbody>
-        </table>
-        <CashField/>
+        <div style="height: 50dvh">
+            <table class="w-full text-sm text-left rtl:text-right  dark:text-gray-400">
+                <thead class="text-sm p-1  bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th class="font-thin">Data</th>
+                        <th class="font-thin">Descrição</th>
+                        <th class="font-thin">Tipo</th>
+                        <th class="font-thin">Valor</th>
+                        <th class="font-thin">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (CashRegisterDTO registerDTO in Registers)
+                    {
+                        <CashRow Register=registerDTO />
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
+        <CashField />
 </div>
