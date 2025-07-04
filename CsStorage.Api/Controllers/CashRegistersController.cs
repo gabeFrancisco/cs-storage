@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CsStorage.Application.DTOs;
 using CsStorage.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,5 +22,25 @@ namespace CsStorage.Api.Controllers
         {
             return Ok(await _cashRegisterService.GetAll());
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            return Ok(await _cashRegisterService.GetById(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CashRegisterDTO dto)
+        {
+            return Ok(await _cashRegisterService.Create(dto));
+        }
+
+        //TODO
+        
+        // [HttpDelete]
+        // public async Task<IActionResult> Delete()
+        // {
+        //     return Ok(await _cashRegisterService.Remove());
+        // }
     }
 }
