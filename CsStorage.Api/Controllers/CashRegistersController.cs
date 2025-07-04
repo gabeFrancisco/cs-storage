@@ -34,13 +34,11 @@ namespace CsStorage.Api.Controllers
         {
             return Ok(await _cashRegisterService.Create(dto));
         }
-
-        //TODO
         
-        // [HttpDelete]
-        // public async Task<IActionResult> Delete()
-        // {
-        //     return Ok(await _cashRegisterService.Remove());
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return Ok(await _cashRegisterService.Remove(id));
+        }
     }
 }

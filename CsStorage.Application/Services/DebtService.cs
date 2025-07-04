@@ -39,7 +39,7 @@ namespace CsStorage.Application.Services
             return _mapper.Map<IEnumerable<DebtDTO>>(debts);
         }
 
-        public Task<DebtDTO> Remove(DebtDTO debt)
+        public Task<DebtDTO> Remove(int? id)
         {
             throw new NotImplementedException();
         }

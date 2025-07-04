@@ -11,6 +11,6 @@ namespace CsStorage.Application.Interfaces
         Task<T> GetById(int? id);
         Task<T> Create(T dto);
         Task<T> Update(T dto);
-        Task<T> Remove(T dto);
+        Task<T> Remove(int? id);
     }
 }

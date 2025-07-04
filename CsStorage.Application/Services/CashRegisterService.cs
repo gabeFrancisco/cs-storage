@@ -38,12 +38,12 @@ namespace CsStorage.Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task<CashRegisterDTO> Remove(CashRegisterDTO dto)
+        public async Task<CashRegisterDTO> Remove(int? id)
         {
-            var register = _mapper.Map<CashRegister>(dto);
+            var register = await _cashRegisterRepository.GetById(id);
             await _cashRegisterRepository.Remove(register);
 
-            return dto;
+            return _mapper.Map<CashRegisterDTO>(register);
         }
 
         public Task<CashRegisterDTO> Update(CashRegisterDTO dto)
