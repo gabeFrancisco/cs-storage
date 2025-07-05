@@ -4,6 +4,7 @@
     <div style="height: 50dvh">
       <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
         <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <!-- Table header -->
           <tr>
             <th class="font-thin p-2">Data</th>
             <th class="font-thin p-2">Descrição</th>
@@ -12,22 +13,57 @@
             <th class="font-thin p-2">Ações</th>
           </tr>
         </thead>
+
+        <!-- Table body -->
         <tbody>
           <tr class="border-b items-center" *ngFor="let item of registers">
-            <th class="font-thin p-1.5">{{ item.createdAt }}</th>
+            <th class="font-thin p-1.5">
+              {{ item.createdAt | date : "dd/MM/yyyy - HH:mm" }}
+            </th>
             <th class="font-thin p-1.5">{{ item.description }}</th>
             <th class="font-thin p-1.5">{{ item.paymentType }}</th>
             <th class="font-thin p-1.5">{{ item.value }}</th>
-            <th
-              class="font-thin"
-            >
-            <button class="btn-primary text-sm mr-1">Editar</button>
-            <button class="btn-red text-sm mr-1">Remover</button>
-          </th>
+            <th class="font-thin">
+              <button class="btn-primary text-sm mr-1">Editar</button>
+              <button class="btn-red text-sm mr-1">Remover</button>
+            </th>
           </tr>
         </tbody>
       </table>
+
+      <!-- Table form -->
     </div>
   </div>
+  <form class="flex flex-row p-1 justify-between items-center flex-wrap">
+    <div class="mr-1">
+      <label class="text-sm" for="description">Descrição</label>
+      <input
+        type="text"
+        class="border border-gray-400"
+        name="description"
+        id="description"
+      />
+    </div>
+    <div class="mr-1">
+      <label class="text-sm" for="paymenttype">Tipo</label>
+      <select name="paymenttype" id="paymenttype">
+        <option value="">Dinheiro</option>
+        <option value="">Débito</option>
+        <option value="">Crédito</option>
+        <option value="">Pix</option>
+        <option value="">Depósito</option>
+      </select>
+    </div>
+    <div class="mr-1">
+      <label class="text-sm" for="value">Valor</label>
+      <input
+        type="text"
+        class="border border-gray-400 w-2/4"
+        name="value"
+        id="value"
+      />
+    </div>
+    <button class="btn-green font-bold text-xl">+</button>
+  </form>
   <!-- <CashField /> -->
 </div>
