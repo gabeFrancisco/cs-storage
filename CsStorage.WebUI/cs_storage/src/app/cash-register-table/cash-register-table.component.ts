@@ -18,5 +18,4 @@ export class CashRegisterTableComponent implements OnInit {
       this.registers = res
     })
   }
-
 }

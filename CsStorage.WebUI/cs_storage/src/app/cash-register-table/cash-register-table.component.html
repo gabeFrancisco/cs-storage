@@ -34,36 +34,42 @@
       <!-- Table form -->
     </div>
   </div>
-  <form class="flex flex-row p-1 justify-between items-center flex-wrap">
-    <div class="mr-1">
-      <label class="text-sm" for="description">Descrição</label>
-      <input
-        type="text"
-        class="border border-gray-400"
-        name="description"
-        id="description"
-      />
+  <form
+    class="flex flex-row p-1 justify-between flex-wrap sticky top-0 bg-gray-100"
+  >
+    <div class="flex flex-col items-end">
+      <div class="mr-1 mb-2">
+        <label class="text-sm mr-1" for="description">Descrição</label>
+        <input
+          type="text"
+          class="border border-gray-400"
+          name="description"
+          id="description"
+        />
+      </div>
+      <div class="mr-1 mb-2 flex flex-row justify-between">
+        <label class="text-sm" for="paymenttype">Tipo</label>
+        <select class="bg-white border border-gray-400" name="paymenttype" id="paymenttype">
+          <option value="">Dinheiro</option>
+          <option value="">Débito</option>
+          <option value="">Crédito</option>
+          <option value="">Pix</option>
+          <option value="">Depósito</option>
+        </select>
+      </div>
     </div>
-    <div class="mr-1">
-      <label class="text-sm" for="paymenttype">Tipo</label>
-      <select name="paymenttype" id="paymenttype">
-        <option value="">Dinheiro</option>
-        <option value="">Débito</option>
-        <option value="">Crédito</option>
-        <option value="">Pix</option>
-        <option value="">Depósito</option>
-      </select>
-    </div>
-    <div class="mr-1">
-      <label class="text-sm" for="value">Valor</label>
-      <input
-        type="text"
-        class="border border-gray-400 w-2/4"
-        name="value"
-        id="value"
-      />
-    </div>
-    <button class="btn-green font-bold text-xl">+</button>
+
+    <div class="flex flex-col justify-center items-end">
+        <div class="mb-2 flex flex-row justify-end items-center">
+          <label class="text-sm mr-1" for="value">Valor</label>
+          <input type="number" class="border border-gray-400 w-2/4" />
+        </div>
+        <div class="mb-2">
+          <label class="text-sm mr-1" for="date">Data</label>
+          <input type="date" class="h-6 border border-gray-400" />
+        </div>
+      </div>
+    <button class="btn-green px-4 font-bold text-xl">+</button>
   </form>
   <!-- <CashField /> -->
 </div>
