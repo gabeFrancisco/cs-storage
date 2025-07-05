@@ -18,7 +18,7 @@
         <tbody>
           <tr class="border-b items-center" *ngFor="let item of registers">
             <th class="font-thin p-1.5">
-              {{ item.createdAt | date : "dd/MM/yyyy, HH:mm" }}
+              {{ item.createdAt | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">{{ item.description }}</th>
             <th class="font-thin p-1.5">{{ item.paymentType }}</th>
@@ -41,7 +41,7 @@
     class="flex flex-row p-1 justify-between flex-wrap sticky top-0 bg-gray-100"
   >
     <div class="flex flex-col">
-      <small class="text-red-500" *ngIf="description.invalid && formDir.submitted">Descrição é obrigatória!</small>
+      <small class="text-red-500" *ngIf="description.invalid && description.touched && formDir.submitted">Descrição é obrigatória!</small>
       <div class="mr-1 mb-2 flex flex-row justify-end items-center">
         <label class="text-sm mr-1" for="description">Descrição</label>
         <input
@@ -58,17 +58,17 @@
           formControlName="paymentType"
 
         >
-          <option value="cash">Dinheiro</option>
-          <option value="debt">Débito</option>
-          <option value="credit">Crédito</option>
-          <option value="pix">Pix</option>
-          <option value="deposit">Depósito</option>
+          <option [ngValue]=0>Dinheiro</option>
+          <option [ngValue]=1>Débito</option>
+          <option [ngValue]=2>Crédito</option>
+          <option [ngValue]=3>Pix</option>
+          <option [ngValue]=4>Depósito</option>
         </select>
       </div>
     </div>
 
     <div class="flex flex-col justify-center items-end">
-      <small class="text-red-500" *ngIf="value.invalid && formDir.submitted">Valor deve ser maior que 0!</small>
+      <small class="text-red-500" *ngIf="value.invalid && value.touched && formDir.submitted">Valor deve ser maior que 0!</small>
       <div class="mb-2 flex flex-row justify-end items-center">
         <label class="text-sm mr-1" for="value">Valor</label>
         <input
@@ -78,12 +78,12 @@
           required
         />
       </div>
-      <small class="text-red-500" *ngIf="date.invalid && formDir.submitted">Data não pode ser maior que a data atual!</small>
+      <small class="text-red-500" *ngIf="createdAt.invalid && value.touched && formDir.submitted">Data não pode ser maior que a data atual!</small>
       <div class="mb-2 flex flex-row justify-end items-center">
         <label class="text-sm mr-1" for="date">Data</label>
         <input
           type="date"
-          formControlName="date"
+          formControlName="createdAt"
           class="h-6 border w-2/3 border-gray-400"
           required
         />

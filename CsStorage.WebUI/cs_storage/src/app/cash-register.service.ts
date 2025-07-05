@@ -14,4 +14,9 @@ export class CashRegisterService {
   getCashRegisters(): Observable<CashRegister[]>{
     return this.http.get<CashRegister[]>(`${this.url}`);
   }
+
+  createCashRegister(payload: CashRegister): Observable<any> {
+    // this.getCashRegisters();
+    return this.http.post(`${this.url}`, payload)
+  }
 }
