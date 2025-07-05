@@ -18,7 +18,7 @@
         <tbody>
           <tr class="border-b items-center" *ngFor="let item of registers">
             <th class="font-thin p-1.5">
-              {{ item.createdAt | date : "dd/MM/yyyy - HH:mm" }}
+              {{ item.createdAt | date : "dd/MM/yyyy, HH:mm" }}
             </th>
             <th class="font-thin p-1.5">{{ item.description }}</th>
             <th class="font-thin p-1.5">{{ item.paymentType }}</th>
@@ -30,46 +30,65 @@
           </tr>
         </tbody>
       </table>
-
-      <!-- Table form -->
     </div>
   </div>
+
+  <!-- Table form -->
+  <!-- <CashField /> -->
+
   <form
+    (ngSubmit)="submit()" [formGroup]="cashForm" #formDir="ngForm"
     class="flex flex-row p-1 justify-between flex-wrap sticky top-0 bg-gray-100"
   >
-    <div class="flex flex-col items-end">
-      <div class="mr-1 mb-2">
+    <div class="flex flex-col">
+      <small class="text-red-500" *ngIf="description.invalid && formDir.submitted">Descrição é obrigatória!</small>
+      <div class="mr-1 mb-2 flex flex-row justify-end items-center">
         <label class="text-sm mr-1" for="description">Descrição</label>
         <input
-          type="text"
-          class="border border-gray-400"
-          name="description"
-          id="description"
+        type="text"
+        class="border border-gray-400"
+        formControlName="description"
+        required
         />
       </div>
-      <div class="mr-1 mb-2 flex flex-row justify-between">
-        <label class="text-sm" for="paymenttype">Tipo</label>
-        <select class="bg-white border border-gray-400" name="paymenttype" id="paymenttype">
-          <option value="">Dinheiro</option>
-          <option value="">Débito</option>
-          <option value="">Crédito</option>
-          <option value="">Pix</option>
-          <option value="">Depósito</option>
+      <div class="mr-1 mb-2 flex flex-row justify-end">
+        <label class="text-sm mr-1" for="paymenttype">Tipo</label>
+        <select
+          class="bg-white border border-gray-400"
+          formControlName="paymentType"
+
+        >
+          <option value="cash">Dinheiro</option>
+          <option value="debt">Débito</option>
+          <option value="credit">Crédito</option>
+          <option value="pix">Pix</option>
+          <option value="deposit">Depósito</option>
         </select>
       </div>
     </div>
 
     <div class="flex flex-col justify-center items-end">
-        <div class="mb-2 flex flex-row justify-end items-center">
-          <label class="text-sm mr-1" for="value">Valor</label>
-          <input type="number" class="border border-gray-400 w-2/4" />
-        </div>
-        <div class="mb-2">
-          <label class="text-sm mr-1" for="date">Data</label>
-          <input type="date" class="h-6 border border-gray-400" />
-        </div>
+      <small class="text-red-500" *ngIf="value.invalid && formDir.submitted">Valor deve ser maior que 0!</small>
+      <div class="mb-2 flex flex-row justify-end items-center">
+        <label class="text-sm mr-1" for="value">Valor</label>
+        <input
+          type="number"
+          formControlName="value"
+          class="border border-gray-400 w-2/4"
+          required
+        />
       </div>
-    <button class="btn-green px-4 font-bold text-xl">+</button>
+      <small class="text-red-500" *ngIf="date.invalid && formDir.submitted">Data não pode ser maior que a data atual!</small>
+      <div class="mb-2 flex flex-row justify-end items-center">
+        <label class="text-sm mr-1" for="date">Data</label>
+        <input
+          type="date"
+          formControlName="date"
+          class="h-6 border w-2/3 border-gray-400"
+          required
+        />
+      </div>
+    </div>
+    <button type="submit" class="btn-green px-4 font-bold text-xl">+</button>
   </form>
-  <!-- <CashField /> -->
 </div>
