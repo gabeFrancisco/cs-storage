@@ -3,8 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStorage.Web", "CsStorage.Web\CsStorage.Web.csproj", "{0AE030BC-6162-4AE6-BE10-8B584A998C5A}"
-EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStorage.Data", "CsStorage.Data\CsStorage.Data.csproj", "{8FFAFFEE-01ED-4E8A-A453-4CF9B65209D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsStorage.Application", "CsStorage.Application\CsStorage.Application.csproj", "{08753500-711F-495F-8754-2B8CCA5B9519}"

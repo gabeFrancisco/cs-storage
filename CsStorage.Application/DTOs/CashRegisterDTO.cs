@@ -16,7 +16,6 @@ namespace CsStorage.Application.DTOs
         [Required(ErrorMessage = "Payment Type is required!")]
         public PaymentType PaymentType { get; set; }
 
-
         [Required(ErrorMessage = "The Value field is required!")]
         [Column(TypeName = "decimal(10,2)")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
