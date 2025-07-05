@@ -15,13 +15,12 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("cs-policy", builder =>
+    options.AddPolicy("AllowAll", builder =>
     {
         builder
+            .AllowAnyOrigin()
             .AllowAnyMethod()
-            .AllowAnyHeader()
-            .SetIsOriginAllowed(origin => true)
-            .AllowCredentials();
+            .AllowAnyHeader();
     });
 });
 
@@ -33,7 +32,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.MapControllers();
 
