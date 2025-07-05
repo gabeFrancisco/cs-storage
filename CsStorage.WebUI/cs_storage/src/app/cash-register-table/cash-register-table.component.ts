@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CashRegisterService } from '../cash-register.service';
+import { CashRegister } from '../../models/CashRegister';
 
 @Component({
   selector: 'app-cash-register-table',
@@ -8,15 +9,13 @@ import { CashRegisterService } from '../cash-register.service';
   styleUrl: './cash-register-table.component.css'
 })
 export class CashRegisterTableComponent implements OnInit {
-  /**
-   *
-   */
-  constructor(private cashService: CashRegisterService) {
+  registers: CashRegister[] = [];
 
-  }
+  constructor(private cashService: CashRegisterService) { }
+
   ngOnInit(): void {
-    this.cashService.getCashRegisters().subscribe((registers) => {
-      console.log(registers)
+    this.cashService.getCashRegisters().subscribe((res) => {
+      this.registers = res
     })
   }
 
