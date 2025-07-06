@@ -1,7 +1,16 @@
 <div class="w-full border border-gray-300 rounded">
-  <div class="p-2 font-bold text-center text-gray-700 bg-gray-100">Caixa</div>
+  <div class="p-2 font-bold flex flex-row text-gray-500 justify-between items-center bg-gray-100">
+    <span class="font-bold ">Caixa</span>
+    <button
+      type="button"
+      (click)="openCashPostModal()"
+      class="btn-green px-4 font-bold text-xl"
+    >
+      +
+    </button>
+  </div>
   <div class="relative overflow-x-auto">
-    <div style="height: 50dvh">
+    <div style="max-height: 50dvh">
       <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
         <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <!-- Table header -->
@@ -32,64 +41,4 @@
       </table>
     </div>
   </div>
-
-  <!-- Table form -->
-  <!-- <CashField /> -->
-
-  <!-- <form
-    (ngSubmit)="submit()" [formGroup]="cashForm" #formDir="ngForm"
-    class="flex flex-row p-1 justify-between flex-wrap sticky top-0 bg-gray-100"
-  >
-    <div class="flex flex-col">
-      <small class="text-red-500" *ngIf="description.invalid && description.touched && formDir.submitted">Descrição é obrigatória!</small>
-      <div class="mr-1 mb-2 flex flex-row justify-end items-center">
-        <label class="text-sm mr-1" for="description">Descrição</label>
-        <input
-        type="text"
-        class="border border-gray-400"
-        formControlName="description"
-        required
-        />
-      </div>
-      <div class="mr-1 mb-2 flex flex-row justify-end">
-        <label class="text-sm mr-1" for="paymenttype">Tipo</label>
-        <select
-          class="bg-white border border-gray-400"
-          formControlName="paymentType"
-
-        >
-          <option [ngValue]=0>Dinheiro</option>
-          <option [ngValue]=1>Débito</option>
-          <option [ngValue]=2>Crédito</option>
-          <option [ngValue]=3>Pix</option>
-          <option [ngValue]=4>Depósito</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="flex flex-col justify-center items-end">
-      <small class="text-red-500" *ngIf="value.invalid && value.touched && formDir.submitted">Valor deve ser maior que 0!</small>
-      <div class="mb-2 flex flex-row justify-end items-center">
-        <label class="text-sm mr-1" for="value">Valor</label>
-        <input
-          type="number"
-          formControlName="value"
-          class="border border-gray-400 w-2/4"
-          required
-        />
-      </div>
-      <small class="text-red-500" *ngIf="createdAt.invalid && value.touched && formDir.submitted">Data não pode ser maior que a data atual!</small>
-      <div class="mb-2 flex flex-row justify-end items-center">
-        <label class="text-sm mr-1" for="date">Data</label>
-        <input
-          type="date"
-          formControlName="createdAt"
-          class="h-6 border w-2/3 border-gray-400"
-          required
-        />
-      </div>
-    </div>
-    <button type="submit" class="btn-green px-4 font-bold text-xl">+</button>
-  </form> -->
-  <button type="button" (click)="openCashPostModal()" class="btn-green px-4 font-bold text-xl">+</button>
 </div>

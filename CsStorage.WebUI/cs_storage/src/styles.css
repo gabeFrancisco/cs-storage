@@ -11,23 +11,23 @@
 
 @layer components {
   .btn {
-    @apply px-3 py-1 text-sm text-gray-500 transition ease-in-out border rounded shadow-sm bg-gray-50 shadow-gray-300 hover:bg-gray-200;
+    @apply px-3 py-1 text-sm text-gray-500 border rounded-sm shadow-sm bg-gray-50 shadow-gray-300 hover:bg-gray-200;
   }
 
   .btn-primary {
-    @apply px-3 py-0.5 text-sm text-white transition ease-in-out rounded bg-blue-500 hover:bg-blue-700;
+    @apply px-3 py-0.5 text-sm text-white rounded-sm bg-blue-500 hover:bg-blue-700;
   }
 
   .btn-green {
-    @apply px-3 py-0.5 text-sm text-white transition ease-in-out rounded bg-emerald-500 shadow-emerald-400 hover:bg-emerald-600;
+    @apply px-3 py-0.5 text-sm text-white rounded-sm bg-emerald-500 shadow-emerald-400 hover:bg-emerald-600;
   }
 
   .btn-yellow {
-    @apply px-3 py-0.5 text-sm text-white transition ease-in-out bg-yellow-500 rounded shadow-yellow-300 hover:bg-yellow-600;
+    @apply px-3 py-0.5 text-sm text-white bg-yellow-500 rounded-sm shadow-yellow-300 hover:bg-yellow-600;
   }
 
   .btn-red {
-    @apply px-3 py-0.5 text-sm text-white transition ease-in-out bg-red-500 rounded shadow-red-500 hover:bg-red-600;
+    @apply px-3 py-0.5 text-sm text-white bg-red-500 rounded-sm shadow-red-500 hover:bg-red-600;
   }
 
   .txt-input {

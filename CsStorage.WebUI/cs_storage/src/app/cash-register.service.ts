@@ -2,7 +2,7 @@ import { CashPostModalComponent } from './cash-post-modal/cash-post-modal.compon
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http'
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { CashRegister } from '../models/CashRegister';
 
 @Injectable({
@@ -10,10 +10,19 @@ import { CashRegister } from '../models/CashRegister';
 })
 export class CashRegisterService {
   private url = "http://localhost:5103/api/cashregisters";
+
+  //cash modal variables
   private cashPostModalState = new BehaviorSubject<boolean>(false);
   cashPostModalState$ = this.cashPostModalState.asObservable();
 
+  //handle update on registers list
+  updateList$ = new ReplaySubject<void>(1);
+
   constructor(private http: HttpClient) { }
+
+  notifyListUpdate(){
+    this.updateList$.next();
+  }
 
   getCashRegisters(): Observable<CashRegister[]> {
     return this.http.get<CashRegister[]>(`${this.url}`);
