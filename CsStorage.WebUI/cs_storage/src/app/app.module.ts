@@ -10,6 +10,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DebtTableComponent } from './debt-table/debt-table.component';
 import { CashPostModalComponent } from './cash-post-modal/cash-post-modal.component';
+import { NgIconsModule } from '@ng-icons/core'
+import { phosphorArrowsClockwiseBold } from '@ng-icons/phosphor-icons/bold'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { CashPostModalComponent } from './cash-post-modal/cash-post-modal.compon
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIconsModule.withIcons({phosphorArrowsClockwiseBold})
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

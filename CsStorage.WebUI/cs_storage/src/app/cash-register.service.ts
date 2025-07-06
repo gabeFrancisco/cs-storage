@@ -21,7 +21,9 @@ export class CashRegisterService {
   constructor(private http: HttpClient) { }
 
   notifyListUpdate() {
-    this.updateList$.next();
+    setTimeout(() => {
+      this.updateList$.next();
+    }, 0)
   }
 
   getCashRegisters(): Observable<CashRegister[]> {

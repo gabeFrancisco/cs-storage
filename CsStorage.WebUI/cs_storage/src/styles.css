@@ -11,7 +11,7 @@
 
 @layer components {
   .btn {
-    @apply px-3 py-1 text-sm text-gray-500 border rounded-sm shadow-sm bg-gray-50 shadow-gray-300 hover:bg-gray-200;
+    @apply px-3 py-0.5 text-sm text-gray-500 border border-gray-300 rounded-sm bg-gray-50 shadow-gray-300 hover:bg-gray-200;
   }
 
   .btn-primary {

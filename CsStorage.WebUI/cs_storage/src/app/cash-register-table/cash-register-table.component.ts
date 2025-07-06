@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CashRegisterService } from '../cash-register.service';
 import { CashRegister } from '../../models/CashRegister';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cash-register-table',
