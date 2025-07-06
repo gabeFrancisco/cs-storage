@@ -28,7 +28,15 @@ export class CashRegisterTableComponent implements OnInit {
     })
   }
 
-  openCashPostModal(){
+  deleteCashRegister(id: number) {
+    if (confirm("Tem certeza que deseja remover esse registro?")) {
+      this.cashService.removeCashRegister(id).subscribe(() => {
+        this.fetchList();
+      });
+    }
+  }
+
+  openCashPostModal() {
     this.cashService.openCashPostModal();
   }
 }

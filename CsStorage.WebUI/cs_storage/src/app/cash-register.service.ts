@@ -20,7 +20,7 @@ export class CashRegisterService {
 
   constructor(private http: HttpClient) { }
 
-  notifyListUpdate(){
+  notifyListUpdate() {
     this.updateList$.next();
   }
 
@@ -31,6 +31,10 @@ export class CashRegisterService {
   createCashRegister(payload: CashRegister): Observable<any> {
     // this.getCashRegisters();
     return this.http.post(`${this.url}`, payload)
+  }
+
+  removeCashRegister(id: number): Observable<any> {
+    return this.http.delete(`${this.url}/${id}`);
   }
 
   openCashPostModal() { this.cashPostModalState.next(true) }

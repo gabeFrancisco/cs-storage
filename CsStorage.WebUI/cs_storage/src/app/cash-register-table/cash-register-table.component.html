@@ -1,5 +1,5 @@
 <div class="w-full border border-gray-300 rounded">
-  <div class="p-2 font-bold flex flex-row text-gray-500 justify-between items-center bg-gray-100">
+  <div class="p-2 font-bold flex flex-row text-gray-600 justify-between items-center bg-gray-100">
     <span class="font-bold ">Caixa</span>
     <button
       type="button"
@@ -19,22 +19,22 @@
             <th class="font-thin p-2">Descrição</th>
             <th class="font-thin p-2">Tipo</th>
             <th class="font-thin p-2">Valor</th>
-            <th class="font-thin p-2">Ações</th>
+            <th class="font-thin text-center p-2">Ações</th>
           </tr>
         </thead>
 
         <!-- Table body -->
         <tbody>
-          <tr class="border-b items-center" *ngFor="let item of registers">
+          <tr class="items-center" *ngFor="let item of registers">
             <th class="font-thin p-1.5">
               {{ item.createdAt | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">{{ item.description }}</th>
             <th class="font-thin p-1.5">{{ item.paymentType }}</th>
             <th class="font-thin p-1.5">{{ item.value }}</th>
-            <th class="font-thin">
+            <th class="font-thin text-center">
               <button class="btn-primary text-sm mr-1">Editar</button>
-              <button class="btn-red text-sm mr-1">Remover</button>
+              <button type="button" (click)="deleteCashRegister(item.id!)" class="btn-red text-sm mr-1">Remover</button>
             </th>
           </tr>
         </tbody>

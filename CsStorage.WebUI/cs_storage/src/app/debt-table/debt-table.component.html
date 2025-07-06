@@ -11,13 +11,13 @@
             <th class="font-thin p-2">Valor</th>
             <th class="font-thin p-2">Previsão</th>
             <th class="font-thin p-2">Pago?</th>
-            <th class="font-thin p-2">Ações</th>
+            <th class="font-thin p-2 text-center">Ações</th>
           </tr>
         </thead>
 
         <!-- Table body -->
         <tbody>
-          <tr class="border-b items-center" *ngFor="let item of debts">
+          <tr class="items-center" *ngFor="let item of debts">
             <th class="font-thin p-1.5">
               {{ item.createdAt | date : "dd/MM/yyyy" }}
             </th>
@@ -25,7 +25,7 @@
             <th class="font-thin p-1.5">{{ item.value }}</th>
             <th class="font-thin p-1.5">{{ item.forecast | date : "dd/MM/yyyy" }}</th>
             <th class="font-thin p-1.5">{{ item.paidDate | date : "dd/MM/yyyy" }}</th>
-            <th class="font-thin">
+            <th class="font-thin text-center">
               <button class="btn-primary text-sm mr-1">Editar</button>
               <button class="btn-red text-sm mr-1">Remover</button>
             </th>
