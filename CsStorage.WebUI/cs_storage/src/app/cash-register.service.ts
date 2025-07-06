@@ -15,6 +15,9 @@ export class CashRegisterService {
   private cashPostModalState = new BehaviorSubject<boolean>(false);
   cashPostModalState$ = this.cashPostModalState.asObservable();
 
+  private cashUpdateModalState = new BehaviorSubject<boolean>(false);
+  cashUpdateModalState$ = this.cashUpdateModalState.asObservable();
+
   //handle update on registers list
   updateList$ = new ReplaySubject<void>(1);
 
@@ -41,4 +44,7 @@ export class CashRegisterService {
 
   openCashPostModal() { this.cashPostModalState.next(true) }
   closeCashPostModal() { this.cashPostModalState.next(false) }
+
+  openCashUpdateModal() { this.cashUpdateModalState.next(true) }
+  closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
 }

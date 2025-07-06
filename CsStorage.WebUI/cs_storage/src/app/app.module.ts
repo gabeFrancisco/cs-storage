@@ -11,7 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DebtTableComponent } from './debt-table/debt-table.component';
 import { CashPostModalComponent } from './cash-post-modal/cash-post-modal.component';
 import { NgIconsModule } from '@ng-icons/core'
-import { phosphorArrowsClockwiseBold } from '@ng-icons/phosphor-icons/bold'
+import { phosphorArrowsClockwiseBold } from '@ng-icons/phosphor-icons/bold';
+import { CashUpdateModalComponent } from './cash-update-modal/cash-update-modal.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { phosphorArrowsClockwiseBold } from '@ng-icons/phosphor-icons/bold'
     HomeComponent,
     CashRegisterTableComponent,
     DebtTableComponent,
-    CashPostModalComponent
+    CashPostModalComponent,
+    CashUpdateModalComponent
   ],
   imports: [
     BrowserModule,
