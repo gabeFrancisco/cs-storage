@@ -8,13 +8,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { CashRegisterTableComponent } from './cash-register-table/cash-register-table.component';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DebtTableComponent } from './debt-table/debt-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    CashRegisterTableComponent
+    CashRegisterTableComponent,
+    DebtTableComponent
   ],
   imports: [
     BrowserModule,
