@@ -63,4 +63,8 @@ export class CashRegisterTableComponent implements OnInit {
     this.cashForm.markAsPristine()
     this.cashForm.markAsUntouched()
   }
+
+  openCashPostModal(){
+    this.cashService.openCashPostModal();
+  }
 }

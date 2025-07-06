@@ -9,6 +9,7 @@ import { CashRegisterTableComponent } from './cash-register-table/cash-register-
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DebtTableComponent } from './debt-table/debt-table.component';
+import { CashPostModalComponent } from './cash-post-modal/cash-post-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DebtTableComponent } from './debt-table/debt-table.component';
     HeaderComponent,
     HomeComponent,
     CashRegisterTableComponent,
-    DebtTableComponent
+    DebtTableComponent,
+    CashPostModalComponent
   ],
   imports: [
     BrowserModule,
