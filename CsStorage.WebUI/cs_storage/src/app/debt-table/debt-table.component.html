@@ -1,5 +1,5 @@
 <div class="w-full border border-gray-300 rounded">
-  <div class="p-2 font-bold text-center text-gray-700 bg-gray-100">Caixa</div>
+  <div class="p-2 font-bold text-center text-gray-700 bg-gray-100">Débitos</div>
   <div class="relative overflow-x-auto">
     <div style="height: 50dvh">
       <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
@@ -7,27 +7,29 @@
           <!-- Table header -->
           <tr>
             <th class="font-thin p-2">Data</th>
-            <th class="font-thin p-2">Descrição</th>
-            <th class="font-thin p-2">Tipo</th>
+            <th class="font-thin p-2">Cliente</th>
             <th class="font-thin p-2">Valor</th>
+            <th class="font-thin p-2">Previsão</th>
+            <th class="font-thin p-2">Pago?</th>
             <th class="font-thin p-2">Ações</th>
           </tr>
         </thead>
 
         <!-- Table body -->
         <tbody>
-          <!-- <tr class="border-b items-center" *ngFor="let item of registers">
+          <tr class="border-b items-center" *ngFor="let item of debts">
             <th class="font-thin p-1.5">
               {{ item.createdAt | date : "dd/MM/yyyy" }}
             </th>
-            <th class="font-thin p-1.5">{{ item.description }}</th>
-            <th class="font-thin p-1.5">{{ item.paymentType }}</th>
+            <th class="font-thin p-1.5">{{ item.customer.name }}</th>
             <th class="font-thin p-1.5">{{ item.value }}</th>
+            <th class="font-thin p-1.5">{{ item.forecast | date : "dd/MM/yyyy" }}</th>
+            <th class="font-thin p-1.5">{{ item.paidDate | date : "dd/MM/yyyy" }}</th>
             <th class="font-thin">
               <button class="btn-primary text-sm mr-1">Editar</button>
               <button class="btn-red text-sm mr-1">Remover</button>
             </th>
-          </tr> -->
+          </tr>
         </tbody>
       </table>
     </div>
