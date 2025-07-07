@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CashRegisterService } from '../cash-register.service';
+import { CashRegisterService } from '../services/cash-register.service';
 import { CashRegister } from '../../models/CashRegister';
 
 @Component({
@@ -15,7 +15,11 @@ export class CashUpdateModalComponent {
   cashForm!: FormGroup;
   initialValues = null;
 
+  cashId: number | null = null;
+
   constructor(private cashRegisterService: CashRegisterService) {
+
+    //Gets the modal open/close state from service
     this.cashRegisterService.cashUpdateModalState$.subscribe((value) => {
       this.show = value
     })
@@ -26,6 +30,9 @@ export class CashUpdateModalComponent {
       value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
       createdAt: new FormControl(new Date().toISOString().substring(0, 10), Validators.required)
     })
+
+    //Gets the cash register ID from the service to load the full cash register entity from DB.
+    this.cashRegisterService.cashRegisterId$.subscribe((data) => this.cashId = data);
 
     this.initialValues = this.cashForm.value;
   }
@@ -58,8 +65,6 @@ export class CashUpdateModalComponent {
     })
 
     this.cashForm.reset(this.initialValues);
-    this.cashForm.markAsPristine()
-    this.cashForm.markAsUntouched()
 
     this.cashRegisterService.closeUpdatePostModal();
     this.cashRegisterService.notifyListUpdate();

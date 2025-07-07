@@ -1,9 +1,9 @@
-import { CashPostModalComponent } from './cash-post-modal/cash-post-modal.component';
+import { CashPostModalComponent } from '../cash-post-modal/cash-post-modal.component';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
-import { CashRegister } from '../models/CashRegister';
+import { CashRegister } from '../../models/CashRegister';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,9 @@ export class CashRegisterService {
 
   private cashUpdateModalState = new BehaviorSubject<boolean>(false);
   cashUpdateModalState$ = this.cashUpdateModalState.asObservable();
+
+  private cashRegisterId = new BehaviorSubject<number | null>(null)
+  cashRegisterId$ = this.cashRegisterId.asObservable();
 
   //handle update on registers list
   updateList$ = new ReplaySubject<void>(1);
@@ -45,6 +48,9 @@ export class CashRegisterService {
   openCashPostModal() { this.cashPostModalState.next(true) }
   closeCashPostModal() { this.cashPostModalState.next(false) }
 
-  openCashUpdateModal(id: number) { this.cashUpdateModalState.next(true) }
+  openCashUpdateModal(id: number) {
+    this.cashUpdateModalState.next(true)
+    this.cashRegisterId.next(id);
+  }
   closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
 }

@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CashRegisterService } from './../cash-register.service';
+import { CashRegisterService } from '../services/cash-register.service';
 import { Component } from '@angular/core';
 import { CashRegister } from '../../models/CashRegister';
 
@@ -58,8 +58,6 @@ export class CashPostModalComponent {
     })
 
     this.cashForm.reset(this.initialValues);
-    this.cashForm.markAsPristine()
-    this.cashForm.markAsUntouched()
 
     this.cashRegisterService.closeCashPostModal();
     this.cashRegisterService.notifyListUpdate();
