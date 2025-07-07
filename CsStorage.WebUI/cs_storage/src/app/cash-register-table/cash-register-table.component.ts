@@ -1,3 +1,4 @@
+import { PaymentTypesDictionary } from './../../utils/PaymentTypesDictionary';
 import { Component, OnInit } from '@angular/core';
 import { CashRegisterService } from '../cash-register.service';
 import { CashRegister } from '../../models/CashRegister';
@@ -10,6 +11,7 @@ import { CashRegister } from '../../models/CashRegister';
 })
 export class CashRegisterTableComponent implements OnInit {
   registers: CashRegister[] = [];
+  paymentTypes = PaymentTypesDictionary
 
   constructor(private cashService: CashRegisterService) { }
 
@@ -37,5 +39,9 @@ export class CashRegisterTableComponent implements OnInit {
 
   openCashPostModal() {
     this.cashService.openCashPostModal();
+  }
+
+  openCashUpdateModal(id: number){
+    this.cashService.openCashUpdateModal(id);
   }
 }

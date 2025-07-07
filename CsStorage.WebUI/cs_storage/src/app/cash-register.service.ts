@@ -45,6 +45,6 @@ export class CashRegisterService {
   openCashPostModal() { this.cashPostModalState.next(true) }
   closeCashPostModal() { this.cashPostModalState.next(false) }
 
-  openCashUpdateModal() { this.cashUpdateModalState.next(true) }
+  openCashUpdateModal(id: number) { this.cashUpdateModalState.next(true) }
   closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
 }
