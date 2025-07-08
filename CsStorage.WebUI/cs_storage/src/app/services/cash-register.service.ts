@@ -1,9 +1,7 @@
-import { CashPostModalComponent } from '../cash-post-modal/cash-post-modal.component';
+import { CashRegister } from './../../models/CashRegister';
 import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http'
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
-import { CashRegister } from '../../models/CashRegister';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +41,10 @@ export class CashRegisterService {
   createCashRegister(payload: CashRegister): Observable<any> {
     // this.getCashRegisters();
     return this.http.post(`${this.url}`, payload)
+  }
+
+  updateCashRegister(payload: CashRegister): Observable<any>{
+    return this.http.put(`${this.url}`, payload);
   }
 
   removeCashRegister(id: number): Observable<any> {

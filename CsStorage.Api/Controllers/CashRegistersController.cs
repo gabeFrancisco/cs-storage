@@ -34,6 +34,12 @@ namespace CsStorage.Api.Controllers
         {
             return Ok(await _cashRegisterService.Create(dto));
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] CashRegisterDTO dto)
+        {
+            return Ok(await _cashRegisterService.Update(dto));
+        }
         
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
