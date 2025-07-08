@@ -36,6 +36,10 @@ export class CashRegisterService {
     return this.http.get<CashRegister[]>(`${this.url}`);
   }
 
+  getCashRegisterById(id: number): Observable<CashRegister>{
+    return this.http.get<CashRegister>(`${this.url}/${id}`)
+  }
+
   createCashRegister(payload: CashRegister): Observable<any> {
     // this.getCashRegisters();
     return this.http.post(`${this.url}`, payload)

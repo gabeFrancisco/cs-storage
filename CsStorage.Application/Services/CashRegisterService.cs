@@ -33,9 +33,10 @@ namespace CsStorage.Application.Services
             return _mapper.Map<IEnumerable<CashRegisterDTO>>(registers);
         }
 
-        public Task<CashRegisterDTO> GetById(int? id)
+        public async Task<CashRegisterDTO> GetById(int? id)
         {
-            throw new NotImplementedException();
+            var register = await _cashRegisterRepository.GetById(id);
+            return _mapper.Map<CashRegisterDTO>(register);
         }
 
         public async Task<CashRegisterDTO> Remove(int? id)
