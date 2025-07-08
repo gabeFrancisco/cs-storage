@@ -28,7 +28,7 @@ export class CashUpdateModalComponent {
       description: new FormControl("", Validators.required),
       paymentType: new FormControl(0),
       value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
-      createdAt: new FormControl(new Date().toISOString().substring(0, 10), Validators.required)
+      createdAt: new FormControl(null, Validators.required)
     })
 
     //Gets the cash register ID from the service to load the full cash register entity from DB.

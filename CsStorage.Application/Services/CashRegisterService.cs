@@ -47,9 +47,12 @@ namespace CsStorage.Application.Services
             return _mapper.Map<CashRegisterDTO>(register);
         }
 
-        public Task<CashRegisterDTO> Update(CashRegisterDTO dto)
+        public async Task<CashRegisterDTO> Update(CashRegisterDTO dto)
         {
-            throw new NotImplementedException();
+            var register = _mapper.Map<CashRegister>(dto);
+            await _cashRegisterRepository.Update(register);
+
+            return dto;
         }
     }
 }
