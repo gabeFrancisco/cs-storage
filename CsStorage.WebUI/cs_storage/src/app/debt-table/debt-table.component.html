@@ -1,5 +1,25 @@
 <div class="w-full border border-gray-300 rounded">
-  <div class="p-2 font-bold text-center text-gray-700 bg-gray-100">Débitos</div>
+  <div
+    class="p-2 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100"
+  >
+    <span class="font-bold">Débitos de clientes</span>
+    <div>
+      <button
+        type="button"
+        (click)="fetchList()"
+        class="mx-1 text-gray-400 btn text-xl"
+      >
+        ↻
+      </button>
+      <!-- <button
+        type="button"
+        (click)="openCashPostModal()"
+        class="btn-green px-4 font-bold text-xl"
+      >
+        +
+      </button> -->
+    </div>
+  </div>
   <div class="relative overflow-x-auto">
     <div style="max-height: 50dvh">
       <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
@@ -8,26 +28,41 @@
           <tr>
             <th class="font-thin p-2">Data</th>
             <th class="font-thin p-2">Cliente</th>
-            <th class="font-thin p-2">Valor</th>
             <th class="font-thin p-2">Previsão</th>
-            <th class="font-thin p-2">Pago?</th>
-            <th class="font-thin p-2 text-center">Ações</th>
+            <th class="font-thin p-2">Valor</th>
+            <th class="font-thin p-2">Pago</th>
+            <th class="font-thin text-center p-2">Ações</th>
           </tr>
         </thead>
 
         <!-- Table body -->
         <tbody>
-          <tr class="items-center" *ngFor="let item of debts">
-            <th class="font-thin p-1.5">
+          <tr
+            class="items-center hover:bg-gray-200 cursor-pointer"
+            *ngFor="let item of debts"
+          >
+            <th class="font-thin border-r p-1.5">
               {{ item.createdAt | date : "dd/MM/yyyy" }}
             </th>
-            <th class="font-thin p-1.5">{{ item.customer.name }}</th>
-            <th class="font-thin p-1.5">{{ item.value }}</th>
-            <th class="font-thin p-1.5">{{ item.forecast | date : "dd/MM/yyyy" }}</th>
-            <th class="font-thin p-1.5">{{ item.paidDate | date : "dd/MM/yyyy" }}</th>
+            <th class="font-thin p-1.5">{{ item.customer.name}}</th>
+            <th class="font-thin border-r p-1.5">
+              {{ item.forecast | date : "dd/MM/yyyy" }}
+            </th>
+            <th class="font-thin text-emerald-700 p-1.5">
+              R${{ item.value.toFixed(2) }}
+            </th>
+            <th class="font-thin p-1.5">
+              {{ item.paidDate | date : "dd/MM/yyyy" }}
+            </th>
             <th class="font-thin text-center">
-              <button class="btn-primary text-sm mr-1">Editar</button>
-              <button class="btn-red text-sm mr-1">Remover</button>
+              <button title="Atualizar" class="btn-primary text-lg mr-1">✎</button>
+              <button
+                type="button"
+                title="Remover"
+                class="btn-red text-lg mr-1"
+              >
+                𝘅
+              </button>
             </th>
           </tr>
         </tbody>
