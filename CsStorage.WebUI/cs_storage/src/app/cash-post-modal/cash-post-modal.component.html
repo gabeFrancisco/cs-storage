@@ -20,68 +20,75 @@
         (ngSubmit)="submit()"
         [formGroup]="cashForm"
         #formDir="ngForm"
-        class="flex flex-col p-1 justify-between sticky top-0"
+        class="max-w-xl mx-auto flex-col space-y-1"
       >
-        <div class="flex flex-row justify-start">
-          <div class="flex flex-col mr-2 mb-2 items-end">
+        <div class="flex items-baseline">
+          <label class="w-16 text-sm text-right mr-2" for="description"
+            >Descrição</label
+          >
+          <div class="flex flex-col">
+            <input
+              type="text"
+              class="border w-full border-gray-400"
+              formControlName="description"
+              required
+            />
             <small
               class="text-red-500"
               *ngIf="description.invalid && formDir.submitted"
               >Descrição é obrigatória!</small
             >
-            <label class="text-sm mt-2" for="description">Descrição</label>
-            <label class="text-sm mt-2" for="paymenttype">Tipo</label>
-            <label class="text-sm mt-3" for="value">Valor</label>
-            <label class="text-sm mt-3" for="date">Data</label>
           </div>
+        </div>
+
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="paymenttype"
+            >Tipo</label
+          >
+          <select
+            class="bg-white border my-1 border-gray-400"
+            formControlName="paymentType"
+          >
+            <option [ngValue]="0">Dinheiro</option>
+            <option [ngValue]="1">Débito</option>
+            <option [ngValue]="2">Crédito</option>
+            <option [ngValue]="3">Pix</option>
+            <option [ngValue]="4">Depósito</option>
+          </select>
+        </div>
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="value">Valor</label>
           <div class="flex flex-col">
-            <input
-              type="text"
-              class="border w-full my-1 border-gray-400"
-              formControlName="description"
-              required
-            />
-
-            <select
-              class="bg-white border my-1 border-gray-400"
-              formControlName="paymentType"
-            >
-              <option [ngValue]="0">Dinheiro</option>
-              <option [ngValue]="1">Débito</option>
-              <option [ngValue]="2">Crédito</option>
-              <option [ngValue]="3">Pix</option>
-              <option [ngValue]="4">Depósito</option>
-
-              <small
-                class="text-red-500"
-                *ngIf="value.invalid && formDir.submitted"
-                >Valor deve ser maior que 0!</small
-              >
-            </select>
-
             <input
               type="number"
               formControlName="value"
               class="border border-gray-400 my-1"
               required
             />
-
+            <small
+              class="text-red-500"
+              *ngIf="value.invalid && formDir.submitted"
+              >Valor deve ser maior que 0!</small
+            >
+          </div>
+        </div>
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="date">Data</label>
+          <div class="flex flex-col">
             <small
               class="text-red-500"
               *ngIf="createdAt.invalid && formDir.submitted"
               >Data não pode ser maior que a data atual!</small
             >
             <input
-              type="date"
+              type="datetime-local"
               formControlName="createdAt"
               class="h-6 border w-2/3 my-1 border-gray-400"
               required
             />
           </div>
         </div>
-
-        <div class="flex flex-col"></div>
-        <button type="submit" class="btn-green mt-2 py-1 text-lg px-4">
+        <button type="submit" class="btn-green w-full mt-2 py-1 text-lg px-4">
           Novo registro!
         </button>
       </form>

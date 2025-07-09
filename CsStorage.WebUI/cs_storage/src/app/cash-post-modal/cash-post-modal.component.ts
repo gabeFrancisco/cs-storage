@@ -24,7 +24,7 @@ export class CashPostModalComponent {
       description: new FormControl('', Validators.required),
       paymentType: new FormControl(0),
       value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
-      createdAt: new FormControl(new Date().toISOString().substring(0, 10), Validators.required)
+      createdAt: new FormControl(new Date(), Validators.required)
     })
 
     this.initialValues = this.cashForm.value;
