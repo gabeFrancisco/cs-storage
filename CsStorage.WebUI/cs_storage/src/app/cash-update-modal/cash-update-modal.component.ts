@@ -25,6 +25,7 @@ export class CashUpdateModalComponent {
     })
 
     this.cashForm = new FormGroup({
+      id: new FormControl(null, Validators.required),
       description: new FormControl("", Validators.required),
       paymentType: new FormControl(0),
       value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
@@ -60,16 +61,19 @@ export class CashUpdateModalComponent {
     let register = this.cashForm.value as CashRegister;
 
     if (this.cashForm.invalid) {
+      alert("Há campos inválidos!");
       return;
     }
 
-    this.cashRegisterService.createCashRegister(register).subscribe(() => {
-      this.cashRegisterService.getCashRegisters();
+    this.cashRegisterService.updateCashRegister(register).subscribe({
+      next: res => {
+        this.cashForm.patchValue(res)
+        this.cashRegisterService.notifyListUpdate();
+        this.cashForm.reset(this.initialValues);
+        this.cashRegisterService.closeUpdatePostModal();
+      },
+      error: err => alert(err)
     })
 
-    this.cashForm.reset(this.initialValues);
-
-    this.cashRegisterService.closeUpdatePostModal();
-    this.cashRegisterService.notifyListUpdate();
   }
 }

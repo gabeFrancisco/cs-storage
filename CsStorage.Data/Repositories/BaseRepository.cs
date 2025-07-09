@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CsStorage.Data.Context;
+using CsStorage.Domain.Entities;
 using CsStorage.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace CsStorage.Data.Repositories
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : Entity
     {
         protected readonly AppDbContext _context;
         public BaseRepository(AppDbContext context)
@@ -45,6 +47,9 @@ namespace CsStorage.Data.Repositories
 
         public async Task<TEntity> Update(TEntity entity)
         {
+            Console.WriteLine(JsonSerializer.Serialize(entity));
+            entity.UpdatedAt = DateTime.Now;
+            
             _context.Set<TEntity>().Update(entity);
             await _context.SaveChangesAsync();
 

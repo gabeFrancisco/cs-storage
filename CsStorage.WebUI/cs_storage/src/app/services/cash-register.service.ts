@@ -1,7 +1,8 @@
 import { CashRegister } from './../../models/CashRegister';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, ReplaySubject } from 'rxjs';
+import { handleNetworkError } from '../../utils/errorHandler';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class CashRegisterService {
     return this.http.get<CashRegister[]>(`${this.url}`);
   }
 
-  getCashRegisterById(id: number): Observable<CashRegister>{
+  getCashRegisterById(id: number): Observable<CashRegister> {
     return this.http.get<CashRegister>(`${this.url}/${id}`)
   }
 
@@ -43,12 +44,14 @@ export class CashRegisterService {
     return this.http.post(`${this.url}`, payload)
   }
 
-  updateCashRegister(payload: CashRegister): Observable<any>{
-    return this.http.put(`${this.url}`, payload);
+  updateCashRegister(payload: CashRegister): Observable<any> {
+    return this.http.put(`${this.url}`, payload)
+      .pipe(catchError(handleNetworkError('update-cash-register')))
   }
 
   removeCashRegister(id: number): Observable<any> {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`)
+      .pipe(catchError(handleNetworkError('remove-cash-register')))
   }
 
   openCashPostModal() { this.cashPostModalState.next(true) }
