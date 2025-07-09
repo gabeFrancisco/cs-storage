@@ -22,4 +22,8 @@ export class DebtTableComponent implements OnInit{
       this.debts = res;
     })
   }
+
+  openDebtPostModal(){
+    this.debtService.openDebtPostModal();
+  }
 }

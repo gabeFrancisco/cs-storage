@@ -8,6 +8,7 @@ import { handleNetworkError } from '../../utils/errorHandler';
   providedIn: 'root'
 })
 export class CashRegisterService {
+  constructor(private http: HttpClient) { }
   private url = "http://localhost:5103/api/cashregisters";
 
   //cash modal variables
@@ -20,10 +21,19 @@ export class CashRegisterService {
   private cashRegisterId = new BehaviorSubject<number | null>(null)
   cashRegisterId$ = this.cashRegisterId.asObservable();
 
+  openCashPostModal() { this.cashPostModalState.next(true) }
+  closeCashPostModal() { this.cashPostModalState.next(false) }
+
+  openCashUpdateModal(id: number) {
+    this.cashUpdateModalState.next(true)
+    this.cashRegisterId.next(id);
+  }
+
+  closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
+
   //handle update on registers list
   updateList$ = new ReplaySubject<void>(1);
 
-  constructor(private http: HttpClient) { }
 
   notifyListUpdate() {
     setTimeout(() => {
@@ -39,7 +49,7 @@ export class CashRegisterService {
     return this.http.get<CashRegister>(`${this.url}/${id}`)
   }
 
-  createCashRegister(payload: CashRegister): Observable<any> {
+  createCashRegister(payload: CashRegister):  Observable<any> {
     // this.getCashRegisters();
     return this.http.post(`${this.url}`, payload)
   }
@@ -54,12 +64,5 @@ export class CashRegisterService {
       .pipe(catchError(handleNetworkError('remove-cash-register')))
   }
 
-  openCashPostModal() { this.cashPostModalState.next(true) }
-  closeCashPostModal() { this.cashPostModalState.next(false) }
 
-  openCashUpdateModal(id: number) {
-    this.cashUpdateModalState.next(true)
-    this.cashRegisterId.next(id);
-  }
-  closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
 }
