@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CashRegisterService } from '../services/cash-register.service';
-import { CashRegister } from '../../models/CashRegister';
+import { CashRegisterService } from '../../../services/cash-register.service';
+import { CashRegister } from '../../../../models/CashRegister';
 
 @Component({
   selector: 'app-cash-update-modal',

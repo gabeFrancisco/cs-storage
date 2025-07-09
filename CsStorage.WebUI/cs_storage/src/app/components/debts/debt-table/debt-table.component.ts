@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Debt } from '../../models/Debt';
-import { DebtService } from '../services/debt.service';
+import { Debt } from '../../../../models/Debt';
+import { DebtService } from '../../../services/debt.service';
 
 @Component({
   selector: 'app-debt-table',

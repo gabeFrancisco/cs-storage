@@ -1,7 +1,7 @@
-import { PaymentTypesDictionary } from './../../utils/PaymentTypesDictionary';
+import { PaymentTypesDictionary } from '../../../../utils/PaymentTypesDictionary';
 import { Component, OnInit } from '@angular/core';
-import { CashRegisterService } from '../services/cash-register.service';
-import { CashRegister } from '../../models/CashRegister';
+import { CashRegisterService } from '../../../services/cash-register.service';
+import { CashRegister } from '../../../../models/CashRegister';
 
 @Component({
   selector: 'app-cash-register-table',
