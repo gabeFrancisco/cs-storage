@@ -34,7 +34,9 @@ export class CashUpdateModalComponent {
 
     //Gets the cash register ID from the service to load the full cash register entity from DB.
     this.cashRegisterService.cashRegisterId$.subscribe((data) => {
-      this.cashRegisterService.getCashRegisterById(data!).subscribe((res) => this.cashForm.patchValue(res))
+      this.cashRegisterService.getCashRegisterById(data!).subscribe((res) => {
+        this.cashForm.patchValue(res)
+      })
     });
 
     this.initialValues = this.cashForm.value;

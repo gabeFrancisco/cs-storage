@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DebtService } from '../../../services/debt.service';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-debt-post-modal',
@@ -18,14 +18,26 @@ export class DebtPostModalComponent {
       this.show = value
     })
 
-    this.debtForm = new FormGroup({})
+    this.debtForm = new FormGroup({
+      value: new FormControl(0, Validators.min(0.1)),
+      forecast: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
+      name: new FormControl("", Validators.required),
+      phone: new FormControl("", Validators.required),
+      cpf_cnpj: new FormControl(""),
+      road: new FormControl(""),
+      number: new FormControl(""),
+      complement: new FormControl(""),
+      neighborhood: new FormControl(""),
+      city: new FormControl(""),
+      state: new FormControl("")
+    })
   }
 
   close() {
     this.debtService.closeDebtPostModal();
   }
 
-  submit(){
+  submit() {
 
   }
 }
