@@ -11,12 +11,10 @@ namespace CsStorage.Application.DTOs
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "The Road field is required!")]
         [MaxLength(100)]
         [DisplayName("Road")]
         public string Road { get; set; }
 
-        [Required(ErrorMessage = "The Number field is required!")]
         [MaxLength(10)]
         [DisplayName("Number")]
         public string Number { get; set; }

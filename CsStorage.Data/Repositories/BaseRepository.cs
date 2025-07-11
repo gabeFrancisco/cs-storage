@@ -19,6 +19,7 @@ namespace CsStorage.Data.Repositories
         }
         public async Task<TEntity> Create(TEntity entity)
         {
+            entity.CreatedAt = DateTime.Now;
             _context.Set<TEntity>().Add(entity);
             await _context.SaveChangesAsync();
 

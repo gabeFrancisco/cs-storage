@@ -24,6 +24,7 @@ namespace CsStorage.Application.DTOs
         [MaxLength(20)]
         [DisplayName("Cpf_cnpj")]
         public string Cpf_cnpj { get; set; }
+        
         public AddressDTO Address { get; set; }
 
         [DisplayName("Address")]

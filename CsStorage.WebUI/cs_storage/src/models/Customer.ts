@@ -4,6 +4,6 @@ import { BaseEntity } from "./BaseEntity";
 export interface Customer extends BaseEntity{
   name: string;
   phone: string;
-  cpf_cnpj: string;
-  address: Address
+  cpf_cnpj?: string;
+  address?: Address
 }

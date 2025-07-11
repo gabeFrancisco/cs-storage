@@ -28,13 +28,13 @@ export class DebtPostModalComponent {
       forecast: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),
-      cpf_cnpj: new FormControl(""),
-      road: new FormControl(""),
-      number: new FormControl(""),
-      complement: new FormControl(""),
-      neighborhood: new FormControl(""),
-      city: new FormControl(""),
-      state: new FormControl("")
+      cpf_cnpj: new FormControl(" "),
+      road: new FormControl(" "),
+      number: new FormControl(" "),
+      complement: new FormControl(" "),
+      neighborhood: new FormControl(" "),
+      city: new FormControl(" "),
+      state: new FormControl(" ")
     })
   }
 
@@ -75,7 +75,7 @@ export class DebtPostModalComponent {
         this.debtService.notifyListUpdate();
         this.debtService.closeDebtPostModal();
       },
-      error: err => alert(err)
+      error: err => console.log(err)
     })
   }
 }

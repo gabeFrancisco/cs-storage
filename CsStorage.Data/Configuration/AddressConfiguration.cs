@@ -13,13 +13,13 @@ namespace CsStorage.Data.Configuration
         public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Road).HasMaxLength(100).IsRequired();
-            builder.Property(x => x.Number).HasMaxLength(10).IsRequired();
+            builder.Property(x => x.Road).HasMaxLength(100);
+            builder.Property(x => x.Number).HasMaxLength(10);
             builder.Property(x => x.Complement).HasMaxLength(30);
             builder.Property(x => x.Neighborhood).HasMaxLength(50);
             builder.Property(x => x.City).HasMaxLength(50);
             builder.Property(x => x.State).HasMaxLength(50);
-            builder.Property(x => x.CreatedAt).HasColumnType("timestamp without time zone").IsRequired();
+            builder.Property(x => x.CreatedAt).HasColumnType("timestamp without time zone");
             builder.Property(x => x.UpdatedAt).HasColumnType("timestamp without time zone");
 
             // builder.HasData(
