@@ -14,6 +14,7 @@ import { phosphorArrowsClockwiseBold } from '@ng-icons/phosphor-icons/bold';
 import { CashUpdateModalComponent } from './components/cashRegisters/cash-update-modal/cash-update-modal.component';
 import { DebtPostModalComponent } from './components/debts/debt-post-modal/debt-post-modal.component'
 import { DebtTableComponent } from './components/debts/debt-table/debt-table.component';
+import { DebtUpdateModalComponent } from './debt-update-modal/debt-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DebtTableComponent } from './components/debts/debt-table/debt-table.com
     DebtTableComponent,
     CashPostModalComponent,
     CashUpdateModalComponent,
-    DebtPostModalComponent
+    DebtPostModalComponent,
+    DebtUpdateModalComponent
   ],
   imports: [
     BrowserModule,
