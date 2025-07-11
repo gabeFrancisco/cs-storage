@@ -14,6 +14,8 @@ namespace CsStorage.Domain.Entities
         public Customer Customer { get; set; }
         public int CustomerId { get; set; }
 
+        public Debt() { }
+
         public Debt(decimal value, DateTime forecast, DateTime? paidDate)
         {
             ValidateDomain(value, forecast, paidDate);

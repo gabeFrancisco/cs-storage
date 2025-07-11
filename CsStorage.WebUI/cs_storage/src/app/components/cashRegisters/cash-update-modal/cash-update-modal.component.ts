@@ -60,12 +60,12 @@ export class CashUpdateModalComponent {
   }
 
   submit() {
-    let register = this.cashForm.value as CashRegister;
-
     if (this.cashForm.invalid) {
-      alert("Há campos inválidos!");
+      alert("Há campos inválidos! Por favor, verifique.");
       return;
     }
+
+    let register = this.cashForm.value as CashRegister;
 
     this.cashRegisterService.updateCashRegister(register).subscribe({
       next: res => {

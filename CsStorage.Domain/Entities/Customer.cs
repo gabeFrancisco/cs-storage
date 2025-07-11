@@ -14,6 +14,8 @@ namespace CsStorage.Domain.Entities
         public Address Address { get; set; }
         public int AddressId { get; set; }
 
+        public Customer() { }
+
         public Customer(string name, string phone, string cpf_cnpj)
         {
             ValidateDomain(name, phone, cpf_cnpj);
