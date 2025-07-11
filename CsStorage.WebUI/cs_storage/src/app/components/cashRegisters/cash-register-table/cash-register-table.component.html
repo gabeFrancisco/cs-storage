@@ -36,6 +36,9 @@
 
         <!-- Table body -->
         <tbody>
+          <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
+            Carregando...
+          </tr>
           <tr
             class="items-center hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of registers"
@@ -44,12 +47,20 @@
               {{ item.createdAt | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">{{ item.description }}</th>
-            <th class="font-thin p-1.5">{{ paymentTypes[item.paymentType] }}</th>
+            <th class="font-thin p-1.5">
+              {{ paymentTypes[item.paymentType] }}
+            </th>
             <th class="font-thin text-emerald-700 p-1.5">
               R${{ item.value.toFixed(2) }}
             </th>
             <th class="font-thin text-center">
-              <button (click)="openCashUpdateModal(item.id! )" title="Atualizar" class="btn-primary text-lg mr-1">✎</button>
+              <button
+                (click)="openCashUpdateModal(item.id!)"
+                title="Atualizar"
+                class="btn-primary text-lg mr-1"
+              >
+                ✎
+              </button>
               <button
                 type="button"
                 title="Remover"

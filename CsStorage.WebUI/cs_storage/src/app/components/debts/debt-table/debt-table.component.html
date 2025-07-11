@@ -37,6 +37,9 @@
 
         <!-- Table body -->
         <tbody>
+          <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
+            Carregando...
+          </tr>
           <tr
             class="items-center hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of debts"

@@ -11,6 +11,8 @@ import { DebtService } from '../../../services/debt.service';
 export class DebtTableComponent implements OnInit{
   debts: Debt[] = [];
 
+  loading = true;
+
   constructor(private debtService: DebtService) { }
 
   ngOnInit(): void {
@@ -18,8 +20,10 @@ export class DebtTableComponent implements OnInit{
   }
 
   fetchList(){
-    this.debtService.getDebts().subscribe((res) => {
-      this.debts = res;
+    this.debtService.getDebts().subscribe({
+      next: (res) => {
+        this.debts = res
+      }, complete: () => this.loading = false
     })
   }
 

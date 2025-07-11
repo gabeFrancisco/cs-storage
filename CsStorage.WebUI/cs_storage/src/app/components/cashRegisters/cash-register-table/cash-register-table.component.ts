@@ -13,6 +13,8 @@ export class CashRegisterTableComponent implements OnInit {
   registers: CashRegister[] = [];
   paymentTypes = PaymentTypesDictionary
 
+  loading = true;
+
   constructor(private cashService: CashRegisterService) { }
 
   ngOnInit(): void {
@@ -24,8 +26,10 @@ export class CashRegisterTableComponent implements OnInit {
   }
 
   fetchList() {
-    this.cashService.getCashRegisters().subscribe((res) => {
-      this.registers = res
+    this.cashService.getCashRegisters().subscribe({
+      next: res => {
+        this.registers = res
+      }, complete: () => this.loading = false
     })
   }
 
