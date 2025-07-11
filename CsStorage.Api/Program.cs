@@ -1,4 +1,5 @@
 using CsStorage.IoC;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = new ConfigurationBuilder()
@@ -8,6 +9,8 @@ var configuration = new ConfigurationBuilder()
 
 builder.Services.AddInfrastructure(configuration);
 builder.Services.AddControllers();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -24,7 +27,16 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+     options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "CsStorage APIO",
+        Description = "Core API for the CsStorage management system",
+    });
+});
 
 var app = builder.Build();
 
