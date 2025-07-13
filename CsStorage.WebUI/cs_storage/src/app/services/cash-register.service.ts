@@ -34,7 +34,6 @@ export class CashRegisterService {
   //handle update on registers list
   updateList$ = new ReplaySubject<void>(1);
 
-
   notifyListUpdate() {
     setTimeout(() => {
       this.updateList$.next();

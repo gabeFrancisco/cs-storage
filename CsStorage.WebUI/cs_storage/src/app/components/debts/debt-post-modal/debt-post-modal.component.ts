@@ -12,7 +12,7 @@ import { ModalType } from '../../../../utils/modalType';
   templateUrl: './debt-post-modal.component.html',
   styleUrl: './debt-post-modal.component.css'
 })
-export class DebtPostModalComponent implements OnInit{
+export class DebtPostModalComponent{
   show = false;
 
   debtForm!: FormGroup;
@@ -44,9 +44,6 @@ export class DebtPostModalComponent implements OnInit{
       this.modalType = value
       console.log(value)
     })
-  }
-  ngOnInit(): void {
-
   }
 
   close(){

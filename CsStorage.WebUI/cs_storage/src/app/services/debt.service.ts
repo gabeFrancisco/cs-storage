@@ -12,12 +12,16 @@ export class DebtService {
 
   private url = "http://localhost:5103/api/debts";
 
+  //Modal type for reuse
   private debtModalType = new BehaviorSubject<ModalType | null>(null);
   debtPostType$ = this.debtModalType.asObservable();
 
-  //debt modal variables
+  //Debt modal variables
   private debtPostModalState = new BehaviorSubject<boolean>(false);
   debtPostModalState$ = this.debtPostModalState.asObservable();
+
+  private debtId = new BehaviorSubject<number | null>(null);
+  debtId$ = this.debtId.asObservable();
 
   openDebtPostModal() { this.debtPostModalState.next(true) }
   closeDebtPostModal() { this.debtPostModalState.next(false) }
@@ -37,6 +41,10 @@ export class DebtService {
 
   getDebts(): Observable<Debt[]> {
     return this.http.get<Debt[]>(this.url);
+  }
+
+  getDebtById(id: number): Observable<Debt>{
+    return this.http.get<Debt>(`${this.url}/${id}`);
   }
 
   createDebt(payload: Debt): Observable<any> {
