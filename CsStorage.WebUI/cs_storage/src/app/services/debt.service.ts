@@ -56,8 +56,13 @@ export class DebtService {
     return this.http.post(this.url, payload);
   }
 
+  updateDebt(payload: Debt): Observable<any>{
+    return this.http.put(this.url, payload)
+    .pipe(catchError(handleNetworkError('update-debt')))
+  }
+
   removeDebt(id: number): Observable<any>{
     return this.http.delete(`${this.url}/${id}`)
-      .pipe(catchError(handleNetworkError('remove-debt-register')))
+      .pipe(catchError(handleNetworkError('remove-debt')))
   }
 }

@@ -43,11 +43,17 @@ export class DebtPostModalComponent {
 
     this.debtService.debtPostType$.subscribe(value => {
       this.modalType = value;
-      if (value === ModalType.UPDATE) {
+
+      //Verify if the modal type is differente from CREATE
+      if (value !== ModalType.CREATE) {
+
+        //Gets the debt id from the service
         this.debtService.debtId$.subscribe(data => {
           if (data !== null) {
+
+            //Fetch the debt by the given id from the server
+            //Then patch all the values for the form fields
             this.debtService.getDebtById(data!).subscribe(res => {
-              console.log(true)
               this.debtForm.patchValue({
                 id: res.id!,
                 value: res.value,
@@ -80,6 +86,7 @@ export class DebtPostModalComponent {
     }
 
     this.debt = {
+      id: this.debtForm.get('id')!.value,
       forecast: this.debtForm.get('forecast')!.value,
       paidDate: new Date().toISOString(),
       value: this.debtForm.get('value')!.value,
@@ -99,13 +106,25 @@ export class DebtPostModalComponent {
       }
     }
 
-    this.debtService.createDebt(this.debt).subscribe({
-      next: res => {
-        this.debtForm.reset();
-        this.debtService.notifyListUpdate();
-        this.debtService.closeDebtPostModal();
-      },
-      error: err => console.log(err)
-    })
+    if (this.modalType === ModalType.CREATE) {
+      this.debtService.createDebt(this.debt).subscribe({
+        next: _ => {
+          this.debtForm.reset();
+          this.debtService.notifyListUpdate();
+          this.debtService.closeDebtPostModal();
+        },
+        error: err => console.log(err)
+      })
+    }
+    else if(this.modalType === ModalType.UPDATE) {
+      this.debtService.updateDebt(this.debt).subscribe({
+        next: _ => {
+          this.debtForm.reset();
+          this.debtService.notifyListUpdate();
+          this.debtService.closeDebtPostModal();
+        },
+        error: err => console.log(err)
+      })
+    }
   }
 }
