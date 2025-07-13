@@ -58,7 +58,7 @@
               {{ item.paidDate | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin text-center">
-              <button title="Atualizar" (click)="openDebtUpdate()" class="btn-primary text-lg mr-1">✎</button>
+              <button title="Atualizar" (click)="openDebtUpdate(item.id!)" class="btn-primary text-lg mr-1">✎</button>
               <button
                 type="button"
                 (click)="deleteDebt(item.id!)"

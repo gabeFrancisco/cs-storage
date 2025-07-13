@@ -12,7 +12,7 @@ import { ModalType } from '../../../../utils/modalType';
   templateUrl: './debt-post-modal.component.html',
   styleUrl: './debt-post-modal.component.css'
 })
-export class DebtPostModalComponent{
+export class DebtPostModalComponent {
   show = false;
 
   debtForm!: FormGroup;
@@ -27,6 +27,7 @@ export class DebtPostModalComponent{
     })
 
     this.debtForm = new FormGroup({
+      id: new FormControl(0),
       value: new FormControl(0, Validators.min(0.1)),
       forecast: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
       name: new FormControl("", Validators.required),
@@ -41,26 +42,45 @@ export class DebtPostModalComponent{
     })
 
     this.debtService.debtPostType$.subscribe(value => {
-      this.modalType = value
+      this.modalType = value;
+      if (value === ModalType.UPDATE) {
+        this.debtService.debtId$.subscribe(data => {
+          if (data !== null) {
+            this.debtService.getDebtById(data!).subscribe(res => {
+              console.log(true)
+              this.debtForm.patchValue({
+                id: res.id!,
+                value: res.value,
+                forecast: res.forecast,
+                name: res.customer.name,
+                phone: res.customer.phone,
+                cpf_cnpj: res.customer.cpf_cnpj,
+                road: res.customer.address?.road,
+                number: res.customer.address?.road,
+                complement: res.customer.address?.complement,
+                neighborhood: res.customer.address?.neighborhood,
+                city: res.customer.address?.city,
+                state: res.customer.address?.state
+              })
+            })
+          }
+        })
+      }
     })
-
-    if(this.modalType === ModalType.UPDATE){
-      this.debtService.getDebtById
-    }
   }
 
-  close(){
+  close() {
     this.debtService.closeDebtPostModal();
   }
 
   submit() {
-    if(this.debtForm.invalid){
+    if (this.debtForm.invalid) {
       // alert("Há campos inválidos! Por favor, verifique.");
       return;
     }
 
     this.debt = {
-      forecast:  this.debtForm.get('forecast')!.value,
+      forecast: this.debtForm.get('forecast')!.value,
       paidDate: new Date().toISOString(),
       value: this.debtForm.get('value')!.value,
       createdAt: new Date().toISOString(),

@@ -39,7 +39,6 @@ export class CashUpdateModalComponent {
       })
     });
 
-    this.initialValues = this.cashForm.value;
   }
 
   //Closes the modal

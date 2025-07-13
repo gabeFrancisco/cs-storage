@@ -22,7 +22,7 @@
         #formDir="ngForm"
         class=""
       >
-        <!-- <input type="hidden" formControlName="id"> -->
+        <input type="hidden" formControlName="id">
         <label class="form-label">Débito</label>
         <div
           class="max-w-xlc form-section flex mx-auto my-3 items-baseline flex-row space-y-1"
@@ -216,18 +216,14 @@
                   formControlName="state"
 
                 />
-                <!-- <small
-                class="text-red-500"
-                *ngIf="description.invalid && formDir.submitted"
-                >Descrição é obrigatória!</small
-              > -->
               </div>
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn-green w-full mt-2 py-1 text-lg px-4">
-          Registrar débito!
+
+        <button *ngIf="modalType !== 2" type="submit" class="w-full mt-2 py-1 text-lg px-4" [class.btn-green]="modalType === 0" [class.btn-primary]="modalType === 1">
+          {{ modalType === 0 ? "Registrar débito" : "Atualizar débito" }}
         </button>
       </form>
     </div>

@@ -31,6 +31,10 @@ export class DebtService {
   setModalTypeToUpdate() { this.debtModalType.next(ModalType.UPDATE) }
   setModalTypeToRead() { this.debtModalType.next(ModalType.READ) }
 
+  setDebtId(id: number){
+    this.debtId.next(id)
+  }
+
   //handle update on registers list
   updateList$ = new ReplaySubject<void>(1);
 
