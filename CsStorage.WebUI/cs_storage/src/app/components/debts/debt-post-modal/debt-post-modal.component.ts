@@ -20,7 +20,7 @@ export class DebtPostModalComponent {
 
   constructor(private debtService: DebtService) {
     this.debtService.debtPostModalState$.subscribe((value) => {
-      this.show = value
+      this.show = value as boolean
     })
 
     this.debtForm = new FormGroup({
@@ -44,8 +44,7 @@ export class DebtPostModalComponent {
 
   submit() {
     if(this.debtForm.invalid){
-      alert("Há campos inválidos! Por favor, verifique.");
-      console.log(this.debtForm)
+      // alert("Há campos inválidos! Por favor, verifique.");
       return;
     }
 

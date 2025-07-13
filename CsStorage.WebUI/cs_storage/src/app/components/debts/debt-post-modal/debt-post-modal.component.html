@@ -25,15 +25,17 @@
         <!-- <input type="hidden" formControlName="id"> -->
         <label class="form-label">Débito</label>
         <div
-          class="max-w-xlc form-section flex mx-auto my-3 items-baseline justify-evenly flex-row space-y-1"
+          class="max-w-xlc form-section flex mx-auto my-3 items-baseline flex-row space-y-1"
         >
           <div class="flex items-baseline">
-            <label class="text-sm text-right mr-2" for="description"
+            <label class="text-sm w-16 text-right mr-2" for="description"
               >Valor</label
             >
             <div class="flex flex-col">
               <input
-                type="text"
+                type="number"
+                min="0.01"
+                step="0.01"
                 class="border w-full border-gray-400"
                 formControlName="value"
                 required
@@ -46,7 +48,7 @@
             </div>
           </div>
           <div class="flex items-baseline">
-            <label class="w-16 mr-2 text-sm text-right" for="description"
+            <label class="w-20 ml-10 mr-2 text-sm text-right" for="description"
               >Previsão</label
             >
             <div class="flex flex-col">

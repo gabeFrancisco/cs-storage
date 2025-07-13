@@ -30,4 +30,8 @@ export class DebtTableComponent implements OnInit{
   openDebtPostModal(){
     this.debtService.openDebtPostModal();
   }
+
+  openDebtUpdate(){
+    this.debtService
+  }
 }

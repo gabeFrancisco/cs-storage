@@ -1,4 +1,4 @@
-import { PaymentTypesDictionary } from '../../../../utils/PaymentTypesDictionary';
+import { PaymentTypesDictionary } from '../../../../utils/paymentTypesDictionary';
 import { Component, OnInit } from '@angular/core';
 import { CashRegisterService } from '../../../services/cash-register.service';
 import { CashRegister } from '../../../../models/CashRegister';

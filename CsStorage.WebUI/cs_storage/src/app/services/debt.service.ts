@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Debt } from '../../models/Debt';
+import { ModalType } from '../../utils/modalType';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,21 @@ export class DebtService {
 
   private url = "http://localhost:5103/api/debts";
 
+  modalType: ModalType | null = null;
+
+  private debtModalType = new BehaviorSubject<ModalType | null>(null);
+  debtPostType = this.debtModalType.asObservable();
+
   //debt modal variables
   private debtPostModalState = new BehaviorSubject<boolean>(false);
   debtPostModalState$ = this.debtPostModalState.asObservable();
 
   openDebtPostModal() { this.debtPostModalState.next(true) }
   closeDebtPostModal() { this.debtPostModalState.next(false) }
+
+  setModalTypeToCreate() { this.debtModalType.next(ModalType.CREATE) }
+  setModalTypeToUpdate() { this.debtModalType.next(ModalType.UPDATE) }
+  setModalTypeToRead() { this.debtModalType.next(ModalType.READ) }
 
   //handle update on registers list
   updateList$ = new ReplaySubject<void>(1);
