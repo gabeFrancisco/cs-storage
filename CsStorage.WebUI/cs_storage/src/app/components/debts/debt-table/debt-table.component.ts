@@ -36,4 +36,12 @@ export class DebtTableComponent implements OnInit{
     this.debtService.setModalTypeToUpdate();
     this.debtService.openDebtPostModal();
   }
+
+  deleteDebt(id: number){
+    if(confirm("Tem certeza que deseja remover este débito?")){
+      this.debtService.removeDebt(id).subscribe(() => {
+        this.fetchList()
+      })
+    }
+  }
 }

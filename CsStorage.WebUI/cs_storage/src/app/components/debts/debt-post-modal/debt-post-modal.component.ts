@@ -42,8 +42,11 @@ export class DebtPostModalComponent{
 
     this.debtService.debtPostType$.subscribe(value => {
       this.modalType = value
-      console.log(value)
     })
+
+    if(this.modalType === ModalType.UPDATE){
+      this.debtService.getDebtById
+    }
   }
 
   close(){

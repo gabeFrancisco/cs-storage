@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject, catchError } from 'rxjs';
 import { Debt } from '../../models/Debt';
 import { ModalType } from '../../utils/modalType';
+import { handleNetworkError } from '../../utils/errorHandler';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,10 @@ export class DebtService {
 
   createDebt(payload: Debt): Observable<any> {
     return this.http.post(this.url, payload);
+  }
+
+  removeDebt(id: number): Observable<any>{
+    return this.http.delete(`${this.url}/${id}`)
+      .pipe(catchError(handleNetworkError('remove-debt-register')))
   }
 }
