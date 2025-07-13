@@ -47,9 +47,12 @@ namespace CsStorage.Application.Services
             return _mapper.Map<DebtDTO>(debt);
         }
 
-        public Task<DebtDTO> Update(DebtDTO debt)
+        public async Task<DebtDTO> Update(DebtDTO dto)
         {
-            throw new NotImplementedException();
+            var debt = _mapper.Map<Debt>(dto);
+            await _debtRepository.Update(debt);
+
+            return dto;
         }
     }
 }
