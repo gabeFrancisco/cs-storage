@@ -1,9 +1,10 @@
 import { Debt } from './../../../../models/Debt';
 import { Customer } from './../../../../models/Customer';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DebtService } from '../../../services/debt.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Address } from '../../../../models/Address';
+import { ModalType } from '../../../../utils/modalType';
 
 @Component({
   selector: 'app-debt-post-modal',
@@ -11,12 +12,14 @@ import { Address } from '../../../../models/Address';
   templateUrl: './debt-post-modal.component.html',
   styleUrl: './debt-post-modal.component.css'
 })
-export class DebtPostModalComponent {
+export class DebtPostModalComponent implements OnInit{
   show = false;
 
   debtForm!: FormGroup;
 
   debt!: Debt;
+
+  modalType: ModalType | null = null;
 
   constructor(private debtService: DebtService) {
     this.debtService.debtPostModalState$.subscribe((value) => {
@@ -36,6 +39,14 @@ export class DebtPostModalComponent {
       city: new FormControl(" "),
       state: new FormControl(" ")
     })
+
+    this.debtService.debtPostType$.subscribe(value => {
+      this.modalType = value
+      console.log(value)
+    })
+  }
+  ngOnInit(): void {
+
   }
 
   close(){

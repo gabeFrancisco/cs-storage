@@ -28,10 +28,12 @@ export class DebtTableComponent implements OnInit{
   }
 
   openDebtPostModal(){
+    this.debtService.setModalTypeToCreate();
     this.debtService.openDebtPostModal();
   }
 
   openDebtUpdate(){
-    this.debtService
+    this.debtService.setModalTypeToUpdate();
+    this.debtService.openDebtPostModal();
   }
 }

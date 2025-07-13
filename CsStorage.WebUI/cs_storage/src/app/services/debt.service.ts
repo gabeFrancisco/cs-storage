@@ -12,10 +12,8 @@ export class DebtService {
 
   private url = "http://localhost:5103/api/debts";
 
-  modalType: ModalType | null = null;
-
   private debtModalType = new BehaviorSubject<ModalType | null>(null);
-  debtPostType = this.debtModalType.asObservable();
+  debtPostType$ = this.debtModalType.asObservable();
 
   //debt modal variables
   private debtPostModalState = new BehaviorSubject<boolean>(false);
