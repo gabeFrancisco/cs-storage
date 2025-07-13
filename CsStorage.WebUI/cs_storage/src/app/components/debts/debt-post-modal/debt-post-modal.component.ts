@@ -72,6 +72,9 @@ export class DebtPostModalComponent {
           }
         })
       }
+      else {
+        this.debtForm.reset();
+      }
     })
   }
 
@@ -116,7 +119,7 @@ export class DebtPostModalComponent {
         error: err => console.log(err)
       })
     }
-    else if(this.modalType === ModalType.UPDATE) {
+    else if (this.modalType === ModalType.UPDATE) {
       this.debtService.updateDebt(this.debt).subscribe({
         next: _ => {
           this.debtForm.reset();
