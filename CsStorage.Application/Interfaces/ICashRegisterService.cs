@@ -8,6 +8,6 @@ namespace CsStorage.Application.Interfaces
 {
     public interface ICashRegisterService : IBaseService<CashRegisterDTO>
     {
-       
+        dynamic GetAllRegistersValueOfActualMonthAndDay();
     }
 }

@@ -33,6 +33,11 @@ namespace CsStorage.Application.Services
             return _mapper.Map<IEnumerable<CashRegisterDTO>>(registers);
         }
 
+        public dynamic GetAllRegistersValueOfActualMonthAndDay()
+        {
+            return _cashRegisterRepository.GetAllRegistersValueOfActualMonthAndDay();   
+        }
+
         public async Task<CashRegisterDTO> GetById(int? id)
         {
             var register = await _cashRegisterRepository.GetById(id);

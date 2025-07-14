@@ -40,11 +40,17 @@ namespace CsStorage.Api.Controllers
         {
             return Ok(await _cashRegisterService.Update(dto));
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             return Ok(await _cashRegisterService.Remove(id));
+        }
+
+        [HttpGet("monthTotal")]
+        public IActionResult GetValueMonth()
+        {
+            return Ok(_cashRegisterService.GetAllRegistersValueOfActualMonthAndDay());
         }
     }
 }

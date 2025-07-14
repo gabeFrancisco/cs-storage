@@ -8,6 +8,6 @@ namespace CsStorage.Domain.Interfaces
 {
     public interface ICashRegisterRepository : IBaseRepository<CashRegister>
     {
-       
+        dynamic GetAllRegistersValueOfActualMonthAndDay();
     }
 }
