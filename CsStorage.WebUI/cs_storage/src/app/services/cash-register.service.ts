@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, ReplaySubject } from 'rxjs';
 import { handleNetworkError } from '../../utils/errorHandler';
+import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +64,7 @@ export class CashRegisterService {
       .pipe(catchError(handleNetworkError('remove-cash-register')))
   }
 
-
+  getDayAndMonthValueData(): Observable<DayAndMonthData>{
+    return this.http.get<DayAndMonthData>(`${this.url}/monthTotal`);
+  }
 }
