@@ -33,6 +33,7 @@ namespace CsStorage.IoC
             services.AddScoped<ICashRegisterService, CashRegisterService>();
 
             return services;
+            
         }
     }
 
