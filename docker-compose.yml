@@ -9,9 +9,19 @@ services:
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: cs_storage
     ports:
-      - "4321:4321"
+      - "5431:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  ef:
+    image: mcr.microsoft.com/dotnet/sdk:9.0
+    container_name: csstorage_ef
+    working_dir: /src
+    volumes:
+      - ./:/src
+    entrypoint: [ "tail", "-f", "/dev/null" ]  # Mantém o container em pé para usar interativamente
+    depends_on:
+      - db
 
   api:
     build:
