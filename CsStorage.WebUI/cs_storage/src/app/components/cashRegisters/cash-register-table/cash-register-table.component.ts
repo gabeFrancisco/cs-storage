@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './cash-register-table.component.html',
   styleUrl: './cash-register-table.component.css'
 })
-export class CashRegisterTableComponent {
+export class CashRegisterTableComponent implements OnInit {
   registers: CashRegister[] = [];
   paymentTypes = PaymentTypesDictionary
   private refreshSub!: Subscription;
@@ -18,12 +18,15 @@ export class CashRegisterTableComponent {
   loading = true;
 
   constructor(private cashService: CashRegisterService, private cdr: ChangeDetectorRef) {
+
+  }
+  ngOnInit(): void {
     this.fetchList();
-    this.refreshSub = this.cashService.refreshList$.subscribe(() => {
+    this.cashService.refreshList$.subscribe(() => {
       this.fetchList();
       this.cdr.detectChanges();
     })
-   }
+  }
 
   fetchList() {
     this.cashService.getCashRegisters().subscribe({
@@ -45,7 +48,7 @@ export class CashRegisterTableComponent {
     this.cashService.openCashPostModal();
   }
 
-  openCashUpdateModal(id: number){
+  openCashUpdateModal(id: number) {
     this.cashService.openCashUpdateModal(id);
   }
 

@@ -9,15 +9,17 @@ import { Subscription } from 'rxjs';
   templateUrl: './debt-table.component.html',
   styleUrl: './debt-table.component.css'
 })
-export class DebtTableComponent {
+export class DebtTableComponent implements OnInit{
   debts: Debt[] = [];
-  private refreshSub!: Subscription;
 
   loading = true;
 
   constructor(private debtService: DebtService, private cdr: ChangeDetectorRef) {
+
+  }
+  ngOnInit(): void {
     this.fetchList();
-    this.refreshSub = this.debtService.updateList$.subscribe(()=>{
+    this.debtService.updateList$.subscribe(()=>{
       this.fetchList();
       this.cdr.detectChanges();
     })
