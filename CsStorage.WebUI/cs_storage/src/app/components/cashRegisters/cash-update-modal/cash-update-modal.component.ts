@@ -69,7 +69,7 @@ export class CashUpdateModalComponent {
     this.cashRegisterService.updateCashRegister(register).subscribe({
       next: res => {
         this.cashForm.patchValue(res)
-        this.cashRegisterService.notifyListUpdate();
+        this.cashRegisterService.triggerUpdate();
         this.cashForm.reset(this.initialValues);
         this.cashRegisterService.closeUpdatePostModal();
       },

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Debt } from '../../../../models/Debt';
 import { DebtService } from '../../../services/debt.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-debt-table',
@@ -8,18 +9,21 @@ import { DebtService } from '../../../services/debt.service';
   templateUrl: './debt-table.component.html',
   styleUrl: './debt-table.component.css'
 })
-export class DebtTableComponent implements OnInit{
+export class DebtTableComponent {
   debts: Debt[] = [];
+  private refreshSub!: Subscription;
 
   loading = true;
 
-  constructor(private debtService: DebtService) { }
-
-  ngOnInit(): void {
+  constructor(private debtService: DebtService, private cdr: ChangeDetectorRef) {
     this.fetchList();
+    this.refreshSub = this.debtService.updateList$.subscribe(()=>{
+      this.fetchList();
+      this.cdr.detectChanges();
+    })
   }
 
-  fetchList(){
+  fetchList() {
     this.debtService.getDebts().subscribe({
       next: (res) => {
         this.debts = res
@@ -27,19 +31,19 @@ export class DebtTableComponent implements OnInit{
     })
   }
 
-  openDebtPostModal(){
+  openDebtPostModal() {
     this.debtService.setModalTypeToCreate();
     this.debtService.openDebtPostModal();
   }
 
-  openDebtUpdate(id: number){
+  openDebtUpdate(id: number) {
     this.debtService.setModalTypeToUpdate();
     this.debtService.setDebtId(id)
     this.debtService.openDebtPostModal();
   }
 
-  deleteDebt(id: number){
-    if(confirm("Tem certeza que deseja remover este débito?")){
+  deleteDebt(id: number) {
+    if (confirm("Tem certeza que deseja remover este débito?")) {
       this.debtService.removeDebt(id).subscribe(() => {
         this.fetchList()
       })

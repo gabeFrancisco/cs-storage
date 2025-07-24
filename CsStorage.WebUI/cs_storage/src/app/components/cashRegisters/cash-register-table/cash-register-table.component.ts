@@ -1,7 +1,8 @@
 import { PaymentTypesDictionary } from '../../../../utils/paymentTypesDictionary';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CashRegisterService } from '../../../services/cash-register.service';
 import { CashRegister } from '../../../../models/CashRegister';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cash-register-table',
@@ -9,21 +10,20 @@ import { CashRegister } from '../../../../models/CashRegister';
   templateUrl: './cash-register-table.component.html',
   styleUrl: './cash-register-table.component.css'
 })
-export class CashRegisterTableComponent implements OnInit {
+export class CashRegisterTableComponent {
   registers: CashRegister[] = [];
   paymentTypes = PaymentTypesDictionary
+  private refreshSub!: Subscription;
 
   loading = true;
 
-  constructor(private cashService: CashRegisterService) { }
-
-  ngOnInit(): void {
+  constructor(private cashService: CashRegisterService, private cdr: ChangeDetectorRef) {
     this.fetchList();
-    this.cashService.notifyListUpdate();
-    this.cashService.updateList$.subscribe(() => {
+    this.refreshSub = this.cashService.refreshList$.subscribe(() => {
       this.fetchList();
+      this.cdr.detectChanges();
     })
-  }
+   }
 
   fetchList() {
     this.cashService.getCashRegisters().subscribe({
@@ -47,5 +47,9 @@ export class CashRegisterTableComponent implements OnInit {
 
   openCashUpdateModal(id: number){
     this.cashService.openCashUpdateModal(id);
+  }
+
+  getTime() {
+    return new Date().toLocaleTimeString();
   }
 }

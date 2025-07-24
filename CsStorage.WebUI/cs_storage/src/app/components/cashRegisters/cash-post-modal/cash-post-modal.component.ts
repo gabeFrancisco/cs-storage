@@ -53,13 +53,17 @@ export class CashPostModalComponent {
       return;
     }
 
-    this.cashRegisterService.createCashRegister(register).subscribe(() => {
-      this.cashRegisterService.getCashRegisters();
-    })
+    this.cashRegisterService.createCashRegister(register).subscribe({
+      next: (item) => {
+        console.log(item)
+        this.cashRegisterService.getCashRegisters();
+      }
+    }
+    )
 
     this.cashForm.reset(this.initialValues);
 
     this.cashRegisterService.closeCashPostModal();
-    this.cashRegisterService.notifyListUpdate();
+    this.cashRegisterService.triggerUpdate();
   }
 }

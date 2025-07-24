@@ -1,7 +1,7 @@
 import { CashRegister } from './../../models/CashRegister';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, ReplaySubject, Subject } from 'rxjs';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 
@@ -9,6 +9,7 @@ import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
   providedIn: 'root'
 })
 export class CashRegisterService {
+
   constructor(private http: HttpClient) { }
   private url = "http://localhost:5103/api/cashregisters";
 
@@ -33,12 +34,11 @@ export class CashRegisterService {
   closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
 
   //handle update on registers list
-  updateList$ = new ReplaySubject<void>(1);
+  private refreshList = new Subject<void>();
+  refreshList$ = this.refreshList.asObservable();
 
-  notifyListUpdate() {
-    setTimeout(() => {
-      this.updateList$.next();
-    }, 0)
+  triggerUpdate() {
+    this.refreshList.next();
   }
 
   getCashRegisters(): Observable<CashRegister[]> {
@@ -49,7 +49,7 @@ export class CashRegisterService {
     return this.http.get<CashRegister>(`${this.url}/${id}`)
   }
 
-  createCashRegister(payload: CashRegister):  Observable<any> {
+  createCashRegister(payload: CashRegister): Observable<any> {
     // this.getCashRegisters();
     return this.http.post(`${this.url}`, payload)
   }
@@ -64,7 +64,7 @@ export class CashRegisterService {
       .pipe(catchError(handleNetworkError('remove-cash-register')))
   }
 
-  getDayAndMonthValueData(): Observable<DayAndMonthData>{
+  getDayAndMonthValueData(): Observable<DayAndMonthData> {
     return this.http.get<DayAndMonthData>(`${this.url}/monthTotal`);
   }
 }
