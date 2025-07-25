@@ -34,7 +34,7 @@ export class CashRegisterService {
   closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
 
   //handle update on registers list
-  private refreshList = new Subject<void>();
+  private refreshList = new BehaviorSubject<void>(undefined);
   refreshList$ = this.refreshList.asObservable();
 
   triggerUpdate() {

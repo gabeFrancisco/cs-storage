@@ -113,8 +113,9 @@ export class DebtPostModalComponent {
       this.debtService.createDebt(this.debt).subscribe({
         next: _ => {
           this.debtForm.reset();
-          this.debtService.notifyListUpdate();
+          this.debtService.triggerUpdate();
           this.debtService.closeDebtPostModal();
+          console.log(this.debt)
         },
         error: err => console.log(err)
       })
@@ -123,7 +124,7 @@ export class DebtPostModalComponent {
       this.debtService.updateDebt(this.debt).subscribe({
         next: _ => {
           this.debtForm.reset();
-          this.debtService.notifyListUpdate();
+          this.debtService.triggerUpdate();
           this.debtService.closeDebtPostModal();
         },
         error: err => console.log(err)

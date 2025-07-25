@@ -18,8 +18,8 @@ export class DebtTableComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.fetchList();
-    this.debtService.updateList$.subscribe(()=>{
+    this.debtService.triggerUpdate();
+    this.debtService.refreshList$.subscribe(()=>{
       this.fetchList();
       this.cdr.detectChanges();
     })

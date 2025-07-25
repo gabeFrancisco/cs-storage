@@ -36,12 +36,11 @@ export class DebtService {
   }
 
   //handle update on registers list
-  updateList$ = new ReplaySubject<void>(1);
+  private refreshList = new BehaviorSubject<void>(undefined);
+  refreshList$ = this.refreshList.asObservable();
 
-  notifyListUpdate() {
-    setTimeout(() => {
-      this.updateList$.next();
-    }, 0)
+  triggerUpdate() {
+    this.refreshList.next();
   }
 
   getDebts(): Observable<Debt[]> {

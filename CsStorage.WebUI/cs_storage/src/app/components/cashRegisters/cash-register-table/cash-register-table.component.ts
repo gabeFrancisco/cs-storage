@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs';
 export class CashRegisterTableComponent implements OnInit {
   registers: CashRegister[] = [];
   paymentTypes = PaymentTypesDictionary
-  private refreshSub!: Subscription;
 
   loading = true;
 
@@ -21,7 +20,8 @@ export class CashRegisterTableComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.fetchList();
+
+    this.cashService.triggerUpdate();
     this.cashService.refreshList$.subscribe(() => {
       this.fetchList();
       this.cdr.detectChanges();

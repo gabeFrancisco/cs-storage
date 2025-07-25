@@ -55,15 +55,11 @@ export class CashPostModalComponent {
 
     this.cashRegisterService.createCashRegister(register).subscribe({
       next: (item) => {
-        console.log(item)
-        this.cashRegisterService.getCashRegisters();
+        this.cashForm.reset(this.initialValues);
+        this.cashRegisterService.closeCashPostModal();
+        this.cashRegisterService.triggerUpdate();
       }
     }
     )
-
-    this.cashForm.reset(this.initialValues);
-
-    this.cashRegisterService.closeCashPostModal();
-    this.cashRegisterService.triggerUpdate();
   }
 }
