@@ -31,8 +31,8 @@ namespace CsStorage.Domain.Entities
 
         private void ValidateDomain(string road, string number, string complement, string neighborhood, string city, string state)
         {
-            DomainExceptionValidation.When(string.IsNullOrEmpty(road), "Road is required!");
-            DomainExceptionValidation.When(string.IsNullOrEmpty(number), "Number is required!");
+            // DomainExceptionValidation.When(string.IsNullOrEmpty(road), "Road is required!");
+            // DomainExceptionValidation.When(string.IsNullOrEmpty(number), "Number is required!");
 
             Road = road;
             Number = number;
