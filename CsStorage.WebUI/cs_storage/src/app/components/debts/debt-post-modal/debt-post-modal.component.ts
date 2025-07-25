@@ -43,6 +43,7 @@ export class DebtPostModalComponent {
 
     this.debtService.debtPostType$.subscribe(value => {
       this.modalType = value;
+      console.log(this.debtForm.value)
 
       //Verify if the modal type is differente from CREATE
       if (value !== ModalType.CREATE) {
@@ -89,22 +90,22 @@ export class DebtPostModalComponent {
     }
 
     this.debt = {
-      id: this.debtForm.get('id')!.value,
-      forecast: this.debtForm.get('forecast')!.value,
+      id: this.debtForm.get('id')!.value! ?? 0,
+      forecast: this.debtForm.get('forecast')!.value ?? "",
       paidDate: new Date().toISOString(),
-      value: this.debtForm.get('value')!.value,
+      value: this.debtForm.get('value')!.value ?? "",
       createdAt: new Date().toISOString(),
       customer: {
-        name: this.debtForm.get('name')!.value,
-        phone: this.debtForm.get('phone')!.value,
-        cpf_cnpj: this.debtForm.get('cpf_cnpj')!.value,
+        name: this.debtForm.get('name')!.value ?? "",
+        phone: this.debtForm.get('phone')!.value ?? "",
+        cpf_cnpj: this.debtForm.get('cpf_cnpj')!.value ?? "",
         address: {
-          road: this.debtForm.get('road')!.value,
-          number: this.debtForm.get('number')!.value,
-          complement: this.debtForm.get('complement')!.value,
-          neighborhood: this.debtForm.get('neighborhood')!.value,
-          city: this.debtForm.get('city')!.value,
-          state: this.debtForm.get('state')!.value
+          road: this.debtForm.get('road')!.value ?? "",
+          number: this.debtForm.get('number')!.value ?? "",
+          complement: this.debtForm.get('complement')!.value ?? "",
+          neighborhood: this.debtForm.get('neighborhood')!.value ?? "",
+          city: this.debtForm.get('city')!.value ?? "",
+          state: this.debtForm.get('state')!.value ?? ""
         }
       }
     }
