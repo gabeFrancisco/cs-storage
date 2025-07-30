@@ -1,0 +1,79 @@
+<div
+  *ngIf="show"
+  class="absolute top-0 left-0 w-screen z-50 h-screen bg-gray-100 bg-opacity-75 flex flex-col justify-center items-center"
+>
+  <div class="-mt-48 border border-gray-400 shadow bg-gray-50">
+    <div
+      class="bg-gray-100 border-b py-1 px-2 flex flex-row justify-between text-gray-700 text-center"
+    >
+      Novo registro
+      <button
+        (click)="close()"
+        type="button"
+        class="font-bold hover:text-red-500"
+      >
+        X
+      </button>
+    </div>
+    <div class="p-5">
+      <form
+        (ngSubmit)="submit()"
+        [formGroup]="missingProductForm"
+        #formDir="ngForm"
+        class="max-w-xl mx-auto flex-col space-y-1"
+      >
+        <div class="flex items-baseline">
+          <label class="w-16 text-sm text-right mr-2" for="description"
+            >Descrição</label
+          >
+          <div class="flex flex-col">
+            <input
+              type="text"
+              class="border w-full border-gray-400"
+              formControlName="description"
+              required
+            />
+            <small
+              class="text-red-500"
+              *ngIf="missingProductForm.get('name')!.invalid && formDir.submitted"
+              >Descrição é obrigatória!</small
+            >
+          </div>
+        </div>
+
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="paymenttype"
+            >Tipo</label
+          >
+
+        </div>
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="value">Valor</label>
+          <div class="flex flex-col">
+            <input
+              type="number"
+              formControlName="value"
+              class="border border-gray-400 my-1"
+              required
+            />
+          </div>
+        </div>
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="date">Data</label>
+          <div class="flex flex-col">
+
+            <input
+              type="date"
+              formControlName="createdAt"
+              class="h-6 border my-1 border-gray-400"
+              required
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn-green w-full mt-2 py-1 text-lg px-4">
+          Novo registro!
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

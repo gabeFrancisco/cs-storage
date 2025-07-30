@@ -1,0 +1,231 @@
+<div
+  *ngIf="show"
+  class="absolute top-0 left-0 w-screen z-50 h-screen bg-gray-100 bg-opacity-75 flex flex-col justify-center items-center"
+>
+  <div class="-mt-32 border border-gray-400 shadow bg-gray-50">
+    <div
+      class="bg-gray-100 border-b py-1 px-2 flex flex-row justify-between text-gray-700 text-center"
+    >
+      Novo débito
+      <button
+        (click)="close()"
+        type="button"
+        class="font-bold hover:text-red-500"
+      >
+        X
+      </button>
+    </div>
+    <div class="p-5">
+      <form
+        (ngSubmit)="submit()"
+        [formGroup]="debtForm"
+        #formDir="ngForm"
+        class=""
+      >
+        <input type="hidden" [value]="0" formControlName="id">
+        <label class="form-label">Débito</label>
+        <div
+          class="max-w-xlc form-section flex mx-auto my-3 items-baseline flex-row space-y-1"
+        >
+          <div class="flex items-baseline">
+            <label class="text-sm w-16 text-right mr-2" for="description"
+              >Valor</label
+            >
+            <div class="flex flex-col">
+              <input
+                type="number"
+                min="0.01"
+                step="0.01"
+                class="border w-full border-gray-400"
+                formControlName="value"
+                required
+              />
+              <small
+                class="text-red-500"
+                *ngIf="debtForm.get('value')!.invalid && formDir.submitted"
+                >Descrição é obrigatória!</small
+              >
+            </div>
+          </div>
+          <div class="flex items-baseline">
+            <label class="w-20 ml-10 mr-2 text-sm text-right" for="description"
+              >Previsão</label
+            >
+            <div class="flex flex-col">
+              <input
+                type="date"
+                class="border w-full border-gray-400"
+                formControlName="forecast"
+                required
+              />
+              <small
+                class="text-red-500"
+                *ngIf="debtForm.get('forecast')!.invalid && formDir.submitted"
+                >Previsão é obrigatória!</small
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-row items-start justify-center">
+          <div class="max-w-xl form-section mr-2 flex-col space-y-1">
+            <label class="form-label -mt-5">Cliente</label>
+            <div class="flex items-baseline">
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >Nome</label
+              >
+              <div class="flex flex-col">
+                <input
+                  type="text"
+                  class="border w-full border-gray-400"
+                  formControlName="name"
+                  required
+                />
+                <small
+                  class="text-red-500"
+                  *ngIf="debtForm.get('name')!.invalid && formDir.submitted"
+                  >Nome é obrigatório!</small
+                >
+              </div>
+            </div>
+            <div class="flex items-baseline">
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >Telefone</label
+              >
+              <div class="flex flex-col">
+                <input
+                  type="text"
+                  class="border w-full border-gray-400"
+                  formControlName="phone"
+                  required
+                />
+                <small
+                  class="text-red-500"
+                  *ngIf="debtForm.get('phone')!.invalid && formDir.submitted"
+                  >Telefone é obrigatório!</small
+                >
+              </div>
+            </div>
+
+            <div class="flex items-baseline">
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >CPF/CNPJ</label
+              >
+              <div class="flex flex-col">
+                <input
+                  type="text"
+                  class="border w-full border-gray-400"
+                  formControlName="cpf_cnpj"
+
+                />
+                <!-- <small
+                class="text-red-500"
+                *ngIf="description.invalid && formDir.submitted"
+                >Descrição é obrigatória!</small
+              > -->
+              </div>
+            </div>
+          </div>
+          <div class="max-w-xl form-section ml-2 flex-col space-y-1">
+            <label class="form-label -mt-5">Endereço</label>
+            <div class="flex items-baseline">
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >Rua</label
+              >
+              <div class="flex flex-col">
+                <input
+                  type="text"
+                  class="border w-full border-gray-400"
+                  formControlName="road"
+
+                />
+                <!-- <small
+                class="text-red-500"
+                *ngIf="description.invalid && formDir.submitted"
+                >Descrição é obrigatória!</small
+              > -->
+              </div>
+            </div>
+            <div class="flex items-baseline">
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >Nº</label
+              >
+              <input
+                type="text"
+                class="border w-12 border-gray-400"
+                formControlName="number"
+              />
+              <!-- <small
+                class="text-red-500"
+                *ngIf="description.invalid && formDir.submitted"
+                >Descrição é obrigatória!</small
+              > -->
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >Compl.</label
+              >
+              <input
+                type="text"
+                class="border w-12 border-gray-400"
+                formControlName="complement"
+              />
+              <!-- <small
+              class="text-red-500"
+              *ngIf="description.invalid && formDir.submitted"
+              >Descrição é obrigatória!</small
+            > -->
+            </div>
+            <div class="flex items-baseline"></div>
+            <div class="flex items-baseline">
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >Bairro</label
+              >
+              <div class="flex flex-col">
+                <input
+                  type="text"
+                  class="border w-full border-gray-400"
+                  formControlName="neighborhood"
+
+                />
+                <!-- <small
+                class="text-red-500"
+                *ngIf="description.invalid && formDir.submitted"
+                >Descrição é obrigatória!</small
+              > -->
+              </div>
+            </div>
+            <div class="flex items-baseline">
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >Cidade</label
+              >
+              <div class="flex flex-col">
+                <input
+                  type="text"
+                  class="border w-full border-gray-400"
+                  formControlName="city"
+
+                />
+              </div>
+            </div>
+            <div class="flex items-baseline">
+              <label class="w-16 text-sm text-right mr-2" for="description"
+                >Estado</label
+              >
+              <div class="flex flex-col">
+                <input
+                  type="text"
+                  class="border w-full border-gray-400"
+                  formControlName="state"
+
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <button *ngIf="modalType !== 2" type="submit" class="w-full mt-2 py-1 text-lg px-4" [class.btn-green]="modalType === 0" [class.btn-primary]="modalType === 1">
+          {{ modalType === 0 ? "Registrar débito" : "Atualizar débito" }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

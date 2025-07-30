@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  font-weight: 300;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+@layer components {
+  .btn {
+    @apply px-3 py-0.5 text-sm text-gray-500 border border-gray-300 rounded-sm bg-gray-50 shadow-gray-300 hover:bg-gray-200;
+  }
+
+  .btn-primary {
+    @apply px-3 py-0.5 text-sm text-white rounded-sm bg-blue-500 hover:bg-blue-700;
+  }
+
+  .btn-green {
+    @apply px-3 py-0.5 text-sm text-white rounded-sm bg-emerald-500 shadow-emerald-400 hover:bg-emerald-600;
+  }
+
+  .btn-yellow {
+    @apply px-3 py-0.5 text-sm text-white bg-yellow-500 rounded-sm shadow-yellow-300 hover:bg-yellow-600;
+  }
+
+  .btn-red {
+    @apply px-3 py-0.5 text-sm text-white bg-red-500 rounded-sm shadow-red-500 hover:bg-red-600;
+  }
+
+  .txt-input {
+    @apply w-full px-1 py-2 transition-all bg-white border rounded dark:bg-gray-900 dark:border-gray-600 dark:text-gray-300;
+  }
+
+  .txt-label {
+    @apply absolute z-10 px-1 ml-3 -mt-2 text-sm transition-all bg-white rounded dark:bg-gray-900 dark:text-gray-300;
+  }
+
+
+  .data-blue{
+    @apply transition ease-in-out shadow rounded border-2 border-blue-500 text-blue-500 bg-blue-50 dark:bg-gray-700 hover:-translate-y-1
+  }
+
+  .data-green{
+    @apply transition ease-in-out shadow rounded border-2 border-green-500 text-green-500 bg-green-50 dark:bg-gray-700 hover:-translate-y-1
+  }
+
+  .data-yellow{
+    @apply transition ease-in-out shadow rounded border-2 border-yellow-500 text-yellow-500 bg-yellow-50 dark:bg-gray-700 hover:-translate-y-1
+  }
+
+  .data-red{
+    @apply transition ease-in-out shadow rounded border-2 border-red-500 text-red-500 bg-red-50 dark:bg-gray-700 hover:-translate-y-1
+  }
+  .form-section {
+    @apply p-3 border rounded-sm shadow-none border-gray-300;
+  }
+
+  .form-label{
+    @apply absolute z-10 px-1 ml-3 -mt-2 text-sm bg-gray-50 rounded dark:bg-gray-800 dark:text-gray-300
+  }
+}
+

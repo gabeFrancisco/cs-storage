@@ -1,0 +1,82 @@
+<div class="w-full border border-gray-300 rounded">
+  <div
+    class="p-2 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100"
+  >
+    <span class="font-bold">Produtos em falta</span>
+    <div>
+      <button
+        type="button"
+        (click)="fetchList()"
+        class="mx-1 text-gray-400 btn text-xl"
+      >
+        ↻
+      </button>
+      <button
+        type="button"
+        class="btn-green px-4 font-bold text-xl"
+        (click)="openMissingProductModal()"
+      >
+        +
+      </button>
+    </div>
+  </div>
+  <div class="relative overflow-x-auto">
+    <div>
+      <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
+        <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <!-- Table header -->
+          <tr>
+            <th class="font-thin p-2">Data</th>
+            <th class="font-thin p-2">Ítem</th>
+            <th class="font-thin p-2">Previsão</th>
+            <th class="font-thin p-2">Cliente</th>
+            <th class="font-thin p-2">Comprado?</th>
+            <th class="font-thin text-center p-2">Ações</th>
+          </tr>
+        </thead>
+
+        <!-- Table body -->
+        <tbody>
+          <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
+            Carregando...
+          </tr>
+          <tr
+            class="items-center hover:bg-gray-200 cursor-pointer"
+            *ngFor="let item of products"
+          >
+            <th class="font-thin border-r p-1.5">
+              {{ item.createdAt | date : "dd/MM/yyyy" }}
+            </th>
+            <th class="font-thin p-1.5">{{ item.name }}</th>
+            <th class="font-thin p-1.5">
+              {{ item.neededDay | date : "dd/MM/yyyy" }}
+            </th>
+            <th class="font-thin p-1.5">
+              {{ item.customer?.name }}/{{ item.customer?.phone }}
+            </th>
+            <th class="font-thin p-1.5">{{ item.isBought ? "Sim" : "Não" }}</th>
+            <th class="font-thin text-center">
+              <button
+                type="button"
+                title="Remover"
+                class="btn-green text-lg mr-1"
+              >
+                ✔
+              </button>
+              <button title="Atualizar" class="btn-primary text-lg mr-1">
+                ✎
+              </button>
+              <button
+                type="button"
+                title="Remover"
+                class="btn-red text-lg mr-1"
+              >
+                𝘅
+              </button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

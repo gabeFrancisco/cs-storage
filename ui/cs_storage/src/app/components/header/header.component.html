@@ -1,0 +1,35 @@
+<header class="flex flex-row items-center p-2 bg-gray-50 shadow-sm border-b">
+  <div class="flex w-full flex-col lg:flex-row justify-between items-center">
+    <div class="flex flex-row items-center">
+      <img src="logo.ico" alt="Logo" class="w-9 ml-3 rounded" />
+      <ul class="ml-5">
+        <li>
+          <a routerLink="/" class="ml-4 text-gray-700 hover:text-blue-600"
+            >Painel</a
+          >
+          <!-- <a routerLink="" class="ml-4 text-gray-700 hover:text-blue-600"
+            >Ordens de Serviços</a
+          > -->
+          <a routerLink="produtosEmFalta" class="ml-4 text-gray-700 hover:text-blue-600"
+            >Produtos em falta</a
+          >
+          <!-- <a routerLink="" class="ml-4 text-gray-700 hover:text-blue-600"
+            >Clientes</a
+          > -->
+        </li>
+      </ul>
+    </div>
+
+    <div class="flex pr-3 flex-row justify-evenly items-center text-gray-600">
+      <span
+        >Caixa: Dia: <span class="text-emerald-600">R${{cashRegisterValues.day.toFixed(2)}}</span> | Mês:
+        <span class="text-emerald-600">R${{cashRegisterValues.month.toFixed(2)}}</span></span
+      >
+      <span class="py-4 h-max mx-3 border-r border-gray-500"></span>
+      <span
+        >Débitos: D: <span class="text-red-500">R$0,00</span> | M:
+        <span class="text-red-500">R$70,00</span></span
+      >
+    </div>
+  </div>
+</header>
