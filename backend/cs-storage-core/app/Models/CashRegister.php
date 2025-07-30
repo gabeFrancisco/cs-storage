@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class CashRegister extends Model
 {
-    //
+    protected $fillable = [
+        'paymentType',
+        'value',
+        'descrpition'
+    ];
 }

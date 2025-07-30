@@ -11,7 +11,7 @@ import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 export class CashRegisterService {
 
   constructor(private http: HttpClient) { }
-  private url = "http://localhost:5103/api/cashregisters";
+  private url = "http://127.0.0.1:8000/api/cashregisters";
 
   //cash modal variables
   private cashPostModalState = new BehaviorSubject<boolean>(false);
