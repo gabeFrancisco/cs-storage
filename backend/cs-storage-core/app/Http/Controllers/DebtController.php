@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class DebtController extends Controller
 {
-    public function getAll(){
-        $debts = Debt::with('customer')->get();
-        // dd($debts);
+    public function getAll()
+    {
+        $debts = Debt::with('customer.address', )->get();
         return response()->json($debts, 200);
     }
 }

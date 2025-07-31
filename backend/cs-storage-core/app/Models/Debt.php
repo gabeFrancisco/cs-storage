@@ -12,7 +12,7 @@ class Debt extends Model
     ];
 
     protected $casts = [
-        'value' => 'decimal'
+        'value' => 'float'
     ];
 
     public function customer(){
