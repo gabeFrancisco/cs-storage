@@ -27,9 +27,9 @@ export class CashUpdateModalComponent {
     this.cashForm = new FormGroup({
       id: new FormControl(null, Validators.required),
       description: new FormControl("", Validators.required),
-      paymentType: new FormControl(0),
+      payment_type: new FormControl(0),
       value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
-      createdAt: new FormControl(null, Validators.required)
+      created_at: new FormControl(null, Validators.required)
     })
 
     //Gets the cash register ID from the service to load the full cash register entity from DB.
@@ -54,8 +54,8 @@ export class CashUpdateModalComponent {
     return this.cashForm.get('value')!;
   }
 
-  get createdAt() {
-    return this.cashForm.get('createdAt')!;
+  get created_at() {
+    return this.cashForm.get('created_at')!;
   }
 
   submit() {

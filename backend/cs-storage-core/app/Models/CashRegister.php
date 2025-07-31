@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class CashRegister extends Model
 {
     protected $fillable = [
-        'paymentType',
+        'payment_type',
         'value',
-        'descrpition'
+        'description',
+        'created_at'
     ];
 
     protected $casts = [

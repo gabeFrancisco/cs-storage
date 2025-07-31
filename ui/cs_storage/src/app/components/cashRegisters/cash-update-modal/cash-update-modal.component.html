@@ -43,12 +43,12 @@
       </div>
 
       <div class="flex items-baseline">
-        <label class="text-sm w-16 text-right mr-2" for="paymenttype"
+        <label class="text-sm w-16 text-right mr-2" for="payment_type"
           >Tipo</label
         >
         <select
           class="bg-white border my-1 border-gray-400"
-          formControlName="paymentType"
+          formControlName="payment_type"
         >
           <option [ngValue]="0">Dinheiro</option>
           <option [ngValue]="1">Débito</option>
@@ -78,12 +78,12 @@
         <div class="flex flex-col">
           <small
             class="text-red-500"
-            *ngIf="createdAt.invalid && formDir.submitted"
+            *ngIf="created_at.invalid && formDir.submitted"
             >Data não pode ser maior que a data atual!</small
           >
           <input
             type="date"
-            formControlName="createdAt"
+            formControlName="created_at"
             class="h-6 border my-1 border-gray-400"
             required
           />

@@ -22,9 +22,9 @@ export class CashPostModalComponent {
 
     this.cashForm = new FormGroup({
       description: new FormControl('', Validators.required),
-      paymentType: new FormControl(0),
+      payment_type: new FormControl(0),
       value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
-      createdAt: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
+      created_at: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
     })
 
     this.initialValues = this.cashForm.value;
@@ -42,8 +42,8 @@ export class CashPostModalComponent {
     return this.cashForm.get('value')!;
   }
 
-  get createdAt() {
-    return this.cashForm.get('createdAt')!;
+  get created_at() {
+    return this.cashForm.get('created_at')!;
   }
 
   submit() {
