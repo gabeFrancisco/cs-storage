@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CashRegister extends Model
+class Debt extends Model
 {
     protected $fillable = [
-        'paymentType',
         'value',
-        'descrpition'
+        'forecast',
     ];
 
     protected $casts = [
-        'value' => 'float',
+        'value' => 'decimal'
     ];
 }
