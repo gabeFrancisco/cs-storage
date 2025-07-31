@@ -11,4 +11,8 @@ class CashRegisterController extends Controller
         $registers = CashRegister::all();
         return response()->json($registers, 200);
     }
+
+    public function post(){
+
+    }
 }

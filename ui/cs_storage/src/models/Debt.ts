@@ -4,6 +4,6 @@ import { Customer } from "./Customer";
 export interface Debt extends BaseEntity{
   value: number;
   forecast: string;
-  paidDate: string;
+  paid_date: string;
   customer: Customer;
 }

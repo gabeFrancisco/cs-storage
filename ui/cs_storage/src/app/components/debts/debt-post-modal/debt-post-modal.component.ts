@@ -92,9 +92,9 @@ export class DebtPostModalComponent {
     this.debt = {
       id: this.debtForm.get('id')!.value! ?? 0,
       forecast: this.debtForm.get('forecast')!.value ?? "",
-      paidDate: new Date().toISOString(),
+      paid_date: new Date().toISOString(),
       value: this.debtForm.get('value')!.value ?? "",
-      createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
       customer: {
         name: this.debtForm.get('name')!.value ?? "",
         phone: this.debtForm.get('phone')!.value ?? "",

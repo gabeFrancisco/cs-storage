@@ -11,7 +11,7 @@ import { handleNetworkError } from '../../utils/errorHandler';
 export class DebtService {
   constructor(private http: HttpClient) { }
 
-  private url = "http://localhost:5103/api/debts";
+  private url = "http://127.0.0.1:8000/api/debts";
 
   //Modal type for reuse
   private debtModalType = new BehaviorSubject<ModalType | null>(null);
