@@ -1,8 +1,7 @@
-import { payment_typesDictionary } from '../../../../utils/payment_typesDictionary';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CashRegisterService } from '../../../services/cash-register.service';
 import { CashRegister } from '../../../../models/CashRegister';
-import { Subscription } from 'rxjs';
+import { PaymentTypeDictionary } from '../../../../utils/paymentTypesDictionary';
 
 @Component({
   selector: 'app-cash-register-table',
@@ -12,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class CashRegisterTableComponent implements OnInit {
   registers: CashRegister[] = [];
-  payment_types = payment_typesDictionary
+  payment_types = PaymentTypeDictionary
 
   loading = true;
 

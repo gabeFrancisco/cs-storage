@@ -1,9 +1,9 @@
-import { payment_type } from "../models/enums/payment_type";
+import { PaymentType } from "../models/enums/PaymentType";
 
-export const payment_typesDictionary: Record<payment_type, string> = {
-  [payment_type.Cash]: 'Dinheiro',
-  [payment_type.Credit]: 'Crédito',
-  [payment_type.Debt]: 'Débito',
-  [payment_type.Deposit]: 'Depósito',
-  [payment_type.Pix]: 'Pix'
+export const PaymentTypeDictionary: Record<PaymentType, string> = {
+  [PaymentType.Cash]: 'Dinheiro',
+  [PaymentType.Credit]: 'Crédito',
+  [PaymentType.Debt]: 'Débito',
+  [PaymentType.Deposit]: 'Depósito',
+  [PaymentType.Pix]: 'Pix'
 }
