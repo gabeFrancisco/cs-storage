@@ -14,4 +14,8 @@ class Debt extends Model
     protected $casts = [
         'value' => 'decimal'
     ];
+
+    public function customer(){
+        return $this->belongsTo(Customer::class);
+    }
 }
