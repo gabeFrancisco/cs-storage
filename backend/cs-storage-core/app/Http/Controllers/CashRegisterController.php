@@ -14,9 +14,10 @@ class CashRegisterController extends Controller
         return response()->json($registers, 200);
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         $register = CashRegister::where("id", $id)->first();
-        if($register != null){
+        if ($register != null) {
             return $register;
         }
     }
@@ -70,5 +71,13 @@ class CashRegisterController extends Controller
             "message" => "Succesfull update",
             "register" => $dbRegister
         ], 200);
+    }
+
+    public function delete($id)
+    {
+        $register = $this->getById($id);
+        $register->delete();
+
+        return response()->json(['message' => 'The register was deleted with success!']);
     }
 }
