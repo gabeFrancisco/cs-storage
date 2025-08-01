@@ -9,6 +9,7 @@ class Debt extends Model
     protected $fillable = [
         'value',
         'forecast',
+        'paid_date'
     ];
 
     protected $casts = [

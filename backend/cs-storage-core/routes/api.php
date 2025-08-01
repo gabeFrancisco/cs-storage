@@ -16,3 +16,4 @@ Route::put("cashregisters", [CashRegisterController::class, 'put'],);
 
 //Debts
 Route::get('debts', [DebtController::class, 'getAll']);
+Route::post('debts', [DebtController::class, 'post']);
