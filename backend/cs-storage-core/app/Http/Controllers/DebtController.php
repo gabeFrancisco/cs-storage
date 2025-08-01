@@ -12,4 +12,6 @@ class DebtController extends Controller
         $debts = Debt::with('customer.address', )->get();
         return response()->json($debts, 200);
     }
+
+
 }
