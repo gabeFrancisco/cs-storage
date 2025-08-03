@@ -58,4 +58,8 @@ class DebtController extends Controller
             "result" => $debt
         ], 200);
     }
+
+    public function put(Request $request){
+
+    }
 }

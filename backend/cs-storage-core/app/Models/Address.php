@@ -16,4 +16,9 @@ class Address extends Model
         'city',
         'state'
     ];
+
+    public function create(Address $address){
+        $dbAddress = Address::create($address);
+        return $address;
+    }
 }

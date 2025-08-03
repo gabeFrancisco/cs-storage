@@ -15,4 +15,9 @@ class Customer extends Model
     public function address(){
         return $this->belongsTo(Address::class);
     }
+
+    public function create(Customer $customer){
+        $dbCustomer = Customer::create($customer);
+        return $dbCustomer;
+    }
 }
