@@ -6,19 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class DebtRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -26,7 +13,7 @@ class DebtRequest extends FormRequest
             'forecast' => 'required|date',
             'customer.name' => 'required|string',
             'customer.phone' => 'required|string',
-            'customer.cpf_cnpj' => 'required|string',
+            'customer.cpf_cnpj' => 'nullable|string',
             'address' => 'nullable|array',
             'address.road' => 'nullable|string',
             'address.number' => 'nullable|string',

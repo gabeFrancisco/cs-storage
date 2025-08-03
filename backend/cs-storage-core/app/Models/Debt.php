@@ -20,9 +20,4 @@ class Debt extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function create(Debt $debt){
-        $dbDebt = Debt::create($debt);
-        return $debt;
-    }
-
 }
