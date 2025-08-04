@@ -8,6 +8,9 @@ use App\Http\Requests\DebtRequest;
 use App\Models\Debt;
 class DebtService
 {
+    public function getAll(){
+        return Debt::with('customer.address', )->get();
+    }
     public function create(DebtRequest $request)
     {
         $address = null;

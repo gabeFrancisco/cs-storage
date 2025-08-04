@@ -19,7 +19,7 @@ class DebtController extends Controller
 
     public function getAll()
     {
-        $debts = Debt::with('customer.address', )->get();
+        $debts = $this->_debtService->getAll();
         return response()->json($debts, 200);
     }
 
