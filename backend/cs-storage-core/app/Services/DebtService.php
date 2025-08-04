@@ -9,25 +9,25 @@ use App\Models\Debt;
 class DebtService
 {
     public function getAll(){
-        return Debt::with('customer.address', )->get();
+        return Debt::with('customer.address')->get();
     }
 
     public function getById($id){
-        return Debt::with('customer.address')->find($id);
+        return Debt::with('customer', 'customer.address')->find($id);
     }
 
     public function create(DebtRequest $request)
     {
         $address = null;
 
-        if (!empty($request->input('address'))) {
+        if (!empty($request->input('customer.address'))) {
             $address = Address::create([
-                'road' => $request->input('road'),
-                'number' => $request->input('number'),
-                'complement' => $request->input('complement'),
-                'neighborhood' => $request->input('neighborhood'),
-                'city' => $request->input('city'),
-                'state' => $request->input('state')
+                'road' => $request->input('customer.address.road'),
+                'number' => $request->input('customer.address.number'),
+                'complement' => $request->input('customer.address.complement'),
+                'neighborhood' => $request->input('customer.address.neighborhood'),
+                'city' => $request->input('customer.address.city'),
+                'state' => $request->input('customer.address.state')
             ]);
         }
 
@@ -40,6 +40,7 @@ class DebtService
 
         if ($address) {
             $customer->address()->associate($address);
+            $customer->save();
         }
 
         $value = $request->input('value');

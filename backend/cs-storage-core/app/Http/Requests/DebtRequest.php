@@ -14,13 +14,13 @@ class DebtRequest extends FormRequest
             'customer.name' => 'required|string',
             'customer.phone' => 'required|string',
             'customer.cpf_cnpj' => 'nullable|string',
-            'address' => 'nullable|array',
-            'address.road' => 'nullable|string',
-            'address.number' => 'nullable|string',
-            'address.complement' => 'nullable|string',
-            'address.neighborhood' => 'nullable|string',
-            'address.city' => 'nullable|string',
-            'address.state' => 'nullable|string',
+            'customer.address' => 'nullable|array',
+            'customer.address.road' => 'nullable|string',
+            'customer.address.number' => 'nullable|string',
+            'customer.address.complement' => 'nullable|string',
+            'customer.address.neighborhood' => 'nullable|string',
+            'customer.address.city' => 'nullable|string',
+            'customer.address.state' => 'nullable|string',
         ];
     }
 }
