@@ -11,6 +11,11 @@ class DebtService
     public function getAll(){
         return Debt::with('customer.address', )->get();
     }
+
+    public function getById($id){
+        return Debt::with('customer.address')->find($id);
+    }
+
     public function create(DebtRequest $request)
     {
         $address = null;

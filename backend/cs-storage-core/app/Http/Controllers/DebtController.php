@@ -23,6 +23,11 @@ class DebtController extends Controller
         return response()->json($debts, 200);
     }
 
+    public function getById($id){
+        $debt = $this->_debtService->getById($id);
+        return response()->json($debt, 200);
+    }
+
     public function post(DebtRequest $request)
     {
         $result = $this->_debtService->create($request);
