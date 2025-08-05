@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CashRegisterRequest;
 use App\Models\CashRegister;
+use App\Services\CashRegisterService;
 use Error;
 use Illuminate\Http\Request;
 
 class CashRegisterController extends Controller
 {
+    private CashRegisterService $_cashRegisterService;
+
+    public function __construct(CashRegisterService $cashRegisterService) {
+        $this->_cashRegisterService = $cashRegisterService;
+    }
     public function getAll()
     {
         $registers = CashRegister::all();
@@ -22,24 +29,9 @@ class CashRegisterController extends Controller
         }
     }
 
-    public function post(Request $request)
+    public function post(CashRegisterRequest $request)
     {
-        $value = $request->input("value");
-        $payment_type = $request->input('payment_type');
-        $description = $request->input('description');
-        $created_at = $request->input('created_at');
-
-        if ($payment_type < 0 && $payment_type > 4) {
-            throw new Error("Payment type is invalid!");
-        }
-
-        CashRegister::create([
-            'value' => $value,
-            'payment_type' => $payment_type,
-            'description' => $description,
-            'created_at' => $created_at
-        ]);
-
+        $register = $this->_cashRegisterService->create($request);
         return response()->json("Ok", 200);
     }
 
