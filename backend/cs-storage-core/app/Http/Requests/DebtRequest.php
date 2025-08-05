@@ -9,6 +9,7 @@ class DebtRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'numeric',
             'value' => 'required|numeric',
             'forecast' => 'required|date',
             'customer.name' => 'required|string',

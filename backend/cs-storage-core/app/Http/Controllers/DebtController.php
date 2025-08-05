@@ -38,7 +38,12 @@ class DebtController extends Controller
         ], 200);
     }
 
-    public function put(Request $request){
+    public function put(DebtRequest $request){
+        $result = $this->_debtService->update($request);
 
+        return response()->json([
+            "message" => "Debt created successfuly",
+            "result" => $result
+        ], 200);
     }
 }

@@ -19,3 +19,4 @@ Route::delete("cashregisters/{id}", [CashRegisterController::class, 'delete']);
 Route::get('debts', [DebtController::class, 'getAll']);
 Route::get('debts/{id}', [DebtController::class, 'getById']);
 Route::post('debts', [DebtController::class, 'post']);
+Route::put('debts', [DebtController::class, 'put']);
