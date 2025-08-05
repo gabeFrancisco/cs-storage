@@ -70,7 +70,7 @@ class DebtService
         $debt->updated_at = now()->toString();
         $debt->save();
 
-        if($request->has('customer', 'customer.address')){
+        if ($request->has('customer', 'customer.address')) {
             $customerData = $request->input('customer');
             $customer = $debt->customer;
 
@@ -79,21 +79,36 @@ class DebtService
             $customer->cpf_cnpj = $customerData['cpf_cnpj'];
             $customer->updated_at = now()->toString();
 
-            $customer->save();
 
-            if(isset($customerData['address'])){
+            if (isset($customerData['address'])) {
                 $addressData = $customerData['address'];
-                $address = $customer->address;
+                if ($customer->address != null) {
 
-                $address->road = $addressData['road'];
-                $address->number = $addressData['number'];
-                $address->complement = $addressData['complement'];
-                $address->neighborhood = $addressData['neighborhood'];
-                $address->city = $addressData['city'];
-                $address->state = $addressData['state'];
+                    $address = $customer->address;
 
-                $address->save();
+                    $address->road = $addressData['road'];
+                    $address->number = $addressData['number'];
+                    $address->complement = $addressData['complement'];
+                    $address->neighborhood = $addressData['neighborhood'];
+                    $address->city = $addressData['city'];
+                    $address->state = $addressData['state'];
+
+                    $address->save();
+                } else {
+                    $newAddress = Address::create([
+                        'road' => $addressData['road'],
+                        'number' => $addressData['number'],
+                        'complement' => $addressData['complement'],
+                        'neighborhood' => $addressData['neighborhood'],
+                        'city' => $addressData['city'],
+                        'state' => $addressData['state']
+                    ]);
+
+                    $customer->address()->associate($newAddress);
+                }
             }
+
+            $customer->save();
         }
 
         return $debt;

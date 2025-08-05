@@ -63,7 +63,7 @@ export class DebtPostModalComponent {
                 phone: res.customer.phone,
                 cpf_cnpj: res.customer.cpf_cnpj,
                 road: res.customer.address?.road,
-                number: res.customer.address?.road,
+                number: res.customer.address?.number,
                 complement: res.customer.address?.complement,
                 neighborhood: res.customer.address?.neighborhood,
                 city: res.customer.address?.city,
