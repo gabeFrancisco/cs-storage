@@ -22,10 +22,7 @@ class CashRegisterController extends Controller
 
     public function getById($id)
     {
-        $register = CashRegister::where("id", $id)->first();
-        if ($register != null) {
-            return $register;
-        }
+        return response()->json($this->_cashRegisterService->getById($id), 200);
     }
 
     public function post(CashRegisterRequest $request)
@@ -34,30 +31,9 @@ class CashRegisterController extends Controller
         return response()->json($register, 200);
     }
 
-    public function put(Request $request)
+    public function put(CashRegisterRequest $request)
     {
-        $id = $request->input("id");
-
-        $value = $request->input("value");
-        $payment_type = $request->input('payment_type');
-        $description = $request->input('description');
-        $created_at = $request->input('created_at');
-
-        if ($payment_type < 0 && $payment_type > 4) {
-            throw new Error("Payment type is invalid!");
-        }
-
-        $dbRegister = $this->getById($id);
-
-        CashRegister::where("id", $id)->update([
-            'value' => $value,
-            'payment_type' => $payment_type,
-            'description' => $description,
-            'created_at' => $created_at
-        ]);
-
-        $dbRegister->refresh();
-
+        $dbRegister = $this->_cashRegisterService->update($request);
         return response()->json([
             "message" => "Succesfull update",
             "register" => $dbRegister
@@ -66,9 +42,11 @@ class CashRegisterController extends Controller
 
     public function delete($id)
     {
-        $register = $this->getById($id);
-        $register->delete();
+       $register = $this->_cashRegisterService->remove($id);
 
-        return response()->json(['message' => 'The register was deleted with success!']);
+        return response()->json([
+            'message' => 'The register was deleted with success!',
+            'data' => $register
+        ]);
     }
 }

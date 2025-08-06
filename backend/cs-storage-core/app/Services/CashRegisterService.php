@@ -38,4 +38,39 @@ class CashRegisterService
 
         return $register;
     }
+
+    public function update(CashRegisterRequest $request)
+    {
+        $id = $request->input("id");
+
+        $value = $request->input("value");
+        $payment_type = $request->input('payment_type');
+        $description = $request->input('description');
+        $created_at = $request->input('created_at');
+
+        if ($payment_type < 0 && $payment_type > 4) {
+            throw new Error("Payment type is invalid!");
+        }
+
+        $dbRegister = $this->getById($id);
+
+        CashRegister::where("id", $id)->update([
+            'value' => $value,
+            'payment_type' => $payment_type,
+            'description' => $description,
+            'created_at' => $created_at
+        ]);
+
+        $dbRegister->refresh();
+
+        return $dbRegister;
+    }
+
+    public function remove($id)
+    {
+        $register = $this->getById($id);
+        $register->delete();
+
+        return $register;
+    }
 }
