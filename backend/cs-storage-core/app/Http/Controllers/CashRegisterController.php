@@ -12,7 +12,8 @@ class CashRegisterController extends Controller
 {
     private CashRegisterService $_cashRegisterService;
 
-    public function __construct(CashRegisterService $cashRegisterService) {
+    public function __construct(CashRegisterService $cashRegisterService)
+    {
         $this->_cashRegisterService = $cashRegisterService;
     }
     public function getAll()
@@ -42,11 +43,11 @@ class CashRegisterController extends Controller
 
     public function delete($id)
     {
-       $register = $this->_cashRegisterService->remove($id);
+        $register = $this->_cashRegisterService->remove($id);
 
         return response()->json([
             'message' => 'The register was deleted with success!',
             'data' => $register
-        ]);
+        ], 200);
     }
 }

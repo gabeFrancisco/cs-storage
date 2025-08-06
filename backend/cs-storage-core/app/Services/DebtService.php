@@ -113,4 +113,11 @@ class DebtService
 
         return $debt;
     }
+
+    public function remove($id){
+        $debt = $this->getById($id);
+        $debt->delete();
+
+        return $debt;
+    }
 }

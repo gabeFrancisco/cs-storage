@@ -46,4 +46,13 @@ class DebtController extends Controller
             "result" => $result
         ], 200);
     }
+
+    public function delete($id){
+        $debt = $this->_debtService->remove($id);
+
+        return response()->json([
+            'message' => 'The register was deleted with success!',
+            'data' => $debt
+        ]);
+    }
 }
