@@ -9,7 +9,7 @@ import { MissingProduct } from '../../models/MissingProduct';
 export class MissingProductService {
 
   constructor(private http: HttpClient) { }
-  private url = "http://localhost:5103/api/missingproducts";
+  private url = "http://127.0.0.1:8000/api/missingproducts";
 
   //Modal variables
   private missingProductModalState = new BehaviorSubject<boolean>(false);
