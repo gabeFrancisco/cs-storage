@@ -10,7 +10,7 @@ class CashRegisterRequest extends FormRequest
     {
         return [
             'id' => 'numeric',
-            'value' => 'required|string',
+            'value' => 'required|numeric',
             'created_at' => 'required|date',
             'payment_type' => 'required|numeric',
             'description' => 'required|string'

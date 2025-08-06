@@ -17,8 +17,7 @@ class CashRegisterController extends Controller
     }
     public function getAll()
     {
-        $registers = CashRegister::all();
-        return response()->json($registers, 200);
+        return response()->json($this->_cashRegisterService->getAll(), 200);
     }
 
     public function getById($id)
@@ -32,7 +31,7 @@ class CashRegisterController extends Controller
     public function post(CashRegisterRequest $request)
     {
         $register = $this->_cashRegisterService->create($request);
-        return response()->json("Ok", 200);
+        return response()->json($register, 200);
     }
 
     public function put(Request $request)
