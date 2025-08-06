@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\MissingProductRequest;
 use App\Models\MissingProduct;
 
 class MissingProductService
@@ -11,7 +12,7 @@ class MissingProductService
         return MissingProduct::all();
     }
 
-    public function create(MissingProduct $request)
+    public function create(MissingProductRequest $request)
     {
         if(!empty($request)){
             $missingProduct = MissingProduct::create([
