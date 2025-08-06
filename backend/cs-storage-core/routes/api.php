@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CashRegisterController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\MissingProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,3 +22,7 @@ Route::get('debts/{id}', [DebtController::class, 'getById']);
 Route::post('debts', [DebtController::class, 'post']);
 Route::put('debts', [DebtController::class, 'put']);
 Route::delete('debts/{id}', [DebtController::class, 'delete']);
+
+//MissingProducts
+Route::get('missingProducts', [MissingProductController::class, 'getAll']);
+Route::post('missingProducts', [MissingProductController::class, 'post']);
