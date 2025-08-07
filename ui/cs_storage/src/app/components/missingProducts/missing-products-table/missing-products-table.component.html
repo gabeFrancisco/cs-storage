@@ -49,12 +49,12 @@
             </th>
             <th class="font-thin p-1.5">{{ item.name }}</th>
             <th class="font-thin p-1.5">
-              {{ item.neededDay | date : "dd/MM/yyyy" }}
+              {{ item.needed_day | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">
               {{ item.customer?.name }}/{{ item.customer?.phone }}
             </th>
-            <th class="font-thin p-1.5">{{ item.isBought ? "Sim" : "Não" }}</th>
+            <th class="font-thin p-1.5">{{ item.is_bought ? "Sim" : "Não" }}</th>
             <th class="font-thin text-center">
               <button
                 type="button"

@@ -6,7 +6,7 @@
     <div
       class="bg-gray-100 border-b py-1 px-2 flex flex-row justify-between text-gray-700 text-center"
     >
-      Novo registro
+      Adicionar produto em falta
       <button
         (click)="close()"
         type="button"
@@ -24,41 +24,38 @@
       >
         <div class="flex items-baseline">
           <label class="w-16 text-sm text-right mr-2" for="description"
-            >Descrição</label
+            >Produto*</label
           >
           <div class="flex flex-col">
             <input
               type="text"
               class="border w-full border-gray-400"
-              formControlName="description"
+              formControlName="name"
               required
             />
             <small
               class="text-red-500"
-              *ngIf="missingProductForm.get('name')!.invalid && formDir.submitted"
-              >Descrição é obrigatória!</small
+              *ngIf="
+                missingProductForm.get('name')!.invalid && formDir.submitted
+              "
+              >Produto é obrigatória!</small
             >
           </div>
         </div>
-
         <div class="flex items-baseline">
-          <label class="text-sm w-16 text-right mr-2" for="payment_type"
-            >Tipo</label
+          <label class="text-sm w-16 text-right mr-2" for="value"
+            >Previsão*</label
           >
-
-        </div>
-        <div class="flex items-baseline">
-          <label class="text-sm w-16 text-right mr-2" for="value">Valor</label>
           <div class="flex flex-col">
             <input
-              type="number"
+              type="date"
               formControlName="value"
               class="border border-gray-400 my-1"
               required
             />
           </div>
         </div>
-        <div class="flex items-baseline">
+        <!-- <div class="flex items-baseline">
           <label class="text-sm w-16 text-right mr-2" for="date">Data</label>
           <div class="flex flex-col">
 
@@ -69,9 +66,22 @@
               required
             />
           </div>
+        </div> -->
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="value">Imagem</label>
+          <div class="flex flex-col">
+            <input
+              type="text"
+              formControlName="image_url"
+              class="border border-gray-400 my-1"
+              readonly
+              required
+            />
+          </div>
+          <button type="button" class="ml-1 btn-primary">Selecionar</button>
         </div>
-        <button type="submit" class="btn-green w-full mt-2 py-1 text-lg px-4">
-          Novo registro!
+        <button type="submit" class="btn-green w-full mt-2 text-lg px-4">
+          Adicionar!
         </button>
       </form>
     </div>
