@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MissingProductService } from '../../../services/missing-product.service';
+import { MissingProduct } from '../../../../models/MissingProduct';
+import { ModalType } from '../../../../utils/modalType';
 
 @Component({
   selector: 'app-missing-products-modal',
@@ -14,6 +16,10 @@ export class MissingProductsModalComponent {
   missingProductForm!: FormGroup;
   initialValues = null;
 
+  missingProduct!: MissingProduct;
+
+  modalType!: ModalType;
+
   constructor(private missingProductService: MissingProductService) {
     this.missingProductService.missingProductModalState$.subscribe((value) => {
       this.show = value;
@@ -21,8 +27,8 @@ export class MissingProductsModalComponent {
 
     this.missingProductForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      customerName: new FormControl(''),
-      neededDay: new FormControl(''),
+      customer_name: new FormControl(''),
+      needed_day: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
     })
   }
 

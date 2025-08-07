@@ -38,18 +38,18 @@
               *ngIf="
                 missingProductForm.get('name')!.invalid && formDir.submitted
               "
-              >Produto é obrigatória!</small
+              >Produto é obrigatório!</small
             >
           </div>
         </div>
         <div class="flex items-baseline">
-          <label class="text-sm w-16 text-right mr-2" for="value"
+          <label class="text-sm w-16 text-right mr-2" for="needed_day"
             >Previsão*</label
           >
           <div class="flex flex-col">
             <input
               type="date"
-              formControlName="value"
+              formControlName="needed_day"
               class="border border-gray-400 my-1"
               required
             />
@@ -68,7 +68,33 @@
           </div>
         </div> -->
         <div class="flex items-baseline">
-          <label class="text-sm w-16 text-right mr-2" for="value">Imagem</label>
+          <label class="text-sm w-16 text-right mr-2" for="customer_name"
+            >Cliente</label
+          >
+          <div class="flex flex-col">
+            <input
+              type="text"
+              formControlName="customer_name"
+              class="border border-gray-400 my-1"
+              required
+            />
+          </div>
+        </div>
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="customer_phone"
+            >Telefone</label
+          >
+          <div class="flex flex-col">
+            <input
+              type="text"
+              formControlName="customer_phone"
+              class="border border-gray-400 my-1"
+              required
+            />
+          </div>
+        </div>
+        <div class="flex items-baseline">
+          <label class="text-sm w-16 text-right mr-2" for="image_url">Imagem</label>
           <div class="flex flex-col">
             <input
               type="text"

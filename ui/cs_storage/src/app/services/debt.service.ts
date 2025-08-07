@@ -43,6 +43,7 @@ export class DebtService {
     this.refreshList.next();
   }
 
+  //API calls
   getDebts(): Observable<Debt[]> {
     return this.http.get<Debt[]>(this.url);
   }
