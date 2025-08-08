@@ -43,7 +43,7 @@ export class DebtPostModalComponent {
 
     this.debtService.debtPostType$.subscribe(value => {
       this.modalType = value;
-      console.log(this.debtForm.value)
+      // console.log(this.debtForm.value)
 
       //Verify if the modal type is differente from CREATE
       if (value !== ModalType.CREATE) {
@@ -115,8 +115,6 @@ export class DebtPostModalComponent {
         next: _ => {
           this.debtForm.reset();
           this.debtService.triggerUpdate();
-          this.debtService.closeDebtPostModal();
-          console.log(this.debt)
         },
         error: err => console.log(err)
       })
@@ -126,10 +124,10 @@ export class DebtPostModalComponent {
         next: _ => {
           this.debtForm.reset();
           this.debtService.triggerUpdate();
-          this.debtService.closeDebtPostModal();
         },
         error: err => console.log(err)
       })
+      this.debtService.closeDebtPostModal();
     }
   }
 }

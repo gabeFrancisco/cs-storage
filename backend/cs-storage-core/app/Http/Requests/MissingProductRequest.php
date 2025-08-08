@@ -11,9 +11,9 @@ class MissingProductRequest extends FormRequest
         return [
             'id' => 'numeric',
             'name' => 'required|string',
-            'needed_day' => 'required|data',
+            'needed_day' => 'required|date',
             'is_bought' => 'boolean',
-            'image_url' => 'string'
+            // 'image_url' => 'string|'
         ];
     }
 }

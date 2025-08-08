@@ -15,7 +15,10 @@ export class MissingProductsTableComponent implements OnInit{
   constructor(private missingProductService: MissingProductService){}
 
   ngOnInit(): void {
-    this.fetchList();
+    this.missingProductService.triggerUpdate();
+    this.missingProductService.refreshList$.subscribe(() => {
+      this.fetchList();
+    })
   }
 
   fetchList(){
@@ -27,6 +30,7 @@ export class MissingProductsTableComponent implements OnInit{
   }
 
   openMissingProductModal(){
+    this.missingProductService.setModalTypeToCreate();
     this.missingProductService.openMissingProductModal();
   }
 }
