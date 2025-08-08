@@ -27,7 +27,7 @@ export class MissingProductsModalComponent {
 
     this.missingProductForm = new FormGroup({
       id: new FormControl(0),
-      name: new FormControl("", Validators.required),
+      name: new FormControl(null, Validators.required),
       customer_name: new FormControl(''),
       customer_phone: new FormControl(''),
       needed_day: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
@@ -45,7 +45,8 @@ export class MissingProductsModalComponent {
 
   submit() {
     if (this.missingProductForm.invalid) {
-      console.log(this.missingProductForm)
+      console.log(this.missingProductForm.errors)
+      console.log(this.missingProductForm.status)
       console.log(this.modalType);
       return
     }
