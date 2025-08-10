@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, ReplaySubject, catchError } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject, catchError, shareReplay } from 'rxjs';
 import { Debt } from '../../models/Debt';
 import { ModalType } from '../../utils/modalType';
 import { handleNetworkError } from '../../utils/errorHandler';
@@ -9,8 +9,9 @@ import { handleNetworkError } from '../../utils/errorHandler';
   providedIn: 'root'
 })
 export class DebtService {
-  constructor(private http: HttpClient) { }
+  private list$?: Observable<Debt[]>;
 
+  constructor(private http: HttpClient) { }
   private url = "http://127.0.0.1:8000/api/debts";
 
   //Modal type for reuse
@@ -45,7 +46,16 @@ export class DebtService {
 
   //API calls
   getDebts(): Observable<Debt[]> {
-    return this.http.get<Debt[]>(this.url);
+    if(!this.list$){
+      this.list$ = this.http.get<Debt[]>(this.url).pipe(
+        shareReplay(1)
+      )
+    }
+    return this.list$;
+  }
+
+  clearCache(){
+    this.list$ = undefined;
   }
 
   getDebtById(id: number): Observable<Debt>{

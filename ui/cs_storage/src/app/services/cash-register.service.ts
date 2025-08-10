@@ -1,7 +1,7 @@
 import { CashRegister } from './../../models/CashRegister';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, ReplaySubject, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, ReplaySubject, shareReplay, Subject } from 'rxjs';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 
@@ -9,6 +9,7 @@ import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
   providedIn: 'root'
 })
 export class CashRegisterService {
+  private list$?: Observable<CashRegister[]>;
 
   constructor(private http: HttpClient) { }
   private url = "http://127.0.0.1:8000/api/cashregisters";
@@ -42,7 +43,12 @@ export class CashRegisterService {
   }
 
   getCashRegisters(): Observable<CashRegister[]> {
-    return this.http.get<CashRegister[]>(`${this.url}`);
+    if(!this.list$){
+      this.list$ = this.http.get<CashRegister[]>(`${this.url}`).pipe(
+        shareReplay(1)
+      )
+    }
+    return this.list$;
   }
 
   getCashRegisterById(id: number): Observable<CashRegister> {
