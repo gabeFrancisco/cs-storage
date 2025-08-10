@@ -50,4 +50,10 @@ class CashRegisterController extends Controller
             'data' => $register
         ], 200);
     }
+
+    public function getDayAndMonthTotal(){
+        $data = $this->_cashRegisterService->getDayAndMonthTotal();
+
+        return response()->json($data, 200);
+    }
 }

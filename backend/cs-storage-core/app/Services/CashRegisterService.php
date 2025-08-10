@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\CashRegisterRequest;
 use App\Models\CashRegister;
 use Error;
+use Carbon\Carbon;
 
 class CashRegisterService
 {
@@ -72,5 +73,18 @@ class CashRegisterService
         $register->delete();
 
         return $register;
+    }
+
+    public function getDayAndMonthTotal()
+    {
+        $day = CashRegister::whereDate('created_at', Carbon::today())->sum('value');
+        $month = CashRegister::whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->get()->sum('value');
+
+        return [
+            'day' => $day,
+            'month' => $month
+        ];
     }
 }

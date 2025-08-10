@@ -50,7 +50,7 @@ export class DebtPostModalComponent {
 
         //Gets the debt id from the service
         this.debtService.debtId$.subscribe(data => {
-          if (data !== null) {
+          if (data) {
 
             //Fetch the debt by the given id from the server
             //Then patch all the values for the form fields

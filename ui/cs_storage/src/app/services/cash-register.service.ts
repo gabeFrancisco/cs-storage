@@ -83,6 +83,6 @@ export class CashRegisterService {
   }
 
   getDayAndMonthValueData(): Observable<DayAndMonthData> {
-    return this.http.get<DayAndMonthData>(`${this.url}/monthTotal`);
+    return this.http.get<DayAndMonthData>(`${this.url}/monthtotal`);
   }
 }
