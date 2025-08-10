@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, ReplaySubject, catchError, shareReplay } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject, catchError, shareReplay, tap } from 'rxjs';
 import { Debt } from '../../models/Debt';
 import { ModalType } from '../../utils/modalType';
 import { handleNetworkError } from '../../utils/errorHandler';
@@ -32,7 +32,7 @@ export class DebtService {
   setModalTypeToUpdate() { this.debtModalType.next(ModalType.UPDATE) }
   setModalTypeToRead() { this.debtModalType.next(ModalType.READ) }
 
-  setDebtId(id: number){
+  setDebtId(id: number) {
     this.debtId.next(id)
   }
 
@@ -46,7 +46,7 @@ export class DebtService {
 
   //API calls
   getDebts(): Observable<Debt[]> {
-    if(!this.list$){
+    if (!this.list$) {
       this.list$ = this.http.get<Debt[]>(this.url).pipe(
         shareReplay(1)
       )
@@ -54,25 +54,28 @@ export class DebtService {
     return this.list$;
   }
 
-  clearCache(){
+  clearCache() {
     this.list$ = undefined;
   }
 
-  getDebtById(id: number): Observable<Debt>{
+  getDebtById(id: number): Observable<Debt> {
     return this.http.get<Debt>(`${this.url}/${id}`);
   }
 
   createDebt(payload: Debt): Observable<any> {
-    return this.http.post(this.url, payload);
+    return this.http.post(this.url, payload)
+      .pipe(tap(() => this.clearCache()))
   }
 
-  updateDebt(payload: Debt): Observable<any>{
+  updateDebt(payload: Debt): Observable<any> {
     return this.http.put(this.url, payload)
-    .pipe(catchError(handleNetworkError('update-debt')))
+      .pipe(catchError(handleNetworkError('update-debt')))
+      .pipe(tap(() => this.clearCache()))
   }
 
-  removeDebt(id: number): Observable<any>{
+  removeDebt(id: number): Observable<any> {
     return this.http.delete(`${this.url}/${id}`)
       .pipe(catchError(handleNetworkError('remove-debt')))
+      .pipe(tap(() => this.clearCache()))
   }
 }

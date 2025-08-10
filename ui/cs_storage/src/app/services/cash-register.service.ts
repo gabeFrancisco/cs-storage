@@ -1,7 +1,7 @@
 import { CashRegister } from './../../models/CashRegister';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, ReplaySubject, shareReplay, Subject } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, ReplaySubject, shareReplay, Subject, tap } from 'rxjs';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 
@@ -57,17 +57,29 @@ export class CashRegisterService {
 
   createCashRegister(payload: CashRegister): Observable<any> {
     // this.getCashRegisters();
-    return this.http.post(`${this.url}`, payload)
+    return this.http.post(`${this.url}`, payload).pipe(
+      tap(() => this.clearCache())
+    )
+  }
+
+  clearCache(){
+    this.list$ = undefined;
   }
 
   updateCashRegister(payload: CashRegister): Observable<any> {
     return this.http.put(`${this.url}`, payload)
       .pipe(catchError(handleNetworkError('update-cash-register')))
+      .pipe(
+        tap(() => this.clearCache())
+      )
   }
 
   removeCashRegister(id: number): Observable<any> {
     return this.http.delete(`${this.url}/${id}`)
       .pipe(catchError(handleNetworkError('remove-cash-register')))
+      .pipe(
+        tap(() => this.clearCache())
+      )
   }
 
   getDayAndMonthValueData(): Observable<DayAndMonthData> {

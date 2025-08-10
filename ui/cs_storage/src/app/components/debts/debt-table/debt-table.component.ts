@@ -14,14 +14,13 @@ export class DebtTableComponent implements OnInit{
 
   loading = true;
 
-  constructor(private debtService: DebtService, private cdr: ChangeDetectorRef) {
+  constructor(private debtService: DebtService) {
 
   }
   ngOnInit(): void {
     this.debtService.triggerUpdate();
     this.debtService.refreshList$.subscribe(()=>{
       this.fetchList();
-      this.cdr.detectChanges();
     })
   }
 

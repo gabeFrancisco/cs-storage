@@ -15,15 +15,13 @@ export class CashRegisterTableComponent implements OnInit {
 
   loading = true;
 
-  constructor(private cashService: CashRegisterService, private cdr: ChangeDetectorRef) {
+  constructor(private cashService: CashRegisterService) {
 
   }
   ngOnInit(): void {
-
     this.cashService.triggerUpdate();
     this.cashService.refreshList$.subscribe(() => {
       this.fetchList();
-      this.cdr.detectChanges();
     })
   }
 
