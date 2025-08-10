@@ -22,30 +22,30 @@
       </ul>
     </div>
 
-    <div class="flex pr-3 flex-row justify-evenly items-center text-gray-600">
+    <div class="flex flex-row justify-evenly items-center text-gray-600">
       <span class="py-6 h-max mx-3 border-r border-gray-300"></span>
-      <div class="mx-2">
+      <div class="mr-2">
         <span class="text-emerald-500"
-          >Caixa:
+          ><span class="text-sm mr-2">Caixa</span>
           <span
             class="rounded-sm border border-emerald-600 p-1 bg-emerald-500 text-white mr-1"
-            >Dia: R${{ cashRegisterValues.day.toFixed(2) }}</span
+            ><span class="text-sm">Dia:</span> R${{ cashRegisterValues.day.toFixed(2) }}</span
           >
           <span
             class="rounded-sm border border-emerald-600 p-1 bg-emerald-500 text-white ml-1"
-            >Mês: R${{ cashRegisterValues.month.toFixed(2) }}</span
+            ><span class="text-sm">Mês:</span> R${{ cashRegisterValues.month.toFixed(2) }}</span
           ></span
         >
       </div>
-      <span class="text-red-500"
-        >Débitos:
+      <span class="text-red-500">
+        <span class="text-sm mr-2">Débitos</span>
         <span
           class="rounded-sm border border-red-500 p-1 bg-red-400 text-white mr-1"
-          >Dia: R$0,00</span
+          ><span class="text-sm">Dia:</span> R$0,00</span
         >
         <span
           class="rounded-sm border border-red-500 p-1 bg-red-400 text-white mr-1"
-          >Mês: R$70,00</span
+          ><span class="text-sm">Mês:</span> R$70,00</span
         ></span
       >
     </div>
