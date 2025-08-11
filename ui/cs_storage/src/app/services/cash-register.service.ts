@@ -43,7 +43,7 @@ export class CashRegisterService {
   }
 
   getCashRegisters(): Observable<CashRegister[]> {
-    if(!this.list$){
+    if (!this.list$) {
       this.list$ = this.http.get<CashRegister[]>(`${this.url}`).pipe(
         shareReplay(1)
       )
@@ -62,7 +62,7 @@ export class CashRegisterService {
     )
   }
 
-  clearCache(){
+  clearCache() {
     this.list$ = undefined;
   }
 
@@ -78,7 +78,10 @@ export class CashRegisterService {
     return this.http.delete(`${this.url}/${id}`)
       .pipe(catchError(handleNetworkError('remove-cash-register')))
       .pipe(
-        tap(() => this.clearCache())
+        tap(() => {
+          this.clearCache()
+          this.triggerUpdate()
+        })
       )
   }
 
