@@ -55,4 +55,10 @@ class DebtController extends Controller
             'data' => $debt
         ]);
     }
+
+    public function getDayAndMonthTotal(){
+        $data = $this->_debtService->getDayAndMonthTotal();
+
+        return response()->json($data, 200);
+    }
 }
