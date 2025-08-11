@@ -127,7 +127,7 @@ export class DebtPostModalComponent {
         },
         error: err => console.log(err)
       })
-      this.debtService.closeDebtPostModal();
     }
+    this.debtService.closeDebtPostModal();
   }
 }
