@@ -14,6 +14,17 @@ class CashRegisterService
         return CashRegister::all();
     }
 
+    public function getAllByToday()
+    {
+        return CashRegister::whereDate('created_at', Carbon::today())->get();
+    }
+
+    //TODO
+    public function getAllByDate($date)
+    {
+        return CashRegister::where('created_at', $date)->get();
+    }
+
     public function getById($id)
     {
         return CashRegister::findOrFail($id);
