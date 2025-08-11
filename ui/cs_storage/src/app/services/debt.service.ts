@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject, ReplaySubject, catchError, shareReplay, ta
 import { Debt } from '../../models/Debt';
 import { ModalType } from '../../utils/modalType';
 import { handleNetworkError } from '../../utils/errorHandler';
+import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +78,9 @@ export class DebtService {
     return this.http.delete(`${this.url}/${id}`)
       .pipe(catchError(handleNetworkError('remove-debt')))
       .pipe(tap(() => this.clearCache()))
+  }
+
+  getDayAndMonthValueData(): Observable<DayAndMonthData>{
+    return this.http.get<DayAndMonthData>(`${this.url}/monthtotal`)
   }
 }

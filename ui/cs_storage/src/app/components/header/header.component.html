@@ -27,25 +27,29 @@
       <div class="mr-2 text-emerald-600">
         <span
           ><span class="text-sm mr-2">Caixa</span>
-          <span
-            class="rounded-sm border border-emerald-600 p-1 mr-1"
-            ><span class="text-sm">Dia:</span> R${{ cashRegisterValues.day.toFixed(2) }}</span
+          <span class="rounded-sm border border-emerald-600 p-1 mr-1"
+            ><span class="text-sm">Dia:</span> R${{
+              cashRegisterValues.day.toFixed(2)
+            }}</span
           >
-          <span
-            class="rounded-sm border border-emerald-600 p-1 ml-1"
-            ><span class="text-sm">Mês:</span> R${{ cashRegisterValues.month.toFixed(2) }}</span
+          <span class="rounded-sm border border-emerald-600 p-1 ml-1"
+            ><span class="text-sm">Mês:</span> R${{
+              cashRegisterValues.month.toFixed(2)
+            }}</span
           ></span
         >
       </div>
       <span class="text-red-500">
         <span class="text-sm mr-2">Débitos</span>
-        <span
-          class="rounded-sm border border-red-500 p-1 mr-1"
-          ><span class="text-sm">Dia:</span> R$0,00</span
+        <span class="rounded-sm border border-red-500 p-1 mr-1"
+          ><span class="text-sm">Dia:</span> R${{
+            debtValues.day.toFixed(2)
+          }}</span
         >
-        <span
-          class="rounded-sm border border-red-500 p-1 mr-1"
-          ><span class="text-sm">Mês:</span> R$70,00</span
+        <span class="rounded-sm border border-red-500 p-1 mr-1"
+          ><span class="text-sm">Mês:</span> R${{
+            debtValues.month.toFixed(2)
+          }}</span
         ></span
       >
     </div>
