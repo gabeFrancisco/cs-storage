@@ -10,12 +10,22 @@ class MissingProductService
 {
     public function getAll()
     {
-        return MissingProduct::with('customer')->get();
+        return MissingProduct::with('customer')
+            ->orderBy('is_bought')
+            ->get();
     }
 
     public function getById($id)
     {
         return MissingProduct::with('customer')->findOrFail($id);
+    }
+
+    public function setBoughtState(int $id, bool $state){
+        $product = MissingProduct::findOrFail($id);
+        $product->is_bought = $state;
+        $product->save();
+
+        return $product;
     }
 
     public function create(MissingProductRequest $request)

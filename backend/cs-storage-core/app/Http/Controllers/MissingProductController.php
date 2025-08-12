@@ -25,4 +25,13 @@ class MissingProductController extends Controller
         $missingProduct = $this->_missingProductService->create($request);
         return response()->json($missingProduct);
     }
+
+    public function post_bought_state(Request $request){
+        $id = $request->input('id');
+        $state = $request->input('state');
+
+        $missingProduct = $this->_missingProductService->setBoughtState($id, $state);
+
+        return $missingProduct;
+    }
 }
