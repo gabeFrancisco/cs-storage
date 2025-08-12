@@ -41,8 +41,9 @@
             Carregando...
           </tr>
           <tr
-            class="items-center hover:bg-gray-200 cursor-pointer"
+            class="items-center border-gray-100 hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of products"
+            [ngClass]="{ 'bg-green-200': item.is_bought }"
           >
             <th class="font-thin border-r p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
@@ -54,25 +55,24 @@
             <th class="font-thin p-1.5">
               {{ item.customer?.name }}/{{ item.customer?.phone }}
             </th>
-            <th class="font-thin p-1.5">{{ item.is_bought ? "Sim" : "Não" }}</th>
+            <th class="font-thin p-1.5">
+              {{ item.is_bought ? "Sim" : "Não" }}
+            </th>
             <th class="font-thin text-center">
-              <button
-                type="button"
-                title="Remover"
-                class="btn-green-i mr-1"
-              >
-                ✔
-              </button>
-              <button title="Atualizar" class="btn-primary-i mr-1">
-                ✎
-              </button>
-              <button
-                type="button"
-                title="Remover"
-                class="btn-red-i mr-1"
-              >
-                𝘅
-              </button>
+              <div *ngIf="!item.is_bought">
+                <button
+                  type="button"
+                  title="Remover"
+                  class="btn-green-i mr-1"
+                  (click)="setBoughtState(item.id!)"
+                >
+                  ✔
+                </button>
+                <button title="Atualizar" class="btn-primary-i mr-1">✎</button>
+                <button type="button" title="Remover" class="btn-red-i mr-1">
+                  𝘅
+                </button>
+              </div>
             </th>
           </tr>
         </tbody>

@@ -33,4 +33,13 @@ export class MissingProductsTableComponent implements OnInit{
     this.missingProductService.setModalTypeToCreate();
     this.missingProductService.openMissingProductModal();
   }
+
+  setBoughtState(id: number){
+    if(confirm('Tem certeza que quer marcar este produto como "Comprado"?')){
+      this.missingProductService.setMissingProductBoughtState({id: id, state: true})
+        .subscribe(() => {
+          this.fetchList();
+        })
+    }
+  }
 }

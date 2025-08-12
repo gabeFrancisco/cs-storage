@@ -60,4 +60,9 @@ export class MissingProductService {
     this.clearCache();
     return this.http.post(this.url, payload);
   }
+
+  setMissingProductBoughtState(payload: { id: number, state: boolean }) {
+    this.clearCache();
+    return this.http.post(`${this.url}/setstate`, payload);
+  }
 }
