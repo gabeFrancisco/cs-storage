@@ -4,14 +4,19 @@ namespace App\Services;
 
 use App\Http\Requests\CashRegisterRequest;
 use App\Models\CashRegister;
+use App\Repository\CashRegisterRepository;
 use Error;
 use Carbon\Carbon;
 
 class CashRegisterService
 {
+    private CashRegisterRepository $_repository;
+    public function __construct(CashRegisterRepository $repository) {
+        $this->_repository = $repository;
+    }
     public function getAll()
     {
-        return CashRegister::all();
+        return $this->_repository->getAllCashRegisters();
     }
 
     public function getAllByToday()
