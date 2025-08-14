@@ -46,12 +46,9 @@ class CashRegisterService
             throw new Error("Payment type is invalid!");
         }
 
-        $register = CashRegister::create([
-            'value' => $value,
-            'payment_type' => $payment_type,
-            'description' => $description,
-            'created_at' => $created_at
-        ]);
+        $register = $this->_repository->createCashRegister(new CashRegister(
+            $value, $payment_type, $description, $created_at
+        ));
 
         return $register;
     }

@@ -3,17 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use payment_type;
 
-class CashRegister extends Model
+class CashRegister
 {
-    protected $fillable = [
-        'payment_type',
-        'value',
-        'description',
-        'created_at'
-    ];
+    public $id;
+    public $value;
+    public $payment_type;
+    public $description;
+    public $created_at;
+    public $updated_at;
 
-    protected $casts = [
-        'value' => 'float',
-    ];
+    public function __construct($value, $payment_type, $description, $created_at) {
+        $this->value = $value;
+        $this->payment_type = $payment_type;
+        $this->description = $description;
+        $this->created_at = $created_at;
+    }
+    // protected $fillable = [
+    //     'payment_type',
+    //     'value',
+    //     'description',
+    //     'created_at'
+    // ];
+
+    // protected $casts = [
+    //     'value' => 'float',
+    // ];
 }
