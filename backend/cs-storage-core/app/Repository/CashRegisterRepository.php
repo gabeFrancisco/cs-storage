@@ -41,7 +41,7 @@ class CashRegisterRepository
 
     public function createCashRegister(CashRegister $cashRegister)
     {
-        $cashRegister = DB::selectOne(
+        $dBcashRegister = DB::selectOne(
             'insert into cash_registers(value, payment_type, description, created_at) values (?,?,?,?) returning *',
             [
                 $cashRegister->value,
@@ -51,12 +51,12 @@ class CashRegisterRepository
             ]
         );
 
-        return $cashRegister;
+        return $dBcashRegister;
     }
 
     public function updateCashRegister(CashRegister $cashRegister)
     {
-        $cashRegister = DB::selectOne(
+        $dBcashRegister = DB::selectOne(
             'update cash_registers
                     set value = ?, payment_type = ?, description = ?, updated_at = ?
                     where id = ?
@@ -70,7 +70,7 @@ class CashRegisterRepository
             ]
         );
 
-        return $cashRegister;
+        return $dBcashRegister;
     }
 
     public function deleteCashRegister(int $id)
