@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\CashRegister;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CashRegisterRepository
@@ -17,7 +18,8 @@ class CashRegisterRepository
         return $cashRegisters;
     }
 
-    public function getCashRegister(int $id){
+    public function getCashRegister(int $id)
+    {
         $cashRegister = DB::selectOne(
             'select id, value, description, payment_type, created_at, updated_at from cash_registers where id = ?',
             [$id]
@@ -26,10 +28,11 @@ class CashRegisterRepository
         return $cashRegister;
     }
 
-    public function getAllByTodayDate(){
+    public function getAllByTodayDate()
+    {
         $cashRegisters = DB::select(
             'select id, value, description, payment_type, created_at, updated_at from cash_registers
-                where created_at = current_date
+                    where created_at = current_date
             '
         );
 
@@ -49,5 +52,50 @@ class CashRegisterRepository
         );
 
         return $cashRegister;
+    }
+
+    public function updateCashRegister(CashRegister $cashRegister)
+    {
+        $cashRegister = DB::selectOne(
+            'update cash_registers
+                    set value = ?, payment_type = ?, description = ?, updated_at = ?
+                    where id = ?
+            ',
+            [
+                $cashRegister->value,
+                $cashRegister->payment_type,
+                $cashRegister->description,
+                date('Y-m-d'),
+                $cashRegister->id
+            ]
+        );
+
+        return $cashRegister;
+    }
+
+    public function deleteCashRegister(int $id)
+    {
+        $cashRegister = DB::selectOne(
+            'delete from cash_registers where id = ?',
+            [$id]
+        );
+
+        return $cashRegister;
+    }
+
+    public function getDayAndMonthTotal()
+    {
+        $day = DB::selectOne('
+            select sum(value) as total from cash_registers where created_at = current_date
+        ');
+
+        $month = DB::selectOne('
+            select sum(value) as total from cash_registers where strftime("%m", created_at) = strftime("%m", "now")
+        ');
+
+        return [
+            "day" => $day->total,
+            "month" => $month->total
+        ];
     }
 }

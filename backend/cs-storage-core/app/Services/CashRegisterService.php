@@ -11,7 +11,8 @@ use Carbon\Carbon;
 class CashRegisterService
 {
     private CashRegisterRepository $_repository;
-    public function __construct(CashRegisterRepository $repository) {
+    public function __construct(CashRegisterRepository $repository)
+    {
         $this->_repository = $repository;
     }
     public function getAll()
@@ -47,7 +48,11 @@ class CashRegisterService
         }
 
         $register = $this->_repository->createCashRegister(new CashRegister(
-            $value, $payment_type, $description, $created_at
+            null,
+            $value,
+            $payment_type,
+            $description,
+            $created_at
         ));
 
         return $register;
@@ -66,38 +71,26 @@ class CashRegisterService
             throw new Error("Payment type is invalid!");
         }
 
-        $dbRegister = $this->getById($id);
+        $register = $this->_repository->updateCashRegister(new CashRegister(
+            $id,
+            $value,
+            $payment_type,
+            $description,
+            $created_at
+        ));
 
-        CashRegister::where("id", $id)->update([
-            'value' => $value,
-            'payment_type' => $payment_type,
-            'description' => $description,
-            'created_at' => $created_at
-        ]);
-
-        $dbRegister->refresh();
-
-        return $dbRegister;
+        return $register;
     }
 
     public function remove($id)
     {
-        $register = $this->getById($id);
-        $register->delete();
+        $register = $this->_repository->deleteCashRegister($id);
 
         return $register;
     }
 
     public function getDayAndMonthTotal()
     {
-        $day = CashRegister::whereDate('created_at', Carbon::today())->sum('value');
-        $month = CashRegister::whereYear('created_at', Carbon::now()->year)
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->get()->sum('value');
-
-        return [
-            'day' => $day,
-            'month' => $month
-        ];
+        return $this->_repository->getDayAndMonthTotal();
     }
 }
