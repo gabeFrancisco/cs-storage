@@ -6,9 +6,25 @@ use App\Models\Customer;
 use App\Models\Address;
 use App\Http\Requests\DebtRequest;
 use App\Models\Debt;
+use App\Repository\AddressRepository;
+use App\Repository\CustomerRepository;
+use App\Repository\DebtRepository;
 use Carbon\Carbon;
 class DebtService
 {
+    private DebtRepository $debtRepository;
+    private CustomerRepository $customerRepository;
+    private AddressRepository $addressRepository;
+
+    public function __construct(
+        DebtRepository $debtRepository,
+        CustomerRepository $customerRepository,
+        AddressRepository $addressRepository
+    ) {
+        $this->debtRepository = $debtRepository;
+        $this->customerRepository = $customerRepository;
+        $this->addressRepository = $addressRepository;
+    }
     public function getAll()
     {
         return Debt::with('customer.address')->get();
@@ -130,9 +146,9 @@ class DebtService
             ->whereMonth('created_at', Carbon::now()->month)
             ->get()->sum('value');
 
-            return [
-                'day' => $day,
-                'month' => $month
-            ];
+        return [
+            'day' => $day,
+            'month' => $month
+        ];
     }
 }
