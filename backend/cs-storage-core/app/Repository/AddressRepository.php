@@ -10,7 +10,7 @@ class AddressRepository
     public function getAllAddresses()
     {
         $addresses = DB::select(
-            'select id, created_at, updated_at, road, number, complement, neighborhood, city, state from addressess'
+            'select id, created_at, updated_at, road, number, complement, neighborhood, city, state from addresses'
         );
 
         return $addresses;
@@ -19,7 +19,7 @@ class AddressRepository
     public function createAddress(Address $address)
     {
         $address = DB::selectOne(
-            'insert into addressess(created_at, road, number, complement, neighborhood, city, state)
+            'insert into addresses(created_at, road, number, complement, neighborhood, city, state)
                     values (?,?,?,?,?,?,?) returning *',
             [
                 $address->created_at,

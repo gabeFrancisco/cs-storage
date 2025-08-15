@@ -13,8 +13,7 @@ use Carbon\Carbon;
 class DebtService
 {
     private DebtRepository $debtRepository;
-    private CustomerRepository $customerRepository;
-    private AddressRepository $addressRepository;
+
 
     public function __construct(
         DebtRepository $debtRepository,
@@ -57,25 +56,28 @@ class DebtService
             $request->input('customer.name'),
             $request->input('customer.phone'),
             $request->input('customer.cpf_cnpj'),
+            $address->id,
             date('Y-m-d')
         ));
 
-        if ($address) {
-            $customer->address()->associate($address);
-            $customer->save();
-        }
+        // if ($address) {
+        //     $customer->address()->associate($address);
+        //     $customer->save();
+        // }
 
         $value = $request->input('value');
         $forecast = $request->input('forecast');
 
-        $debt = new Debt([
-            'value' => $value,
-            'forecast' => $forecast,
-            'paid_date' => now()->toString(),
-        ]);
+        $debt = $this->debtRepository->createDebt(new Debt(
+            null,
+            $value,
+            $forecast,
+            $customer->id,
+            date("Y-m-d"),
+        ));
 
-        $debt->customer()->associate($customer);
-        $debt->save();
+        // $debt->customer()->associate($customer);
+        // $debt->save();
 
         return $debt;
     }

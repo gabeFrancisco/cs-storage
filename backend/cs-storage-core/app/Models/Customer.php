@@ -17,6 +17,7 @@ class Customer extends Model
 
     public function __construct($id, $name, $phone, $cpf_cnpj, $address_id, $created_at) {
         $this->id = $id;
+        $this->name = $name;
         $this->phone = $phone;
         $this->cpf_cnpj = $cpf_cnpj;
         $this->address_id = $address_id;
