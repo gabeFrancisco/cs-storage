@@ -40,22 +40,25 @@ class DebtService
         $address = null;
 
         if (!empty($request->input('customer.address'))) {
-            $address = Address::create([
-                'road' => $request->input('customer.address.road'),
-                'number' => $request->input('customer.address.number'),
-                'complement' => $request->input('customer.address.complement'),
-                'neighborhood' => $request->input('customer.address.neighborhood'),
-                'city' => $request->input('customer.address.city'),
-                'state' => $request->input('customer.address.state')
-            ]);
+            $address = $this->addressRepository->createAddress(new Address(
+                null,
+                $request->input('customer.address.road'),
+                $request->input('customer.address.number'),
+                $request->input('customer.address.complement'),
+                $request->input('customer.address.neighborhood'),
+                $request->input('customer.address.city'),
+                $request->input('customer.address.state'),
+                date('Y-m-d')
+            ));
         }
 
-        $customer = Customer::create([
-            'name' => $request->input('customer.name'),
-            'phone' => $request->input('customer.phone'),
-            'cpf_cnpj' => $request->input('customer.cpf_cnpj'),
-
-        ]);
+        $customer = $this->customerRepository->createCustomer(new Customer(
+            null,
+            $request->input('customer.name'),
+            $request->input('customer.phone'),
+            $request->input('customer.cpf_cnpj'),
+            date('Y-m-d')
+        ));
 
         if ($address) {
             $customer->address()->associate($address);
