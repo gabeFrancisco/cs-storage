@@ -17,6 +17,25 @@ class CashRegisterRepository
         return $cashRegisters;
     }
 
+    public function getCashRegister(int $id){
+        $cashRegister = DB::selectOne(
+            'select id, value, description, payment_type, created_at, updated_at from cash_registers where id = ?',
+            [$id]
+        );
+
+        return $cashRegister;
+    }
+
+    public function getAllByTodayDate(){
+        $cashRegisters = DB::select(
+            'select id, value, description, payment_type, created_at, updated_at from cash_registers
+                where created_at = current_date
+            '
+        );
+
+        return $cashRegisters;
+    }
+
     public function createCashRegister(CashRegister $cashRegister)
     {
         $cashRegister = DB::selectOne(
@@ -27,15 +46,6 @@ class CashRegisterRepository
                 $cashRegister->description,
                 $cashRegister->created_at
             ]
-        );
-
-        return $cashRegister;
-    }
-
-    public function getCashRegister(int $id){
-        $cashRegister = DB::selectOne(
-            'select id, value, description, payment_type, created_at, updated_at from cash_registers where id = ?',
-            [$id]
         );
 
         return $cashRegister;

@@ -16,12 +16,12 @@ class CashRegisterService
     }
     public function getAll()
     {
-        return $this->_repository->getAllCashRegisters();
+        return $this->_repository->getAllByTodayDate();
     }
 
     public function getAllByToday()
     {
-        return CashRegister::whereDate('created_at', Carbon::today())->get();
+        return $this->_repository->getAllByTodayDate();
     }
 
     //TODO
