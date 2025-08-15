@@ -39,7 +39,7 @@ class DebtService
         $address = null;
 
         if (!empty($request->input('customer.address'))) {
-            $address = $this->addressRepository->createAddress(new Address(
+            $address = new Address(
                 null,
                 $request->input('customer.address.road'),
                 $request->input('customer.address.number'),
@@ -48,17 +48,17 @@ class DebtService
                 $request->input('customer.address.city'),
                 $request->input('customer.address.state'),
                 date('Y-m-d')
-            ));
+            );
         }
 
-        $customer = $this->customerRepository->createCustomer(new Customer(
+        $customer = new Customer(
             null,
             $request->input('customer.name'),
             $request->input('customer.phone'),
             $request->input('customer.cpf_cnpj'),
             $address->id,
             date('Y-m-d')
-        ));
+        );
 
         // if ($address) {
         //     $customer->address()->associate($address);
@@ -74,7 +74,7 @@ class DebtService
             $forecast,
             $customer->id,
             date("Y-m-d"),
-        ));
+        ), $customer, $address);
 
         // $debt->customer()->associate($customer);
         // $debt->save();
