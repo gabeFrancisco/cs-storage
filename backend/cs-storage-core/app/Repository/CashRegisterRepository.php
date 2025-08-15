@@ -31,4 +31,13 @@ class CashRegisterRepository
 
         return $cashRegister;
     }
+
+    public function getCashRegister(int $id){
+        $cashRegister = DB::selectOne(
+            'select id, value, description, payment_type, created_at, updated_at from cash_registers where id = ?',
+            [$id]
+        );
+
+        return $cashRegister;
+    }
 }

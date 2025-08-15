@@ -32,7 +32,7 @@ class CashRegisterService
 
     public function getById($id)
     {
-        return CashRegister::findOrFail($id);
+        return $this->_repository->getCashRegister($id);
     }
 
     public function create(CashRegisterRequest $request)
