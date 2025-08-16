@@ -26,12 +26,12 @@ class DebtService
     }
     public function getAll()
     {
-        return Debt::with('customer.address')->get();
+        return $this->debtRepository->getAllDebts();
     }
 
     public function getById($id)
     {
-        return Debt::with('customer', 'customer.address')->findOrFail($id);
+        // return Debt::with('customer', 'customer.address')->findOrFail($id);
     }
 
     public function create(DebtRequest $request)
@@ -60,11 +60,6 @@ class DebtService
             date('Y-m-d')
         );
 
-        // if ($address) {
-        //     $customer->address()->associate($address);
-        //     $customer->save();
-        // }
-
         $value = $request->input('value');
         $forecast = $request->input('forecast');
 
@@ -75,9 +70,6 @@ class DebtService
             $customer->id,
             date("Y-m-d"),
         ), $customer, $address);
-
-        // $debt->customer()->associate($customer);
-        // $debt->save();
 
         return $debt;
     }

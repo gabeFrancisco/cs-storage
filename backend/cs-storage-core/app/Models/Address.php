@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class Address
 {
     public $id;
     public $road;
@@ -25,15 +25,4 @@ class Address extends Model
         $this->state = $state;
         $this->created_at = $created_at;
     }
-
-    protected $table = 'addresses';
-
-    protected $fillable = [
-        'road',
-        'number',
-        'complement',
-        'neighborhood',
-        'city',
-        'state'
-    ];
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Customer
 {
     public $id;
     public $name;
@@ -22,14 +22,5 @@ class Customer extends Model
         $this->cpf_cnpj = $cpf_cnpj;
         $this->address_id = $address_id;
         $this->created_at = $created_at;
-    }
-    protected $fillable = [
-        'name',
-        'phone',
-        'cpf_cnpj'
-    ];
-
-    public function address(){
-        return $this->belongsTo(Address::class);
     }
 }

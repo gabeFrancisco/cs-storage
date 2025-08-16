@@ -19,6 +19,20 @@ class DebtRepository
         $this->customerRepository = $customerRepository;
         $this->addressRepository = $addressRepository;
     }
+
+    public function getAllDebts(){
+        $debts = DB::select(
+            'select d.id as debt_id, d.value, d.forecast, d.created_at, d.updated_at,
+                    c.id as customer_id, c.name, c.phone, c.cpf_cnpj, c.created_at, c.updated_at,
+                    a.id as address_id, a.road, a.number, a.complement, a.neighborhood, a.city, a.state
+                from debts d
+                left join customers c on d.customer_id = c.id
+                left join addresses a on c.address_id = a.id
+            '
+        );
+
+        return $debts;
+    }
     public function createDebt(Debt $debt, Customer $customer, Address $address)
     {
         DB::beginTransaction();

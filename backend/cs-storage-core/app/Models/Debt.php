@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Debt extends Model
+class Debt
 {
     public $id;
     public $value;
@@ -22,19 +22,4 @@ class Debt extends Model
         $this->customer_id = $customer_id;
         $this->created_at = $created_at;
     }
-
-    protected $fillable = [
-        'value',
-        'forecast',
-        'paid_date'
-    ];
-
-    protected $casts = [
-        'value' => 'float'
-    ];
-
-    public function customer(){
-        return $this->belongsTo(Customer::class);
-    }
-
 }
