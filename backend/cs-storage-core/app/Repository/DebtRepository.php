@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Models\Debt;
 use App\Models\Address;
 use App\Models\Customer;
+use App\Utils\ClassHelper;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -20,49 +21,38 @@ class DebtRepository
         $this->addressRepository = $addressRepository;
     }
 
-    public function getAllDebts(){
-        $dbDebts = DB::select(
-            'select d.id as debt_id, d.value, d.forecast, d.paid_date, d.created_at, d.updated_at,
-                    c.id as customer_id, c.name, c.phone, c.cpf_cnpj, c.created_at as c_created, c.updated_at as c_updated,
-                    a.id as address_id, a.road, a.number, a.complement, a.neighborhood, a.city, a.state, a.created_at as a_created, a.updated_at as a_updated
-                from debts d
-                left join customers c on d.customer_id = c.id
-                left join addresses a on c.address_id = a.id
-            '
-        );
+    private $selectAllWithJoinStmt =
+        'select d.id as d_id, d.value as d_value, d.forecast as d_forecast, d.paid_date as d_paid_date,
+         d.created_at as d_created_at, d.updated_at as d_updated_at, d.customer_id as d_customer_id,
+            c.id as c_id, c.name as c_name, c.phone as c_phone, c.cpf_cnpj as c_cpf_cnpj,
+            c.created_at as c_created_at, c.updated_at as c_updated_at, c.address_id as c_address_id,
+                a.id as a_id, a.road as a_road, a.number as a_number, a.complement as a_complement,
+                a.neighborhood as a_neighborhood, a.city as a_city,
+                a.state as a_state, a.created_at as a_created_at, a.updated_at as a_updated_at
+        from debts d
+        left join customers c on d.customer_id = c.id
+        left join addresses a on c.address_id = a.id';
+
+    public function getAllDebts()
+    {
+        $dbDebts = DB::select($this->selectAllWithJoinStmt);
 
         $debts = [];
 
-        foreach($dbDebts as $row){
-            $debt = new Debt(
-                $row->debt_id,
-                $row->value,
-                $row->forecast,
-                $row->paid_date,
-                null,
-                $row->created_at,
-                $row->updated_at,
-                new Customer(
-                    $row->customer_id,
-                    $row->name,
-                    $row->phone,
-                    $row->cpf_cnpj,
-                    null,
-                    $row->c_created,
-                    $row->c_updated,
-                    new Address(
-                        $row->address_id,
-                        $row->road,
-                        $row->number,
-                        $row->complement,
-                        $row->neighborhood,
-                        $row->city,
-                        $row->state,
-                        $row->a_created,
-                        $row->a_updated
-                    )
-                )
-            );
+        foreach ($dbDebts as $row) {
+            $debt = ClassHelper::fillFromSql($row, Debt::class, 'd_');
+
+            if ($row->d_customer_id) {
+                $customer = ClassHelper::fillFromSql($row, Customer::class, 'c_');
+
+                if ($row->c_address_id) {
+                    $address = ClassHelper::fillFromSql($row, Address::class, 'a_');
+                    $customer->address = $address;
+                }
+
+                $debt->customer = $customer;
+
+            }
 
             $debts[] = $debt;
         }

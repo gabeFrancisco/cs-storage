@@ -14,14 +14,5 @@ class Address
     public $created_at;
     public $updated_at;
 
-    public function __construct($id, $road, $number, $complement, $neighborhood, $city, $state, $created_at, $updated_at) {
-        $this->id = $id;
-        $this->road = $road;
-        $this->number = $number;
-        $this->neighborhood = $neighborhood;
-        $this->city = $city;
-        $this->state = $state;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
-    }
+
 }

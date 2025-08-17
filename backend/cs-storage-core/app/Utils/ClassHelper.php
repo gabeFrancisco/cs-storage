@@ -4,7 +4,7 @@ namespace App\Utils;
 
 class ClassHelper
 {
-    public static function fillFromSql(object $row, string $class, string $prefix)
+    public static function fillFromSql(object $row, string $class, string $prefix = '')
     {
         $instance = new $class();
 
