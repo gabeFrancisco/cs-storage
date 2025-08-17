@@ -40,6 +40,16 @@ class DebtRepository
         $debts = [];
 
         foreach ($dbDebts as $row) {
+            $debt = $this->parseDebt($dbDebts);
+
+            $debts[] = $debt;
+        }
+
+        return $debts;
+    }
+
+    private function parseDebt($dbDebts){
+        foreach ($dbDebts as $row) {
             $debt = ClassHelper::fillFromSql($row, Debt::class, 'd_');
 
             if ($row->d_customer_id) {
@@ -51,13 +61,16 @@ class DebtRepository
                 }
 
                 $debt->customer = $customer;
-
             }
-
-            $debts[] = $debt;
         }
+        return $debt;
+    }
 
-        return $debts;
+    public function getDebt($id){
+        $dbDebt = DB::select($this->selectAllWithJoinStmt . ' where d_id = ?', [$id]);
+        $debt = $this->parseDebt($dbDebt);
+
+        return $debt;
     }
     public function createDebt(Debt $debt, Customer $customer, Address $address)
     {

@@ -31,7 +31,7 @@ class DebtService
 
     public function getById($id)
     {
-        // return Debt::with('customer', 'customer.address')->findOrFail($id);
+        return $this->debtRepository->getDebt($id);
     }
 
     public function create(DebtRequest $request)
