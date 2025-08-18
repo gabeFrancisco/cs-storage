@@ -40,34 +40,33 @@ class DebtRepository
         $debts = [];
 
         foreach ($dbDebts as $row) {
-            $debt = $this->parseDebt($dbDebts);
-
+            $debt = $this->parseDebt($row);
             $debts[] = $debt;
         }
 
         return $debts;
     }
 
-    private function parseDebt($dbDebts){
-        foreach ($dbDebts as $row) {
-            $debt = ClassHelper::fillFromSql($row, Debt::class, 'd_');
+    private function parseDebt($dbDebt)
+    {
+        $debt = ClassHelper::fillFromSql($dbDebt, Debt::class, 'd_');
 
-            if ($row->d_customer_id) {
-                $customer = ClassHelper::fillFromSql($row, Customer::class, 'c_');
+        if ($dbDebt->d_customer_id) {
+            $customer = ClassHelper::fillFromSql($dbDebt, Customer::class, 'c_');
 
-                if ($row->c_address_id) {
-                    $address = ClassHelper::fillFromSql($row, Address::class, 'a_');
-                    $customer->address = $address;
-                }
-
-                $debt->customer = $customer;
+            if ($dbDebt->c_address_id) {
+                $address = ClassHelper::fillFromSql($dbDebt, Address::class, 'a_');
+                $customer->address = $address;
             }
+
+            $debt->customer = $customer;
         }
         return $debt;
     }
 
-    public function getDebt($id){
-        $dbDebt = DB::select($this->selectAllWithJoinStmt . ' where d_id = ?', [$id]);
+    public function getDebt($id)
+    {
+        $dbDebt = DB::selectOne($this->selectAllWithJoinStmt . ' where d_id = ?', [$id]);
         $debt = $this->parseDebt($dbDebt);
 
         return $debt;

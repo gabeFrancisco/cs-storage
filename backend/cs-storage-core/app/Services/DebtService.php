@@ -39,37 +39,33 @@ class DebtService
         $address = null;
 
         if (!empty($request->input('customer.address'))) {
-            $address = new Address(
-                null,
-                $request->input('customer.address.road'),
-                $request->input('customer.address.number'),
-                $request->input('customer.address.complement'),
-                $request->input('customer.address.neighborhood'),
-                $request->input('customer.address.city'),
-                $request->input('customer.address.state'),
-                date('Y-m-d')
-            );
+            $address = new Address();
+            $address->road = $request->input('customer.address.road');
+            $address->number = $request->input('customer.address.number');
+            $address->complement = $request->input('customer.address.complement');
+            $address->neighborhood = $request->input('customer.address.neighborhood');
+            $address->city = $request->input('customer.address.city');
+            $address->state = $request->input('customer.address.state');
+            date('Y-m-d');
+
         }
 
-        $customer = new Customer(
-            null,
-            $request->input('customer.name'),
-            $request->input('customer.phone'),
-            $request->input('customer.cpf_cnpj'),
-            $address->id,
-            date('Y-m-d')
-        );
+        $customer = new Customer();
+        $customer->name = $request->input('customer.name');
+        $customer->phone = $request->input('customer.phone');
+        $customer->cpf_cnpj = $request->input('customer.cpf_cnpj');
+        $address->id;
+        date('Y-m-d');
+
 
         $value = $request->input('value');
         $forecast = $request->input('forecast');
 
-        $debt = $this->debtRepository->createDebt(new Debt(
-            null,
-            $value,
-            $forecast,
-            $customer->id,
-            date("Y-m-d"),
-        ), $customer, $address);
+        $debt = new Debt();
+        $debt->value = $value;
+        $debt->forecast = $forecast;
+        $debt->created_at = date("Y-m-d")        ;
+        $this->debtRepository->createDebt($debt, $customer, $address);
 
         return $debt;
     }
