@@ -21,7 +21,7 @@ class DebtRepository
         $this->addressRepository = $addressRepository;
     }
 
-    private $selectAllWithJoinStmt =
+    private $selectAllWithJoinQuery =
         'select d.id as d_id, d.value as d_value, d.forecast as d_forecast, d.paid_date as d_paid_date,
          d.created_at as d_created_at, d.updated_at as d_updated_at, d.customer_id as d_customer_id,
             c.id as c_id, c.name as c_name, c.phone as c_phone, c.cpf_cnpj as c_cpf_cnpj,
@@ -35,7 +35,7 @@ class DebtRepository
 
     public function getAllDebts()
     {
-        $dbDebts = DB::select($this->selectAllWithJoinStmt);
+        $dbDebts = DB::select($this->selectAllWithJoinQuery);
 
         $debts = [];
 
@@ -66,7 +66,7 @@ class DebtRepository
 
     public function getDebt($id):Debt
     {
-        $dbDebt = DB::selectOne($this->selectAllWithJoinStmt . ' where d_id = ?', [$id]);
+        $dbDebt = DB::selectOne($this->selectAllWithJoinQuery . ' where d_id = ?', [$id]);
         $debt = $this->parseDebt($dbDebt);
 
         return $debt;
