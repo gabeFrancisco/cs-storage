@@ -59,7 +59,7 @@ class CashRegisterRepository
         $dBcashRegister = DB::selectOne(
             'update cash_registers
                     set value = ?, payment_type = ?, description = ?, updated_at = ?
-                    where id = ?
+                    where id = ? returning *
             ',
             [
                 $cashRegister->value,

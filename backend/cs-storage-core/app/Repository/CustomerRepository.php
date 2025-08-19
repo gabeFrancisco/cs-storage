@@ -35,4 +35,23 @@ class CustomerRepository
 
         return $dBcustomer;
     }
+
+    public function updateCustomer(Customer $customer)
+    {
+        $dbCustomer = DB::selectOne(
+            'update customers
+                    set name=?, set phone=?, set cpf_cnpj=?, set updated_at=?
+                    where id = ? returning *;
+            ',
+            [
+                $customer->name,
+                $customer->phone,
+                $customer->cpf_cnpj,
+                date("Y-m-d"),
+                $customer->id
+            ]
+        );
+
+        return $dbCustomer;
+    }
 }

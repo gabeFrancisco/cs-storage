@@ -34,4 +34,26 @@ class AddressRepository
 
         return $address;
     }
+
+    public function updateAddress(Address $address){
+        $dbAddress = DB::selectOne(
+            'update addresses
+                set road = ?, set number = ?, set complement = ?,
+                set neighborhood = ?, set city = ?, set state = ?, set updated_at = ?
+                where id = ? returning *
+          ',
+          [
+            $address->road,
+            $address->number,
+            $address->complement,
+            $address->neighborhood,
+            $address->city,
+            $address->state,
+            date("Y-m-d"),
+            $address->id
+          ]
+        );
+
+        return $dbAddress;
+    }
 }

@@ -103,4 +103,18 @@ class DebtRepository
 
         return $dbDebt;
     }
+
+    public function updateDebt(Debt $debt, Customer $customer, Address $address)
+    {
+        DB::beginTransaction();
+
+        try {
+            if (!empty($address)) {
+
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            DB::rollBack();
+        }
+    }
 }
