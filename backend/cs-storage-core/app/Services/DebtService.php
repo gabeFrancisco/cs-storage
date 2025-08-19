@@ -13,6 +13,8 @@ use Carbon\Carbon;
 class DebtService
 {
     private DebtRepository $debtRepository;
+    private CustomerRepository $customerRepository;
+    private AddressRepository $addressRepository;
 
     public function __construct(
         DebtRepository $debtRepository,
@@ -72,44 +74,26 @@ class DebtService
     public function update(DebtRequest $request)
     {
         $id = $request->input('id');
-        $debt = $this->debtRepository->getDebt($id);
 
+        $debt = new Debt();
+        $debt->id = $id;
         $debt->value = $request->input('value');
         $debt->forecast = $request->input('forecast');
 
-        if ($request->has('customer', 'customer.address')) {
-            $customerData = $request->input('customer');
-            $customer = $debt->customer;
+        $customerData = $request->input('customer');
+        $customer = new Customer();
+        $customer->name = $customerData['name'];
+        $customer->phone = $customerData['phone'];
+        $customer->cpf_cnpj = $customerData['cpf_cnpj'];
 
-            $customer->name = $customerData['name'];
-            $customer->phone = $customerData['phone'];
-            $customer->cpf_cnpj = $customerData['cpf_cnpj'];
-
-            if (isset($customerData['address'])) {
-                $addressData = $customerData['address'];
-                if ($customer->address != null) {
-
-                    $address = $customer->address;
-
-                    $address->road = $addressData['road'];
-                    $address->number = $addressData['number'];
-                    $address->complement = $addressData['complement'];
-                    $address->neighborhood = $addressData['neighborhood'];
-                    $address->city = $addressData['city'];
-                    $address->state = $addressData['state'];
-
-                } else {
-                    $address = new Address();
-
-                    $address->road = $addressData['road'];
-                    $address->number = $addressData['number'];
-                    $address->complement = $addressData['complement'];
-                    $address->neighborhood = $addressData['neighborhood'];
-                    $address->city = $addressData['city'];
-                    $address->state = $addressData['state'];
-                }
-            }
-        }
+        $addressData = $customerData['address'];
+        $address = new Address();
+        $address->road = $addressData['road'];
+        $address->number = $addressData['number'];
+        $address->complement = $addressData['complement'];
+        $address->neighborhood = $addressData['neighborhood'];
+        $address->city = $addressData['city'];
+        $address->state = $addressData['state'];
 
         $dbDebt = $this->debtRepository->updateDebt($debt, $customer, $address);
 

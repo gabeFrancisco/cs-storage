@@ -19,7 +19,7 @@ class CustomerRepository
         return $customers;
     }
 
-    public function createCustomer(Customer $customer):Customer
+    public function createCustomer(Customer $customer)
     {
         $dBcustomer = DB::selectOne(
             'insert into customers(name, phone, cpf_cnpj, address_Id, created_at)
@@ -36,11 +36,12 @@ class CustomerRepository
         return $dBcustomer;
     }
 
-    public function updateCustomer(Customer $customer): Customer
+    public function updateCustomer(Customer $customer)
     {
+        // dd($customer);
         $dbCustomer = DB::selectOne(
             'update customers
-                    set name=?, set phone=?, set cpf_cnpj=?, set updated_at=?
+                    set name=?, phone=?, cpf_cnpj=?, updated_at=?, address_id = ?
                     where id = ? returning *;
             ',
             [
@@ -48,6 +49,7 @@ class CustomerRepository
                 $customer->phone,
                 $customer->cpf_cnpj,
                 date("Y-m-d"),
+                $customer->address_id,
                 $customer->id
             ]
         );

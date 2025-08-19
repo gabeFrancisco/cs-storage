@@ -42,7 +42,7 @@ class DebtController extends Controller
         $result = $this->_debtService->update($request);
 
         return response()->json([
-            "message" => "Debt created successfuly",
+            "message" => "Debt updated successfuly",
             "result" => $result
         ], 200);
     }

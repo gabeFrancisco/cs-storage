@@ -64,7 +64,7 @@ class DebtRepository
         return $debt;
     }
 
-    public function getDebt($id):Debt
+    public function getDebt($id): Debt
     {
         $dbDebt = DB::selectOne($this->selectAllWithJoinQuery . ' where d_id = ?', [$id]);
         $debt = $this->parseDebt($dbDebt);
@@ -104,29 +104,34 @@ class DebtRepository
         return $dbDebt;
     }
 
-    public function updateDebt(Debt $debt, Customer $customer, ?Address $address): Debt
+    public function updateDebt(Debt $debt, Customer $customer, ?Address $address)
     {
         DB::beginTransaction();
 
         try {
+            $dbDebt = $this->getDebt($debt->id);
             if (!empty($address) || $address == null) {
-                // $dbAddress = $this->addressRepository-
-                $dbAddress = $this->addressRepository->updateAddress($address);
-                $customer->address_id = $dbAddress->id;
+                if ($dbDebt->customer->address_id !== null) {
+                    $address->id =$dbDebt->customer->address_id;
+                    $dbAddress = $this->addressRepository->updateAddress($address);
+                } else {
+                    $dbAddress = $this->addressRepository->createAddress($address);
+                    $customer->address_id = $dbAddress->id;
+                }
             }
-
+            $customer->id = $dbDebt->customer_id;
             $this->customerRepository->updateCustomer($customer);
 
             $dbDebt = DB::selectOne(
                 'update debts
-                set value = ?, set forecast = ?, set updated_at = ?
+                set value = ?, forecast = ?, updated_at = ?
                 where id = ?
                 ',
                 [
                     $debt->value,
                     $debt->forecast,
                     date('Y-m-d'),
-                    $debt->id
+                    $dbDebt->id
                 ]
             );
 

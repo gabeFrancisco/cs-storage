@@ -15,7 +15,7 @@ class AddressRepository
         return $addresses;
     }
 
-    public function createAddress(Address $address): Address
+    public function createAddress(Address $address)
     {
         $address = DB::selectOne(
             'insert into addresses(created_at, road, number, complement, neighborhood, city, state)
@@ -34,12 +34,12 @@ class AddressRepository
         return $address;
     }
 
-    public function updateAddress(Address $address):Address
+    public function updateAddress(Address $address)
     {
         $dbAddress = DB::selectOne(
             'update addresses
-                set road = ?, set number = ?, set complement = ?,
-                set neighborhood = ?, set city = ?, set state = ?, set updated_at = ?
+                set road = ?, number = ?, complement = ?,
+                neighborhood = ?, city = ?, state = ?, updated_at = ?
                 where id = ? returning *
           ',
             [
@@ -57,7 +57,7 @@ class AddressRepository
         return $dbAddress;
     }
 
-    public function getAddress($id): Address
+    public function getAddress($id)
     {
         $dbAddress = DB::selectOne($this->selectAllQuery . ' where id = ?', [$id]);
         return $dbAddress;
