@@ -14,7 +14,6 @@ class DebtService
 {
     private DebtRepository $debtRepository;
 
-
     public function __construct(
         DebtRepository $debtRepository,
         CustomerRepository $customerRepository,
@@ -64,7 +63,7 @@ class DebtService
         $debt = new Debt();
         $debt->value = $value;
         $debt->forecast = $forecast;
-        $debt->created_at = date("Y-m-d")        ;
+        $debt->created_at = date("Y-m-d");
         $this->debtRepository->createDebt($debt, $customer, $address);
 
         return $debt;
@@ -73,12 +72,10 @@ class DebtService
     public function update(DebtRequest $request)
     {
         $id = $request->input('id');
-        $debt = Debt::with('customer.address')->findOrFail($id);
+        $debt = $this->debtRepository->getDebt($id);
 
         $debt->value = $request->input('value');
         $debt->forecast = $request->input('forecast');
-        $debt->updated_at = now()->toString();
-        $debt->save();
 
         if ($request->has('customer', 'customer.address')) {
             $customerData = $request->input('customer');
@@ -87,8 +84,6 @@ class DebtService
             $customer->name = $customerData['name'];
             $customer->phone = $customerData['phone'];
             $customer->cpf_cnpj = $customerData['cpf_cnpj'];
-            $customer->updated_at = now()->toString();
-
 
             if (isset($customerData['address'])) {
                 $addressData = $customerData['address'];
@@ -103,25 +98,22 @@ class DebtService
                     $address->city = $addressData['city'];
                     $address->state = $addressData['state'];
 
-                    $address->save();
                 } else {
-                    $newAddress = Address::create([
-                        'road' => $addressData['road'],
-                        'number' => $addressData['number'],
-                        'complement' => $addressData['complement'],
-                        'neighborhood' => $addressData['neighborhood'],
-                        'city' => $addressData['city'],
-                        'state' => $addressData['state']
-                    ]);
+                    $address = new Address();
 
-                    $customer->address()->associate($newAddress);
+                    $address->road = $addressData['road'];
+                    $address->number = $addressData['number'];
+                    $address->complement = $addressData['complement'];
+                    $address->neighborhood = $addressData['neighborhood'];
+                    $address->city = $addressData['city'];
+                    $address->state = $addressData['state'];
                 }
             }
-
-            $customer->save();
         }
 
-        return $debt;
+        $dbDebt = $this->debtRepository->updateDebt($debt, $customer, $address);
+
+        return $dbDebt;
     }
 
     public function remove($id)

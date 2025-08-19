@@ -19,7 +19,7 @@ class CustomerRepository
         return $customers;
     }
 
-    public function createCustomer(Customer $customer)
+    public function createCustomer(Customer $customer):Customer
     {
         $dBcustomer = DB::selectOne(
             'insert into customers(name, phone, cpf_cnpj, address_Id, created_at)
@@ -36,7 +36,7 @@ class CustomerRepository
         return $dBcustomer;
     }
 
-    public function updateCustomer(Customer $customer)
+    public function updateCustomer(Customer $customer): Customer
     {
         $dbCustomer = DB::selectOne(
             'update customers

@@ -47,7 +47,7 @@ class DebtRepository
         return $debts;
     }
 
-    private function parseDebt($dbDebt)
+    private function parseDebt($dbDebt): Debt
     {
         $debt = ClassHelper::fillFromSql($dbDebt, Debt::class, 'd_');
 
@@ -64,14 +64,14 @@ class DebtRepository
         return $debt;
     }
 
-    public function getDebt($id)
+    public function getDebt($id):Debt
     {
         $dbDebt = DB::selectOne($this->selectAllWithJoinStmt . ' where d_id = ?', [$id]);
         $debt = $this->parseDebt($dbDebt);
 
         return $debt;
     }
-    public function createDebt(Debt $debt, Customer $customer, Address $address)
+    public function createDebt(Debt $debt, Customer $customer, Address $address): Debt
     {
         DB::beginTransaction();
 
@@ -94,27 +94,49 @@ class DebtRepository
                 ]
             );
 
+
             DB::commit();
+
         } catch (Exception $e) {
             error_log($e->getMessage());
             DB::rollBack();
         }
-
-
         return $dbDebt;
     }
 
-    public function updateDebt(Debt $debt, Customer $customer, Address $address)
+    public function updateDebt(Debt $debt, Customer $customer, ?Address $address): Debt
     {
         DB::beginTransaction();
 
         try {
-            if (!empty($address)) {
-
+            if (!empty($address) || $address == null) {
+                // $dbAddress = $this->addressRepository-
+                $dbAddress = $this->addressRepository->updateAddress($address);
+                $customer->address_id = $dbAddress->id;
             }
+
+            $this->customerRepository->updateCustomer($customer);
+
+            $dbDebt = DB::selectOne(
+                'update debts
+                set value = ?, set forecast = ?, set updated_at = ?
+                where id = ?
+                ',
+                [
+                    $debt->value,
+                    $debt->forecast,
+                    date('Y-m-d'),
+                    $debt->id
+                ]
+            );
+
+            DB::commit();
+
         } catch (Exception $e) {
             error_log($e->getMessage());
             DB::rollBack();
         }
+
+        return $dbDebt;
     }
 }
