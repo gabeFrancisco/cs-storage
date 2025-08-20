@@ -102,9 +102,7 @@ class DebtService
 
     public function remove($id)
     {
-        $debt = $this->getById($id);
-        $debt->delete();
-
+        $debt = $this->debtRepository->removeDebt($id);
         return $debt;
     }
 

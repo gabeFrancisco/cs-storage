@@ -145,4 +145,13 @@ class DebtRepository
 
         return $dbDebt;
     }
+
+    public function removeDebt(int $id){
+        $debt = DB::selectOne(
+            'delete from debts where id = ?',
+            [$id]
+        );
+
+        return $debt;
+    }
 }
