@@ -9,7 +9,7 @@ import { DayAndMonthData } from '../../../models/ValueObjects/DayAndMonthData';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent{
   cashRegisterValues!: DayAndMonthData;
   debtValues!: DayAndMonthData;
 
@@ -24,9 +24,9 @@ export class HeaderComponent implements OnInit {
       this.fetchData();
     })
   }
-  ngOnInit(): void {
-    this.fetchData();
-  }
+  // ngOnInit(): void {
+  //   this.fetchData();
+  // }
 
   fetchData() {
     this.cashRegisterService.getDayAndMonthValueData()
