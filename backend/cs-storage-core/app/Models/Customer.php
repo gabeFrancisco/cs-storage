@@ -2,16 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Customer
+class Customer extends BaseModel
 {
-    public $id;
     public $name;
     public $phone;
     public $cpf_cnpj;
     public $address_id;
     public ?Address $address;
-    public $created_at;
-    public $updated_at;
 }
