@@ -5,14 +5,17 @@ namespace App\Services;
 use App\Http\Requests\MissingProductRequest;
 use App\Models\Customer;
 use App\Models\MissingProduct;
+use App\Repository\MissingProductRepository;
 
 class MissingProductService
 {
+    private MissingProductRepository $missingProductRepository;
+    public function __construct(MissingProductRepository $missingProductRepository) {
+        $this->missingProductRepository = $missingProductRepository;
+    }
     public function getAll()
     {
-        return MissingProduct::with('customer')
-            ->orderBy('is_bought')
-            ->get();
+        return $this->missingProductRepository->getAllMissingProducts();
     }
 
     public function getById($id)
@@ -21,7 +24,7 @@ class MissingProductService
     }
 
     public function setBoughtState(int $id, bool $state){
-        $product = MissingProduct::findOrFail($id);
+        $product = MissingProduct:: findOrFail($id);
         $product->is_bought = $state;
         $product->save();
 
