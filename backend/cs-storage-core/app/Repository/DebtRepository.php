@@ -154,4 +154,20 @@ class DebtRepository
 
         return $debt;
     }
+
+    public function getDayAndMonthTotal()
+    {
+        $day = DB::selectOne('
+            select sum(value) as total from debts where created_at = current_date'
+        );
+
+        $month = DB::selectOne('
+            select sum(value) as total from debts where strftime("%m", created_at) = strftime("%m", "now")
+        ');
+
+        return [
+            "day" => $day->total,
+            "month" => $month->total
+        ];
+    }
 }

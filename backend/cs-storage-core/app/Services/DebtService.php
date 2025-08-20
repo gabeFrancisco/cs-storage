@@ -108,14 +108,6 @@ class DebtService
 
     public function getDayAndMonthTotal()
     {
-        $day = Debt::whereDate('created_at', Carbon::today())->sum('value');
-        $month = Debt::whereYear('created_at', Carbon::now()->year)
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->get()->sum('value');
-
-        return [
-            'day' => $day,
-            'month' => $month
-        ];
+       return $this->debtRepository->getDayAndMonthTotal();
     }
 }
