@@ -24,10 +24,7 @@ class MissingProductService
     }
 
     public function setBoughtState(int $id, bool $state){
-        $product = MissingProduct:: findOrFail($id);
-        $product->is_bought = $state;
-        $product->save();
-
+        $product = $this->missingProductRepository->setBoughtState($id, $state);
         return $product;
     }
 

@@ -19,7 +19,8 @@ class MissingProductRepository
         return $dbMissingProducts;
     }
 
-    public function createMissingProduct(MissingProduct $missingProduct){
+    public function createMissingProduct(MissingProduct $missingProduct)
+    {
         $dbMissingProduct = DB::selectOne(
             'insert into missing_products(name, needed_day, is_bought,
             customer_name, customer_phone, created_at) values
@@ -30,6 +31,20 @@ class MissingProductRepository
                 $missingProduct->customer_name,
                 $missingProduct->customer_phone,
                 date('Y-m-d')
+            ]
+        );
+
+        return $dbMissingProduct;
+    }
+
+    public function setBoughtState($id, bool $state)
+    {
+        $dbMissingProduct = DB::selectOne(
+            'update missing_products
+                    set is_bought = ? where id = ? returning *',
+            [
+                $state,
+                $id
             ]
         );
 
