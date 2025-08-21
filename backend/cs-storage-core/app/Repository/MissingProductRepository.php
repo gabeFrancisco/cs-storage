@@ -30,7 +30,7 @@ class MissingProductRepository
                 $missingProduct->needed_day,
                 $missingProduct->customer_name,
                 $missingProduct->customer_phone,
-                date('Y-m-d')
+                date('Y-m-d H:i:s')
             ]
         );
 
@@ -45,6 +45,26 @@ class MissingProductRepository
             [
                 $state,
                 $id
+            ]
+        );
+
+        return $dbMissingProduct;
+    }
+
+    public function updateMissingProduct(MissingProduct $missingProduct){
+        $dbMissingProduct = DB::select(
+            'update missing_products
+                    set name = ?, needed_day = ?, is_bought = ?,
+                    customer_name = ?, customer_phone = ?, updated_at = ?
+                    where id = ? returning *
+            ',
+            [
+                $missingProduct->name,
+                $missingProduct->needed_day,
+                $missingProduct->is_bought,
+                $missingProduct->customer_name,
+                $missingProduct->customer_phone,
+                date('Y-m-d')
             ]
         );
 
