@@ -11,3 +11,4 @@ class MissingProduct extends BaseModel
     public $customer_phone;
     public $image_url;
 }
+

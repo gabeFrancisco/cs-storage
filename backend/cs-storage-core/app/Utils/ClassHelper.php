@@ -13,7 +13,6 @@ class ClassHelper
             //If the SQL result has a model prefix field like customer_ or address_
             if ($prefix && str_starts_with($field, $prefix)) {
                 $prop = substr($field, strlen($prefix));
-                dd($prop);
 
                 //Check if the prefix field exists on actual model class
                 if (property_exists($instance, $prop)) {
