@@ -12,8 +12,9 @@ class MissingProductRequest extends FormRequest
             'id' => 'numeric',
             'name' => 'required|string',
             'needed_day' => 'required|date',
-            'is_bought' => 'boolean',
-            // 'image_url' => 'string|'
+            'customer_name' => 'string|nullable',
+            'customer_phone' => 'string|nullable',
+            'image_url' => 'string|nullable'
         ];
     }
 }

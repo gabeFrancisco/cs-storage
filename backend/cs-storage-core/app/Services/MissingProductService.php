@@ -33,32 +33,16 @@ class MissingProductService
 
     public function create(MissingProductRequest $request)
     {
-        $customer = null;
-        if (
-            !empty($request->input('customer.name'))
-            ||
-            !empty($request->input('customer.phone'))
-        ) {
-            $customer = Customer::create([
-                'name' => $request->input('customer.name'),
-                'phone' => $request->input('customer.phone')
-            ]);
-        }
+        $missingProduct = new MissingProduct();
 
-        $missingProduct = new MissingProduct([
-            'name' => $request->input('name'),
-            'needed_day' => $request->input('needed_day'),
-            'is_bought' => $request->input('is_bought'),
-            'image_url' => $request->input('image_url')
-        ]);
+        $missingProduct->name = $request->input('name');
+        $missingProduct->needed_day = $request->input('needed_day');
+        $missingProduct->image_url = $request->input('image_url');
+        $missingProduct->customer_name = $request->input('customer_name');
+        $missingProduct->customer_phone = $request->input('customer_phone');
 
-        if ($customer) {
-            $missingProduct->customer()->associate($customer);
-        }
+        $dbMissingProduct = $this->missingProductRepository->createMissingProduct($missingProduct);
 
-
-        $missingProduct->save();
-
-        return $missingProduct;
+        return $dbMissingProduct;
     }
 }
