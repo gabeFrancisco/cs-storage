@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\CashRegister;
+use App\Utils\DateHelper;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +13,7 @@ class CashRegisterRepository
     public function getAllCashRegisters()
     {
         $cashRegisters = DB::select(
-            "select id, value, description, payment_type, created_at, updated_at from cash_registers"
+            'select id, value, description, payment_type, created_at, updated_at from cash_registers'
         );
 
         return $cashRegisters;
@@ -65,7 +66,7 @@ class CashRegisterRepository
                 $cashRegister->value,
                 $cashRegister->payment_type,
                 $cashRegister->description,
-                date('Y-m-d'),
+                DateHelper::now(),
                 $cashRegister->id
             ]
         );

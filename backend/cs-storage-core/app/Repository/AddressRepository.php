@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Models\Address;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Mime\Header\DateHeader;
+use App\Utils\DateHelper;
 
 class AddressRepository
 {
@@ -49,7 +51,7 @@ class AddressRepository
                 $address->neighborhood,
                 $address->city,
                 $address->state,
-                date("Y-m-d"),
+                DateHelper::now(),
                 $address->id
             ]
         );

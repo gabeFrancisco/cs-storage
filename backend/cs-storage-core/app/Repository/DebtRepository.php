@@ -6,6 +6,7 @@ use App\Models\Debt;
 use App\Models\Address;
 use App\Models\Customer;
 use App\Utils\ClassHelper;
+use App\Utils\DateHelper;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -90,7 +91,7 @@ class DebtRepository
                     $debt->value,
                     $debt->forecast,
                     $dBcustomer->id,
-                    $debt->created_at
+                    DateHelper::now()
                 ]
             );
 
@@ -131,7 +132,7 @@ class DebtRepository
                 [
                     $debt->value,
                     $debt->forecast,
-                    date('Y-m-d'),
+                    DateHelper::now(),
                     $dbDebt->id
                 ]
             );

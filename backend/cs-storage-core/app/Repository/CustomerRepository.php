@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\Customer;
+use App\Utils\DateHelper;
 use Illuminate\Support\Facades\DB;
 
 class CustomerRepository
@@ -48,7 +49,7 @@ class CustomerRepository
                 $customer->name,
                 $customer->phone,
                 $customer->cpf_cnpj,
-                date("Y-m-d"),
+                DateHelper::now(),
                 $customer->address_id,
                 $customer->id
             ]

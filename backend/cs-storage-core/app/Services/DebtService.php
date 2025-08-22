@@ -9,6 +9,7 @@ use App\Models\Debt;
 use App\Repository\AddressRepository;
 use App\Repository\CustomerRepository;
 use App\Repository\DebtRepository;
+use App\Utils\DateHelper;
 use Carbon\Carbon;
 class DebtService
 {
@@ -47,7 +48,7 @@ class DebtService
             $address->neighborhood = $request->input('customer.address.neighborhood');
             $address->city = $request->input('customer.address.city');
             $address->state = $request->input('customer.address.state');
-            date('Y-m-d');
+            DateHelper::now();
 
         }
 
@@ -56,7 +57,7 @@ class DebtService
         $customer->phone = $request->input('customer.phone');
         $customer->cpf_cnpj = $request->input('customer.cpf_cnpj');
         $address->id;
-        date('Y-m-d');
+
 
 
         $value = $request->input('value');
@@ -65,7 +66,7 @@ class DebtService
         $debt = new Debt();
         $debt->value = $value;
         $debt->forecast = $forecast;
-        $debt->created_at = date("Y-m-d");
+
         $this->debtRepository->createDebt($debt, $customer, $address);
 
         return $debt;
