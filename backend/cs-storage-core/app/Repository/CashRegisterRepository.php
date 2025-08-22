@@ -95,8 +95,8 @@ class CashRegisterRepository
         ');
 
         return [
-            "day" => $day->total,
-            "month" => $month->total
+            "day" => $day->total != null ? $day->total : 0,
+            "month" => $month->total != null ? $month->total : 0
         ];
     }
 }
