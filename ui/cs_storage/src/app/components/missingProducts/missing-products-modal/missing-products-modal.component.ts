@@ -57,10 +57,8 @@ export class MissingProductsModalComponent {
       image_url: this.missingProductForm.get('image_url')!.value,
       is_bought: false,
       needed_day: this.missingProductForm.get('needed_day')!.value,
-      customer: {
-        name: this.missingProductForm.get('customer_name')!.value,
-        phone: this.missingProductForm.get('customer_phone')!.value
-      }
+      customer_name: this.missingProductForm.get('customer_name')!.value,
+      customer_phone: this.missingProductForm.get('customer_phone')!.value
     }
 
     if (this.modalType === ModalType.CREATE) {
