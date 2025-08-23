@@ -1,4 +1,4 @@
-<div class="w-full border shadow-lg border-gray-200 rounded">
+<div class="border shadow-lg w-full border-gray-200 rounded">
   <div
     class="p-2 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100"
   >
@@ -37,13 +37,13 @@
 
         <!-- Table body -->
         <tbody>
-          <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
+          <tr *ngIf="loading" class="text-center text-gray-500 text-lg">
             Carregando...
           </tr>
           <tr
-            class="items-center border-gray-100 hover:bg-gray-200 cursor-pointer"
+            class="items-center border-gray-200 border-b hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of products"
-            [ngClass]="{ 'bg-green-200': item.is_bought }"
+            [ngClass]="{ 'bg-green-200 border-none': item.is_bought }"
           >
             <th class="font-thin border-r p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
@@ -53,23 +53,23 @@
               {{ item.needed_day | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">
-              {{ item.customer?.name }}/{{ item.customer?.phone }}
+              {{ item.customer_name }}/{{ item.customer_phone }}
             </th>
             <th class="font-thin p-1.5">
               {{ item.is_bought ? "Sim" : "Não" }}
             </th>
-            <th class="font-thin text-center">
+            <th class="font-thin text-center p-1">
               <div *ngIf="!item.is_bought">
                 <button
                   type="button"
                   title="Remover"
-                  class="btn-green-i mr-1"
+                  class="btn-green mr-1 py-1 px-3 "
                   (click)="setBoughtState(item.id!)"
                 >
                   ✔
                 </button>
-                <button title="Atualizar" class="btn-primary-i mr-1">✎</button>
-                <button type="button" title="Remover" class="btn-red-i mr-1">
+                <button title="Atualizar" class="btn-primary mr-1 py-1 px-3 ">✎</button>
+                <button type="button" title="Remover" class="btn-red py-1 px-3 mr-1">
                   𝘅
                 </button>
               </div>
