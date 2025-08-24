@@ -10,7 +10,8 @@ use App\Repository\MissingProductRepository;
 class MissingProductService
 {
     private MissingProductRepository $missingProductRepository;
-    public function __construct(MissingProductRepository $missingProductRepository) {
+    public function __construct(MissingProductRepository $missingProductRepository)
+    {
         $this->missingProductRepository = $missingProductRepository;
     }
     public function getAll()
@@ -23,7 +24,8 @@ class MissingProductService
         return $this->missingProductRepository->getMissingProduct($id);
     }
 
-    public function setBoughtState(int $id, bool $state){
+    public function setBoughtState(int $id, bool $state)
+    {
         $product = $this->missingProductRepository->setBoughtState($id, $state);
         return $product;
     }
@@ -41,5 +43,11 @@ class MissingProductService
         $dbMissingProduct = $this->missingProductRepository->createMissingProduct($missingProduct);
 
         return $dbMissingProduct;
+    }
+
+    public function remove($id)
+    {
+        $missingProduct = $this->missingProductRepository->deleteMissingProduct($id);
+        return $missingProduct;
     }
 }

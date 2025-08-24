@@ -22,6 +22,7 @@ class MissingProductController extends Controller
 
     public function getById($id){
         $missingProduct = $this->missingProductService->getById($id);
+        return response()->json($missingProduct, 200);
     }
 
     public function post(MissingProductRequest $request)
@@ -37,5 +38,10 @@ class MissingProductController extends Controller
         $missingProduct = $this->missingProductService->setBoughtState($id, $state);
 
         return $missingProduct;
+    }
+
+    public function delete(Request $id){
+        $missingProduct = $this->missingProductService->remove($id);
+        return response()->json($missingProduct, 200);
     }
 }

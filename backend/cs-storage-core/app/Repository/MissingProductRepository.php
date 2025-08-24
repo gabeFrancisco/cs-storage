@@ -82,4 +82,17 @@ class MissingProductRepository
 
         return $dbMissingProduct;
     }
+
+    public function deleteMissingProduct($id)
+    {
+        $missingProduct = DB::selectOne(
+            'delete from missing_products where id = ? returning *',
+            [$id]
+        );
+
+        return [
+            "missing_product" => $missingProduct,
+            "message" => 'Deleted with success!'
+        ];
+    }
 }
