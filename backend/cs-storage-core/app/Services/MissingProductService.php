@@ -20,7 +20,7 @@ class MissingProductService
 
     public function getById($id)
     {
-        return MissingProduct::with('customer')->findOrFail($id);
+        return $this->missingProductRepository->getMissingProduct($id);
     }
 
     public function setBoughtState(int $id, bool $state){

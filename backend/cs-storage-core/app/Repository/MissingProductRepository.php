@@ -20,6 +20,16 @@ class MissingProductRepository
         return $dbMissingProducts;
     }
 
+    public function getMissingProduct($id)
+    {
+        $dbMissingProduct = DB::selectOne(
+            $this->selectAllQuery . ' where id = ?',
+            [$id]
+        );
+
+        return $dbMissingProduct;
+    }
+
     public function createMissingProduct(MissingProduct $missingProduct)
     {
         $dbMissingProduct = DB::selectOne(
@@ -52,7 +62,8 @@ class MissingProductRepository
         return $dbMissingProduct;
     }
 
-    public function updateMissingProduct(MissingProduct $missingProduct){
+    public function updateMissingProduct(MissingProduct $missingProduct)
+    {
         $dbMissingProduct = DB::select(
             'update missing_products
                     set name = ?, needed_day = ?, is_bought = ?,

@@ -8,21 +8,25 @@ use Illuminate\Http\Request;
 
 class MissingProductController extends Controller
 {
-    private MissingProductService $_missingProductService;
+    private MissingProductService $missingProductService;
     public function __construct(MissingProductService $missingProductService)
     {
-        $this->_missingProductService = $missingProductService;
+        $this->missingProductService = $missingProductService;
     }
 
     public function getAll()
     {
-        $missingProducts = $this->_missingProductService->getAll();
+        $missingProducts = $this->missingProductService->getAll();
         return response()->json($missingProducts);
+    }
+
+    public function getById($id){
+        $missingProduct = $this->missingProductService->getById($id);
     }
 
     public function post(MissingProductRequest $request)
     {
-        $missingProduct = $this->_missingProductService->create($request);
+        $missingProduct = $this->missingProductService->create($request);
         return response()->json($missingProduct);
     }
 
@@ -30,7 +34,7 @@ class MissingProductController extends Controller
         $id = $request->input('id');
         $state = $request->input('state');
 
-        $missingProduct = $this->_missingProductService->setBoughtState($id, $state);
+        $missingProduct = $this->missingProductService->setBoughtState($id, $state);
 
         return $missingProduct;
     }
