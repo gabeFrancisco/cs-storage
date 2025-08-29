@@ -26,8 +26,8 @@ Route::put('debts', [DebtController::class, 'put']);
 Route::delete('debts/{id}', [DebtController::class, 'delete']);
 
 //MissingProducts
-
 Route::get('missingproducts', [MissingProductController::class, 'getAll']);
 Route::post('missingproducts', [MissingProductController::class, 'post']);
 Route::post('missingproducts/setstate', [MissingProductController::class, 'post_bought_state']);
 Route::get('missingproducts/{id}', [MissingProductController::class, 'getById']);
+Route::delete('missingproducts/{id}', [MissingProductController::class, 'delete']);

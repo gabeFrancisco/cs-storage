@@ -20,7 +20,8 @@ class MissingProductController extends Controller
         return response()->json($missingProducts);
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         $missingProduct = $this->missingProductService->getById($id);
         return response()->json($missingProduct, 200);
     }
@@ -31,7 +32,8 @@ class MissingProductController extends Controller
         return response()->json($missingProduct);
     }
 
-    public function post_bought_state(Request $request){
+    public function post_bought_state(Request $request)
+    {
         $id = $request->input('id');
         $state = $request->input('state');
 
@@ -40,8 +42,12 @@ class MissingProductController extends Controller
         return $missingProduct;
     }
 
-    public function delete(Request $id){
+    public function delete($id)
+    {
         $missingProduct = $this->missingProductService->remove($id);
-        return response()->json($missingProduct, 200);
+        return response()->json([
+            "missing_product" => $missingProduct,
+            "message" => 'Deleted with success!'
+        ], 200);
     }
 }

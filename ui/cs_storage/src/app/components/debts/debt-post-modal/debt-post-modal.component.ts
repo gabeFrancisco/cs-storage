@@ -80,6 +80,8 @@ export class DebtPostModalComponent {
   }
 
   close() {
+    this.debtForm.reset();
+    this.debtService.setDebtId(0);
     this.debtService.closeDebtPostModal();
   }
 
