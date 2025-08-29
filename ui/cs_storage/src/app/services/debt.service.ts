@@ -60,7 +60,7 @@ export class DebtService {
   }
 
   getDebtById(id: number): Observable<Debt> {
-    return this.http.get<Debt>(`${this.url}/${id}`);
+    return this.http.get<Debt>(`${this.url}/${id}`)
   }
 
   createDebt(payload: Debt): Observable<any> {

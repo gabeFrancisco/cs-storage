@@ -41,11 +41,11 @@
             Carregando...
           </tr>
           <tr
-            class="items-center border-gray-200 border-b hover:bg-gray-200 cursor-pointer"
+            class="items-center even:bg-zinc-50 border-gray-200 hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of products"
-            [ngClass]="{ 'bg-green-200 border-none': item.is_bought }"
+            [ngClass]="{ 'text-gray-400 ': item.is_bought }"
           >
-            <th class="font-thin border-r p-1.5">
+            <th class="font-thin p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">{{ item.name }}</th>
@@ -58,20 +58,32 @@
             <th class="font-thin p-1.5">
               {{ item.is_bought ? "Sim" : "Não" }}
             </th>
-            <th class="font-thin text-center p-1">
+            <th
+              class="font-thin text-center border-l border-dashed p-1"
+              [ngClass]="{ 'bg-sky-100 border-none': item.is_bought }"
+            >
               <div *ngIf="!item.is_bought">
                 <button
                   type="button"
                   title="Remover"
-                  class="btn-green mr-1 py-1 px-3 "
+                  class="btn-green mr-1 py-1 px-3"
                   (click)="setBoughtState(item.id!)"
                 >
                   ✔
                 </button>
-                <button title="Atualizar" class="btn-primary mr-1 py-1 px-3 ">✎</button>
-                <button type="button" title="Remover" class="btn-red py-1 px-3 mr-1">
+                <button title="Atualizar" class="btn-primary mr-1 py-1 px-3">
+                  ✎
+                </button>
+                <button
+                  type="button"
+                  title="Remover"
+                  class="btn-red py-1 px-3 mr-1"
+                >
                   𝘅
                 </button>
+              </div>
+              <div *ngIf="item.is_bought">
+                <p class="text-gray-500 italic">Ítem comprado</p>
               </div>
             </th>
           </tr>

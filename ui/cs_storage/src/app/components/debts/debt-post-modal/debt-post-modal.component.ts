@@ -1,10 +1,9 @@
 import { Debt } from './../../../../models/Debt';
-import { Customer } from './../../../../models/Customer';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DebtService } from '../../../services/debt.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Address } from '../../../../models/Address';
 import { ModalType } from '../../../../utils/modalType';
+import { first, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-debt-post-modal',
@@ -12,7 +11,7 @@ import { ModalType } from '../../../../utils/modalType';
   templateUrl: './debt-post-modal.component.html',
   styleUrl: './debt-post-modal.component.css'
 })
-export class DebtPostModalComponent {
+export class DebtPostModalComponent implements OnInit{
   show = false;
 
   debtForm!: FormGroup;
@@ -25,8 +24,10 @@ export class DebtPostModalComponent {
     this.debtService.debtPostModalState$.subscribe((value) => {
       this.show = value as boolean
     })
+  }
 
-    this.debtForm = new FormGroup({
+  ngOnInit(): void {
+     this.debtForm = new FormGroup({
       id: new FormControl(0),
       value: new FormControl(0, Validators.min(0.1)),
       forecast: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
@@ -43,7 +44,6 @@ export class DebtPostModalComponent {
 
     this.debtService.debtPostType$.subscribe(value => {
       this.modalType = value;
-      // console.log(this.debtForm.value)
 
       //Verify if the modal type is differente from CREATE
       if (value !== ModalType.CREATE) {
@@ -77,6 +77,7 @@ export class DebtPostModalComponent {
         this.debtForm.reset();
       }
     })
+
   }
 
   close() {
