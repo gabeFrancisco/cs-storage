@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DebtService } from '../../../services/debt.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalType } from '../../../../utils/modalType';
-import { first, Subscription } from 'rxjs';
+import { filter, first, Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-debt-post-modal',
@@ -11,7 +11,7 @@ import { first, Subscription } from 'rxjs';
   templateUrl: './debt-post-modal.component.html',
   styleUrl: './debt-post-modal.component.css'
 })
-export class DebtPostModalComponent implements OnInit{
+export class DebtPostModalComponent implements OnInit {
   show = false;
 
   debtForm!: FormGroup;
@@ -27,7 +27,7 @@ export class DebtPostModalComponent implements OnInit{
   }
 
   ngOnInit(): void {
-     this.debtForm = new FormGroup({
+    this.debtForm = new FormGroup({
       id: new FormControl(0),
       value: new FormControl(0, Validators.min(0.1)),
       forecast: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
@@ -42,41 +42,72 @@ export class DebtPostModalComponent implements OnInit{
       state: new FormControl(" ")
     })
 
-    this.debtService.debtPostType$.subscribe(value => {
-      this.modalType = value;
+    this.debtService.debtPostType$
+      .pipe(
+        switchMap(type => {
+          this.modalType = type;
 
-      //Verify if the modal type is differente from CREATE
-      if (value !== ModalType.CREATE) {
-
-        //Gets the debt id from the service
-        this.debtService.debtId$.subscribe(data => {
-          if (data) {
-
-            //Fetch the debt by the given id from the server
-            //Then patch all the values for the form fields
-            this.debtService.getDebtById(data!).subscribe(res => {
-              this.debtForm.patchValue({
-                id: res.id!,
-                value: res.value,
-                forecast: res.forecast,
-                name: res.customer.name,
-                phone: res.customer.phone,
-                cpf_cnpj: res.customer.cpf_cnpj,
-                road: res.customer.address?.road,
-                number: res.customer.address?.number,
-                complement: res.customer.address?.complement,
-                neighborhood: res.customer.address?.neighborhood,
-                city: res.customer.address?.city,
-                state: res.customer.address?.state
-              })
-            })
+          if (type == ModalType.CREATE) {
+            this.debtForm.reset();
           }
+
+          return this.debtService.debtId$.pipe(
+            filter(id => !!id),
+            switchMap(id => this.debtService.getDebtById(id!))
+          )
         })
-      }
-      else {
-        this.debtForm.reset();
-      }
-    })
+      ).subscribe(res => {
+        this.debtForm.patchValue({
+          id: res.id!,
+          value: res.value,
+          forecast: res.forecast,
+          name: res.customer.name,
+          phone: res.customer.phone,
+          cpf_cnpj: res.customer.cpf_cnpj,
+          road: res.customer.address?.road,
+          number: res.customer.address?.number,
+          complement: res.customer.address?.complement,
+          neighborhood: res.customer.address?.neighborhood,
+          city: res.customer.address?.city,
+          state: res.customer.address?.state
+        })
+      })
+
+    // this.debtService.debtPostType$.subscribe(value => {
+    //   this.modalType = value;
+
+    //   //Verify if the modal type is differente from CREATE
+    //   if (value !== ModalType.CREATE) {
+
+    //     //Gets the debt id from the service
+    //     this.debtService.debtId$.subscribe(data => {
+    //       if (data) {
+
+    //         //Fetch the debt by the given id from the server
+    //         //Then patch all the values for the form fields
+    //         this.debtService.getDebtById(data!).subscribe(res => {
+    //           this.debtForm.patchValue({
+    //             id: res.id!,
+    //             value: res.value,
+    //             forecast: res.forecast,
+    //             name: res.customer.name,
+    //             phone: res.customer.phone,
+    //             cpf_cnpj: res.customer.cpf_cnpj,
+    //             road: res.customer.address?.road,
+    //             number: res.customer.address?.number,
+    //             complement: res.customer.address?.complement,
+    //             neighborhood: res.customer.address?.neighborhood,
+    //             city: res.customer.address?.city,
+    //             state: res.customer.address?.state
+    //           })
+    //         })
+    //       }
+    //     })
+    //   }
+    //   else {
+    //     this.debtForm.reset();
+    //   }
+    // })
 
   }
 

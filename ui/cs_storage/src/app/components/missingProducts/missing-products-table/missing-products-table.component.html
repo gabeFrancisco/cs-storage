@@ -41,7 +41,7 @@
             Carregando...
           </tr>
           <tr
-            class="items-center even:bg-zinc-50 border-gray-200 hover:bg-gray-200 cursor-pointer"
+            class="items-center even:bg-zinc-50 border-gray-200 hover:bg-gray-100 cursor-pointer"
             *ngFor="let item of products"
             [ngClass]="{ 'text-gray-400 ': item.is_bought }"
           >
@@ -59,8 +59,7 @@
               {{ item.is_bought ? "Sim" : "Não" }}
             </th>
             <th
-              class="font-thin text-center border-l border-dashed p-1"
-              [ngClass]="{ 'bg-sky-100 border-none': item.is_bought }"
+              class="font-thin text-center border-l border-double p-1"
             >
               <div *ngIf="!item.is_bought">
                 <button
