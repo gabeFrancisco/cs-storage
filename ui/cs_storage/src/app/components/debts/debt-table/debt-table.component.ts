@@ -37,8 +37,7 @@ export class DebtTableComponent implements OnInit{
   }
 
   openDebtUpdate(id: number) {
-    this.debtService.setDebtId(id)
-    this.debtService.openDebtPostModal();
+    this.debtService.openDebtUpdateModal(id);
   }
 
   deleteDebt(id: number) {

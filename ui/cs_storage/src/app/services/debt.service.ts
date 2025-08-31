@@ -19,11 +19,20 @@ export class DebtService {
   private debtPostModalState = new BehaviorSubject<boolean>(false);
   debtPostModalState$ = this.debtPostModalState.asObservable();
 
+  private debtUpdateModalState = new BehaviorSubject<boolean>(false);
+  debtUpdateModalState$ = this.debtUpdateModalState.asObservable();
+
   private debtId = new BehaviorSubject<number | null>(null);
   debtId$ = this.debtId.asObservable();
 
   openDebtPostModal() { this.debtPostModalState.next(true) }
   closeDebtPostModal() { this.debtPostModalState.next(false) }
+
+  openDebtUpdateModal(id: number) {
+    this.debtUpdateModalState.next(true)
+    this.debtId.next(id);
+  }
+  closeDebtUpdateModal(){ this.debtUpdateModalState.next(false)}
 
   setDebtId(id: number) {
     this.debtId.next(id)

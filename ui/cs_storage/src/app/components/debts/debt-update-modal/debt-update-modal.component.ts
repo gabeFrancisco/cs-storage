@@ -18,7 +18,9 @@ export class DebtUpdateModalComponent implements OnInit {
   debt!: Debt;
 
   constructor(private debtService: DebtService) {
-
+    this.debtService.debtUpdateModalState$.subscribe((value) => {
+      this.show = value
+    })
   }
   ngOnInit(): void {
     this.debtForm = new FormGroup({
@@ -62,7 +64,7 @@ export class DebtUpdateModalComponent implements OnInit {
   close() {
     this.debtForm.reset();
     this.debtService.setDebtId(0);
-    this.debtService.closeDebtPostModal();
+    this.debtService.closeDebtUpdateModal();
   }
 
   submit() {
@@ -96,7 +98,7 @@ export class DebtUpdateModalComponent implements OnInit {
       next: _ => {
         this.debtForm.reset();
         this.debtService.triggerUpdate();
-        this.debtService.closeDebtPostModal();
+        this.debtService.closeDebtUpdateModal();
       },
       error: err => console.log(err)
     })
