@@ -1,17 +1,16 @@
-import { Debt } from './../../../../models/Debt';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DebtService } from '../../../services/debt.service';
+import { DebtService } from './../../../services/debt.service';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalType } from '../../../../utils/modalType';
-import { filter, first, Subscription, switchMap } from 'rxjs';
+import { Debt } from '../../../../models/Debt';
+import { filter, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-debt-post-modal',
+  selector: 'app-debt-update-modal',
   standalone: false,
-  templateUrl: './debt-post-modal.component.html',
-  styleUrl: './debt-post-modal.component.css'
+  templateUrl: './debt-update-modal.component.html',
+  styleUrl: './debt-update-modal.component.css'
 })
-export class DebtPostModalComponent implements OnInit {
+export class DebtUpdateModalComponent implements OnInit {
   show = false;
 
   debtForm!: FormGroup;
@@ -19,11 +18,8 @@ export class DebtPostModalComponent implements OnInit {
   debt!: Debt;
 
   constructor(private debtService: DebtService) {
-    this.debtService.debtPostModalState$.subscribe((value) => {
-      this.show = value as boolean
-    })
-  }
 
+  }
   ngOnInit(): void {
     this.debtForm = new FormGroup({
       id: new FormControl(0),
@@ -39,6 +35,28 @@ export class DebtPostModalComponent implements OnInit {
       city: new FormControl(" "),
       state: new FormControl(" ")
     })
+
+
+    this.debtService.debtId$.pipe(
+      filter(id => !!id),
+      switchMap(id => this.debtService.getDebtById(id!))
+    )
+      .subscribe(res => {
+        this.debtForm.patchValue({
+          id: res.id!,
+          value: res.value,
+          forecast: res.forecast,
+          name: res.customer.name,
+          phone: res.customer.phone,
+          cpf_cnpj: res.customer.cpf_cnpj,
+          road: res.customer.address?.road,
+          number: res.customer.address?.number,
+          complement: res.customer.address?.complement,
+          neighborhood: res.customer.address?.neighborhood,
+          city: res.customer.address?.city,
+          state: res.customer.address?.state
+        })
+      })
   }
 
   close() {
@@ -74,12 +92,13 @@ export class DebtPostModalComponent implements OnInit {
       }
     }
 
-      this.debtService.createDebt(this.debt).subscribe({
-        next: _ => {
-          this.debtForm.reset();
-          this.debtService.triggerUpdate();
-        },
-        error: err => console.log(err)
-      })
+    this.debtService.updateDebt(this.debt).subscribe({
+      next: _ => {
+        this.debtForm.reset();
+        this.debtService.triggerUpdate();
+        this.debtService.closeDebtPostModal();
+      },
+      error: err => console.log(err)
+    })
   }
 }

@@ -15,10 +15,6 @@ export class DebtService {
   constructor(private http: HttpClient) { }
   private url = "http://127.0.0.1:8000/api/debts";
 
-  //Modal type for reuse
-  private debtModalType = new BehaviorSubject<ModalType | null>(null);
-  debtPostType$ = this.debtModalType.asObservable();
-
   //Debt modal variables
   private debtPostModalState = new BehaviorSubject<boolean>(false);
   debtPostModalState$ = this.debtPostModalState.asObservable();
@@ -28,10 +24,6 @@ export class DebtService {
 
   openDebtPostModal() { this.debtPostModalState.next(true) }
   closeDebtPostModal() { this.debtPostModalState.next(false) }
-
-  setModalTypeToCreate() { this.debtModalType.next(ModalType.CREATE) }
-  setModalTypeToUpdate() { this.debtModalType.next(ModalType.UPDATE) }
-  setModalTypeToRead() { this.debtModalType.next(ModalType.READ) }
 
   setDebtId(id: number) {
     this.debtId.next(id)

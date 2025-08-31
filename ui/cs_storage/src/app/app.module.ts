@@ -16,6 +16,7 @@ import { MissingProductsComponent } from './pages/missing-products/missing-produ
 import { RouterModule } from '@angular/router';
 import { MissingProductsTableComponent } from './components/missingProducts/missing-products-table/missing-products-table.component';
 import { MissingProductsModalComponent } from './components/missingProducts/missing-products-modal/missing-products-modal.component';
+import { DebtUpdateModalComponent } from './components/debts/debt-update-modal/debt-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MissingProductsModalComponent } from './components/missingProducts/miss
     MissingProductsComponent,
     MissingProductsTableComponent,
     MissingProductsModalComponent,
+    DebtUpdateModalComponent,
   ],
   imports: [
     BrowserModule,

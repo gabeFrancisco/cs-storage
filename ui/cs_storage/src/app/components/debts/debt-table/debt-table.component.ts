@@ -33,12 +33,10 @@ export class DebtTableComponent implements OnInit{
   }
 
   openDebtPostModal() {
-    this.debtService.setModalTypeToCreate();
     this.debtService.openDebtPostModal();
   }
 
   openDebtUpdate(id: number) {
-    this.debtService.setModalTypeToUpdate();
     this.debtService.setDebtId(id)
     this.debtService.openDebtPostModal();
   }
