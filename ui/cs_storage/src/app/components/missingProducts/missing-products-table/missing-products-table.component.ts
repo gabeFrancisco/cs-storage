@@ -59,4 +59,12 @@ export class MissingProductsTableComponent implements OnInit{
       })
     }
   }
+
+  deleteAllBought(){
+    if(confirm("Todos os produtos comprados irão ficar registrados em um log guardado no sistema. Procede com a remoção?")){
+      this.missingProductService.removeAllBought().subscribe(() => {
+        this.fetchList()
+      })
+    }
+  }
 }

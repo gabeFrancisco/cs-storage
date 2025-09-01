@@ -72,4 +72,10 @@ export class MissingProductService {
     .pipe(catchError(handleNetworkError('remove-missing-product')))
     .pipe(tap(() => this.clearCache()))
   }
+
+  removeAllBought(): Observable<any>{
+    return this.http.delete(`${this.url}/deleteallbought`)
+    .pipe(catchError(handleNetworkError('remove-all-bought-missing-products')))
+    .pipe(tap(() => this.clearCache()))
+  }
 }
