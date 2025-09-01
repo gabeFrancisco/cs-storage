@@ -42,20 +42,19 @@ class MissingProductController extends Controller
         return $missingProduct;
     }
 
-    public function remove($id)
+    public function remove()
     {
-        $missingProduct = $this->missingProductService->remove($id);
+        $id = request()->query('id');
+        $this->missingProductService->remove($id);
         return response()->json([
-            "missing_product" => $missingProduct,
             "message" => 'Deleted with success!'
         ], 200);
     }
 
     public function removeAllBought(){
-        $missingProducts = $this->missingProductService->removeAllBought();
+        $this->missingProductService->removeAllBought();
         return response()->json([
-            "deleted_missing_products" => $missingProducts,
-            "message" => 'Deleted with success!'
+            "message" => 'All bought products deleted with success!'
         ], 200);
     }
 }

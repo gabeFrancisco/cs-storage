@@ -68,7 +68,7 @@ export class MissingProductService {
   }
 
   removeMissingProduct(id: number): Observable<any>{
-    return this.http.delete(`${this.url}/${id}`)
+    return this.http.delete(`${this.url}/?id=${id}`)
     .pipe(catchError(handleNetworkError('remove-missing-product')))
     .pipe(tap(() => this.clearCache()))
   }

@@ -47,12 +47,10 @@ class MissingProductService
 
     public function remove($id)
     {
-        $missingProduct = $this->missingProductRepository->deleteMissingProduct($id);
-        return $missingProduct;
+        $this->missingProductRepository->deleteMissingProduct($id);
     }
 
     public function removeAllBought(){
-        $missingProducts = $this->missingProductRepository->deleteBoughtProducts();
-        return $missingProducts;
+        $this->missingProductRepository->deleteBoughtProducts();
     }
 }
