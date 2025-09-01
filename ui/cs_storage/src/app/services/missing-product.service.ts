@@ -1,8 +1,9 @@
 import { MissingProduct } from './../../models/MissingProduct';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, shareReplay, tap } from 'rxjs';
 import { ModalType } from '../../utils/modalType';
+import { handleNetworkError } from '../../utils/errorHandler';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,11 @@ export class MissingProductService {
   setMissingProductBoughtState(payload: { id: number, state: boolean }) {
     this.clearCache();
     return this.http.post(`${this.url}/setstate`, payload);
+  }
+
+  removeMissingProduct(id: number): Observable<any>{
+    return this.http.delete(`${this.url}/${id}`)
+    .pipe(catchError(handleNetworkError('remove-missing-product')))
+    .pipe(tap(() => this.clearCache()))
   }
 }

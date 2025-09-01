@@ -12,7 +12,7 @@ class MissingProductRepository
     private $selectAllQuery =
         'select id, name, needed_day, is_bought, customer_name,
          customer_phone, created_at, updated_at from missing_products
-         order by is_bought';
+         order by is_bought, created_at desc';
 
     public function getAllMissingProducts()
     {

@@ -51,4 +51,12 @@ export class MissingProductsTableComponent implements OnInit{
 
     return false;
   }
+
+  deleteMissingProduct(id: number){
+    if(confirm("Tem certeza que deseja remover este registro?")){
+      this.missingProductService.removeMissingProduct(id).subscribe(() => {
+        this.fetchList();
+      })
+    }
+  }
 }
