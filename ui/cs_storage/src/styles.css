@@ -11,23 +11,23 @@
 
 @layer components {
   .btn {
-    @apply px-2 text-sm text-gray-700 rounded-sm shadow bg-gradient-to-br from-white to-gray-50 hover:to-indigo-200;
+    @apply px-2 text-sm text-gray-700 rounded border bg-white hover:bg-indigo-100;
   }
 
   .btn-primary {
-    @apply px-2 text-sm text-white rounded-sm shadow bg-gradient-to-br from-blue-400 to-blue-500 hover:to-blue-700;
+    @apply px-2 text-sm text-white rounded bg-blue-500 hover:bg-blue-600;
   }
 
   .btn-green {
-    @apply px-2 text-sm text-white rounded-sm shadow bg-gradient-to-br from-emerald-400 to-emerald-600 hover:to-emerald-700;
+    @apply px-2 text-sm text-white rounded bg-emerald-500 hover:bg-emerald-600;
   }
 
   .btn-yellow {
-    @apply px-2 text-sm text-white bg-gradient-to-br rounded-sm shadow from-yellow-400 to-yellow-500 hover:to-yellow-700;
+    @apply px-2 text-sm text-white rounded bg-yellow-500 hover:bg-yellow-600;
   }
 
   .btn-red {
-    @apply px-2 text-sm text-white bg-gradient-to-br rounded-sm shadow from-red-400 to-red-500 hover:to-red-700;
+    @apply px-2 text-sm text-white rounded bg-red-500 hover:bg-red-600;
   }
 
   .btn-primary-i {
