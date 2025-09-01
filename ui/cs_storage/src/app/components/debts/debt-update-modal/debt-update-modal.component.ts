@@ -12,9 +12,7 @@ import { filter, switchMap } from 'rxjs';
 })
 export class DebtUpdateModalComponent implements OnInit {
   show = false;
-
   debtForm!: FormGroup;
-
   debt!: Debt;
 
   constructor(private debtService: DebtService) {

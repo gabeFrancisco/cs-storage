@@ -23,14 +23,13 @@
   <div class="relative overflow-x-auto">
     <div>
       <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
-        <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-sm bg-gray-50 dark:bg-gray-700 border-b shadow-sm dark:text-gray-400">
           <!-- Table header -->
           <tr>
             <th class="font-thin p-2">Data</th>
             <th class="font-thin p-2">Ítem</th>
             <th class="font-thin p-2">Previsão</th>
             <th class="font-thin p-2">Cliente</th>
-            <th class="font-thin p-2">Comprado?</th>
             <th class="font-thin text-center p-2">Ações</th>
           </tr>
         </thead>
@@ -53,11 +52,9 @@
               {{ item.needed_day | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">
-              {{ item.customer_name }}/{{ item.customer_phone }}
+              {{ item.customer_name }} - {{ item.customer_phone }}
             </th>
-            <th class="font-thin p-1.5">
-              {{ item.is_bought ? "Sim" : "Não" }}
-            </th>
+
             <th
               class="font-thin text-center border-l border-double p-1"
             >
@@ -82,7 +79,7 @@
                 </button>
               </div>
               <div *ngIf="item.is_bought">
-                <p class="text-gray-500 italic">Ítem comprado</p>
+                <p class="text-gray-500">Ítem comprado</p>
               </div>
             </th>
           </tr>
