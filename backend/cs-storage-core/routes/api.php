@@ -3,6 +3,7 @@
 use App\Http\Controllers\CashRegisterController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\MissingProductController;
+use App\Http\Controllers\ServiceOrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,3 +33,7 @@ Route::post('missingproducts/setstate', [MissingProductController::class, 'post_
 Route::get('missingproducts/{id}', [MissingProductController::class, 'getById']);
 Route::delete('missingproducts', [MissingProductController::class, 'remove']);
 Route::delete('missingproducts/deleteallbought', [MissingProductController::class, 'removeAllBought']);
+
+
+//ServiceOrders
+Route::post('serviceorders', [ServiceOrderController::class, 'post']);
