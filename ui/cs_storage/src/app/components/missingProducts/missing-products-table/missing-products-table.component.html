@@ -1,9 +1,16 @@
 <div class="border shadow-lg w-full border-gray-200 rounded">
   <div
-    class="p-2 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100"
+    class="p-2 font-bold flex flex-row text-gray-600 border-b justify-between items-baseline bg-gray-100"
   >
     <span class="font-bold">Produtos em falta</span>
     <div>
+      <button
+      type="button"
+      (click)="fetchList()"
+      class="btn-red py-1 text-md"
+    >
+      Remover Concluídos
+    </button>
       <button
         type="button"
         (click)="fetchList()"
@@ -42,13 +49,13 @@
           <tr
             class="items-center border-gray-200 hover:bg-gray-100 cursor-pointer"
             *ngFor="let item of products"
-            [ngClass]="{ 'text-gray-400 ': item.is_bought, 'bg-red-100': getLateDate(item.needed_day) && !item.is_bought}"
+            [ngClass]="{ 'text-gray-400 ': item.is_bought}"
           >
             <th class="font-thin p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">{{ item.name }}</th>
-            <th class="font-thin p-1.5">
+            <th class="font-thin p-1.5" [ngClass]="{'bg-red-100 rounded text-red-600': getLateDate(item.needed_day) && !item.is_bought}">
               {{ item.needed_day | date : "dd/MM/yyyy" }}
             </th>
             <th class="font-thin p-1.5">
@@ -56,27 +63,27 @@
             </th>
 
             <th
-              class="font-thin text-center border-l border-double p-1"
+              class="font-thin text-center border-l border-gray-300 border-double py-2"
             >
               <div *ngIf="!item.is_bought">
                 <button
                   type="button"
                   title="Remover"
-                  class="btn-green mr-1 py-1 px-3"
+                  class="btn-green mr-1 py-0.5 px-3"
                   (click)="setBoughtState(item.id!)"
                 >
-                  ✔
+                  Concluir
                 </button>
-                <button title="Atualizar" class="btn-primary mr-1 py-1 px-3">
-                  ✎
+                <button title="Atualizar" class="btn-primary mr-1 py-0.5 px-3">
+                  Editar
                 </button>
                 <button
                   type="button"
                   title="Remover"
-                  class="btn-red py-1 px-3 mr-1"
+                  class="btn-red py-0.5 px-3 mr-1"
                   (click)="deleteMissingProduct(item.id!)"
                 >
-                  𝘅
+                  Remover
                 </button>
               </div>
               <div *ngIf="item.is_bought">

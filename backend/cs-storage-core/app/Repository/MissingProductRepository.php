@@ -92,4 +92,12 @@ class MissingProductRepository
 
         return $missingProduct;
     }
+
+    public function deleteBoughtProducts(){
+        $missingProducts = DB::selectOne(
+            'delete from missing_products where is_bought = true'
+        );
+
+        return $missingProducts;
+    }
 }
