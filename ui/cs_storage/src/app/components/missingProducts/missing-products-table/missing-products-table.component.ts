@@ -42,4 +42,13 @@ export class MissingProductsTableComponent implements OnInit{
         })
     }
   }
+
+  getLateDate(date: string): boolean{
+    let formateDate = new Date(date);
+    if(formateDate.getTime() < new Date().getTime()){
+      return true;
+    }
+
+    return false;
+  }
 }
