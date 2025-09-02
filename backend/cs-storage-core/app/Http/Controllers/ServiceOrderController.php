@@ -14,6 +14,12 @@ class ServiceOrderController extends Controller
         $this->serviceOrderService = $serviceOrderService;
     }
 
+    public function getAll()
+    {
+        $result = $this->serviceOrderService->getAll();
+        return response()->json($result, 200);
+    }
+
     public function post(ServiceOrderRequest $request)
     {
         $result = $this->serviceOrderService->create($request);

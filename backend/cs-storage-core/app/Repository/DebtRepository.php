@@ -23,30 +23,34 @@ class DebtRepository
     }
 
     private $selectAllWithJoinQuery =
-        'select d.id as d_id, d.value as d_value, d.forecast as d_forecast, d.paid_date as d_paid_date,
-         d.created_at as d_created_at, d.updated_at as d_updated_at, d.customer_id as d_customer_id,
-            c.id as c_id, c.name as c_name, c.phone as c_phone, c.cpf_cnpj as c_cpf_cnpj,
-            c.created_at as c_created_at, c.updated_at as c_updated_at, c.address_id as c_address_id,
-                a.id as a_id, a.road as a_road, a.number as a_number, a.complement as a_complement,
-                a.neighborhood as a_neighborhood, a.city as a_city,
-                a.state as a_state, a.created_at as a_created_at, a.updated_at as a_updated_at
-        from debts d
-        left join customers c on d.customer_id = c.id
-        left join addresses a on c.address_id = a.id';
-
-    public function getAllDebts()
-    {
-        $dbDebts = DB::select($this->selectAllWithJoinQuery);
-
-        $debts = [];
-
-        foreach ($dbDebts as $row) {
-            $debt = $this->parseDebt($row);
-            $debts[] = $debt;
-        }
-
-        return $debts;
-    }
+        'SELECT d.id  AS d_id,
+            d.value        AS d_value,
+            d.forecast     AS d_forecast,
+            d.paid_date    AS d_paid_date,
+            d.created_at   AS d_created_at,
+            d.updated_at   AS d_updated_at,
+            d.customer_id  AS d_customer_id,
+            c.id           AS c_id,
+            c.name         AS c_name,
+            c.phone        AS c_phone,
+            c.cpf_cnpj     AS c_cpf_cnpj,
+            c.created_at   AS c_created_at,
+            c.updated_at   AS c_updated_at,
+            c.address_id   AS c_address_id,
+            a.id           AS a_id,
+            a.road         AS a_road,
+            a.number       AS a_number,
+            a.complement   AS a_complement,
+            a.neighborhood AS a_neighborhood,
+            a.city         AS a_city,
+            a.state        AS a_state,
+            a.created_at   AS a_created_at,
+            a.updated_at   AS a_updated_at
+        FROM   debts d
+            LEFT JOIN customers c
+                    ON d.customer_id = c.id
+            LEFT JOIN addresses a
+                    ON c.address_id = a.id ';
 
     private function parseDebt($dbDebt): Debt
     {
@@ -65,9 +69,24 @@ class DebtRepository
         return $debt;
     }
 
+    public function getAllDebts()
+    {
+        $dbDebts = DB::select($this->selectAllWithJoinQuery);
+
+        $debts = [];
+
+        foreach ($dbDebts as $row) {
+            $debt = $this->parseDebt($row);
+            $debts[] = $debt;
+        }
+
+        return $debts;
+    }
+
+
     public function getDebt($id)
     {
-        $dbDebt = DB::selectOne($this->selectAllWithJoinQuery . ' where d_id = ?', [$id]);
+        $dbDebt = DB::selectOne($this->selectAllWithJoinQuery . ' WHERE d_id = ?', [$id]);
         $debt = $this->parseDebt($dbDebt);
 
         return $debt;
@@ -85,8 +104,8 @@ class DebtRepository
             $dBcustomer = $this->customerRepository->createCustomer($customer);
 
             $dbDebt = DB::selectOne(
-                'insert into debts(value, forecast, customer_id, created_at)
-                    values (?,?,?,?) returning *',
+                'INSERT INTO debts(value, forecast, customer_id, created_at)
+                    VALUES (?,?,?,?) returning *',
                 [
                     $debt->value,
                     $debt->forecast,
@@ -113,7 +132,7 @@ class DebtRepository
             $dbDebt = $this->getDebt($debt->id);
             if (!empty($address) || $address == null) {
                 if ($dbDebt->customer->address_id !== null) {
-                    $address->id =$dbDebt->customer->address_id;
+                    $address->id = $dbDebt->customer->address_id;
                     $dbAddress = $this->addressRepository->updateAddress($address);
                     $customer->address_id = $dbDebt->customer->address_id;
                 } else {
@@ -125,9 +144,9 @@ class DebtRepository
             $this->customerRepository->updateCustomer($customer);
 
             $dbDebt = DB::selectOne(
-                'update debts
-                set value = ?, forecast = ?, updated_at = ?
-                where id = ?
+                'UPDATE debts
+                SET VALUE = ?, forecast = ?, updated_at = ?
+                WHERE id = ?
                 ',
                 [
                     $debt->value,
@@ -147,9 +166,10 @@ class DebtRepository
         return $dbDebt;
     }
 
-    public function removeDebt(int $id){
+    public function removeDebt(int $id)
+    {
         $debt = DB::selectOne(
-            'delete from debts where id = ?',
+            'DELETE FROM debts WHERE id = ?',
             [$id]
         );
 
@@ -158,13 +178,14 @@ class DebtRepository
 
     public function getDayAndMonthTotal()
     {
-        $day = DB::selectOne('
-            select sum(value) as total from debts where created_at = current_date'
+        $day = DB::selectOne(
+            'SELECT SUM(value) AS total FROM debts WHERE created_at = current_date'
         );
 
-        $month = DB::selectOne('
-            select sum(value) as total from debts where strftime("%m", created_at) = strftime("%m", "now")
-        ');
+        $month = DB::selectOne(
+            'SELECT SUM(value) AS total FROM debts WHERE strftime("%m", created_at) = strftime("%m", "now")
+        '
+        );
 
         return [
             "day" => $day->total != null ? $day->total : 0,

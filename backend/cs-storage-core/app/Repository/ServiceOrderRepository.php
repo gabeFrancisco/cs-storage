@@ -22,6 +22,35 @@ class ServiceOrderRepository
         $this->addressRepository = $addressRepository;
         $this->customerRepository = $customerRepository;
     }
+
+    private $selectAllWithJoinQuery =
+        'SELECT s.id  AS s_id,
+            s.title        AS s_title,
+            s.description  AS s_description,
+            s.customer_id  AS s_customer_id,
+            s.address_id   AS s_address_id,
+            s.service_date AS s_service_date,
+            s.created_at   AS s_created_at,
+            s.updated_at   AS s_updated_at,
+            c.id           AS c_id,
+            c.name         AS c_name,
+            c.phone        AS c_phone,
+            c.cpf_cnpj     AS c_cpf_cnpj,
+            a.id           AS a_id,
+            a.road         AS a_road,
+            a.number       AS a_number,
+            a.complement   AS a_complement,
+            a.neighborhood AS a_neighborhood,
+            a.city         AS a_city,
+            a.state        AS a_state,
+            a.created_at   AS a_created_at,
+            a.updated_at   AS a_updated_at
+        FROM   service_orders s
+            INNER JOIN customers c
+                    ON s.customer_id = c.id
+            INNER JOIN addresses a
+                    ON s.address_id = a.id ';
+
     private function parseServiceOrder($dbServiceOrder)
     {
         $serviceOrder = ClassHelper::fillFromSql($dbServiceOrder, ServiceOrder::class, 's_');
@@ -32,6 +61,19 @@ class ServiceOrderRepository
         $serviceOrder->address = $address;
 
         return $serviceOrder;
+    }
+
+    public function getAllServiceOrders(){
+        $dbServiceOrders = DB::select($this->selectAllWithJoinQuery);
+
+        $serviceOrders = [];
+
+        foreach($dbServiceOrders as $row){
+            $serviceOrder = $this->parseServiceOrder($row);
+            $serviceOrders[] = $serviceOrder;
+        }
+
+        return $serviceOrders;
     }
 
     public function createServiceOrder(ServiceOrder $serviceOrder)
@@ -45,8 +87,8 @@ class ServiceOrderRepository
             $dbCustomer = $this->customerRepository->createCustomer($serviceOrder->customer);
 
             $dbServiceOrder = DB::selectOne(
-                'insert into service_orders(title, description, service_date, value, customer_id, address_id, created_at)
-                    values (?,?,?,?,?,?,?) returning *',
+                'INSERT INTO service_orders(title, description, service_date, value, customer_id, address_id, created_at)
+                    VALUES (?,?,?,?,?,?,?) returning *',
                 [
                     $serviceOrder->title,
                     $serviceOrder->description,

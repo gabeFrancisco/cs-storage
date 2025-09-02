@@ -36,4 +36,5 @@ Route::delete('missingproducts/deleteallbought', [MissingProductController::clas
 
 
 //ServiceOrders
+Route::get('serviceorders', [ServiceOrderController::class, 'getAll']);
 Route::post('serviceorders', [ServiceOrderController::class, 'post']);
