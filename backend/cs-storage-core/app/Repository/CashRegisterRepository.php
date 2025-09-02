@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Models\CashRegister;
-use App\Utils\DateHelper;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -71,7 +70,7 @@ class CashRegisterRepository
                 $cashRegister->value,
                 $cashRegister->payment_type,
                 $cashRegister->description,
-                DateHelper::now(),
+                Carbon::now(),
                 $cashRegister->id
             ]
         );

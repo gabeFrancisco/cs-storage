@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Models\Customer;
-use App\Utils\DateHelper;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CustomerRepository
@@ -30,7 +30,7 @@ class CustomerRepository
                 $customer->phone,
                 $customer->cpf_cnpj,
                 $customer->address_id,
-
+                Carbon::now()
             ]
         );
 
@@ -49,7 +49,7 @@ class CustomerRepository
                 $customer->name,
                 $customer->phone,
                 $customer->cpf_cnpj,
-                DateHelper::now(),
+                Carbon::now(),
                 $customer->address_id,
                 $customer->id
             ]

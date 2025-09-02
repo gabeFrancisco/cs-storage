@@ -3,9 +3,9 @@
 namespace App\Repository;
 
 use App\Models\Address;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Mime\Header\DateHeader;
-use App\Utils\DateHelper;
 
 class AddressRepository
 {
@@ -24,7 +24,7 @@ class AddressRepository
             'INSERT INTO addresses(created_at, road, number, complement, neighborhood, city, state)
                     VALUES (?,?,?,?,?,?,?) returning *',
             [
-                $address->created_at,
+                Carbon::now(),
                 $address->road,
                 $address->number,
                 $address->complement,
@@ -52,7 +52,7 @@ class AddressRepository
                 $address->neighborhood,
                 $address->city,
                 $address->state,
-                DateHelper::now(),
+                Carbon::now(),
                 $address->id
             ]
         );

@@ -9,8 +9,6 @@ use App\Models\Debt;
 use App\Repository\AddressRepository;
 use App\Repository\CustomerRepository;
 use App\Repository\DebtRepository;
-use App\Utils\DateHelper;
-use Carbon\Carbon;
 class DebtService
 {
     private DebtRepository $debtRepository;
@@ -48,7 +46,6 @@ class DebtService
             $address->neighborhood = $request->input('customer.address.neighborhood');
             $address->city = $request->input('customer.address.city');
             $address->state = $request->input('customer.address.state');
-            DateHelper::now();
 
         }
 

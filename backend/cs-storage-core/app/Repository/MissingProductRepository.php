@@ -3,8 +3,7 @@
 namespace App\Repository;
 
 use App\Models\MissingProduct;
-use App\Utils\ClassHelper;
-use App\Utils\DateHelper;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class MissingProductRepository
@@ -42,7 +41,7 @@ class MissingProductRepository
                 $missingProduct->needed_day,
                 $missingProduct->customer_name,
                 $missingProduct->customer_phone,
-                DateHelper::now()
+                Carbon::now()
             ]
         );
 
@@ -77,7 +76,7 @@ class MissingProductRepository
                 $missingProduct->is_bought,
                 $missingProduct->customer_name,
                 $missingProduct->customer_phone,
-                DateHelper::now()
+                Carbon::now()
             ]
         );
 
