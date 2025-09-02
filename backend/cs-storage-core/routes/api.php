@@ -39,3 +39,4 @@ Route::delete('missingproducts/deleteallbought', [MissingProductController::clas
 Route::get('serviceorders', [ServiceOrderController::class, 'getAll']);
 Route::get('serviceorders/{id}', [ServiceOrderController::class, 'getById']);
 Route::post('serviceorders', [ServiceOrderController::class, 'post']);
+Route::put('serviceorders', [ServiceOrderController::class, 'put']);

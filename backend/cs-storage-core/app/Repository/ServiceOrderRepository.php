@@ -121,16 +121,17 @@ class ServiceOrderRepository
 
     public function updateServiceOrder(ServiceOrder $serviceOrder)
     {
+        /*
+            First step for a ServiceOrder update is to check if it has an Address
+            registered on database. If has, the updateAddress repository function is called.
+            If not, a new Address is created.
+
+            The customer is not nullable so every incoming address already exists on database.
+        */
+
         DB::beginTransaction();
 
         try {
-            /*
-                First step for a ServiceOrder update is to check if it has an Address
-                registered on database. If has, the updateAddress repository function is called.
-                If not, a new Address is created.
-
-                The customer is not nullable so every incoming address already exists on database.
-            */
 
             $dbServiceOrder = $this->getServiceOrder($serviceOrder->id);
             $address = $serviceOrder->address;
@@ -155,18 +156,20 @@ class ServiceOrderRepository
 
             //Updates the Costumer
             $customer = $serviceOrder->customer;
+            $serviceOrder->customer_id = $dbServiceOrder->customer_id;
+
             $this->customerRepository->updateCustomer($customer);
 
             $dbServiceOrder = DB::selectOne(
                 'UPDATE service_orders
-                          SET    title = ?,
+                          SET title = ?,
                               description = ?,
                               service_date = ?,
                               value = ?,
                               customer_id = ?,
                               address_id = ?,
-                              updated_at
-                          WHERE  id = ?'
+                              updated_at = ?
+                          WHERE  id = ? RETURNING *'
                 ,
                 [
                     $serviceOrder->title,
@@ -181,9 +184,9 @@ class ServiceOrderRepository
             );
 
             DB::commit();
-        } catch(Exception $e){
-            error_log($e->getMessage());
+        } catch (Exception $e) {
             DB::rollBack();
+            throw $e;
         }
 
         return $dbServiceOrder;

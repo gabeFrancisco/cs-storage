@@ -21,7 +21,8 @@ class ServiceOrderController extends Controller
         return response()->json($result, 200);
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         $result = $this->serviceOrderService->getById($id);
         return response()->json($result, 200);
     }
@@ -29,6 +30,12 @@ class ServiceOrderController extends Controller
     public function post(ServiceOrderRequest $request)
     {
         $result = $this->serviceOrderService->create($request);
+        return response()->json($result, 200);
+    }
+
+    public function put(ServiceOrderRequest $request)
+    {
+        $result = $this->serviceOrderService->update($request);
         return response()->json($result, 200);
     }
 }

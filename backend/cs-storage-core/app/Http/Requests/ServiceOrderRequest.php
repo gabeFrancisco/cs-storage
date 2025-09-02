@@ -14,6 +14,7 @@ class ServiceOrderRequest extends FormRequest
             'description' => 'required|string',
             'service_date' => 'date|nullable',
             'value' => 'numeric|nullable',
+            'customer' => 'required',
             'customer.name' => 'required|string',
             'customer.phone' => 'required|string',
             'customer.cpf_cnpj' => 'nullable|string',

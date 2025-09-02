@@ -159,8 +159,8 @@ class DebtRepository
             DB::commit();
 
         } catch (Exception $e) {
-            error_log($e->getMessage());
             DB::rollBack();
+            throw $e;
         }
 
         return $dbDebt;

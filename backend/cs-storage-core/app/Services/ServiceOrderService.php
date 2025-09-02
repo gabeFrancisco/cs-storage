@@ -17,19 +17,11 @@ class ServiceOrderService
         $this->serviceOrderRepository = $serviceOrderRepository;
     }
 
-    public function getAll()
-    {
-        return $this->serviceOrderRepository->getAllServiceOrders();
-    }
-
-    public function getById($id){
-        return $this->serviceOrderRepository->getServiceOrder($id);
-    }
-
-    public function create(ServiceOrderRequest $request)
+    private function getRequestData(ServiceOrderRequest $request)
     {
         $serviceOrder = new ServiceOrder();
 
+        $serviceOrder->id = $request->input('id');
         $serviceOrder->title = $request->input('title');
         $serviceOrder->description = $request->input('description');
         $serviceOrder->service_date = $request->input('service_date');
@@ -48,8 +40,32 @@ class ServiceOrderService
         $serviceOrder->address->city = $request->input('address.city');
         $serviceOrder->address->state = $request->input('address.state');
 
+        return $serviceOrder;
+    }
+
+    public function getAll()
+    {
+        return $this->serviceOrderRepository->getAllServiceOrders();
+    }
+
+    public function getById($id)
+    {
+        return $this->serviceOrderRepository->getServiceOrder($id);
+    }
+
+    public function create(ServiceOrderRequest $request)
+    {
+        $serviceOrder = $this->getRequestData($request);
         $dbServiceOrder = $this->serviceOrderRepository->createServiceOrder($serviceOrder);
 
         return $dbServiceOrder;
+    }
+
+    public function update(ServiceOrderRequest $request)
+    {
+        $serviceOrder = $this->getRequestData($request);
+        $dbServiceOrer = $this->serviceOrderRepository->updateServiceOrder($serviceOrder);
+
+        return $dbServiceOrer;
     }
 }
