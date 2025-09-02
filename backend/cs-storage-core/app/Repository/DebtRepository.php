@@ -130,7 +130,7 @@ class DebtRepository
 
         try {
             $dbDebt = $this->getDebt($debt->id);
-            if (!empty($address) || $address == null) {
+            if (!empty($address) || $address != null) {
                 if ($dbDebt->customer->address_id !== null) {
                     $address->id = $dbDebt->customer->address_id;
                     $dbAddress = $this->addressRepository->updateAddress($address);
@@ -145,8 +145,8 @@ class DebtRepository
 
             $dbDebt = DB::selectOne(
                 'UPDATE debts
-                SET VALUE = ?, forecast = ?, updated_at = ?
-                WHERE id = ?
+                        SET VALUE = ?, forecast = ?, updated_at = ?
+                        WHERE id = ?
                 ',
                 [
                     $debt->value,

@@ -64,12 +64,13 @@ class ServiceOrderRepository
         return $serviceOrder;
     }
 
-    public function getAllServiceOrders(){
+    public function getAllServiceOrders()
+    {
         $dbServiceOrders = DB::select($this->selectAllWithJoinQuery);
 
         $serviceOrders = [];
 
-        foreach($dbServiceOrders as $row){
+        foreach ($dbServiceOrders as $row) {
             $serviceOrder = $this->parseServiceOrder($row);
             $serviceOrders[] = $serviceOrder;
         }
@@ -77,7 +78,8 @@ class ServiceOrderRepository
         return $serviceOrders;
     }
 
-    public function getServiceOrder($id){
+    public function getServiceOrder($id)
+    {
         $dbServiceOrder = DB::selectOne($this->selectAllWithJoinQuery . ' WHERE s_id = ?', [$id]);
         $serviceOrder = $this->parseServiceOrder($dbServiceOrder);
 
@@ -110,19 +112,80 @@ class ServiceOrderRepository
 
             DB::commit();
 
-        } catch( Exception $e){
+        } catch (Exception $e) {
             error_log($e->getMessage());
             DB::rollBack();
         }
         return $dbServiceOrder;
     }
 
-    //TODO
-    // public function updateServiceOrder(ServiceOrder $serviceOrder){
-    //     DB::beginTransaction();
+    public function updateServiceOrder(ServiceOrder $serviceOrder)
+    {
+        DB::beginTransaction();
 
-    //     try{
-    //
-    //     }
-    // }
+        try {
+            /*
+                First step for a ServiceOrder update is to check if it has an Address
+                registered on database. If has, the updateAddress repository function is called.
+                If not, a new Address is created.
+
+                The customer is not nullable so every incoming address already exists on database.
+            */
+
+            $dbServiceOrder = $this->getServiceOrder($serviceOrder->id);
+            $address = $serviceOrder->address;
+
+            //Checks if the receiving address is not empty or null
+            if (!empty($address) || $address != null) {
+
+                //Checks if the db instance has an address atacched to it.
+                //If is, the address is updated. If not, a new one is created
+                if ($dbServiceOrder->address !== null) {
+
+                    //Get the address ID of the db service order instance
+                    $address->id = $dbServiceOrder->address_id;
+
+                    $dbAddress = $this->addressRepository->updateAddress($address);
+                    $serviceOrder->address_id = $dbServiceOrder->address_id;
+                } else {
+                    $dbAddress = $this->addressRepository->createAddress($address);
+                    $serviceOrder->address_id = $dbAddress->address_id;
+                }
+            }
+
+            //Updates the Costumer
+            $customer = $serviceOrder->customer;
+            $this->customerRepository->updateCustomer($customer);
+
+            $dbServiceOrder = DB::selectOne(
+                'UPDATE service_orders
+                          SET    title = ?,
+                              description = ?,
+                              service_date = ?,
+                              value = ?,
+                              customer_id = ?,
+                              address_id = ?,
+                              updated_at
+                          WHERE  id = ?'
+                ,
+                [
+                    $serviceOrder->title,
+                    $serviceOrder->description,
+                    $serviceOrder->service_date,
+                    $serviceOrder->value,
+                    $serviceOrder->customer_id,
+                    $serviceOrder->address_id,
+                    Carbon::now(),
+                    $serviceOrder->id
+                ]
+            );
+
+            DB::commit();
+        } catch(Exception $e){
+            error_log($e->getMessage());
+            DB::rollBack();
+        }
+
+        return $dbServiceOrder;
+    }
 }
