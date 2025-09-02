@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\DB;
 class MissingProductRepository
 {
     private $selectAllQuery =
-        'select id, name, needed_day, is_bought, customer_name,
-         customer_phone, created_at, updated_at from missing_products
-         order by is_bought, created_at desc';
+        'SELECT id, name, needed_day, is_bought, customer_name,
+             customer_phone, created_at, updated_at
+        FROM missing_products
+        ORDER BY is_bought, created_at desc';
 
     public function getAllMissingProducts()
     {
@@ -23,7 +24,7 @@ class MissingProductRepository
     public function getMissingProduct($id)
     {
         $dbMissingProduct = DB::selectOne(
-            $this->selectAllQuery . ' where id = ?',
+            $this->selectAllQuery . ' WHERE id = ?',
             [$id]
         );
 
@@ -33,9 +34,9 @@ class MissingProductRepository
     public function createMissingProduct(MissingProduct $missingProduct)
     {
         $dbMissingProduct = DB::selectOne(
-            'insert into missing_products(name, needed_day, is_bought,
-            customer_name, customer_phone, created_at) values
-            (?,?,0,?,?,?) returning *',
+            'INSERT INTO missing_products(name, needed_day, is_bought,
+                        customer_name, customer_phone, created_at)
+                    VALUES (?,?,0,?,?,?) returning *',
             [
                 $missingProduct->name,
                 $missingProduct->needed_day,
@@ -51,8 +52,8 @@ class MissingProductRepository
     public function setBoughtState($id, bool $state)
     {
         $dbMissingProduct = DB::selectOne(
-            'update missing_products
-                    set is_bought = ? where id = ? returning *',
+            'UPDATE missing_products
+                    SET is_bought = ? where id = ? returning *',
             [
                 $state,
                 $id
@@ -65,10 +66,10 @@ class MissingProductRepository
     public function updateMissingProduct(MissingProduct $missingProduct)
     {
         $dbMissingProduct = DB::select(
-            'update missing_products
-                    set name = ?, needed_day = ?, is_bought = ?,
-                    customer_name = ?, customer_phone = ?, updated_at = ?
-                    where id = ? returning *
+            'UPDATE missing_products
+                    SET name = ?, needed_day = ?, is_bought = ?,
+                        customer_name = ?, customer_phone = ?, updated_at = ?
+                    WHERE id = ? returning *
             ',
             [
                 $missingProduct->name,
@@ -86,14 +87,14 @@ class MissingProductRepository
     public function deleteMissingProduct($id)
     {
         DB::selectOne(
-            'delete from missing_products where id = ?',
+            'DELETE from missing_products WHERE id = ?',
             [$id]
         );
     }
 
     public function deleteBoughtProducts(){
         DB::select(
-            'delete from missing_products where is_bought'
+            'DELETE from missing_products WHERE is_bought'
         );
     }
 }

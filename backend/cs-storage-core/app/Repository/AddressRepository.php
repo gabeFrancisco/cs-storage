@@ -9,7 +9,8 @@ use App\Utils\DateHelper;
 
 class AddressRepository
 {
-    private $selectAllQuery = 'select id, created_at, updated_at, road, number, complement, neighborhood, city, state from addresses';
+    private $selectAllQuery = 'SELECT id, created_at, updated_at, road, number, complement, neighborhood, city, state
+                               FROM addresses';
     public function getAllAddresses()
     {
         $addresses = DB::select($this->selectAllQuery);
@@ -20,8 +21,8 @@ class AddressRepository
     public function createAddress(Address $address)
     {
         $address = DB::selectOne(
-            'insert into addresses(created_at, road, number, complement, neighborhood, city, state)
-                    values (?,?,?,?,?,?,?) returning *',
+            'INSERT INTO addresses(created_at, road, number, complement, neighborhood, city, state)
+                    VALUES (?,?,?,?,?,?,?) returning *',
             [
                 $address->created_at,
                 $address->road,
@@ -39,10 +40,10 @@ class AddressRepository
     public function updateAddress(Address $address)
     {
         $dbAddress = DB::selectOne(
-            'update addresses
-                set road = ?, number = ?, complement = ?,
-                neighborhood = ?, city = ?, state = ?, updated_at = ?
-                where id = ? returning *
+            'UPDATE addresses
+                    SET road = ?, number = ?, complement = ?,
+                        neighborhood = ?, city = ?, state = ?, updated_at = ?
+                    WHERE id = ? returning *
           ',
             [
                 $address->road,
@@ -61,7 +62,7 @@ class AddressRepository
 
     public function getAddress($id)
     {
-        $dbAddress = DB::selectOne($this->selectAllQuery . ' where id = ?', [$id]);
+        $dbAddress = DB::selectOne($this->selectAllQuery . ' WHERE id = ?', [$id]);
         return $dbAddress;
     }
 }

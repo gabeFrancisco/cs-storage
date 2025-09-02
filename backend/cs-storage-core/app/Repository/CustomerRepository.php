@@ -11,9 +11,9 @@ class CustomerRepository
     public function getAllCustomers()
     {
         $customers = DB::select(
-            'select id, created_at, updated_at, name, phone, cpf_cnpj, address_id
-                from customers
-                left join addresses on customers.address_id = addresses.id
+            'SELECT id, created_at, updated_at, name, phone, cpf_cnpj, address_id
+                    FROM customers
+                        LEFT JOIN addresses on customers.address_id = addresses.id
             '
         );
 
@@ -23,8 +23,8 @@ class CustomerRepository
     public function createCustomer(Customer $customer)
     {
         $dBcustomer = DB::selectOne(
-            'insert into customers(name, phone, cpf_cnpj, address_Id, created_at)
-                values (?,?,?,?,current_date) returning *',
+            'INSERT INTO customers(name, phone, cpf_cnpj, address_Id, created_at)
+                    VALUES (?,?,?,?,current_date) returning *',
             [
                 $customer->name,
                 $customer->phone,
@@ -41,9 +41,9 @@ class CustomerRepository
     {
         // dd($customer);
         $dbCustomer = DB::selectOne(
-            'update customers
-                    set name=?, phone=?, cpf_cnpj=?, updated_at=?, address_id = ?
-                    where id = ? returning *;
+            'UPDATE customers
+                    SET name=?, phone=?, cpf_cnpj=?, updated_at=?, address_id = ?
+                    WHERE id = ? returning *;
             ',
             [
                 $customer->name,

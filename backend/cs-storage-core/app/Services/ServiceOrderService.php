@@ -21,6 +21,11 @@ class ServiceOrderService
     {
         return $this->serviceOrderRepository->getAllServiceOrders();
     }
+
+    public function getById($id){
+        return $this->serviceOrderRepository->getServiceOrder($id);
+    }
+
     public function create(ServiceOrderRequest $request)
     {
         $serviceOrder = new ServiceOrder();

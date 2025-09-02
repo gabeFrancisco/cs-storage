@@ -27,6 +27,7 @@ class ServiceOrderRepository
         'SELECT s.id  AS s_id,
             s.title        AS s_title,
             s.description  AS s_description,
+            s.value        AS s_value,
             s.customer_id  AS s_customer_id,
             s.address_id   AS s_address_id,
             s.service_date AS s_service_date,
@@ -76,19 +77,26 @@ class ServiceOrderRepository
         return $serviceOrders;
     }
 
+    public function getServiceOrder($id){
+        $dbServiceOrder = DB::selectOne($this->selectAllWithJoinQuery . ' WHERE s_id = ?', [$id]);
+        $serviceOrder = $this->parseServiceOrder($dbServiceOrder);
+
+        return $serviceOrder;
+    }
+
     public function createServiceOrder(ServiceOrder $serviceOrder)
     {
-        $dbServiceOrder = null;
+        DB::beginTransaction();
 
         try {
-            DB::beginTransaction();
 
             $dbAddress = $this->addressRepository->createAddress($serviceOrder->address);
             $dbCustomer = $this->customerRepository->createCustomer($serviceOrder->customer);
 
             $dbServiceOrder = DB::selectOne(
-                'INSERT INTO service_orders(title, description, service_date, value, customer_id, address_id, created_at)
-                    VALUES (?,?,?,?,?,?,?) returning *',
+                'INSERT INTO service_orders
+                            (title, description, service_date, value, customer_id, address_id, created_at)
+                        VALUES (?,?,?,?,?,?,?) returning *',
                 [
                     $serviceOrder->title,
                     $serviceOrder->description,
@@ -108,4 +116,13 @@ class ServiceOrderRepository
         }
         return $dbServiceOrder;
     }
+
+    //TODO
+    // public function updateServiceOrder(ServiceOrder $serviceOrder){
+    //     DB::beginTransaction();
+
+    //     try{
+    //
+    //     }
+    // }
 }

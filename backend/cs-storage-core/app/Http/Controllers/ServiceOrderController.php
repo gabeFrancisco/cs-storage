@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ServiceOrderRequest;
 use App\Services\ServiceOrderService;
+use Illuminate\Http\Request;
 
 class ServiceOrderController extends Controller
 {
@@ -17,6 +18,11 @@ class ServiceOrderController extends Controller
     public function getAll()
     {
         $result = $this->serviceOrderService->getAll();
+        return response()->json($result, 200);
+    }
+
+    public function getById($id){
+        $result = $this->serviceOrderService->getById($id);
         return response()->json($result, 200);
     }
 

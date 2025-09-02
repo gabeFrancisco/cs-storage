@@ -13,7 +13,8 @@ class CashRegisterRepository
     public function getAllCashRegisters()
     {
         $cashRegisters = DB::select(
-            'select id, value, description, payment_type, created_at, updated_at from cash_registers'
+            'SELECT id, value, description, payment_type, created_at, updated_at
+                    FROM cash_registers'
         );
 
         return $cashRegisters;
@@ -22,7 +23,9 @@ class CashRegisterRepository
     public function getCashRegister(int $id)
     {
         $cashRegister = DB::selectOne(
-            'select id, value, description, payment_type, created_at, updated_at from cash_registers where id = ?',
+            'SELECT id, value, description, payment_type, created_at, updated_at
+                    FROM cash_registers
+                    WHERE id = ?',
             [$id]
         );
 
@@ -32,8 +35,9 @@ class CashRegisterRepository
     public function getAllByTodayDate()
     {
         $cashRegisters = DB::select(
-            'select id, value, description, payment_type, created_at, updated_at from cash_registers
-                    where created_at = current_date
+            'SELECT id, value, description, payment_type, created_at, updated_at
+                    FROM cash_registers
+                    WHERE created_at = current_date
             '
         );
 
@@ -43,7 +47,8 @@ class CashRegisterRepository
     public function createCashRegister(CashRegister $cashRegister)
     {
         $dbCashRegister = DB::selectOne(
-            'insert into cash_registers(value, payment_type, description, created_at) values (?,?,?,?) returning *',
+            'INSERT INTO cash_registers(value, payment_type, description, created_at)
+                    VALUES (?,?,?,?) returning *',
             [
                 $cashRegister->value,
                 $cashRegister->payment_type,
@@ -58,9 +63,9 @@ class CashRegisterRepository
     public function updateCashRegister(CashRegister $cashRegister)
     {
         $dBcashRegister = DB::selectOne(
-            'update cash_registers
-                    set value = ?, payment_type = ?, description = ?, updated_at = ?
-                    where id = ? returning *
+            'UPDATE cash_registers
+                    SET value = ?, payment_type = ?, description = ?, updated_at = ?
+                    WHERE id = ? returning *
             ',
             [
                 $cashRegister->value,
@@ -77,7 +82,7 @@ class CashRegisterRepository
     public function deleteCashRegister(int $id)
     {
         $cashRegister = DB::selectOne(
-            'delete from cash_registers where id = ?',
+            'DELETE from cash_registers WHERE id = ?',
             [$id]
         );
 
@@ -86,12 +91,10 @@ class CashRegisterRepository
 
     public function getDayAndMonthTotal()
     {
-        $day = DB::selectOne('
-            select sum(value) as total from cash_registers where created_at = current_date
+        $day = DB::selectOne('SELECT SUM(value) AS total FROM cash_registers WHERE created_at = current_date
         ');
 
-        $month = DB::selectOne('
-            select sum(value) as total from cash_registers where strftime("%m", created_at) = strftime("%m", "now")
+        $month = DB::selectOne('SELECT SUM(value) AS total FROM cash_registers WHERE strftime("%m", created_at) = strftime("%m", "now")
         ');
 
         return [
