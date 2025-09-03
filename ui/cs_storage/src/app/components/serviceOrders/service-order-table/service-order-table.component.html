@@ -15,7 +15,7 @@
       >
         ↻
       </button>
-      <button type="button" class="btn-green px-4 font-bold text-xl">+</button>
+      <button (click)="newServiceOrder()" type="button" class="btn-green px-4 font-bold text-xl">+</button>
     </div>
   </div>
   <div class="relative overflow-x-auto">
@@ -26,9 +26,9 @@
           <tr>
             <th class="font-thin p-2">Títutlo</th>
             <th class="font-thin p-2">Data do serviço</th>
-            <th class="font-thin p-2">Valor</th>
             <th class="font-thin p-2">Cliente</th>
             <th class="font-thin p-2">Endereço</th>
+            <th class="font-thin p-2">Valor</th>
             <th class="font-thin text-center p-2">Ações</th>
           </tr>
         </thead>
@@ -43,17 +43,17 @@
             *ngFor="let item of serviceOrders"
           >
             <th class="font-thin p-1.5">{{ item.title }}</th>
-            <th class="font-thin border-r p-1.5">
+            <th class="font-thin p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </th>
-            <th class="font-thin p-1.5">R${{ item.value.toFixed(2) }}</th>
-            <th class="font-thin text-emerald-700 p-1.5">
+            <th class="font-thin text-gray-700 p-1.5">
               {{ item.customer.name }} - Tel: {{ item.customer.phone }}
             </th>
-            <th class="font-thin text-emerald-700 p-1.5">
+            <th class="font-thin text-gray-700 p-1.5">
               {{ item.address?.road }}, {{ item.address?.number }}, {{ item.address?.complement }}
             </th>
-            <th class="font-thin text-center">
+            <th class="font-thin text-emerald-700 p-1.5">R${{ item.value.toFixed(2) }}</th>
+            <th class="font-thin text-center border-l">
               <button title="Atualizar" class="btn-primary text-lg mr-1">
                 ✎
               </button>

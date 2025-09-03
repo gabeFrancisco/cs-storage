@@ -1,48 +1,89 @@
 <div class="px-7 flex flex-col justify-center">
   <div
-    class="text-xl font-bold border-b py-2 px-2 flex flex-row justify-between text-gray-700 text-center"
+    class="text-xl sticky top-12 bg-white font-bold border-b py-2 px-2 flex flex-row justify-between text-gray-700 text-center"
   >
     Nova ordem de serviço
   </div>
-  <div class="p-5">
-    <form #formDir="ngForm" class="max-w-xl mx-auto flex-col space-y-1">
+  <div class="p-5 w-full flex flex-col items-center">
+    <form #formDir="ngForm" class="w-full md:w-2/3 lg:w-2/5 mx-auto space-y-1">
       <input type="hidden" [value]="0" formControlName="id" />
-      <div class="flex items-baseline">
-        <label class="w-16 text-sm text-right mr-2" for="name">Título*</label>
-        <div class="flex flex-col">
+      <h5 class="text-start">Serviço</h5>
+      <hr class="py-1" />
+      <div class="flex items-baseline w-full">
+        <label class="w-24 text-sm text-right mr-2" for="title">Título*</label>
+        <div class="flex flex-col w-full">
           <input
             type="text"
             class="border w-full border-gray-400"
-            formControlName="name"
+            formControlName="title"
             required
           />
-          <small class="text-red-500" *ngIf="">Produto é obrigatório!</small>
+          <!-- <small
+            class="text-red-500"
+            *ngIf="
+              missingProductForm.get('name')!.invalid && formDir.submitted
+            "
+            >Produto é obrigatório!</small
+          > -->
         </div>
       </div>
       <div class="flex items-baseline">
-        <label class="text-sm w-16 text-right mr-2" for="needed_day"
+        <label class="w-24 text-sm text-right mr-2" for="description"
           >Descrição*</label
         >
-        <div class="flex flex-col">
+        <div class="flex flex-col w-full">
           <textarea
-            formControlName="needed_day"
-            class="border border-gray-400 my-1"
-            required
-          ></textarea>
-          <small class="text-red-500" *ngIf="">Descrição é obrigatória!</small>
-        </div>
-      </div>
-      <input type="hidden" [value]="0" formControlName="id" />
-      <div class="flex items-baseline">
-        <label class="w-16 text-sm text-right mr-2" for="name">Valor:*</label>
-        <div class="flex flex-col">
-          <input
             type="text"
             class="border w-full border-gray-400"
-            formControlName="name"
+            formControlName="description"
+            rows="5"
+            required
+          ></textarea>
+          <!-- <small
+            class="text-red-500"
+            *ngIf="
+              missingProductForm.get('name')!.invalid && formDir.submitted
+            "
+            >Produto é obrigatório!</small
+          > -->
+        </div>
+      </div>
+      <div class="flex items-baseline w">
+        <label class="text-sm w-24 text-right mr-2" for="service_date"
+          >Data*</label
+        >
+        <div class="flex flex-col w-full">
+          <input
+            type="date"
+            formControlName="service_date"
+            class="border border-gray-400 my-1"
             required
           />
-          <small class="text-red-500" *ngIf="">Produto é obrigatório!</small>
+          <!-- <small
+          class="text-red-500"
+          *ngIf="
+            missingProductForm.get('name')!.invalid && formDir.submitted
+          "
+          >Previsão é obrigatória!</small
+        > -->
+        </div>
+      </div>
+      <div class="flex items-baseline w-full pb-5">
+        <label class="w-24 text-sm text-right mr-2" for="value">Valor</label>
+        <div class="flex flex-col w-full">
+          <input
+            type="number"
+            class="border w-full border-gray-400"
+            formControlName="value"
+            required
+          />
+          <!-- <small
+            class="text-red-500"
+            *ngIf="
+              missingProductForm.get('name')!.invalid && formDir.submitted
+            "
+            >Produto é obrigatório!</small
+          > -->
         </div>
       </div>
       <!-- <div class="flex items-baseline">
@@ -57,11 +98,13 @@
           />
         </div>
       </div> -->
+      <h5 class="text-start">Cliente</h5>
+      <hr class="py-1" />
       <div class="flex items-baseline">
-        <label class="text-sm w-16 text-right mr-2" for="customer_name"
-          >Cliente</label
+        <label class="text-sm w-24 text-right mr-2" for="customer_name"
+          >Nome</label
         >
-        <div class="flex flex-col">
+        <div class="flex flex-col w-full">
           <input
             type="text"
             formControlName="customer_name"
@@ -69,11 +112,11 @@
           />
         </div>
       </div>
-      <div class="flex items-baseline">
-        <label class="text-sm w-16 text-right mr-2" for="customer_phone"
+      <div class="flex items-baseline pb-5">
+        <label class="text-sm w-24 text-right mr-2" for="customer_phone"
           >Telefone</label
         >
-        <div class="flex flex-col">
+        <div class="flex flex-col w-full">
           <input
             type="text"
             formControlName="customer_phone"
@@ -81,23 +124,76 @@
           />
         </div>
       </div>
-      <div class="flex items-baseline">
-        <label class="text-sm w-16 text-right mr-2" for="image_url"
-          >Imagem</label
+      <h5 class="text-start">Endereço</h5>
+      <hr class="py-1" />
+      <div class="flex items-baseline pb-5">
+        <label class="text-sm w-24 text-right mr-2" for="customer_phone"
+          >Telefone</label
         >
-        <div class="flex flex-col">
+        <div class="flex flex-col w-full">
           <input
             type="text"
-            formControlName="image_url"
+            formControlName="customer_phone"
             class="border border-gray-400 my-1"
-            readonly
           />
         </div>
-        <button type="button" class="ml-1 btn-primary">Selecionar</button>
       </div>
-      <button type="submit" class="btn-green w-full mt-2 text-lg px-4">
-        Adicionar!
-      </button>
+      <div class="flex items-baseline pb-5">
+        <label class="text-sm w-24 text-right mr-2" for="customer_phone"
+          >Telefone</label
+        >
+        <div class="flex flex-col w-full">
+          <input
+            type="text"
+            formControlName="customer_phone"
+            class="border border-gray-400 my-1"
+          />
+        </div>
+      </div>
+      <div class="flex items-baseline pb-5">
+        <label class="text-sm w-24 text-right mr-2" for="customer_phone"
+          >Telefone</label
+        >
+        <div class="flex flex-col w-full">
+          <input
+            type="text"
+            formControlName="customer_phone"
+            class="border border-gray-400 my-1"
+          />
+        </div>
+      </div>
+      <div class="flex items-baseline pb-5">
+        <label class="text-sm w-24 text-right mr-2" for="customer_phone"
+          >Telefone</label
+        >
+        <div class="flex flex-col w-full">
+          <input
+            type="text"
+            formControlName="customer_phone"
+            class="border border-gray-400 my-1"
+          />
+        </div>
+      </div>
+      <div class="flex items-baseline pb-5">
+        <label class="text-sm w-24 text-right mr-2" for="customer_phone"
+          >Telefone</label
+        >
+        <div class="flex flex-col w-full">
+          <input
+            type="text"
+            formControlName="customer_phone"
+            class="border border-gray-400 my-1"
+          />
+        </div>
+      </div>
+      <div class="flex flex-row">
+        <button type="submit" class="btn-red w-full mt-2 text-lg mr-1 px-4 py-1">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-green w-full mt-2 text-lg ml-1 px-4 py-1">
+          Adicionar!
+        </button>
+      </div>
     </form>
   </div>
 </div>

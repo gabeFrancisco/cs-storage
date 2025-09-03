@@ -8,6 +8,11 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+input, textarea{
+  border-radius: 3px;
+  padding: 0 0.2rem 0 0.2rem;
+}
+
 
 @layer components {
   .btn {
@@ -53,7 +58,6 @@
   .txt-label {
     @apply absolute z-10 px-1 ml-3 -mt-2 text-sm transition-all bg-white rounded dark:bg-gray-900 dark:text-gray-300;
   }
-
 
   .data-blue{
     @apply transition ease-in-out shadow rounded border-2 border-blue-500 text-blue-500 bg-blue-50 dark:bg-gray-700 hover:-translate-y-1

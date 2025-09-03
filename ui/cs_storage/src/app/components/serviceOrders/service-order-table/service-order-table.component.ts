@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceOrder } from '../../../../models/ServiceOrder';
 import { ServiceOrderService } from '../../../services/service-order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-service-order-table',
@@ -13,7 +14,7 @@ export class ServiceOrderTableComponent implements OnInit {
 
   loading = true;
 
-  constructor(private serviceOrderService: ServiceOrderService) { }
+  constructor(private serviceOrderService: ServiceOrderService, private router: Router) { }
 
   ngOnInit(): void {
     this.serviceOrderService.triggerUpdate();
@@ -28,5 +29,9 @@ export class ServiceOrderTableComponent implements OnInit {
         this.serviceOrders = res
       }, complete: () => this.loading = false
     })
+  }
+
+  newServiceOrder(){
+    this.router.navigate(["ordensDeServiço/novo"])
   }
 }
