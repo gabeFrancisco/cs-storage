@@ -19,6 +19,7 @@ import { MissingProductsModalComponent } from './components/missingProducts/miss
 import { DebtUpdateModalComponent } from './components/debts/debt-update-modal/debt-update-modal.component';
 import { ServiceOrderTableComponent } from './components/serviceOrders/service-order-table/service-order-table.component';
 import { ServiceOrdersComponent } from './pages/service-orders/service-orders.component';
+import { ServiceOrderCreateComponent } from './pages/service-order-create/service-order-create.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ServiceOrdersComponent } from './pages/service-orders/service-orders.co
     DebtUpdateModalComponent,
     ServiceOrderTableComponent,
     ServiceOrdersComponent,
+    ServiceOrderCreateComponent,
   ],
   imports: [
     BrowserModule,
