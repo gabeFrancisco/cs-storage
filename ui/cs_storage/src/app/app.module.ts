@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { MissingProductsTableComponent } from './components/missingProducts/missing-products-table/missing-products-table.component';
 import { MissingProductsModalComponent } from './components/missingProducts/missing-products-modal/missing-products-modal.component';
 import { DebtUpdateModalComponent } from './components/debts/debt-update-modal/debt-update-modal.component';
+import { ServiceOrderTableComponent } from './components/serviceOrders/service-order-table/service-order-table.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DebtUpdateModalComponent } from './components/debts/debt-update-modal/d
     MissingProductsTableComponent,
     MissingProductsModalComponent,
     DebtUpdateModalComponent,
+    ServiceOrderTableComponent,
   ],
   imports: [
     BrowserModule,

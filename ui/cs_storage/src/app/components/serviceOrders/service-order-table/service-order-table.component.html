@@ -1,0 +1,73 @@
+<div class="w-full shadow-lg border border-gray-200 rounded">
+  <div
+    class="px-2 py-1 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100"
+  >
+    <span class="font-bold">Ordens de Serviço</span>
+    <div class="border pl-2 rounded-sm bg-white">
+      <label for="date" class="mr-2">Data</label>
+      <input type="date" class="" name="date" id="date" />
+    </div>
+    <div>
+      <button
+        type="button"
+        (click)="fetchList()"
+        class="mx-1 text-gray-400 btn text-xl"
+      >
+        ↻
+      </button>
+      <button type="button" class="btn-green px-4 font-bold text-xl">+</button>
+    </div>
+  </div>
+  <div class="relative overflow-x-auto">
+    <div style="max-height: 50dvh">
+      <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
+        <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <!-- Table header -->
+          <tr>
+            <th class="font-thin p-2">Títutlo</th>
+            <th class="font-thin p-2">Data do serviço</th>
+            <th class="font-thin p-2">Valor</th>
+            <th class="font-thin p-2">Cliente</th>
+            <th class="font-thin p-2">Endereço</th>
+            <th class="font-thin text-center p-2">Ações</th>
+          </tr>
+        </thead>
+
+        <!-- Table body -->
+        <tbody>
+          <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
+            Carregando...
+          </tr>
+          <tr
+            class="items-center hover:bg-gray-200 cursor-pointer"
+            *ngFor="let item of serviceOrders"
+          >
+            <th class="font-thin p-1.5">{{ item.title }}</th>
+            <th class="font-thin border-r p-1.5">
+              {{ item.created_at | date : "dd/MM/yyyy" }}
+            </th>
+            <th class="font-thin p-1.5">R${{ item.value.toFixed(2) }}</th>
+            <th class="font-thin text-emerald-700 p-1.5">
+              {{ item.customer.name }} - Tel: {{ item.customer.phone }}
+            </th>
+            <th class="font-thin text-emerald-700 p-1.5">
+              {{ item.address?.road }}, {{ item.address?.number }}, {{ item.address?.complement }}
+            </th>
+            <th class="font-thin text-center">
+              <button title="Atualizar" class="btn-primary text-lg mr-1">
+                ✎
+              </button>
+              <button
+                type="button"
+                title="Remover"
+                class="btn-red text-lg mr-1"
+              >
+                𝘅
+              </button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

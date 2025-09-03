@@ -55,8 +55,6 @@ class DebtService
         $customer->cpf_cnpj = $request->input('customer.cpf_cnpj');
         $address->id;
 
-
-
         $value = $request->input('value');
         $forecast = $request->input('forecast');
 
@@ -78,14 +76,14 @@ class DebtService
         $debt->value = $request->input('value');
         $debt->forecast = $request->input('forecast');
 
-        $customerData = $request->input('customer');
         $customer = new Customer();
+        $customerData = $request->input('customer');
         $customer->name = $customerData['name'];
         $customer->phone = $customerData['phone'];
         $customer->cpf_cnpj = $customerData['cpf_cnpj'];
 
-        $addressData = $customerData['address'];
         $address = new Address();
+        $addressData = $customerData['address'];
         $address->road = $addressData['road'];
         $address->number = $addressData['number'];
         $address->complement = $addressData['complement'];
