@@ -18,6 +18,7 @@ import { MissingProductsTableComponent } from './components/missingProducts/miss
 import { MissingProductsModalComponent } from './components/missingProducts/missing-products-modal/missing-products-modal.component';
 import { DebtUpdateModalComponent } from './components/debts/debt-update-modal/debt-update-modal.component';
 import { ServiceOrderTableComponent } from './components/serviceOrders/service-order-table/service-order-table.component';
+import { ServiceOrdersComponent } from './pages/service-orders/service-orders.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ServiceOrderTableComponent } from './components/serviceOrders/service-o
     MissingProductsModalComponent,
     DebtUpdateModalComponent,
     ServiceOrderTableComponent,
+    ServiceOrdersComponent,
   ],
   imports: [
     BrowserModule,
