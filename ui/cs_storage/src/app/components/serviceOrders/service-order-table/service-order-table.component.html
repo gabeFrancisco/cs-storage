@@ -33,6 +33,7 @@
             <th class="font-thin p-2">Criação</th>
             <th class="font-thin p-2">Títutlo</th>
             <th class="font-thin p-2">Data do serviço</th>
+            <th class="font-thin p-2">Prioridade</th>
             <th class="font-thin p-2">Cliente</th>
             <th class="font-thin p-2">Endereço</th>
             <th class="font-thin p-2">Valor</th>
@@ -55,6 +56,16 @@
             <td class="font-thin text-ellipsis overflow-hidden max-w-lg p-1.5">{{ item.title }}</td>
             <td class="font-thin text-ellipsis overflow-hidden max-w-lg p-1.5 text-blue-700">
               {{ item.service_date | date : "dd/MM/yyyy" }}
+            </td>
+            <td [ngClass]="{
+              'bg-sky-200': item.priority === 0,
+              'bg-gray-200': item.priority === 1,
+              'bg-red-200': item.priority === 2,
+            }"
+              class="font-thin text-center rounded text-ellipsis overflow-hidden max-w-lg p-1.5">
+              @if (item.priority === 0) { Baixa }
+              @if (item.priority === 1) { Normal }
+              @if (item.priority === 2) { Alta }
             </td>
             <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-gray-700 p-1.5">
               {{ item.customer.name }} - Tel: {{ item.customer.phone }}
