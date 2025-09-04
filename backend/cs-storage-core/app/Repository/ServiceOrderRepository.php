@@ -98,7 +98,7 @@ class ServiceOrderRepository
             $dbServiceOrder = DB::selectOne(
                 'INSERT INTO service_orders
                             (title, description, service_date, value, customer_id, address_id, created_at)
-                        VALUES (?,?,?,?,?,?,?) returning *',
+                        VALUES (?,?,?,?,?,?,current_date) returning *',
                 [
                     $serviceOrder->title,
                     $serviceOrder->description,
@@ -106,15 +106,14 @@ class ServiceOrderRepository
                     $serviceOrder->value,
                     $dbCustomer->id,
                     $dbAddress->id,
-                    Carbon::now()
                 ]
             );
 
             DB::commit();
 
         } catch (Exception $e) {
-            error_log($e->getMessage());
             DB::rollBack();
+            throw $e;
         }
         return $dbServiceOrder;
     }

@@ -49,7 +49,6 @@ export class DebtPostModalComponent implements OnInit {
 
   submit() {
     if (this.debtForm.invalid) {
-      alert("Há campos inválidos! Por favor, verifique.");
       return;
     }
 
@@ -74,12 +73,12 @@ export class DebtPostModalComponent implements OnInit {
       }
     }
 
-      this.debtService.createDebt(this.debt).subscribe({
-        next: _ => {
-          this.debtForm.reset();
-          this.debtService.triggerUpdate();
-        },
-        error: err => console.log(err)
-      })
+    this.debtService.createDebt(this.debt).subscribe({
+      next: _ => {
+        this.debtForm.reset();
+        this.debtService.triggerUpdate();
+      },
+      error: err => console.log(err)
+    })
   }
 }
