@@ -15,11 +15,11 @@ const routes: Routes = [
     component: MissingProductsComponent
   },
   {
-    path: "ordensDeServiço",
+    path: "ordensDeServico",
     component: ServiceOrdersComponent,
   },
   {
-    path: "ordensDeServiço/novo",
+    path: "ordensDeServico/novo",
     component: ServiceOrderCreateComponent
   }
 ];

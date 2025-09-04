@@ -18,8 +18,6 @@ export class MissingProductsModalComponent {
 
   missingProduct!: MissingProduct;
 
-  modalType: ModalType | null = null;
-
   constructor(private missingProductService: MissingProductService) {
     this.missingProductService.missingProductModalState$.subscribe((value) => {
       this.show = value;
@@ -33,10 +31,6 @@ export class MissingProductsModalComponent {
       needed_day: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
       image_url: new FormControl('')
     })
-
-    this.missingProductService.missingProductModalType$.subscribe(value => {
-      this.modalType = value;
-    })
   }
 
   close() {
@@ -47,7 +41,6 @@ export class MissingProductsModalComponent {
     if (this.missingProductForm.invalid) {
       console.log(this.missingProductForm.errors)
       console.log(this.missingProductForm.status)
-      console.log(this.modalType);
       return
     }
 
@@ -61,15 +54,14 @@ export class MissingProductsModalComponent {
       customer_phone: this.missingProductForm.get('customer_phone')!.value
     }
 
-    if (this.modalType === ModalType.CREATE) {
-      this.missingProductService.createMissingProduct(this.missingProduct).subscribe({
-        next: _ => {
-          this.missingProductForm.reset();
-          this.missingProductService.triggerUpdate();
-        },
-        error: err => console.log(err)
-      })
-      this.missingProductService.closeMissingProductModal();
-    }
+    this.missingProductService.createMissingProduct(this.missingProduct).subscribe({
+      next: _ => {
+        this.missingProductForm.reset();
+        this.missingProductService.triggerUpdate();
+      },
+      error: err => console.log(err)
+    })
+    this.missingProductService.closeMissingProductModal();
+
   }
 }

@@ -32,6 +32,6 @@ export class ServiceOrderTableComponent implements OnInit {
   }
 
   newServiceOrder(){
-    this.router.navigate(["ordensDeServiço/novo"])
+    this.router.navigate(["ordensDeServico/novo"])
   }
 }
