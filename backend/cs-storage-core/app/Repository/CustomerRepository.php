@@ -23,8 +23,8 @@ class CustomerRepository
     public function createCustomer(Customer $customer)
     {
         $dBcustomer = DB::selectOne(
-            'INSERT INTO customers(name, phone, cpf_cnpj, address_id, created_at)
-                    VALUES (?,?,?,?,current_date) returning *',
+            "INSERT INTO customers(name, phone, cpf_cnpj, address_id, created_at)
+                    VALUES (?,?,?,?,datetime('now')) returning *",
             [
                 $customer->name,
                 $customer->phone,

@@ -50,7 +50,8 @@ class ServiceOrderRepository
             INNER JOIN customers c
                     ON s.customer_id = c.id
             INNER JOIN addresses a
-                    ON s.address_id = a.id ';
+                    ON s.address_id = a.id
+        ORDER BY s.created_at DESC';
 
     private function parseServiceOrder($dbServiceOrder)
     {
@@ -96,9 +97,9 @@ class ServiceOrderRepository
             $dbCustomer = $this->customerRepository->createCustomer($serviceOrder->customer);
 
             $dbServiceOrder = DB::selectOne(
-                'INSERT INTO service_orders
+                "INSERT INTO service_orders
                             (title, description, service_date, value, customer_id, address_id, created_at)
-                        VALUES (?,?,?,?,?,?,current_date) returning *',
+                        VALUES (?,?,?,?,?,?,datetime('now')) returning *",
                 [
                     $serviceOrder->title,
                     $serviceOrder->description,

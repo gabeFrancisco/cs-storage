@@ -34,10 +34,10 @@ class CashRegisterRepository
     public function getAllByTodayDate()
     {
         $cashRegisters = DB::select(
-            'SELECT id, value, description, payment_type, created_at, updated_at
+            "SELECT id, value, description, payment_type, created_at, updated_at
                     FROM cash_registers
                     WHERE created_at = current_date
-            '
+            "
         );
 
         return $cashRegisters;
@@ -90,8 +90,9 @@ class CashRegisterRepository
 
     public function getDayAndMonthTotal()
     {
-        $day = DB::selectOne('SELECT SUM(value) AS total FROM cash_registers WHERE created_at = current_date
-        ');
+        $day = DB::selectOne(
+            "SELECT SUM(value) AS total FROM cash_registers WHERE created_at = current_date"
+        );
 
         $month = DB::selectOne('SELECT SUM(value) AS total FROM cash_registers WHERE strftime("%m", created_at) = strftime("%m", "now")
         ');

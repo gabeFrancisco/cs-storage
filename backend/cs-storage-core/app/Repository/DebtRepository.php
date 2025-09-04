@@ -178,7 +178,7 @@ class DebtRepository
     public function getDayAndMonthTotal()
     {
         $day = DB::selectOne(
-            'SELECT SUM(value) AS total FROM debts WHERE created_at = current_date'
+            "SELECT SUM(value) AS total FROM debts WHERE created_at = current_date"
         );
 
         $month = DB::selectOne(

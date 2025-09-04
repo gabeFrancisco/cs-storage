@@ -1,4 +1,4 @@
-<div class="w-full shadow border border-gray-200 rounded">
+<div class="w-full shadow border mt-3 border-gray-200 rounded">
   <div
     class="px-2 py-1 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100"
   >
@@ -15,7 +15,13 @@
       >
         ↻
       </button>
-      <button (click)="newServiceOrder()" type="button" class="btn-green px-4 font-bold text-xl">+</button>
+      <button
+        (click)="newServiceOrder()"
+        type="button"
+        class="btn-green px-4 font-bold text-xl"
+      >
+        +
+      </button>
     </div>
   </div>
   <div class="relative overflow-x-auto">
@@ -24,6 +30,7 @@
         <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <!-- Table header -->
           <tr>
+            <th class="font-thin p-2">Criação</th>
             <th class="font-thin p-2">Títutlo</th>
             <th class="font-thin p-2">Data do serviço</th>
             <th class="font-thin p-2">Cliente</th>
@@ -42,18 +49,24 @@
             class="items-center hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of serviceOrders"
           >
-            <th class="font-thin p-1.5">{{ item.title }}</th>
-            <th class="font-thin p-1.5">
-              {{ item.created_at | date : "dd/MM/yyyy" }}
-            </th>
-            <th class="font-thin text-gray-700 p-1.5">
+            <td class="font-thin text-ellipsis overflow-hidden max-w-lg p-1.5 text-gray-500">
+              {{ item.created_at | date : "dd/MM/yyyy HH:mm" }}
+            </td>
+            <td class="font-thin text-ellipsis overflow-hidden max-w-lg p-1.5">{{ item.title }}</td>
+            <td class="font-thin text-ellipsis overflow-hidden max-w-lg p-1.5 text-blue-700">
+              {{ item.service_date | date : "dd/MM/yyyy" }}
+            </td>
+            <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-gray-700 p-1.5">
               {{ item.customer.name }} - Tel: {{ item.customer.phone }}
-            </th>
-            <th class="font-thin text-gray-700 p-1.5">
-              {{ item.address?.road }}, {{ item.address?.number }}, {{ item.address?.complement }}
-            </th>
-            <th class="font-thin text-emerald-700 p-1.5">R${{ item.value.toFixed(2) }}</th>
-            <th class="font-thin text-center border-l">
+            </td>
+            <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-gray-700 p-1.5">
+              {{ item.address?.road }}, {{ item.address?.number }},
+              {{ item.address?.complement }}
+            </td>
+            <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-emerald-700 p-1.5">
+              R${{ item.value.toFixed(2) }}
+            </td>
+            <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-center border-l">
               <button title="Atualizar" class="btn-primary text-lg mr-1">
                 ✎
               </button>
@@ -64,7 +77,7 @@
               >
                 𝘅
               </button>
-            </th>
+            </td>
           </tr>
         </tbody>
       </table>
