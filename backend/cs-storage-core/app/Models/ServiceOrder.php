@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Enums\ServicePriority;
-
 class ServiceOrder extends BaseModel{
     public $title;
     public $description;
-    public ServicePriority $priority;
+    public $priority;
     public $service_date;
     public $value;
     public $customer_id;

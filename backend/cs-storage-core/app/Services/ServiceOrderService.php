@@ -27,7 +27,7 @@ class ServiceOrderService
         $serviceOrder->description = $request->input('description');
         $serviceOrder->service_date = $request->input('service_date');
         $serviceOrder->value = $request->input('value');
-        $serviceOrder->priority = ServicePriority::from($request->input('priority'));
+        $serviceOrder->priority = $request->input('priority');
 
         $serviceOrder->customer = new Customer();
         $serviceOrder->customer->name = $request->input('customer.name');

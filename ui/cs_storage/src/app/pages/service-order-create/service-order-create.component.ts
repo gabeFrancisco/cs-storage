@@ -21,6 +21,7 @@ export class ServiceOrderCreateComponent {
       hasAddress: new FormControl(false),
       title: new FormControl("", Validators.required),
       description: new FormControl("", Validators.required),
+      priority: new FormControl(1, Validators.required),
       service_date: new FormControl("", Validators.required),
       value: new FormControl(0),
       customer_name: new FormControl("", Validators.required),
@@ -45,6 +46,7 @@ export class ServiceOrderCreateComponent {
     this.serviceOrder = {
       title: this.serviceOrderForm.get('title')!.value,
       description: this.serviceOrderForm.get('description')!.value,
+      priority: this.serviceOrderForm.get('priority')!.value,
       service_date: this.serviceOrderForm.get('service_date')!.value,
       value: this.serviceOrderForm.get('value')!.value,
       customer: {

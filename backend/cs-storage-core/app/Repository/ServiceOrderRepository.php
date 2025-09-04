@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Enums\ServicePriority;
 use App\Models\Address;
 use App\Models\ServiceOrder;
 use App\Models\Customer;
@@ -104,7 +105,7 @@ class ServiceOrderRepository
                 [
                     $serviceOrder->title,
                     $serviceOrder->description,
-                    $serviceOrder->priority->value,
+                    $serviceOrder->priority,
                     $serviceOrder->service_date,
                     $serviceOrder->value,
                     $dbCustomer->id,
@@ -166,6 +167,7 @@ class ServiceOrderRepository
                 'UPDATE service_orders
                           SET title = ?,
                               description = ?,
+                              priority = ?,
                               service_date = ?,
                               value = ?,
                               customer_id = ?,
@@ -176,6 +178,7 @@ class ServiceOrderRepository
                 [
                     $serviceOrder->title,
                     $serviceOrder->description,
+                    $serviceOrder->priority,
                     $serviceOrder->service_date,
                     $serviceOrder->value,
                     $serviceOrder->customer_id,
