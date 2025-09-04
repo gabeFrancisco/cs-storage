@@ -2,6 +2,8 @@
 
 namespace App\Utils;
 
+use Carbon\Carbon;
+
 class ClassHelper
 {
     public static function fillFromSql(object $row, string $class, string $prefix = '')
@@ -17,8 +19,7 @@ class ClassHelper
                 //Check if the prefix field exists on actual model class
                 if (property_exists($instance, $prop)) {
                     $instance->$prop = $value;
-                }
-                elseif(!$prefix && property_exists($instance, $field)){
+                } elseif (!$prefix && property_exists($instance, $field)) {
                     $instance->$field = $value;
                 }
             }

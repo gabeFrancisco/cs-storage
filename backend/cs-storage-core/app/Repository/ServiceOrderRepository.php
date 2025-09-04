@@ -30,6 +30,7 @@ class ServiceOrderRepository
             s.value        AS s_value,
             s.customer_id  AS s_customer_id,
             s.address_id   AS s_address_id,
+            s.priority     AS s_priority,
             s.service_date AS s_service_date,
             s.created_at   AS s_created_at,
             s.updated_at   AS s_updated_at,
@@ -98,11 +99,12 @@ class ServiceOrderRepository
 
             $dbServiceOrder = DB::selectOne(
                 "INSERT INTO service_orders
-                            (title, description, service_date, value, customer_id, address_id, created_at)
-                        VALUES (?,?,?,?,?,?,datetime('now')) returning *",
+                            (title, description, priority, service_date, value, customer_id, address_id, created_at)
+                        VALUES (?,?,?, ?, ?,?,?,datetime('now')) returning *",
                 [
                     $serviceOrder->title,
                     $serviceOrder->description,
+                    $serviceOrder->priority->value,
                     $serviceOrder->service_date,
                     $serviceOrder->value,
                     $dbCustomer->id,

@@ -12,6 +12,7 @@ class ServiceOrderRequest extends FormRequest
             'id' => 'numeric|nullable',
             'title' => 'required|string',
             'description' => 'required|string',
+            'priority' => 'required|numeric',
             'service_date' => 'date|nullable',
             'value' => 'numeric|nullable',
             'customer' => 'required',
