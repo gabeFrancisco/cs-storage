@@ -1,6 +1,8 @@
 <?php
 
-enum payment_type{
+namespace App\Enums;
+
+enum PaymentType: int{
     case CASH = 0;
     case DEBT = 1;
     case CREDIT = 2;

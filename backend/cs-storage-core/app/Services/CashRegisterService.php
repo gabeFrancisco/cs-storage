@@ -6,7 +6,7 @@ use App\Http\Requests\CashRegisterRequest;
 use App\Models\CashRegister;
 use App\Repository\CashRegisterRepository;
 use Error;
-use Carbon\Carbon;
+use App\Enums\PaymentType;
 
 class CashRegisterService
 {
@@ -23,12 +23,6 @@ class CashRegisterService
     public function getAllByToday()
     {
         return $this->_repository->getAllByTodayDate();
-    }
-
-    //TODO
-    public function getAllByDate($date)
-    {
-        return CashRegister::where('created_at', $date)->get();
     }
 
     public function getById($id)
@@ -50,7 +44,7 @@ class CashRegisterService
         $register = $this->_repository->createCashRegister(new CashRegister(
             null,
             $value,
-            $payment_type,
+            PaymentType::from($payment_type),
             $description,
             $created_at
         ));
@@ -74,7 +68,7 @@ class CashRegisterService
         $register = $this->_repository->updateCashRegister(new CashRegister(
             $id,
             $value,
-            $payment_type,
+            PaymentType::from($payment_type),
             $description,
             $created_at
         ));

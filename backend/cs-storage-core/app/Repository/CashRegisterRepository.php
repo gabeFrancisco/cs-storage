@@ -50,7 +50,7 @@ class CashRegisterRepository
                     VALUES (?,?,?,?) returning *',
             [
                 $cashRegister->value,
-                $cashRegister->payment_type,
+                $cashRegister->payment_type->value,
                 $cashRegister->description,
                 $cashRegister->created_at
             ]
@@ -68,7 +68,7 @@ class CashRegisterRepository
             ',
             [
                 $cashRegister->value,
-                $cashRegister->payment_type,
+                $cashRegister->payment_type->value,
                 $cashRegister->description,
                 Carbon::now(),
                 $cashRegister->id
