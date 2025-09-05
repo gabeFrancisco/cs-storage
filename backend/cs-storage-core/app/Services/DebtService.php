@@ -98,8 +98,7 @@ class DebtService
 
     public function remove($id)
     {
-        $debt = $this->debtRepository->removeDebt($id);
-        return $debt;
+        $this->debtRepository->removeDebt($id);
     }
 
     public function getDayAndMonthTotal()

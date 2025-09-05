@@ -40,15 +40,16 @@ class CashRegisterController extends Controller
 
     public function delete($id)
     {
-        $register = $this->_cashRegisterService->remove($id);
+        $this->_cashRegisterService->remove($id);
 
-        return response()->json([
-            'message' => 'The register was deleted with success!',
-            'data' => $register
-        ], 200);
+        return response()->json(
+            'The register was deleted with success!',
+            200
+        );
     }
 
-    public function getDayAndMonthTotal(){
+    public function getDayAndMonthTotal()
+    {
         $data = $this->_cashRegisterService->getDayAndMonthTotal();
 
         return response()->json($data, 200);

@@ -13,7 +13,8 @@ class DebtController extends Controller
 {
     private DebtService $_debtService;
 
-    public function __construct(DebtService $debtService) {
+    public function __construct(DebtService $debtService)
+    {
         $this->_debtService = $debtService;
     }
 
@@ -23,7 +24,8 @@ class DebtController extends Controller
         return response()->json($debts, 200);
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         $debt = $this->_debtService->getById($id);
         return response()->json($debt, 200);
     }
@@ -38,7 +40,8 @@ class DebtController extends Controller
         ], 200);
     }
 
-    public function put(DebtRequest $request){
+    public function put(DebtRequest $request)
+    {
         $result = $this->_debtService->update($request);
 
         return response()->json([
@@ -47,16 +50,18 @@ class DebtController extends Controller
         ], 200);
     }
 
-    public function delete($id){
-        $debt = $this->_debtService->remove($id);
+    public function delete($id)
+    {
+        $this->_debtService->remove($id);
 
-        return response()->json([
-            'message' => 'The register was deleted with success!',
-            'data' => $debt
-        ]);
+        return response()->json(
+            'The register was deleted with success!',
+            200
+        );
     }
 
-    public function getDayAndMonthTotal(){
+    public function getDayAndMonthTotal()
+    {
         $data = $this->_debtService->getDayAndMonthTotal();
 
         return response()->json($data, 200);

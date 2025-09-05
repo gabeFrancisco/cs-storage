@@ -80,12 +80,10 @@ class CashRegisterRepository
 
     public function deleteCashRegister(int $id)
     {
-        $cashRegister = DB::selectOne(
+        DB::delete(
             'DELETE from cash_registers WHERE id = ?',
             [$id]
         );
-
-        return $cashRegister;
     }
 
     public function getDayAndMonthTotal()

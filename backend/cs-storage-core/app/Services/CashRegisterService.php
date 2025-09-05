@@ -78,9 +78,7 @@ class CashRegisterService
 
     public function remove($id)
     {
-        $register = $this->_repository->deleteCashRegister($id);
-
-        return $register;
+        $this->_repository->deleteCashRegister($id);
     }
 
     public function getDayAndMonthTotal()

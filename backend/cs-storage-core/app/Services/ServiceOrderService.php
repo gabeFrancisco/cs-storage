@@ -70,4 +70,9 @@ class ServiceOrderService
 
         return $dbServiceOrer;
     }
+
+    public function remove($id)
+    {
+        $this->serviceOrderRepository->removeServiceOrder($id);
+    }
 }

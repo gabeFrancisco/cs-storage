@@ -42,7 +42,7 @@ class MissingProductController extends Controller
         return $missingProduct;
     }
 
-    public function remove()
+    public function delete()
     {
         $id = request()->query('id');
         $this->missingProductService->remove($id);
@@ -51,7 +51,7 @@ class MissingProductController extends Controller
         ], 200);
     }
 
-    public function removeAllBought(){
+    public function deleteAllBought(){
         $this->missingProductService->removeAllBought();
         return response()->json([
             "message" => 'All bought products deleted with success!'

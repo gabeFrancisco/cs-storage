@@ -167,12 +167,10 @@ class DebtRepository
 
     public function removeDebt(int $id)
     {
-        $debt = DB::selectOne(
+        DB::delete(
             'DELETE FROM debts WHERE id = ?',
             [$id]
         );
-
-        return $debt;
     }
 
     public function getDayAndMonthTotal()

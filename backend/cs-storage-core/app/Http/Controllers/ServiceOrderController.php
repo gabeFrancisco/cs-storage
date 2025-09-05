@@ -38,4 +38,8 @@ class ServiceOrderController extends Controller
         $result = $this->serviceOrderService->update($request);
         return response()->json($result, 200);
     }
+
+    public function delete($id){
+        $this->serviceOrderService->remove($id);
+    }
 }

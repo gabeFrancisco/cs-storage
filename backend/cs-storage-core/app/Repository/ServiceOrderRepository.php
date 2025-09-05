@@ -196,4 +196,11 @@ class ServiceOrderRepository
 
         return $dbServiceOrder;
     }
+
+    public function removeServiceOrder(int $id){
+        DB::delete(
+            "DELETE FROM service_orders WHERE id = ?",
+            [$id]
+        );
+    }
 }
