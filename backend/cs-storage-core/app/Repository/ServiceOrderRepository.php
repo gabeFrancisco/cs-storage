@@ -53,7 +53,7 @@ class ServiceOrderRepository
                     ON s.customer_id = c.id
             INNER JOIN addresses a
                     ON s.address_id = a.id
-        ORDER BY s.created_at DESC';
+        ';
 
     private function parseServiceOrder($dbServiceOrder)
     {
@@ -173,7 +173,7 @@ class ServiceOrderRepository
                               customer_id = ?,
                               address_id = ?,
                               updated_at = ?
-                          WHERE  id = ? RETURNING *'
+                          WHERE id = ?'
                 ,
                 [
                     $serviceOrder->title,

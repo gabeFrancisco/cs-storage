@@ -1,6 +1,6 @@
+import { ServiceOrder } from './../../../models/ServiceOrder';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ServiceOrder } from '../../../models/ServiceOrder';
 import { ServiceOrderService } from '../../services/service-order.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -22,6 +22,7 @@ export class ServiceOrderUpdateComponent implements OnInit {
   ) {
     this.serviceOrderForm = new FormGroup({
       hasAddress: new FormControl(false),
+      id: new FormControl(0),
       title: new FormControl("", Validators.required),
       description: new FormControl("", Validators.required),
       priority: new FormControl(1, Validators.required),
@@ -40,7 +41,36 @@ export class ServiceOrderUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
       this.serviceOrderService.getCachedServiceOrderById(parseInt(params.get('id')!))?.subscribe(value => {
-        this.serviceOrderForm.patchValue(value!)
+        // const ServiceOrder: ServiceOrder = {
+        //   id: value!.id,
+        //   title: value!.title,
+        //   description: value!.description,
+        //   priority: value!.priority,
+        //   service_date: value!.service_date,
+        //   customer: {
+        //     name: value!.customer.name,
+        //     phone: value!.customer.phone
+        //   }
+        // }
+        if(value!.address){
+          this.serviceOrderForm.controls['hasAddress'].setValue(true)
+        }
+        this.serviceOrderForm.patchValue({
+          id: value!.id,
+          title: value!.title,
+          description: value!.description,
+          priority: value!.priority,
+          service_date: value!.service_date,
+          value: value!.value,
+          customer_name: value!.customer.name,
+          customer_phone: value!.customer.phone,
+          road: value!.address?.road,
+          number: value!.address?.number,
+          complement: value!.address?.complement,
+          neighborhood: value!.address?.neighborhood,
+          city: value!.address?.city,
+          state: value!.address?.state
+        })
       })
     })
   }
@@ -54,6 +84,7 @@ export class ServiceOrderUpdateComponent implements OnInit {
       return;
     }
     this.serviceOrder = {
+      id: this.serviceOrderForm.get('id')!.value,
       title: this.serviceOrderForm.get('title')!.value,
       description: this.serviceOrderForm.get('description')!.value,
       priority: this.serviceOrderForm.get('priority')!.value,
@@ -75,7 +106,7 @@ export class ServiceOrderUpdateComponent implements OnInit {
       }
     }
 
-    this.serviceOrderService.createServiceOrder(this.serviceOrder).subscribe({
+    this.serviceOrderService.updateServiceOrder(this.serviceOrder).subscribe({
       next: _ => {
         this.serviceOrderForm.reset();
         this.serviceOrderService.triggerUpdate();

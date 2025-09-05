@@ -33,7 +33,7 @@ export class ServiceOrderService {
     this.list$ = undefined;
   }
 
-  getCachedServiceOrderById(id: number){
+  getCachedServiceOrderById(id: number) {
     return this.list$?.pipe(
       map(so => so.find(x => x.id === id))
     )
@@ -42,6 +42,12 @@ export class ServiceOrderService {
   createServiceOrder(payload: ServiceOrder): Observable<any> {
     return this.http.post(this.url, payload)
       .pipe(catchError(handleNetworkError('create-service-order')))
+      .pipe(tap(() => this.clearCache()))
+  }
+
+  updateServiceOrder(payload: ServiceOrder): Observable<any> {
+    return this.http.put(this.url, payload)
+      .pipe(catchError(handleNetworkError('update-service-order')))
       .pipe(tap(() => this.clearCache()))
   }
 
