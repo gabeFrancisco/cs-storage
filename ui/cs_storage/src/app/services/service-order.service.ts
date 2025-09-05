@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ServiceOrder } from '../../models/ServiceOrder';
-import { BehaviorSubject, catchError, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { handleNetworkError } from '../../utils/errorHandler';
 
@@ -31,6 +31,12 @@ export class ServiceOrderService {
 
   clearCache() {
     this.list$ = undefined;
+  }
+
+  getCachedServiceOrderById(id: number){
+    return this.list$?.pipe(
+      map(so => so.find(x => x.id === id))
+    )
   }
 
   createServiceOrder(payload: ServiceOrder): Observable<any> {

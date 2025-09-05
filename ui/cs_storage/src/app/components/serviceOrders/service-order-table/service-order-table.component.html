@@ -78,7 +78,9 @@
               R${{ item.value.toFixed(2) }}
             </td>
             <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-center border-l">
-              <button title="Atualizar" class="btn-primary text-lg mr-1">
+              <button
+              (click)="update(item.id!)"
+              title="Atualizar" class="btn-primary text-lg mr-1">
                 ✎
               </button>
               <button

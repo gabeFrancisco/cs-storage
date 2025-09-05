@@ -20,6 +20,7 @@ import { DebtUpdateModalComponent } from './components/debts/debt-update-modal/d
 import { ServiceOrderTableComponent } from './components/serviceOrders/service-order-table/service-order-table.component';
 import { ServiceOrdersComponent } from './pages/service-orders/service-orders.component';
 import { ServiceOrderCreateComponent } from './pages/service-order-create/service-order-create.component';
+import { ServiceOrderUpdateComponent } from './pages/service-order-update/service-order-update.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ServiceOrderCreateComponent } from './pages/service-order-create/servic
     ServiceOrderTableComponent,
     ServiceOrdersComponent,
     ServiceOrderCreateComponent,
+    ServiceOrderUpdateComponent,
   ],
   imports: [
     BrowserModule,

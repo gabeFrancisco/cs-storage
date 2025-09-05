@@ -1,0 +1,279 @@
+<div class="px-7 flex flex-col justify-center">
+  <div
+    class="text-xl sticky top-12 bg-white font-bold border-b py-2 px-2 flex flex-row justify-between text-gray-700 text-center"
+  >
+    Nova ordem de serviço
+  </div>
+  <div class="p-5 w-full flex flex-col items-center">
+    <form
+      #formDir="ngForm"
+      (ngSubmit)="submit()"
+      [formGroup]="serviceOrderForm"
+      class="w-full md:w-2/3 lg:w-2/5 mx-auto space-y-1"
+    >
+      <input type="hidden" [value]="0" formControlName="id" />
+      <h5 class="text-start">Serviço</h5>
+      <hr class="py-1" />
+      <div class="flex items-baseline w-full">
+        <label class="w-24 text-sm text-right mr-2" for="title">Título*</label>
+        <div class="flex flex-col w-full">
+          <input
+            type="text"
+            class="border w-full border-gray-400"
+            formControlName="title"
+            required
+          />
+          <small
+            class="text-red-500"
+            *ngIf="serviceOrderForm.get('title')!.invalid && formDir.submitted"
+            >Título é obrigatório!</small
+          >
+        </div>
+      </div>
+      <div class="flex items-baseline">
+        <label class="w-24 text-sm text-right mr-2" for="description"
+          >Descrição*</label
+        >
+        <div class="flex flex-col w-full">
+          <textarea
+            type="text"
+            class="border w-full border-gray-400"
+            formControlName="description"
+            rows="5"
+            required
+          ></textarea>
+          <small
+            class="text-red-500"
+            *ngIf="
+              serviceOrderForm.get('description')!.invalid && formDir.submitted
+            "
+            >Descrição é obrigatório!</small
+          >
+        </div>
+      </div>
+      <div class="flex items-baseline w">
+        <label class="text-sm w-24 text-right mr-2" for="priority"
+          >Prioridade</label
+        >
+        <div class="flex flex-col w-full">
+          <select
+            class="border border-gray-400 bg-white my-3"
+            formControlName="priority"
+            [ngClass]="{
+              'bg-indigo-200': serviceOrderForm.get('priority')!.value === 0,
+              'bg-gray-200': serviceOrderForm.get('priority')!.value === 1,
+              'bg-red-200': serviceOrderForm.get('priority')!.value === 2
+            }"
+          >
+            <option [ngValue]="0">Baixa</option>
+            <option [ngValue]="1">Normal</option>
+            <option [ngValue]="2">Alta</option>
+          </select>
+          <small
+            class="text-red-500"
+            *ngIf="
+              serviceOrderForm.get('priority')!.invalid && formDir.submitted
+            "
+            >Prioridade é obrigatório!</small
+          >
+        </div>
+      </div>
+      <div class="flex items-baseline w">
+        <label class="text-sm w-24 text-right mr-2" for="service_date"
+          >Data*</label
+        >
+        <div class="flex flex-col w-full">
+          <input
+            type="date"
+            formControlName="service_date"
+            class="border border-gray-400 my-1"
+            required
+          />
+          <small
+            class="text-red-500"
+            *ngIf="
+              serviceOrderForm.get('service_date')!.invalid && formDir.submitted
+            "
+            >Data é obrigatório!</small
+          >
+        </div>
+      </div>
+      <div class="flex items-baseline w-full pb-5">
+        <label class="w-24 text-sm text-right mr-2" for="value">Valor</label>
+        <div class="flex flex-col w-full">
+          <input
+            type="number"
+            class="border w-full border-gray-400"
+            formControlName="value"
+            required
+          />
+        </div>
+      </div>
+      <h5 class="text-start">Cliente</h5>
+      <hr class="py-1" />
+      <div class="flex items-baseline">
+        <label class="text-sm w-24 text-right mr-2" for="customer_name"
+          >Nome</label
+        >
+        <div class="flex flex-col w-full">
+          <input
+            type="text"
+            formControlName="customer_name"
+            class="border border-gray-400 my-1"
+          />
+          <small
+            class="text-red-500"
+            *ngIf="
+              serviceOrderForm.get('customer_name')!.invalid &&
+              formDir.submitted
+            "
+            >Nome é obrigatório!</small
+          >
+        </div>
+      </div>
+      <div class="flex items-baseline pb-5">
+        <label class="text-sm w-24 text-right mr-2" for="customer_phone"
+          >Telefone</label
+        >
+        <div class="flex flex-col w-full">
+          <input
+            type="text"
+            formControlName="customer_phone"
+            class="border border-gray-400 my-1"
+          />
+          <small
+            class="text-red-500"
+            *ngIf="
+              serviceOrderForm.get('customer_phone')!.invalid &&
+              formDir.submitted
+            "
+            >Telefone é obrigatório!</small
+          >
+        </div>
+      </div>
+
+      <div class="flex flex-row items-center">
+        <label for="hasAddress" class="mr-2">Incluir endereço?</label>
+        <input type="checkbox" name="hasAddress" formControlName="hasAddress" />
+      </div>
+      <div *ngIf="this.serviceOrderForm.get('hasAddress')!.value">
+        <h5 class="text-start">Endereço</h5>
+        <hr class="py-1" />
+
+        <div class="flex items-baseline">
+          <label class="text-sm w-24 text-right mr-2" for="road">Rua</label>
+          <div class="flex flex-col w-full">
+            <input
+              type="text"
+              formControlName="road"
+              class="border border-gray-400 my-1"
+            />
+            <small
+              class="text-red-500"
+              *ngIf="serviceOrderForm.get('road')!.invalid && formDir.submitted"
+              >Rua é obrigatório!</small
+            >
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-start items-start w-full">
+          <div class="flex items-baseline justify-start mr-2">
+            <label class="text-sm w-20 text-right mr-2" for="number"
+              >Número</label
+            >
+            <div class="flex flex-col justify-stretch w-1/3">
+              <input
+                type="text"
+                formControlName="number"
+                class="border border-gray-400 my-1"
+              />
+              <small
+                class="text-red-500"
+                *ngIf="
+                  serviceOrderForm.get('number')!.invalid && formDir.submitted
+                "
+                >Número é obrigatório!</small
+              >
+            </div>
+          </div>
+          <div class="flex items-baseline justify-stretch">
+            <label class="text-sm w-20 text-right mr-5" for="complement"
+              >Complemento</label
+            >
+            <div class="flex flex-col w-1/4">
+              <input
+                type="text"
+                formControlName="complement"
+                class="border border-gray-400 my-1"
+              />
+              <small
+                class="text-red-500"
+                *ngIf="
+                  serviceOrderForm.get('complement')!.invalid &&
+                  formDir.submitted
+                "
+                >Complemento é obrigatório!</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-baseline">
+          <label class="text-sm w-24 text-right mr-2" for="neighborhood"
+            >Bairro</label
+          >
+          <div class="flex flex-col w-full">
+            <input
+              type="text"
+              formControlName="neighborhood"
+              class="border border-gray-400 my-1"
+            />
+            <small
+              class="text-red-500"
+              *ngIf="
+                serviceOrderForm.get('neighborhood')!.invalid &&
+                formDir.submitted
+              "
+              >Bairro é obrigatório!</small
+            >
+          </div>
+        </div>
+        <div class="flex items-baseline">
+          <label class="text-sm w-24 text-right mr-2" for="city">Cidade</label>
+          <div class="flex flex-col w-full">
+            <input
+              type="text"
+              formControlName="city"
+              class="border border-gray-400 my-1"
+            />
+          </div>
+        </div>
+        <div class="flex items-baseline">
+          <label class="text-sm w-24 text-right mr-2" for="state">Estado</label>
+          <div class="flex flex-col w-full">
+            <input
+              type="text"
+              formControlName="state"
+              class="border border-gray-400 my-1"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-row">
+        <button
+          (click)="cancel()"
+          type="submit"
+          class="btn-red w-full mt-2 text-lg mr-1 px-4 py-1"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="btn-green w-full mt-2 text-lg ml-1 px-4 py-1"
+        >
+          Enviar!
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

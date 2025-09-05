@@ -35,6 +35,14 @@ export class ServiceOrderTableComponent implements OnInit {
     this.router.navigate(["ordensDeServico/novo"])
   }
 
+  update(id: number) {
+    // this.serviceOrderService
+    // .getCachedServiceOrderById(id)?.subscribe(value => console.log(value?.id))
+    this.router.navigate(["ordensDeServico/editar"], {
+      queryParams: { id: id }
+    })
+  };
+
   remove(id: number) {
     if (confirm("Tem certeza que deseja remover essa ordem de serviço?")) {
       this.serviceOrderService.removeServiceOrder(id).subscribe(() => {

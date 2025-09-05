@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { MissingProductsComponent } from './pages/missing-products/missing-products.component';
 import { ServiceOrdersComponent } from './pages/service-orders/service-orders.component';
 import { ServiceOrderCreateComponent } from './pages/service-order-create/service-order-create.component';
+import { ServiceOrderUpdateComponent } from './pages/service-order-update/service-order-update.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: "ordensDeServico/novo",
     component: ServiceOrderCreateComponent
+  },
+  {
+    path: "ordensDeServico/editar",
+    component: ServiceOrderUpdateComponent
   }
 ];
 
