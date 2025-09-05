@@ -31,7 +31,15 @@ export class ServiceOrderTableComponent implements OnInit {
     })
   }
 
-  newServiceOrder(){
+  newServiceOrder() {
     this.router.navigate(["ordensDeServico/novo"])
+  }
+
+  remove(id: number) {
+    if (confirm("Tem certeza que deseja remover essa ordem de serviço?")) {
+      this.serviceOrderService.removeServiceOrder(id).subscribe(() => {
+        this.fetchList()
+      });
+    }
   }
 }
