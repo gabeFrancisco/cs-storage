@@ -4,11 +4,15 @@ use App\Http\Controllers\CashRegisterController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\MissingProductController;
 use App\Http\Controllers\ServiceOrderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+//User
+Route::post('users/register', [UserController::class, 'register']);
 
 //CashRegister
 Route::get('cashregisters', [CashRegisterController::class, 'getAll']);
@@ -33,7 +37,6 @@ Route::post('missingproducts/setstate', [MissingProductController::class, 'post_
 Route::get('missingproducts/{id}', [MissingProductController::class, 'getById']);
 Route::delete('missingproducts', [MissingProductController::class, 'delete']);
 Route::delete('missingproducts/deleteallbought', [MissingProductController::class, 'deleteAllBought']);
-
 
 //ServiceOrders
 Route::get('serviceorders', [ServiceOrderController::class, 'getAll']);
