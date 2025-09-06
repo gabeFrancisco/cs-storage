@@ -13,6 +13,7 @@ Route::get('/', function () {
 
 //User
 Route::post('users/register', [UserController::class, 'register']);
+Route::post('users/login', [UserController::class, 'login']);
 
 //CashRegister
 Route::get('cashregisters', [CashRegisterController::class, 'getAll']);

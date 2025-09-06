@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Exception;
 
 class UserController extends Controller
 {
@@ -33,5 +35,25 @@ class UserController extends Controller
             "user" => $user,
             "token" => $token
         ]);
+    }
+
+    public function login(Request $request){
+        $credentials = $request->only('email', 'password');
+        try{
+            if(!Auth::attempt($credentials)){
+                return response()->json(['message' => "Invalid credentials!"], 401);
+            }
+
+            $user = Auth::user();
+            $token = $user->createToken("access_token")->plainTextToken;
+
+            return response()->json([
+                "user" => $user,
+                "token" => $token
+            ], 200);
+        }
+        catch(Exception $e){
+            return response()->json($e->getMessage(), 500);
+        }
     }
 }
