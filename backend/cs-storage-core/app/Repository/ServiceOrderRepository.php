@@ -159,6 +159,7 @@ class ServiceOrderRepository
 
             //Updates the Costumer
             $customer = $serviceOrder->customer;
+            $customer->id = $dbServiceOrder->customer->id;
             $serviceOrder->customer_id = $dbServiceOrder->customer_id;
 
             $this->customerRepository->updateCustomer($customer);
