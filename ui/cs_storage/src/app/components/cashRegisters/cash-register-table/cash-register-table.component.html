@@ -26,12 +26,12 @@
   </div>
   <div class="relative overflow-x-auto">
     <div style="max-height: 50dvh">
-      <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
+      <table class="table-fixed w-full text-sm text-left rtl:text-right dark:text-gray-400">
         <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <!-- Table header -->
           <tr>
             <th class="font-thin p-2">Data</th>
-            <th class="font-thin p-2">Descrição</th>
+            <th class="font-thin w-1/3 p-2">Descrição</th>
             <th class="font-thin p-2">Tipo</th>
             <th class="font-thin p-2">Valor</th>
             <th class="font-thin text-center p-2">Ações</th>
@@ -47,17 +47,17 @@
             class="items-center hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of registers"
           >
-            <th class="font-thin border-r p-1.5">
+            <td class="font-thin truncate border-r p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
-            </th>
-            <th class="font-thin p-1.5">{{ item.description }}</th>
-            <th class="font-thin p-1.5">
+            </td>
+            <td class="font-thin truncate p-1.5">{{ item.description }}</td>
+            <td class="font-thin truncate p-1.5">
               {{ payment_types[item.payment_type] }}
-            </th>
-            <th class="font-thin text-emerald-700 p-1.5">
+            </td>
+            <td class="font-thin truncate text-emerald-700 p-1.5">
               R${{ item.value.toFixed(2) }}
-            </th>
-            <th class="font-thin text-center">
+            </td>
+            <td class="font-thin truncate text-center">
               <button
                 (click)="openCashUpdateModal(item.id!)"
                 title="Atualizar"
@@ -73,7 +73,7 @@
               >
                 𝘅
               </button>
-            </th>
+            </td>
           </tr>
         </tbody>
       </table>

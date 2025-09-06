@@ -26,16 +26,16 @@
   </div>
   <div class="relative overflow-x-auto">
     <div style="max-height: 80dvh">
-      <table class="w-full text-sm text-left rtl:text-right dark:text-gray-400">
+      <table class="table-fixed w-full text-sm text-left rtl:text-right dark:text-gray-400">
         <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <!-- Table header -->
           <tr>
             <th class="font-thin p-2">Criação</th>
-            <th class="font-thin p-2">Títutlo</th>
-            <th class="font-thin p-2">Data do serviço</th>
+            <th class="font-thin w-1/4 p-2">Títutlo</th>
+            <th class="font-thin w-1/6 p-2">Data do serviço</th>
             <th class="font-thin p-2">Prioridade</th>
             <th class="font-thin p-2">Cliente</th>
-            <th class="font-thin p-2">Endereço</th>
+            <th class="font-thin w-1/6 p-2">Endereço</th>
             <th class="font-thin p-2">Valor</th>
             <th class="font-thin text-center p-2">Ações</th>
           </tr>
@@ -50,11 +50,11 @@
             class="items-center hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of serviceOrders"
           >
-            <td class="font-thin text-ellipsis overflow-hidden max-w-lg p-1.5 text-gray-500">
+            <td class="font-thin truncate p-1.5 text-gray-500">
               {{ item.created_at | date : "dd/MM/yyyy HH:mm" }}
             </td>
-            <td class="font-thin text-ellipsis overflow-hidden max-w-lg p-1.5">{{ item.title }}</td>
-            <td class="font-thin text-ellipsis overflow-hidden max-w-lg p-1.5 text-blue-700">
+            <td class="font-thin truncate p-1.5">{{ item.title }}</td>
+            <td class="font-thin truncate p-1.5 text-blue-700">
               {{ item.service_date | date : "dd/MM/yyyy" }}
             </td>
             <td [ngClass]="{
@@ -62,22 +62,22 @@
               'bg-gray-200': item.priority === 1,
               'bg-red-200': item.priority === 2,
             }"
-              class="font-thin text-center rounded text-ellipsis overflow-hidden max-w-lg p-1.5">
+              class="font-thin text-center rounded truncate p-1.5">
               @if (item.priority === 0) { Baixa }
               @if (item.priority === 1) { Normal }
               @if (item.priority === 2) { Alta }
             </td>
-            <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-gray-700 p-1.5">
+            <td class="font-thin truncate text-gray-700 p-1.5">
               {{ item.customer.name }} - Tel: {{ item.customer.phone }}
             </td>
-            <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-gray-700 p-1.5">
+            <td class="font-thin truncate text-gray-700 p-1.5">
               {{ item.address?.road }}, {{ item.address?.number }},
               {{ item.address?.complement }}
             </td>
-            <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-emerald-700 p-1.5">
+            <td class="font-thin truncate text-emerald-700 p-1.5">
               R${{ item.value.toFixed(2) }}
             </td>
-            <td class="font-thin text-ellipsis overflow-hidden max-w-lg text-center border-l">
+            <td class="font-thin truncate text-center border-l">
               <button
               (click)="update(item.id!)"
               title="Atualizar" class="btn-primary text-lg mr-1">
