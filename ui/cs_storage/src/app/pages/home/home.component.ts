@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  // showCashPostModal: boolean = true;
-  // showCashUpdateModal: boolean = true;
+  constructor(private userService: UserService){
+    userService.login({
+      email: "gabrielsfrancisco508@gmail.com",
+      password: "gabe1234"
+    }).subscribe()
+   }
 }

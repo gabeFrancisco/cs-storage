@@ -11,14 +11,15 @@ use Exception;
 
 class UserController extends Controller
 {
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -37,10 +38,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $credentials = $request->only('email', 'password');
-        try{
-            if(!Auth::attempt($credentials)){
+        try {
+            if (!Auth::attempt($credentials)) {
                 return response()->json(['message' => "Invalid credentials!"], 401);
             }
 
@@ -49,10 +51,9 @@ class UserController extends Controller
 
             return response()->json([
                 "user" => $user,
-                "token" => $token
-            ], 200);
-        }
-        catch(Exception $e){
+            ], 200)->cookie('access_token', $token, 262800);
+
+        } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
     }
