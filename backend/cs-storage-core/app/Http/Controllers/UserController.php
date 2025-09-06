@@ -58,7 +58,7 @@ class UserController extends Controller
 
 
             return response()->json([
-                "user" => $user,
+                "user" => $user
             ], 200)->withCookie($cookie);
 
             // ->cookie('access_token', $token, 262800, '/', null, false, true, false, 'None');
