@@ -13,6 +13,6 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login({ email, password }: { email: string, password: string }): Observable<any> {
-    return this.http.post(`${this.url}/login`, {email, password})
+    return this.http.post(`${this.url}/login`, {email, password}, { withCredentials: true})
   }
 }

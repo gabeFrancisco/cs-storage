@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Exception;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class UserController extends Controller
 {
@@ -49,12 +50,21 @@ class UserController extends Controller
             $user = Auth::user();
             $token = $user->createToken("access_token")->plainTextToken;
 
+            $cookie = Cookie::create('access_token', $token)
+                ->withSecure(true)
+                ->withHttpOnly(true)
+                ->withSameSite('None')
+                ->withExpires(time() + 60 * 60 * 24 * 180);
+
+
             return response()->json([
                 "user" => $user,
-            ], 200)->cookie('access_token', $token, 262800);
+            ], 200)->withCookie($cookie);
+
+            // ->cookie('access_token', $token, 262800, '/', null, false, true, false, 'None');
 
         } catch (Exception $e) {
-            return response()->json($e->getMessage(), 500);
+            return response()->json($e->getMessage(), 500, );
         }
     }
 }

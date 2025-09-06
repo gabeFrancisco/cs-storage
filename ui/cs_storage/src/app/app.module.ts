@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CashRegisterTableComponent } from './components/cashRegisters/cash-register-table/cash-register-table.component';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CashPostModalComponent } from './components/cashRegisters/cash-post-modal/cash-post-modal.component';
 import { CashUpdateModalComponent } from './components/cashRegisters/cash-update-modal/cash-update-modal.component';
@@ -21,6 +21,7 @@ import { ServiceOrderTableComponent } from './components/serviceOrders/service-o
 import { ServiceOrdersComponent } from './pages/service-orders/service-orders.component';
 import { ServiceOrderCreateComponent } from './pages/service-order-create/service-order-create.component';
 import { ServiceOrderUpdateComponent } from './pages/service-order-update/service-order-update.component';
+import { authInterceptor } from './utils/interceptor';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,9 @@ import { ServiceOrderUpdateComponent } from './pages/service-order-update/servic
     ReactiveFormsModule,
     RouterModule
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor]))
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
