@@ -21,7 +21,9 @@ import { ServiceOrderTableComponent } from './components/serviceOrders/service-o
 import { ServiceOrdersComponent } from './pages/service-orders/service-orders.component';
 import { ServiceOrderCreateComponent } from './pages/service-order-create/service-order-create.component';
 import { ServiceOrderUpdateComponent } from './pages/service-order-update/service-order-update.component';
-import { authInterceptor } from './utils/interceptor';
+import { authInterceptor } from '../utils/interceptor';
+import { LoginComponent } from './pages/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { authInterceptor } from './utils/interceptor';
     ServiceOrdersComponent,
     ServiceOrderCreateComponent,
     ServiceOrderUpdateComponent,
+    LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

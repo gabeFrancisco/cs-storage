@@ -5,27 +5,39 @@ import { MissingProductsComponent } from './pages/missing-products/missing-produ
 import { ServiceOrdersComponent } from './pages/service-orders/service-orders.component';
 import { ServiceOrderCreateComponent } from './pages/service-order-create/service-order-create.component';
 import { ServiceOrderUpdateComponent } from './pages/service-order-update/service-order-update.component';
+import { LoginComponent } from './pages/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: "",
-    component: HomeComponent
+    component: HomeComponent,
+    children: [
+      {
+        path: "",
+        component: DashboardComponent
+      },
+      {
+        path: "produtosEmFalta",
+        component: MissingProductsComponent
+      },
+      {
+        path: "ordensDeServico",
+        component: ServiceOrdersComponent,
+      },
+      {
+        path: "ordensDeServico/novo",
+        component: ServiceOrderCreateComponent
+      },
+      {
+        path: "ordensDeServico/editar",
+        component: ServiceOrderUpdateComponent
+      },
+    ]
   },
   {
-    path: "produtosEmFalta",
-    component: MissingProductsComponent
-  },
-  {
-    path: "ordensDeServico",
-    component: ServiceOrdersComponent,
-  },
-  {
-    path: "ordensDeServico/novo",
-    component: ServiceOrderCreateComponent
-  },
-  {
-    path: "ordensDeServico/editar",
-    component: ServiceOrderUpdateComponent
+    path: "login",
+    component: LoginComponent
   }
 ];
 
