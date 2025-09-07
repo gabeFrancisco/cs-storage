@@ -67,4 +67,9 @@ class UserController extends Controller
             return response()->json($e->getMessage(), 500, );
         }
     }
+
+    public function getActualUser()
+    {
+        return response()->json(request()->user());
+    }
 }

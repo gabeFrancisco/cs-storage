@@ -6,13 +6,21 @@ use App\Http\Controllers\MissingProductController;
 use App\Http\Controllers\ServiceOrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CookieTokenMiddleware;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+//User
+Route::post('users/register', [UserController::class, 'register']);
+Route::post('users/login', [UserController::class, 'login']);
+
 Route::middleware([CookieTokenMiddleware::class])->group(function () {
+    Route::get('users/getuser', [UserController::class, 'getActualUser']);
     //CashRegister
     Route::get('cashregisters', [CashRegisterController::class, 'getAll']);
     Route::get('cashregisters/monthtotal', [CashRegisterController::class, 'getDayAndMonthTotal']);
@@ -46,6 +54,3 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
 
 });
 
-//User
-Route::post('users/register', [UserController::class, 'register']);
-Route::post('users/login', [UserController::class, 'login']);
