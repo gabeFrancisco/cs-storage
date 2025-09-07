@@ -4,7 +4,12 @@
     <h1 class="text-4xl text-gray-600">Gerência Chaveiro Sul</h1>
   </div>
   <div class="border rounded shadow px-5 py-7">
-    <form action="" class="flex flex-col">
+    <form
+      [formGroup]="loginForm"
+      #formDir="ngForm"
+      (submit)="submit()"
+      class="flex flex-col"
+    >
       <div class="flex items-baseline">
         <label class="w-16 text-sm text-right mr-2" for="description"
           >Email</label
@@ -16,11 +21,11 @@
             formControlName="email"
             required
           />
-          <!-- <small
+          <small
             class="text-red-500"
-            *ngIf="debtForm.get('name')!.invalid && formDir.submitted"
-            >Nome é obrigatório!</small
-          > -->
+            *ngIf="loginForm.get('email')!.invalid && formDir.submitted"
+            >Email é obrigatório!</small
+          >
         </div>
       </div>
       <div class="flex items-baseline mt-5">
@@ -34,11 +39,11 @@
             formControlName="password"
             required
           />
-          <!-- <small
+          <small
           class="text-red-500"
-          *ngIf="debtForm.get('name')!.invalid && formDir.submitted"
-          >Nome é obrigatório!</small
-        > -->
+          *ngIf="loginForm.get('password')!.invalid && formDir.submitted"
+          >Senha é obrigatória!</small
+        >
         </div>
       </div>
       <button class="btn-green py-1 text-lg mt-3">Login</button>
