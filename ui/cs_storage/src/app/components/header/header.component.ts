@@ -9,9 +9,11 @@ import { DayAndMonthData } from '../../../models/ValueObjects/DayAndMonthData';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
   cashRegisterValues!: DayAndMonthData;
   debtValues!: DayAndMonthData;
+
+  user: any = null;
 
   constructor(private cashRegisterService: CashRegisterService, private debtService: DebtService) {
     this.cashRegisterService.triggerUpdate();
@@ -24,9 +26,10 @@ export class HeaderComponent{
       this.fetchData();
     })
   }
-  // ngOnInit(): void {
-  //   this.fetchData();
-  // }
+
+  ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem("user")!).user
+  }
 
   fetchData() {
     this.cashRegisterService.getDayAndMonthValueData()

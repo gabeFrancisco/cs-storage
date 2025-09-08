@@ -27,7 +27,8 @@ export class LoginComponent {
       email: this.loginForm.get('email')!.value,
       password: this.loginForm.get('password')!.value
     }).subscribe(({
-      next: () => {
+      next: (data) => {
+        localStorage.setItem("user", JSON.stringify(data));
         window.location.href = ""
       },
       error: () => alert("Usuário ou senha inválidos!")

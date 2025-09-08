@@ -8,10 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  constructor(private userService: UserService){
-    userService.login({
-      email: "gabrielsfrancisco508@gmail.com",
-      password: "gabe1234"
-    }).subscribe()
-   }
+
 }

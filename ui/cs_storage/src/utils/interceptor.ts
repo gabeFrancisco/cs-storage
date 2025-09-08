@@ -12,6 +12,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         return
       }
       // alert("Sessão expirada! Por favor, proceda para a tela de login!")
+      localStorage.removeItem("user");
       router.navigate(["login"]);
     }));
 };
