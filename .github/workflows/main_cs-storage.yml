@@ -3,10 +3,6 @@
 
 name: Build and deploy PHP app to Azure Web App - cs-storage
 
-defaults:
-  run:
-    working-directory: ./backend/cs-storage-core
-
 on:
   push:
     branches:
@@ -16,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend/cs-storage-core
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -46,6 +45,9 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend/cs-storage-core
     needs: build
     permissions:
       id-token: write #This is required for requesting the JWT
@@ -70,7 +72,8 @@ jobs:
         with:
           app-name: 'cs-storage'
           slot-name: 'Production'
-          package: .
+          package: ./backend/cs-storage-core
 
           
+
 
