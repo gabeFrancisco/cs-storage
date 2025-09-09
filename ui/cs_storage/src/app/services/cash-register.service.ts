@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, ReplaySubject, shareReplay, Subject, tap } from 'rxjs';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class CashRegisterService {
   private list$?: Observable<CashRegister[]>;
 
   constructor(private http: HttpClient) { }
-  private url = "http://127.0.0.1:8000/api/cashregisters";
+  private url = `${environment.apiUrl}/cashregisters`;
 
   //cash modal variables
   private cashPostModalState = new BehaviorSubject<boolean>(false);

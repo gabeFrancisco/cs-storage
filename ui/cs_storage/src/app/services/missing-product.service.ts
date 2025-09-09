@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, shareReplay, tap } from 'rxjs';
 import { ModalType } from '../../utils/modalType';
 import { handleNetworkError } from '../../utils/errorHandler';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class MissingProductService {
   private list$?: Observable<MissingProduct[]>;
 
   constructor(private http: HttpClient) { }
-  private url = "http://127.0.0.1:8000/api/missingproducts";
+  private url = `${environment.apiUrl}/missingproducts`;
 
   //Modal type for reuse
   private missingProductModalType = new BehaviorSubject<ModalType | null>(null);

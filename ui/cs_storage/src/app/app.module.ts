@@ -24,6 +24,7 @@ import { ServiceOrderUpdateComponent } from './pages/service-order-update/servic
 import { authInterceptor } from '../utils/interceptor';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { UserComponent } from './pages/user/user.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     ServiceOrderUpdateComponent,
     LoginComponent,
     DashboardComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

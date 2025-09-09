@@ -21,10 +21,10 @@ export class HeaderComponent implements OnInit{
       this.fetchData();
     })
 
-    this.debtService.triggerUpdate();
-    this.debtService.refreshList$.subscribe(() => {
-      this.fetchData();
-    })
+    // this.debtService.triggerUpdate();
+    // this.debtService.refreshList$.subscribe(() => {
+    //   this.fetchData();
+    // })
   }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit{
     this.cashRegisterService.getDayAndMonthValueData()
       .subscribe((res) => this.cashRegisterValues = res)
 
-    this.debtService.getDayAndMonthValueData()
-      .subscribe((res) => this.debtValues = res)
+    // this.debtService.getDayAndMonthValueData()
+    //   .subscribe((res) => this.debtValues = res)
   }
 }

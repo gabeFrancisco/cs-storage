@@ -5,6 +5,7 @@ import { Debt } from '../../models/Debt';
 import { ModalType } from '../../utils/modalType';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class DebtService {
   private list$?: Observable<Debt[]>;
 
   constructor(private http: HttpClient) { }
-  private url = "http://127.0.0.1:8000/api/debts";
+  private url = `${environment.apiUrl}/debts`;
 
   //Debt modal variables
   private debtPostModalState = new BehaviorSubject<boolean>(false);

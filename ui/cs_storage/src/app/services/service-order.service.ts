@@ -3,13 +3,14 @@ import { ServiceOrder } from '../../models/ServiceOrder';
 import { BehaviorSubject, catchError, map, Observable, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { handleNetworkError } from '../../utils/errorHandler';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceOrderService {
   private list$?: Observable<ServiceOrder[]>;
-  private url = "http://127.0.0.1:8000/api/serviceorders"
+  private url = `${environment.apiUrl}/serviceorders`;
 
   constructor(private http: HttpClient) { }
 
