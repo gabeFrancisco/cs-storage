@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CashRegisterService } from '../../../services/cash-register.service';
 import { CashRegister } from '../../../../models/CashRegister';
 import { PaymentTypeDictionary } from '../../../../utils/paymentTypesDictionary';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cash-register-table',
@@ -12,6 +13,7 @@ import { PaymentTypeDictionary } from '../../../../utils/paymentTypesDictionary'
 export class CashRegisterTableComponent implements OnInit {
   registers: CashRegister[] = [];
   payment_types = PaymentTypeDictionary
+  date!: FormControl;
 
   loading = true;
 
@@ -19,10 +21,13 @@ export class CashRegisterTableComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.date = new FormControl(new Date().toISOString().split('T')[0])
+
     this.cashService.triggerUpdate();
     this.cashService.refreshList$.subscribe(() => {
       this.fetchList();
     })
+
   }
 
   fetchList() {
