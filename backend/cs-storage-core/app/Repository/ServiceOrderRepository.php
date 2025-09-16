@@ -68,7 +68,7 @@ class ServiceOrderRepository
 
     public function getAllServiceOrders()
     {
-        $dbServiceOrders = DB::select($this->selectAllWithJoinQuery);
+        $dbServiceOrders = DB::select($this->selectAllWithJoinQuery . " ORDER BY s.priority desc");
 
         $serviceOrders = [];
 
