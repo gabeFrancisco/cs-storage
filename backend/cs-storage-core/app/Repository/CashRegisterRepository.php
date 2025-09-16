@@ -34,10 +34,9 @@ class CashRegisterRepository
     public function getAllByTodayDate()
     {
         $cashRegisters = DB::select(
-            "SELECT id, value, description, payment_type, created_at, updated_at
+            'SELECT id, value, description, payment_type, created_at, updated_at
                     FROM cash_registers
-                    WHERE created_at = current_date
-            "
+            '
         );
 
         return $cashRegisters;

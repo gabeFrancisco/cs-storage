@@ -8,7 +8,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const cloned = req.clone({ withCredentials: true })
   return next(cloned).pipe(tap(() => { },
     (err: any) => {
-      if(err.status !== 401){
+      if(err.status !== 401 && localStorage.getItem("user") !== null){
         return
       }
       // alert("Sessão expirada! Por favor, proceda para a tela de login!")
