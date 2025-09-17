@@ -25,6 +25,7 @@ import { authInterceptor } from '../utils/interceptor';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UserComponent } from './pages/user/user.component';
+import { NgClickOutsideDirective} from 'ng-click-outside2'
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UserComponent } from './pages/user/user.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NgClickOutsideDirective
   ],
   providers: [provideHttpClient(),
     provideHttpClient(withInterceptors([authInterceptor]))
