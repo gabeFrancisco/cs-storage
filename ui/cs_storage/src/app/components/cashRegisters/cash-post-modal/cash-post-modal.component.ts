@@ -62,8 +62,4 @@ export class CashPostModalComponent {
     }
     )
   }
-
-  msg(){
-    alert("It's working!")
-  }
 }

@@ -18,7 +18,7 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::get('users/getuser', [UserController::class, 'getActualUser']);
 
     //CashRegister
-    Route::get('cashregisters', [CashRegisterController::class, 'getAll']);
+    Route::get('cashregisters/getall/{date}', [CashRegisterController::class, 'getAll']);
     Route::get('cashregisters/monthtotal', [CashRegisterController::class, 'getDayAndMonthTotal']);
     Route::get('cashregisters/{id}', [CashRegisterController::class, 'getById']);
     Route::post("cashregisters", [CashRegisterController::class, 'post'], );

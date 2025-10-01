@@ -26,12 +26,12 @@
         <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <!-- Table header -->
           <tr>
-            <th class="font-thin p-2">Data</th>
-            <th class="font-thin p-2">Cliente</th>
-            <th class="font-thin p-2">Previsão</th>
-            <th class="font-thin p-2">Valor</th>
-            <th class="font-thin p-2">Pago</th>
-            <th class="font-thin w-1/5 text-center p-2">Ações</th>
+            <th class="font-normal p-2">Data</th>
+            <th class="font-normal p-2">Cliente</th>
+            <th class="font-normal p-2">Previsão</th>
+            <th class="font-normal p-2">Valor</th>
+            <th class="font-normal p-2">Pago</th>
+            <th class="font-normal w-1/5 text-center p-2">Ações</th>
           </tr>
         </thead>
 
@@ -44,20 +44,20 @@
             class="items-center hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of debts"
           >
-            <td class="font-thin truncate border-r p-1.5">
+            <td class="font-normal truncate border-r p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </td>
-            <td class="font-thin truncate p-1.5">{{ item.customer!.name}}</td>
-            <td class="font-thin truncate border-r p-1.5">
+            <td class="font-normal truncate p-1.5">{{ item.customer!.name}}</td>
+            <td class="font-normal truncate border-r p-1.5">
               {{ item.forecast | date : "dd/MM/yyyy" }}
             </td>
-            <td class="font-thin truncate text-emerald-700 p-1.5">
+            <td class="font-normal truncate text-emerald-700 p-1.5">
               R${{ item.value.toFixed(2) }}
             </td>
-            <td class="font-thin truncate p-1.5">
+            <td class="font-normal truncate p-1.5">
               {{ item.paid_date | date : "dd/MM/yyyy" }}
             </td>
-            <td class="font-thin text-center border-l">
+            <td class="font-normal text-center border-l">
               <button title="Atualizar" (click)="openDebtUpdate(item.id!)" class="btn-primary text-lg mr-1">✎</button>
               <button
                 type="button"

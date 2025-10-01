@@ -1,7 +1,7 @@
 import { CashRegister } from './../../models/CashRegister';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, ReplaySubject, shareReplay, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, ReplaySubject, shareReplay, Subject, tap } from 'rxjs';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 import { environment } from '../../environments/environment';
@@ -11,6 +11,7 @@ import { environment } from '../../environments/environment';
 })
 export class CashRegisterService {
   private list$?: Observable<CashRegister[]>;
+  private dateList?: Observable<CashRegister[]>;
 
   constructor(private http: HttpClient) { }
   private url = `${environment.apiUrl}/cashregisters`;
@@ -43,9 +44,12 @@ export class CashRegisterService {
     this.refreshList.next();
   }
 
-  getCashRegisters(): Observable<CashRegister[]> {
+  getCashRegisters(date: string): Observable<CashRegister[]> {
     if (!this.list$) {
-      this.list$ = this.http.get<CashRegister[]>(`${this.url}`).pipe(
+      this.list$!.subscribe(registers => {
+
+      })
+      this.list$ = this.http.get<CashRegister[]>(`${this.url}/getall/${date}`).pipe(
         shareReplay(1)
       )
     }

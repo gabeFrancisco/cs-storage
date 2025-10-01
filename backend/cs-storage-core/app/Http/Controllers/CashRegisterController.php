@@ -13,9 +13,9 @@ class CashRegisterController extends Controller
     {
         $this->_cashRegisterService = $cashRegisterService;
     }
-    public function getAll()
+    public function getAll($date)
     {
-        return response()->json($this->_cashRegisterService->getAll(), 200);
+        return response()->json($this->_cashRegisterService->getAllByDate($date), 200);
     }
 
     public function getById($id)

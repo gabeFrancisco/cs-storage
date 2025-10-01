@@ -4,8 +4,7 @@
 @tailwind utilities;
 
 *{
-  font-weight: 300;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 input, textarea, select{

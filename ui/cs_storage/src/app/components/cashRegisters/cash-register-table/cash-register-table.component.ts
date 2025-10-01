@@ -31,7 +31,7 @@ export class CashRegisterTableComponent implements OnInit {
   }
 
   fetchList() {
-    this.cashService.getCashRegisters().subscribe({
+    this.cashService.getCashRegisters(this.date.value).subscribe({
       next: res => {
         this.registers = res
       }, complete: () => this.loading = false

@@ -31,12 +31,16 @@ class CashRegisterRepository
         return $cashRegister;
     }
 
-    public function getAllByTodayDate()
+    public function getAllByDate($date)
     {
         $cashRegisters = DB::select(
             'SELECT id, value, description, payment_type, created_at, updated_at
                     FROM cash_registers
-            '
+                    WHERE created_at = ?
+            ',
+            [
+                $date
+            ]
         );
 
         return $cashRegisters;

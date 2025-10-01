@@ -17,12 +17,12 @@ class CashRegisterService
     }
     public function getAll()
     {
-        return $this->_repository->getAllByTodayDate();
+        return $this->_repository->getAllCashRegisters();
     }
 
-    public function getAllByToday()
+    public function getAllByDate($date)
     {
-        return $this->_repository->getAllByTodayDate();
+        return $this->_repository->getAllByDate($date);
     }
 
     public function getById($id)

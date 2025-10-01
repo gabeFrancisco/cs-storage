@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, ReplaySubject, catchError, shareReplay, tap, map } from 'rxjs';
 import { Debt } from '../../models/Debt';
-import { ModalType } from '../../utils/modalType';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 import { environment } from '../../environments/environment';
