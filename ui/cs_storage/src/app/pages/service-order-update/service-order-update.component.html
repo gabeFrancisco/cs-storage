@@ -22,6 +22,7 @@
             class="border w-full border-gray-400"
             formControlName="title"
             required
+            [readOnly]="!edit"
           />
           <small
             class="text-red-500"
@@ -41,6 +42,7 @@
             formControlName="description"
             rows="5"
             required
+            [readOnly]="!edit"
           ></textarea>
           <small
             class="text-red-500"
@@ -59,6 +61,7 @@
           <select
             class="border border-gray-400 bg-white my-3"
             formControlName="priority"
+            [disabled]="!edit"
             [ngClass]="{
               'bg-indigo-200': serviceOrderForm.get('priority')!.value === 0,
               'bg-gray-200': serviceOrderForm.get('priority')!.value === 1,
@@ -88,6 +91,7 @@
             formControlName="service_date"
             class="border border-gray-400 my-1"
             required
+            [readOnly]="!edit"
           />
           <small
             class="text-red-500"
@@ -106,6 +110,7 @@
             class="border w-full border-gray-400"
             formControlName="value"
             required
+            [readOnly]="!edit"
           />
         </div>
       </div>
@@ -120,6 +125,7 @@
             type="text"
             formControlName="customer_name"
             class="border border-gray-400 my-1"
+            [readOnly]="!edit"
           />
           <small
             class="text-red-500"
@@ -140,6 +146,7 @@
             type="text"
             formControlName="customer_phone"
             class="border border-gray-400 my-1"
+            [readOnly]="!edit"
           />
           <small
             class="text-red-500"
@@ -154,7 +161,12 @@
 
       <div class="flex flex-row items-center">
         <label for="hasAddress" class="mr-2">Incluir endereço?</label>
-        <input type="checkbox" name="hasAddress" formControlName="hasAddress" />
+        <input
+          type="checkbox"
+          name="hasAddress"
+          formControlName="hasAddress"
+          [disabled]="!edit"
+        />
       </div>
       <div *ngIf="this.serviceOrderForm.get('hasAddress')!.value">
         <h5 class="text-start">Endereço</h5>
@@ -167,6 +179,7 @@
               type="text"
               formControlName="road"
               class="border border-gray-400 my-1"
+              [readOnly]="!edit"
             />
             <small
               class="text-red-500"
@@ -186,6 +199,7 @@
                 type="text"
                 formControlName="number"
                 class="border border-gray-400 my-1"
+                [readOnly]="!edit"
               />
               <small
                 class="text-red-500"
@@ -205,6 +219,7 @@
                 type="text"
                 formControlName="complement"
                 class="border border-gray-400 my-1"
+                [readOnly]="!edit"
               />
               <small
                 class="text-red-500"
@@ -227,6 +242,7 @@
               type="text"
               formControlName="neighborhood"
               class="border border-gray-400 my-1"
+              [readOnly]="!edit"
             />
             <small
               class="text-red-500"
@@ -245,6 +261,7 @@
               type="text"
               formControlName="city"
               class="border border-gray-400 my-1"
+              [readOnly]="!edit"
             />
           </div>
         </div>
@@ -255,6 +272,7 @@
               type="text"
               formControlName="state"
               class="border border-gray-400 my-1"
+              [readOnly]="!edit"
             />
           </div>
         </div>

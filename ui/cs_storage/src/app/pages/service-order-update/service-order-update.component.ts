@@ -11,7 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './service-order-update.component.css'
 })
 export class ServiceOrderUpdateComponent implements OnInit {
+
   serviceOrderForm!: FormGroup;
+  edit: boolean = false;
 
   serviceOrder!: ServiceOrder;
 
@@ -20,6 +22,7 @@ export class ServiceOrderUpdateComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.serviceOrderService.edit$.subscribe(value => this.edit = value)
     this.serviceOrderForm = new FormGroup({
       hasAddress: new FormControl(false),
       id: new FormControl(0),

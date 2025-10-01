@@ -25,7 +25,7 @@ import { authInterceptor } from '../utils/interceptor';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UserComponent } from './pages/user/user.component';
-import { NgClickOutsideDirective} from 'ng-click-outside2'
+import { NgClickOutsideDirective} from 'ng-click-outside2';
 
 @NgModule({
   declarations: [

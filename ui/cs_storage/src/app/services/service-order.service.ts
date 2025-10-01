@@ -12,6 +12,13 @@ export class ServiceOrderService {
   private list$?: Observable<ServiceOrder[]>;
   private url = `${environment.apiUrl}/serviceorders`;
 
+  private edit = new BehaviorSubject<boolean>(false);
+  edit$ = this.edit.asObservable();
+
+  setEdit(value: boolean){
+    this.edit.next(value);
+  }
+
   constructor(private http: HttpClient) { }
 
   getServiceOrders(): Observable<ServiceOrder[]> {
