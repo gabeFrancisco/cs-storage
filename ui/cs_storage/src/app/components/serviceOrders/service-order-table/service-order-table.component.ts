@@ -35,9 +35,17 @@ export class ServiceOrderTableComponent implements OnInit {
     this.router.navigate(["ordensDeServico/novo"])
   }
 
+  show(id:number){
+    this.serviceOrderService.setEdit(false)
+    this.router.navigate(["ordensDeServico/editar"], {
+      queryParams: { id: id}
+    })
+  }
+
   update(id: number) {
     // this.serviceOrderService
     // .getCachedServiceOrderById(id)?.subscribe(value => console.log(value?.id))
+    this.serviceOrderService.setEdit(true)
     this.router.navigate(["ordensDeServico/editar"], {
       queryParams: { id: id }
     })

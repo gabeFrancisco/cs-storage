@@ -49,6 +49,7 @@
           <tr
             class="items-center hover:bg-gray-200 cursor-pointer"
             *ngFor="let item of serviceOrders"
+            (click)="show(item.id!)"
           >
             <td class="font-normal truncate p-1.5 text-gray-500">
               {{ item.created_at | date : "dd/MM/yyyy HH:mm" }}
@@ -87,7 +88,7 @@
                 type="button"
                 title="Remover"
                 class="btn-red text-lg mr-1"
-                (click)="remove(item.id!)"
+                (click)="remove(item.id!); $event.stopPropagation()"
               >
                 𝘅
               </button>
