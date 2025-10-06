@@ -22,7 +22,9 @@ export class ServiceOrderUpdateComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.serviceOrderService.edit$.subscribe(value => this.edit = value)
+    this.serviceOrderService.edit$.subscribe(value => {
+      this.edit = value
+    })
     this.serviceOrderForm = new FormGroup({
       hasAddress: new FormControl(false),
       id: new FormControl(0),
@@ -55,7 +57,7 @@ export class ServiceOrderUpdateComponent implements OnInit {
         //     phone: value!.customer.phone
         //   }
         // }
-        if(value!.address){
+        if (value!.address) {
           this.serviceOrderForm.controls['hasAddress'].setValue(true)
         }
         this.serviceOrderForm.patchValue({
@@ -83,6 +85,11 @@ export class ServiceOrderUpdateComponent implements OnInit {
   }
 
   submit() {
+    if(!this.edit){
+      this.edit = true
+      return;
+    }
+
     if (this.serviceOrderForm.invalid) {
       return;
     }
