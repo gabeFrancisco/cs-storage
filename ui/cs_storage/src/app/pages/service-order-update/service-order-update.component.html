@@ -274,11 +274,20 @@
       </div>
       <div class="flex flex-row">
         <button
+          *ngIf="edit"
           (click)="cancel()"
           type="submit"
           class="btn-red w-full mt-2 text-lg mr-1 px-4 py-1"
         >
           Cancelar
+        </button>
+        <button
+          *ngIf="!edit"
+          (click)="back()"
+          type="submit"
+          class="btn w-full mt-2 text-lg mr-1 px-4 py-1"
+        >
+          Voltar
         </button>
         <button
           type="submit"

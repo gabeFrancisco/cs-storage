@@ -24,6 +24,12 @@ export class ServiceOrderUpdateComponent implements OnInit {
   ) {
     this.serviceOrderService.edit$.subscribe(value => {
       this.edit = value
+      if(value){
+        this.serviceOrderForm.enable()
+      }
+      else{
+        this.serviceOrderForm.disable();
+      }
     })
     this.serviceOrderForm = new FormGroup({
       hasAddress: new FormControl(false),
@@ -80,7 +86,12 @@ export class ServiceOrderUpdateComponent implements OnInit {
     })
   }
 
-  cancel() {
+  cancel(){
+    this.serviceOrderService.setEdit(false);
+    alert(this.edit)
+  }
+
+  back() {
     this.router.navigate(["ordensDeServico"])
   }
 

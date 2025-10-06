@@ -46,9 +46,9 @@ export class CashRegisterService {
 
   getCashRegisters(date: string): Observable<CashRegister[]> {
     if (!this.list$) {
-      this.list$!.subscribe(registers => {
+      // this.list$!.subscribe(registers => {
 
-      })
+      // })
       this.list$ = this.http.get<CashRegister[]>(`${this.url}/getall/${date}`).pipe(
         shareReplay(1)
       )
