@@ -10,7 +10,12 @@ class Estimate extends BaseModel
     public string $observations;
 
     public function getTotal(): float {
-        //TODO
+        $total = 0;
+        foreach($this->items as $item){
+            $total =+ $item->price;
+        }
+
+        return $total;
     }
 
 }
