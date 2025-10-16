@@ -56,4 +56,12 @@ class CustomerRepository
 
         return $dbCustomer;
     }
+
+    public function deleteCustomer($id)
+    {
+        DB::delete(
+            'DELETE from customers WHERE id = ?',
+            [$id]
+        );
+    }
 }

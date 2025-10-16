@@ -65,4 +65,11 @@ class AddressRepository
         $dbAddress = DB::selectOne($this->selectAllQuery . ' WHERE id = ?', [$id]);
         return $dbAddress;
     }
+
+    public function deleteAddress($id){
+        DB::delete(
+            'DELETE from addresses WHERE id = ?',
+            [$id]
+        );
+    }
 }
