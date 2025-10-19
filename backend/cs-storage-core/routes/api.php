@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CashRegisterController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\MissingProductController;
 use App\Http\Controllers\ServiceOrderController;
 use App\Http\Controllers\UserController;
@@ -48,5 +49,7 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::put('serviceorders', [ServiceOrderController::class, 'put']);
     Route::delete('serviceorders/{id}', [ServiceOrderController::class, 'delete']);
 
+    //Estimates
+    Route::post('estimates', [EstimateController::class, 'post']);
 });
 
