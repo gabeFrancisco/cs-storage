@@ -9,6 +9,7 @@ class EstimateItem extends BaseModel{
     public ?string $description;
     public int $quantity;
     public float $price;
+    public int $estimate_id;
     public ProductType $productType;
 
     public function getTotal(): float {

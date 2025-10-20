@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Models\Estimate;
 use Exception;
 use DB;
+use Illuminate\Support\Carbon;
 
 class EstimateRepository
 {
@@ -25,15 +26,27 @@ class EstimateRepository
         DB::beginTransaction();
 
         try {
+            $dbCustomer = $this->customerRepository->createCustomer($estimate->customer);
+            $dbEstimate = DB::selectOne(
+                'INSERT INTO estimates(title, observations, total, customer_id, created_at)
+                VALUES (?,?,?,?,?) RETURNING *',
+                [
+                    $estimate->title,
+                    $estimate->observations,
+                    $estimate->getTotal(),
+                    $dbCustomer->id,
+                    Carbon::now()
+                ]
+            );
+
             if (!empty($estimate->items)) {
                 foreach ($estimate->items as $item) {
+                    $item->estimate_id = $dbEstimate->id;
                     $this->estimateItemRepository->createEstimateItem($item);
                 }
             }
 
-            $this->customerRepository->createCustomer($estimate->customer);
-
-
+            DB::commit();
 
         } catch (Exception $e) {
             DB::rollBack();
