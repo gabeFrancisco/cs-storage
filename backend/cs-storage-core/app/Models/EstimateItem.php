@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Enums\ProductType;
+use App\Enums\ProductType;
 
 class EstimateItem extends BaseModel{
     public string $name;
