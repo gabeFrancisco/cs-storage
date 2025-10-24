@@ -21,7 +21,7 @@ class EstimateTest extends TestCase
         $estimateItem->description = "Some test description";
         $estimateItem->quantity = 2;
         $estimateItem->price = 12.0;
-        $estimateItem->productType = ProductType::Product->value;
+        $estimateItem->productType = ProductType::Product;
 
         $customer = new Customer();
         $customer->name = "Some test customer";
@@ -36,8 +36,6 @@ class EstimateTest extends TestCase
         $estimate->customer = $customer;
 
         $service->createEstimate($estimate);
-
-
 
         $this->assertTrue(true);
     }
