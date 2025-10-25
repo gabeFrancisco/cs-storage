@@ -15,7 +15,7 @@ class EstimateController extends Controller
     }
 
     public function post(EstimateCreationRequest $request){
-        $this->estimateService->create();
-        return response("", 200);
+        $result = $this->estimateService->create($request);
+        return response()->json($result)->setStatusCode(200);
     }
 }

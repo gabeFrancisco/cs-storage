@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ProductType{
-    case Product;
-    case Service;
+enum ProductType: int{
+    case Product = 0;
+    case Service = 1;
 }

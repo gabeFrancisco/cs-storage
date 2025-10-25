@@ -28,11 +28,12 @@ class EstimateCreationRequest extends FormRequest
             'customer.address.city' => 'nullable|string',
             'customer.address.state' => 'nullable|string',
 
-            'estimate_item.name' => 'required|string',
-            'estimate_item.description' => 'nullable|string',
-            'estimate_item.quantity' => 'required|numeric|min:1',
-            'estimate_item.price' => 'required|numeric',
-            'estimate_item.product_type' => 'required|numeric'
+            "items" => 'required|array',
+            'items.*.name' => 'required|string',
+            'items.*.description' => 'nullable|string',
+            'items.*.quantity' => 'required|numeric|min:1',
+            'items.*.price' => 'required|numeric',
+            'items.*.product_type' => 'required|numeric'
         ];
     }
 }
