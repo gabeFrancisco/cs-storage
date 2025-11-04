@@ -19,16 +19,19 @@ class EstimateItemRepository
                 'INSERT INTO estimate_items (name, description, quantity,
                     price, product_type, total, estimate_id, created_at)
                     VALUES (?,?,?,?,?,?,?,?) RETURNING *',
-                    [
-                        $item->name,
-                        $item->description,
-                        $item->quantity,
-                        $item->price,
-                        $item->productType->value,
-                        $item->getTotal(),
-                        1,
-                        Carbon::now()
-                    ]);
+                [
+                    $item->name,
+                    $item->description,
+                    $item->quantity,
+                    $item->price,
+                    $item->productType->value,
+                    $item->getTotal(),
+                    1,
+                    Carbon::now()
+                ]
+            );
+
+            DB::commit();
 
         } catch (Exception $e) {
             DB::rollBack();

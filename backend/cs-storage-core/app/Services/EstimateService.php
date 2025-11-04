@@ -21,6 +21,7 @@ class EstimateService
     public function create(EstimateCreationRequest $request)
     {
         $estimate = $this->getRequestData($request);
+        $this->estimateRepository->createEstimate($estimate);
         return $estimate;
     }
 

@@ -39,6 +39,8 @@ class EstimateRepository
                 ]
             );
 
+            error_log(json_encode($dbEstimate));
+
             if (!empty($estimate->items)) {
                 foreach ($estimate->items as $item) {
                     $item->estimate_id = $dbEstimate->id;
