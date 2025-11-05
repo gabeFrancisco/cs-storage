@@ -33,7 +33,7 @@ class EstimateRepository
             c.phone         AS c_phone,
             c.cpf_cnpj      AS c_cpf_cnpj,
             c.created_at    AS c_created_at,
-            c.updated_at    AS c.updated_at
+            c.updated_at    AS c_updated_at,
             ei.id           AS ei_id,
             ei.name         AS ei_name,
             ei.description  AS ei_description,
@@ -41,7 +41,14 @@ class EstimateRepository
             ei.price        AS ei_price,
             ei.product_type AS ei_product_type,
             ei.total        AS ei_total,
-            ei.estimate_id  AS ei_estimate_id
+            ei.estimate_id  AS ei_estimate_id,
+            ei.created_at   AS ei_created_at,
+            ei.updated_at   AS ei_updated_at
+        FROM estimates e
+            INNER JOIN customers c
+                ON e.customer_id = c.id
+            LEFT JOIN estimate_items ei
+                ON ei.estimate_id = e.id
             ';
 
     public function createEstimate(Estimate $estimate)
