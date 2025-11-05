@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EstimateCreationRequest;
 use App\Services\EstimateService;
 use Illuminate\Http\Request;
+use Exception;
 
 class EstimateController extends Controller
 {
@@ -14,8 +15,21 @@ class EstimateController extends Controller
         $this->estimateService = $estimateService;
     }
 
-    public function post(EstimateCreationRequest $request){
+    public function getAll()
+    {
+        try {
+
+            $this->estimateService->getAll();
+            return response("Finished!", 200);
+        } catch (Exception $e) {
+            return response($e);
+        }
+    }
+
+    public function post(EstimateCreationRequest $request)
+    {
         $result = $this->estimateService->create($request);
         return response()->json($result)->setStatusCode(200);
     }
+
 }

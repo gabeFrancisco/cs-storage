@@ -70,8 +70,6 @@ class EstimateRepository
                 ]
             );
 
-            error_log(json_encode($dbEstimate));
-
             if (!empty($estimate->items)) {
                 foreach ($estimate->items as $item) {
                     $item->estimate_id = $dbEstimate->id;
@@ -89,6 +87,7 @@ class EstimateRepository
 
     public function getAllEstimates()
     {
-
+        $result = DB::select($this->selectAllWithJoinQuery);
+        error_log(json_encode($result));
     }
 }

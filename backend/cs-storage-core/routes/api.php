@@ -50,6 +50,7 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::delete('serviceorders/{id}', [ServiceOrderController::class, 'delete']);
 
     //Estimates
+    Route::get('estimates', [EstimateController::class, 'getAll']);
     Route::post('estimates', [EstimateController::class, 'post']);
 });
 

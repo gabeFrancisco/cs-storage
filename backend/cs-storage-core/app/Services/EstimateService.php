@@ -25,6 +25,10 @@ class EstimateService
         return $estimate;
     }
 
+    public function getAll(){
+        $this->estimateRepository->getAllEstimates();
+    }
+
     private function getRequestData(EstimateCreationRequest $request)
     {
         $estimate = new Estimate();
@@ -58,7 +62,7 @@ class EstimateService
         $estimate->customer->address->neighborhood = $request->input('address.neighborhood');
         $estimate->customer->address->city = $request->input('address.city');
         $estimate->customer->address->state = $request->input('address.state');
-//
+
         return $estimate;
     }
 }
