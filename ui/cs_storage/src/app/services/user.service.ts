@@ -8,7 +8,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class UserService {
   private user!: User;
-  private url = "http://127.0.0.1:8000/api/users";
+  private url = "http://10.0.10.250:8000/api/users";
 
   constructor(private http: HttpClient) { }
 
