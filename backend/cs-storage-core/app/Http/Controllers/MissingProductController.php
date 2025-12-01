@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MissingProductRequest;
 use App\Services\MissingProductService;
+use Exception;
 use Illuminate\Http\Request;
 
 class MissingProductController extends Controller
@@ -28,8 +29,13 @@ class MissingProductController extends Controller
 
     public function post(MissingProductRequest $request)
     {
-        $missingProduct = $this->missingProductService->create($request);
-        return response()->json($missingProduct);
+        try{
+            $missingProduct = $this->missingProductService->create($request);
+            return response()->json($missingProduct);
+        }
+        catch(Exception $e){
+            error_log($e);
+        }
     }
 
     public function post_bought_state(Request $request)
