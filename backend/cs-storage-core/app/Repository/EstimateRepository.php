@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Models\Estimate;
 use Exception;
 use DB;
+use App\Mappers\EstimateMapper;
+
 use Illuminate\Support\Carbon;
 
 class EstimateRepository
@@ -88,7 +90,10 @@ class EstimateRepository
     public function getAllEstimates()
     {
         $result = DB::select($this->selectAllWithJoinQuery);
-        // error_log(json_encode($result));
-        return $result;
+        $content = [];
+        foreach($result as $value){
+            $content[] = EstimateMapper::fromSql($value);
+        }
+        return $content;
     }
 }
