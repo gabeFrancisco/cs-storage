@@ -88,6 +88,7 @@ class EstimateRepository
     public function getAllEstimates()
     {
         $result = DB::select($this->selectAllWithJoinQuery);
-        error_log(json_encode($result));
+        // error_log(json_encode($result));
+        return $result;
     }
 }

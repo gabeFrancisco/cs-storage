@@ -26,7 +26,7 @@ class EstimateService
     }
 
     public function getAll(){
-        $this->estimateRepository->getAllEstimates();
+        return $this->estimateRepository->getAllEstimates();
     }
 
     private function getRequestData(EstimateCreationRequest $request)

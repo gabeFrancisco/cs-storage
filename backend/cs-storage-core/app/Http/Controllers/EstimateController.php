@@ -19,8 +19,8 @@ class EstimateController extends Controller
     {
         try {
 
-            $this->estimateService->getAll();
-            return response("Finished!", 200);
+            $estimates = $this->estimateService->getAll();
+            return response($estimates, 200);
         } catch (Exception $e) {
             return response($e);
         }
