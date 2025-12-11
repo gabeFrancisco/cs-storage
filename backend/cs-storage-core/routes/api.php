@@ -52,5 +52,6 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     //Estimates
     Route::get('estimates', [EstimateController::class, 'getAll']);
     Route::post('estimates', [EstimateController::class, 'post']);
+    Route::get('estimates/{id}', [EstimateController::class, 'getById']);
 });
 

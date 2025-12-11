@@ -25,7 +25,8 @@ class EstimateService
         return $estimate;
     }
 
-    public function getAll(){
+    public function getAll()
+    {
         return $this->estimateRepository->getAllEstimates();
     }
 
@@ -38,7 +39,7 @@ class EstimateService
 
         $items = $request->input('items');
 
-        foreach($items as $item){
+        foreach ($items as $item) {
             $estimateItem = new EstimateItem();
 
             $estimateItem->name = $item['name'];
@@ -64,5 +65,10 @@ class EstimateService
         $estimate->customer->address->state = $request->input('address.state');
 
         return $estimate;
+    }
+
+    public function getById($id)
+    {
+        return $this->estimateRepository->getEstimate($id);
     }
 }

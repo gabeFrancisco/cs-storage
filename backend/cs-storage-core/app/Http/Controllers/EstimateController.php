@@ -32,4 +32,9 @@ class EstimateController extends Controller
         return response()->json($result)->setStatusCode(200);
     }
 
+    public function getById($id){
+        $estimate = $this->estimateService->getById($id);
+        return response()->json($estimate, 200);
+    }
+
 }
