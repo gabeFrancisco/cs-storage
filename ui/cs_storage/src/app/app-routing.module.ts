@@ -8,6 +8,7 @@ import { ServiceOrderCreateComponent } from './pages/service-order-create/servic
 import { ServiceOrderUpdateComponent } from './pages/service-order-update/service-order-update.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { EstimatesComponent } from './pages/estimates/estimates.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: "ordensDeServico/editar",
         component: ServiceOrderUpdateComponent
+      },
+      {
+        path: "orcamentos",
+        component: EstimatesComponent
       },
       {
         path: "usuario",
