@@ -89,11 +89,8 @@ class EstimateRepository
 
     public function getAllEstimates()
     {
-        $result = DB::select($this->selectAllWithJoinQuery);
-        $content = [];
-        foreach($result as $value){
-            $content[] = EstimateMapper::fromSql($value);
-        }
-        return $content;
+        $query = DB::select($this->selectAllWithJoinQuery);
+        $result = EstimateMapper::fromSqlList($query);
+        return $result;
     }
 }
