@@ -93,4 +93,12 @@ class EstimateRepository
         $result = EstimateMapper::fromSqlList($query);
         return $result;
     }
+
+    public function getEstimate(int $id)
+    {
+        $dbEstimate = DB::select($this->selectAllWithJoinQuery . ' WHERE e_id = ?', [$id]);
+        $estimate = EstimateMapper::fromSqlList($dbEstimate);
+
+        return $estimate;
+    }
 }
