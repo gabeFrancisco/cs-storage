@@ -1,33 +1,23 @@
 <div class="w-full shadow border mt-3 border-gray-200 rounded">
-  <div
-    class="px-2 py-1 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100"
-  >
+  <div class="px-2 py-1 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100">
     <span class="font-bold">Ordens de Serviço</span>
     <!-- <div class="border pl-2 rounded-sm bg-white">
       <label for="date" class="mr-2">Data</label>
       <input type="date" class="" name="date" id="date" />
     </div> -->
     <div>
-      <button
-        type="button"
-        (click)="fetchList()"
-        class="mx-1 text-gray-400 btn text-xl"
-      >
+      <button type="button" (click)="fetchList()" class="mx-1 text-gray-400 btn text-xl">
         ↻
       </button>
-      <button
-        (click)="newServiceOrder()"
-        type="button"
-        class="btn-green px-4 font-bold text-xl"
-      >
+      <button (click)="newServiceOrder()" type="button" class="btn-green px-4 font-bold text-xl">
         +
       </button>
     </div>
   </div>
   <div class="relative overflow-x-auto">
     <div style="max-height: 80dvh">
-      <table class="table-fixed w-full text-sm text-left rtl:text-right dark:text-gray-400">
-        <thead class="text-sm bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table class="table-fixed w-full text-sm text-left rtl:text-right ">
+        <thead class="text-sm bg-gray-50  ">
           <!-- Table header -->
           <tr>
             <th class="font-normal p-2">Criação</th>
@@ -46,11 +36,8 @@
           <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
             Carregando...
           </tr>
-          <tr
-            class="items-center hover:bg-gray-200 cursor-pointer"
-            *ngFor="let item of serviceOrders"
-            (click)="show(item.id!)"
-          >
+          <tr class="items-center hover:bg-gray-200 cursor-pointer" *ngFor="let item of serviceOrders"
+            (click)="show(item.id!)">
             <td class="font-normal truncate p-1.5 text-gray-500">
               {{ item.created_at | date : "dd/MM/yyyy HH:mm" }}
             </td>
@@ -62,8 +49,7 @@
               'bg-sky-200': item.priority === 0,
               'bg-gray-200': item.priority === 1,
               'bg-red-200': item.priority === 2,
-            }"
-              class="font-normal text-center rounded truncate p-1.5">
+            }" class="font-normal text-center rounded truncate p-1.5">
               @if (item.priority === 0) { Baixa }
               @if (item.priority === 1) { Normal }
               @if (item.priority === 2) { Alta }
@@ -79,17 +65,11 @@
               R${{ item.value.toFixed(2) }}
             </td>
             <td class="font-normal truncate text-center border-l">
-              <button
-              (click)="update(item.id!)"
-              title="Atualizar" class="btn-primary text-lg mr-1">
+              <button (click)="update(item.id!)" title="Atualizar" class="btn-primary text-lg mr-1">
                 ✎
               </button>
-              <button
-                type="button"
-                title="Remover"
-                class="btn-red text-lg mr-1"
-                (click)="remove(item.id!); $event.stopPropagation()"
-              >
+              <button type="button" title="Remover" class="btn-red text-lg mr-1"
+                (click)="remove(item.id!); $event.stopPropagation()">
                 𝘅
               </button>
             </td>

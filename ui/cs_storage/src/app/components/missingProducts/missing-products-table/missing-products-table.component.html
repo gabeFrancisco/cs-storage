@@ -1,39 +1,22 @@
 <div class="border shadow w-full border-gray-200 rounded">
-  <div
-    class="p-2 font-bold flex flex-row text-gray-600 border-b justify-between items-baseline bg-gray-100"
-  >
+  <div class="p-2 font-bold flex flex-row text-gray-600 border-b justify-between items-baseline bg-gray-100">
     <span class="font-bold">Produtos em falta</span>
     <div class="flex flex-row items-center">
-      <button
-        type="button"
-        (click)="fetchList()"
-        class="btn-red py-1 text-md"
-        (click)="deleteAllBought()"
-      >
+      <button type="button" (click)="fetchList()" class="btn-red py-1 text-md" (click)="deleteAllBought()">
         Remover Concluídos
       </button>
-      <button
-        type="button"
-        (click)="fetchList()"
-        class="mx-1 text-gray-400 btn text-xl"
-      >
+      <button type="button" (click)="fetchList()" class="mx-1 text-gray-400 btn text-xl">
         ↻
       </button>
-      <button
-        type="button"
-        class="btn-green px-4 font-bold text-xl"
-        (click)="openMissingProductModal()"
-      >
+      <button type="button" class="btn-green px-4 font-bold text-xl" (click)="openMissingProductModal()">
         +
       </button>
     </div>
   </div>
   <div class="relative overflow-x-auto">
     <div>
-      <table class="table-fixed w-full text-sm text-left rtl:text-right dark:text-gray-400">
-        <thead
-          class="text-sm bg-gray-50 dark:bg-gray-700 border-b shadow-sm dark:text-gray-400"
-        >
+      <table class="table-fixed w-full text-sm text-left rtl:text-right ">
+        <thead class="text-sm bg-gray-50  border-b shadow-sm ">
           <!-- Table header -->
           <tr>
             <th class="font-normal p-2">Data</th>
@@ -49,22 +32,16 @@
           <tr *ngIf="loading" class="text-center text-gray-500 text-lg">
             Carregando...
           </tr>
-          <tr
-            class="items-center even:bg-slate-100 hover:bg-gray-200 cursor-pointer"
-            *ngFor="let item of products"
-            [ngClass]="{ 'text-gray-500 ': item.is_bought }"
-          >
+          <tr class="items-center even:bg-slate-100 hover:bg-gray-200 cursor-pointer" *ngFor="let item of products"
+            [ngClass]="{ 'text-gray-500 ': item.is_bought }">
             <td class="font-normal p-1.5 truncate">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </td>
             <td class="font-normal truncate p-1.5">{{ item.name }}</td>
-            <td
-              class="font-normal truncate p-1.5"
-              [ngClass]="{
+            <td class="font-normal truncate p-1.5" [ngClass]="{
                 'text-red-600':
                   getLateDate(item.needed_day) && !item.is_bought
-              }"
-            >
+              }">
               {{ item.needed_day | date : "dd/MM/yyyy" }}
               @if(getLateDate(item.needed_day) && !item.is_bought) { - Atrasado! }
             </td>
@@ -72,24 +49,14 @@
               {{ item.customer_name }} - {{ item.customer_phone }}
             </td>
 
-            <td
-              class="font-normal text-center truncate border-l border-gray-300 border-double py-1"
-            >
+            <td class="font-normal text-center truncate border-l border-gray-300 border-double py-1">
               <div *ngIf="!item.is_bought">
-                <button
-                  type="button"
-                  title="Remover"
-                  class="btn-primary mr-1 py-0.5 px-3"
-                  (click)="setBoughtState(item.id!)"
-                >
+                <button type="button" title="Remover" class="btn-primary mr-1 py-0.5 px-3"
+                  (click)="setBoughtState(item.id!)">
                   ✓
                 </button>
-                <button
-                  type="button"
-                  title="Remover"
-                  class="btn-red py-0.5 px-3 mr-1"
-                  (click)="deleteMissingProduct(item.id!)"
-                >
+                <button type="button" title="Remover" class="btn-red py-0.5 px-3 mr-1"
+                  (click)="deleteMissingProduct(item.id!)">
                   𝘅
                 </button>
               </div>

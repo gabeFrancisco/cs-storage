@@ -59,19 +59,19 @@ input, textarea, select{
   }
 
   .data-blue{
-    @apply transition ease-in-out shadow rounded border-2 border-blue-500 text-blue-500 bg-blue-50 dark:bg-gray-700 hover:-translate-y-1
+    @apply transition ease-in-out shadow rounded border-2 border-blue-500 text-blue-500 bg-blue-50  hover:-translate-y-1
   }
 
   .data-green{
-    @apply transition ease-in-out shadow rounded border-2 border-green-500 text-green-500 bg-green-50 dark:bg-gray-700 hover:-translate-y-1
+    @apply transition ease-in-out shadow rounded border-2 border-green-500 text-green-500 bg-green-50  hover:-translate-y-1
   }
 
   .data-yellow{
-    @apply transition ease-in-out shadow rounded border-2 border-yellow-500 text-yellow-500 bg-yellow-50 dark:bg-gray-700 hover:-translate-y-1
+    @apply transition ease-in-out shadow rounded border-2 border-yellow-500 text-yellow-500 bg-yellow-50  hover:-translate-y-1
   }
 
   .data-red{
-    @apply transition ease-in-out shadow rounded border-2 border-red-500 text-red-500 bg-red-50 dark:bg-gray-700 hover:-translate-y-1
+    @apply transition ease-in-out shadow rounded border-2 border-red-500 text-red-500 bg-red-50  hover:-translate-y-1
   }
   .form-section {
     @apply p-3 border rounded shadow-none border-gray-300;
