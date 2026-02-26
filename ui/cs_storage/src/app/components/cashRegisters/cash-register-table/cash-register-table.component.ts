@@ -34,7 +34,8 @@ export class CashRegisterTableComponent implements OnInit {
     this.cashService.getCashRegisters(this.date.value).subscribe({
       next: res => {
         this.registers = res
-      }, complete: () => this.loading = false
+      },
+      complete: () => this.loading = false
     })
   }
 

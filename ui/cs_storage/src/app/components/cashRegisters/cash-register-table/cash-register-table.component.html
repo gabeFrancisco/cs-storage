@@ -3,7 +3,7 @@
     <span class="font-bold">Caixa</span>
     <div class="border font- pl-2 rounded-sm bg-white">
       <label for="date" class="mr-2">Data</label>
-      <input (input)="fetchList()" [formControl]="date" type="date" dat name="date" id="date" />
+      <input (change)="fetchList()" [formControl]="date" type="date" name="date" id="date" />
     </div>
     <div>
       <button type="button" (click)="fetchList()" class="mx-1 text-gray-400 btn text-xl">
