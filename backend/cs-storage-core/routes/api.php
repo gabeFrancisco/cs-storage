@@ -6,6 +6,7 @@ use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\MissingProductController;
 use App\Http\Controllers\ServiceOrderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserPreferencesController;
 use App\Http\Middleware\CookieTokenMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -53,5 +54,8 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::get('estimates', [EstimateController::class, 'getAll']);
     Route::post('estimates', [EstimateController::class, 'post']);
     Route::get('estimates/{id}', [EstimateController::class, 'getById']);
+
+    //UserPreferences
+    Route::get('userpreferences', [UserPreferencesController::class, 'get']);
 });
 
