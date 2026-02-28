@@ -15,6 +15,14 @@ class CashRegisterService
     {
         $this->_repository = $repository;
     }
+
+    private function checkPaymentType($payment_type)
+    {
+        if ($payment_type < 0 && $payment_type > 4) {
+            throw new Error("Payment type is invalid!");
+        }
+    }
+
     public function getAll()
     {
         return $this->_repository->getAllCashRegisters();
@@ -37,9 +45,7 @@ class CashRegisterService
         $description = $request->input('description');
         $created_at = $request->input('created_at');
 
-        if ($payment_type < 0 && $payment_type > 4) {
-            throw new Error("Payment type is invalid!");
-        }
+        $this->checkPaymentType($payment_type);
 
         $register = $this->_repository->createCashRegister(new CashRegister(
             null,
@@ -61,9 +67,7 @@ class CashRegisterService
         $description = $request->input('description');
         $created_at = $request->input('created_at');
 
-        if ($payment_type < 0 && $payment_type > 4) {
-            throw new Error("Payment type is invalid!");
-        }
+        $this->checkPaymentType($payment_type);
 
         $register = $this->_repository->updateCashRegister(new CashRegister(
             $id,

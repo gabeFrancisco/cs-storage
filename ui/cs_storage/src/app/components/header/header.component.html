@@ -1,32 +1,16 @@
-<header
-  class="flex sticky top-0 z-50 flex-row items-center px-2 bg-gray-50 shadow border-b"
->
+<header class="flex py-1 sticky top-0 z-50 flex-row items-center px-2 bg-gray-50 shadow border-b">
   <div class="flex w-full flex-col lg:flex-row justify-between items-center">
     <div class="flex flex-row items-center">
       <img src="logo.ico" alt="Logo" class="w-9 ml-3 rounded" />
       <ul class="ml-2">
         <li class="text-sm">
-          <a routerLink="" class="ml-3 text-gray-700 hover:text-blue-500"
-            >Painel</a
-          >
+          <a routerLink="" class="ml-3 text-gray-700 hover:text-blue-500">Painel</a>
           <!-- <a routerLink="" class="ml-3 text-gray-700 hover:text-blue-600"
             >Ordens de Serviços</a
           > -->
-          <a
-            routerLink="produtosEmFalta"
-            class="ml-3 text-gray-700 hover:text-blue-600"
-            >Produtos em falta</a
-          >
-          <a
-            routerLink="ordensDeServico"
-            class="ml-3 text-gray-700 hover:text-blue-600"
-            >Ordens de Serviço</a
-          >
-          <a
-            routerLink="orcamentos"
-            class="ml-3 text-gray-700 hover:text-blue-600"
-            >Orçamentos</a
-          >
+          <a routerLink="produtosEmFalta" class="ml-3 text-gray-700 hover:text-blue-600">Produtos em falta</a>
+          <a routerLink="ordensDeServico" class="ml-3 text-gray-700 hover:text-blue-600">Ordens de Serviço</a>
+          <a routerLink="orcamentos" class="ml-3 text-gray-700 hover:text-blue-600">Orçamentos</a>
           <!-- <a routerLink="" class="ml-3 text-gray-700 hover:text-blue-600"
             >Clientes</a
           > -->
@@ -37,19 +21,13 @@
     <div class="flex flex-row justify-evenly items-center text-gray-600">
       <span class="py-6 h-max mx-3 border-r border-gray-300"></span>
       <div class="mr-2 text-emerald-600">
-        <span
-          ><span class="text-sm mr-2">Caixa</span>
-          <span class="rounded-sm border border-emerald-600 p-1 mr-1"
-            ><span class="text-sm">Dia:</span> R${{
-              cashRegisterValues.day.toFixed(2)
-            }}</span
-          >
-          <span class="rounded-sm border border-emerald-600 p-1 ml-1"
-            ><span class="text-sm">Mês:</span> R${{
-              cashRegisterValues.month.toFixed(2)
-            }}</span
-          ></span
-        >
+        <span><span class="text-sm mr-2">Caixa</span>
+          <span class="rounded-sm border border-emerald-600 p-1 mr-1"><span class="text-sm">Dia:</span> R${{
+            cashRegisterValues.day.toFixed(2)
+            }}</span>
+          <span class="rounded-sm border border-emerald-600 p-1 ml-1"><span class="text-sm">Mês:</span> R${{
+            cashRegisterValues.month.toFixed(2)
+            }}</span></span>
       </div>
       <!-- <span class="text-red-500">
         <span class="text-sm mr-2">Débitos</span>
@@ -68,7 +46,7 @@
         Olá
         <a href="usuario" class="hover:text-blue-500 underline">{{
           user.name
-        }}</a>
+          }}</a>
       </div>
     </div>
   </div>
