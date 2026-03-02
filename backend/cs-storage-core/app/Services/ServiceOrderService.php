@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Enums\ServicePriority;
 use App\Http\Requests\ServiceOrderRequest;
 use App\Models\Customer;
 use App\Models\Address;
