@@ -19,4 +19,9 @@ class UserPreferencesController extends Controller
         $userPreferences = $this->userPreferencesRepository->getUserPreferences($user_id);
         return response()->json($userPreferences);
     }
+
+    public function post()
+    {
+
+    }
 }
