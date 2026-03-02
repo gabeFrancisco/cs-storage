@@ -57,5 +57,6 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
 
     //UserPreferences
     Route::get('userpreferences', [UserPreferencesController::class, 'get']);
+    Route::post('userpreferences', [UserPreferencesController::class, 'post']);
 });
 
