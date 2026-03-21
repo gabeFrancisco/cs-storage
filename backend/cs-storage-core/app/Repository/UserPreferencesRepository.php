@@ -28,7 +28,7 @@ class UserPreferencesRepository
             VALUES (?,?,?,?) returning *;',
             [
                 $userPreferences->log_email,
-                $userPreferences->email_interval,
+                $userPreferences->email_interval->value,
                 $userPreferences->user_id,
                 $userPreferences->created_at
             ]

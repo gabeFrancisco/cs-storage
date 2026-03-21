@@ -25,7 +25,7 @@ class CashRegisterService
 
     public function getAll()
     {
-        return $this->_repository->getAllCashRegisters();
+        return CashRegister::all();
     }
 
     public function getAllByDate($date)
@@ -43,17 +43,14 @@ class CashRegisterService
         $value = $request->input("value");
         $payment_type = $request->input('payment_type');
         $description = $request->input('description');
-        $created_at = $request->input('created_at');
 
         $this->checkPaymentType($payment_type);
 
-        $register = $this->_repository->createCashRegister(new CashRegister(
-            null,
+        $register = CashRegister::create([
             $value,
-            PaymentType::from($payment_type),
-            $description,
-            $created_at
-        ));
+            $payment_type,
+            $description
+        ]);
 
         return $register;
     }
