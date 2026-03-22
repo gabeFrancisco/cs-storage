@@ -11,27 +11,14 @@ use App\Repository\CustomerRepository;
 use App\Repository\DebtRepository;
 class DebtService
 {
-    private DebtRepository $debtRepository;
-    private CustomerRepository $customerRepository;
-    private AddressRepository $addressRepository;
-
-    public function __construct(
-        DebtRepository $debtRepository,
-        CustomerRepository $customerRepository,
-        AddressRepository $addressRepository
-    ) {
-        $this->debtRepository = $debtRepository;
-        $this->customerRepository = $customerRepository;
-        $this->addressRepository = $addressRepository;
-    }
     public function getAll()
     {
-        return $this->debtRepository->getAllDebts();
+        return Debt::all();
     }
 
     public function getById($id)
     {
-        return $this->debtRepository->getDebt($id);
+        return Debt::findOrFail($id);
     }
 
     public function create(DebtRequest $request)
@@ -103,6 +90,6 @@ class DebtService
 
     public function getDayAndMonthTotal()
     {
-       return $this->debtRepository->getDayAndMonthTotal();
+        return $this->debtRepository->getDayAndMonthTotal();
     }
 }
