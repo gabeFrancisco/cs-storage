@@ -10,12 +10,6 @@ use App\Enums\PaymentType;
 
 class CashRegisterService
 {
-    private CashRegisterRepository $_repository;
-    public function __construct(CashRegisterRepository $repository)
-    {
-        $this->_repository = $repository;
-    }
-
     private function checkPaymentType($payment_type)
     {
         if ($payment_type < 0 && $payment_type > 4) {
@@ -30,12 +24,21 @@ class CashRegisterService
 
     public function getAllByDate($date)
     {
-        return $this->_repository->getAllByDate($date);
+        return CashRegister::whereDate('created_at', $date)->get();
     }
 
     public function getById($id)
     {
-        return $this->_repository->getCashRegister($id);
+        return CashRegister::findOrFail($id);
+    }
+
+    private function parseCashRegister($value, $payment_type, $description)
+    {
+        return [
+            'value' => $value,
+            'payment_type' => $payment_type,
+            'description' => $description
+        ];
     }
 
     public function create(CashRegisterRequest $request)
@@ -46,11 +49,7 @@ class CashRegisterService
 
         $this->checkPaymentType($payment_type);
 
-        $register = CashRegister::create([
-            $value,
-            $payment_type,
-            $description
-        ]);
+        $register = CashRegister::create($this->parseCashRegister($value, $payment_type, $description));
 
         return $register;
     }
@@ -62,28 +61,28 @@ class CashRegisterService
         $value = $request->input("value");
         $payment_type = $request->input('payment_type');
         $description = $request->input('description');
-        $created_at = $request->input('created_at');
 
         $this->checkPaymentType($payment_type);
 
-        $register = $this->_repository->updateCashRegister(new CashRegister(
-            $id,
-            $value,
-            PaymentType::from($payment_type),
-            $description,
-            $created_at
-        ));
+        $register = CashRegister::where('id', $id)
+            ->update($this->parseCashRegister($value, $payment_type, $description));
 
         return $register;
     }
 
     public function remove($id)
     {
-        $this->_repository->deleteCashRegister($id);
+        CashRegister::destroy($id);
     }
 
     public function getDayAndMonthTotal()
     {
-        return $this->_repository->getDayAndMonthTotal();
+        $day = CashRegister::whereDate('created_at', today())->sum('value');
+        $month = CashRegister::whereMonth('created_at', now()->month)->sum('value');
+
+        return [
+            "day" => $day != null ? $day : 0,
+            "month" => $month != null ? $month : 0
+        ];
     }
 }
