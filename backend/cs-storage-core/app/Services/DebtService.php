@@ -9,49 +9,47 @@ use App\Models\Debt;
 use App\Repository\AddressRepository;
 use App\Repository\CustomerRepository;
 use App\Repository\DebtRepository;
+use Exception;
+use DB;
 class DebtService
 {
     public function getAll()
     {
-        return Debt::all();
+        return Debt::with('customer.address')->get();
     }
 
     public function getById($id)
     {
-        return Debt::findOrFail($id);
+        return Debt::with('customer.address')->findOrFail($id);
     }
 
     public function create(DebtRequest $request)
     {
-        $address = null;
+        try {
+            $result = DB::transaction(function () use ($request) {
 
-        if (!empty($request->input('customer.address'))) {
-            $address = new Address();
-            $address->road = $request->input('customer.address.road');
-            $address->number = $request->input('customer.address.number');
-            $address->complement = $request->input('customer.address.complement');
-            $address->neighborhood = $request->input('customer.address.neighborhood');
-            $address->city = $request->input('customer.address.city');
-            $address->state = $request->input('customer.address.state');
+                if (!empty($request->input('customer.address'))) {
+                    $address = Address::create($request->input('customer.address'));
+                }
 
+                $customer = new Customer($request->input('customer'));
+                $customer->address()->associate($address);
+                $customer->save();
+
+                $debt = new Debt([
+                    "value" => $request->input('value'),
+                    "forecast" => $request->input('forecast')
+                ]);
+
+                $debt->customer()->associate($customer);
+                $debt->save();
+
+                return $debt->load('customer.address');
+            });
+
+        } catch (Exception $e) {
+            throw $e;
         }
-
-        $customer = new Customer();
-        $customer->name = $request->input('customer.name');
-        $customer->phone = $request->input('customer.phone');
-        $customer->cpf_cnpj = $request->input('customer.cpf_cnpj');
-        $address->id;
-
-        $value = $request->input('value');
-        $forecast = $request->input('forecast');
-
-        $debt = new Debt();
-        $debt->value = $value;
-        $debt->forecast = $forecast;
-
-        $this->debtRepository->createDebt($debt, $customer, $address);
-
-        return $debt;
     }
 
     public function update(DebtRequest $request)
@@ -85,11 +83,17 @@ class DebtService
 
     public function remove($id)
     {
-        $this->debtRepository->removeDebt($id);
+        Debt::destroy($id);
     }
 
     public function getDayAndMonthTotal()
     {
-        return $this->debtRepository->getDayAndMonthTotal();
+        $day = Debt::whereDate('created_at', today())->sum('value');
+        $month = Debt::whereMonth('created_at', now()->month)->sum('value');
+
+        return [
+            "day" => $day != null ? $day : 0,
+            "month" => $month != null ? $month : 0
+        ];
     }
 }

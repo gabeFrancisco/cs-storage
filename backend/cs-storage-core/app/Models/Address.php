@@ -6,13 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    // public $road;
-    // public $number;
-    // public $complement;
-    // public $neighborhood;
-    // public $city;
-    // public $state;
-
     protected $fillable = [
         'road',
         'number',
@@ -21,4 +14,9 @@ class Address extends Model
         'city',
         'state'
     ];
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'address_id');
+    }
 }
