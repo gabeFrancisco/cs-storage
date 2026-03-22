@@ -41,6 +41,7 @@ class UserPreferencesService
     public function create(UserPreferencesCreationRequest $request)
     {
         $userPreferences = $this->getRequestData($request);
-        return $userPreferences;
+        $dbUserPreferences = $this->_repository->createUserPreferences($userPreferences);
+        return $dbUserPreferences;
     }
 }
