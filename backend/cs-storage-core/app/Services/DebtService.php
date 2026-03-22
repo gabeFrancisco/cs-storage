@@ -6,9 +6,6 @@ use App\Models\Customer;
 use App\Models\Address;
 use App\Http\Requests\DebtRequest;
 use App\Models\Debt;
-use App\Repository\AddressRepository;
-use App\Repository\CustomerRepository;
-use App\Repository\DebtRepository;
 use Exception;
 use DB;
 class DebtService
@@ -56,29 +53,33 @@ class DebtService
     {
         $id = $request->input('id');
 
-        $debt = new Debt();
-        $debt->id = $id;
-        $debt->value = $request->input('value');
-        $debt->forecast = $request->input('forecast');
+        try {
+            $result = DB::transaction(function () use ($request, $id) {
+                $debt = Debt::with('customer.address')->findOrFail($id);
+                $customer = $debt->customer;
 
-        $customer = new Customer();
-        $customerData = $request->input('customer');
-        $customer->name = $customerData['name'];
-        $customer->phone = $customerData['phone'];
-        $customer->cpf_cnpj = $customerData['cpf_cnpj'];
+                if ($request->has('customer.address')) {
+                    if ($customer->address) {
+                        //if customer exists
+                        $customer->address->update($request->input('customer.address'));
+                    } else {
+                        //if customer does not exists
+                        $newAddress = Address::create($request->input('customer.address'));
+                        $customer->address()->associate($newAddress);
+                        $customer->save();
+                    }
+                }
 
-        $address = new Address();
-        $addressData = $customerData['address'];
-        $address->road = $addressData['road'];
-        $address->number = $addressData['number'];
-        $address->complement = $addressData['complement'];
-        $address->neighborhood = $addressData['neighborhood'];
-        $address->city = $addressData['city'];
-        $address->state = $addressData['state'];
+                $customer->update($request->input('customer'));
+                $debt->update([
+                    "value" => $request->input('value'),
+                    "forecast" => $request->input('forecast')
+                ]);
 
-        $dbDebt = $this->debtRepository->updateDebt($debt, $customer, $address);
-
-        return $dbDebt;
+            });
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     public function remove($id)
