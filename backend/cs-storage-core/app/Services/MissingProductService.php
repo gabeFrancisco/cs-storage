@@ -3,30 +3,26 @@
 namespace App\Services;
 
 use App\Http\Requests\MissingProductRequest;
-use App\Models\Customer;
 use App\Models\MissingProduct;
-use App\Repository\MissingProductRepository;
 
 class MissingProductService
 {
-    private MissingProductRepository $missingProductRepository;
-    public function __construct(MissingProductRepository $missingProductRepository)
-    {
-        $this->missingProductRepository = $missingProductRepository;
-    }
     public function getAll()
     {
-        return $this->missingProductRepository->getAllMissingProducts();
+        return MissingProduct::all();
     }
 
     public function getById($id)
     {
-        return $this->missingProductRepository->getMissingProduct($id);
+        return MissingProduct::findOrFail($id);
     }
 
     public function setBoughtState(int $id, bool $state)
     {
-        $product = $this->missingProductRepository->setBoughtState($id, $state);
+        $product = $this->getById($id);
+        $product->is_bought = $state;
+        $product->save();
+
         return $product;
     }
 
@@ -40,17 +36,18 @@ class MissingProductService
         $missingProduct->customer_name = $request->input('customer_name');
         $missingProduct->customer_phone = $request->input('customer_phone');
 
-        $dbMissingProduct = $this->missingProductRepository->createMissingProduct($missingProduct);
+        $missingProduct->save();
 
-        return $dbMissingProduct;
+        return $missingProduct;
     }
 
     public function remove($id)
     {
-        $this->missingProductRepository->deleteMissingProduct($id);
+        MissingProduct::destroy($id);
     }
 
-    public function removeAllBought(){
-        $this->missingProductRepository->deleteBoughtProducts();
+    public function removeAllBought()
+    {
+        MissingProduct::where('is_bought', true)->delete();
     }
 }
