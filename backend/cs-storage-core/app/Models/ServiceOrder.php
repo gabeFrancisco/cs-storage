@@ -39,7 +39,7 @@ class ServiceOrder extends Model
         'description',
         'priority',
         'service_date',
-        'value'
+        'value',
     ];
 
     public function customer()
