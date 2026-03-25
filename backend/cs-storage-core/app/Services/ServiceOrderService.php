@@ -6,72 +6,80 @@ use App\Http\Requests\ServiceOrderRequest;
 use App\Models\Customer;
 use App\Models\Address;
 use App\Models\ServiceOrder;
-use App\Repository\ServiceOrderRepository;
+use DB;
 
 class ServiceOrderService
 {
-    private ServiceOrderRepository $serviceOrderRepository;
-
-    public function __construct(ServiceOrderRepository $serviceOrderRepository)
-    {
-        $this->serviceOrderRepository = $serviceOrderRepository;
-    }
-
     private function getRequestData(ServiceOrderRequest $request)
     {
-        $serviceOrder = new ServiceOrder();
 
-        $serviceOrder->id = $request->input('id');
-        $serviceOrder->title = $request->input('title');
-        $serviceOrder->description = $request->input('description');
-        $serviceOrder->service_date = $request->input('service_date');
-        $serviceOrder->value = $request->input('value');
-        $serviceOrder->priority = $request->input('priority');
-
-        $serviceOrder->customer = new Customer();
-        $serviceOrder->customer->name = $request->input('customer.name');
-        $serviceOrder->customer->phone = $request->input('customer.phone');
-        $serviceOrder->customer->cpf_cnpj = $request->input('customer.cpf_cnpj');
-
-        $serviceOrder->address = new Address();
-        $serviceOrder->address->road = $request->input('address.road');
-        $serviceOrder->address->number = $request->input('address.number');
-        $serviceOrder->address->complement = $request->input('address.complement');
-        $serviceOrder->address->neighborhood = $request->input('address.neighborhood');
-        $serviceOrder->address->city = $request->input('address.city');
-        $serviceOrder->address->state = $request->input('address.state');
-
-        return $serviceOrder;
+        return [
+            'address' => $request->input('address'),
+            'customer' => $request->input('customer'),
+            'serviceOrder' => $request->only(['id', 'title', 'description', 'service_date', 'value', 'priority'])
+        ];
     }
 
     public function getAll()
     {
-        return $this->serviceOrderRepository->getAllServiceOrders();
+        return ServiceOrder::with('customer', 'address')->get();
     }
 
     public function getById($id)
     {
-        return $this->serviceOrderRepository->getServiceOrder($id);
+        return ServiceOrder::findOrFail($id);
     }
 
     public function create(ServiceOrderRequest $request)
     {
-        $serviceOrder = $this->getRequestData($request);
-        $dbServiceOrder = $this->serviceOrderRepository->createServiceOrder($serviceOrder);
+        $requestData = $this->getRequestData($request);
 
-        return $dbServiceOrder;
+        $result = DB::transaction(function () use ($requestData) {
+            $serviceOrder = new ServiceOrder($requestData['serviceOrder']);
+
+            $customer = new Customer($requestData['customer']);
+            $customer->save();
+
+            if ($requestData['address'] != null) {
+                $address = new Address($requestData['address']);
+                $address->save();
+                $serviceOrder->address()->associate($address);
+            }
+
+            $serviceOrder->customer()->associate($customer);
+            $serviceOrder->save();
+        });
+
+        return $result;
     }
 
     public function update(ServiceOrderRequest $request)
     {
-        $serviceOrder = $this->getRequestData($request);
-        $dbServiceOrer = $this->serviceOrderRepository->updateServiceOrder($serviceOrder);
+        $requestData = $this->getRequestData($request);
 
-        return $dbServiceOrer;
+        $result = DB::transaction(function () use ($requestData) {
+            $serviceOrder = ServiceOrder::with('customer', 'address')->findOrFail($requestData['serviceOrder']['id']);
+
+            if ($serviceOrder->has('address')) {
+                if ($requestData['address'] != null) {
+                    $serviceOrder->address->update($requestData['address']);
+                } else {
+                    $serviceOrder->address->delete();
+                }
+            } else {
+                $newAddress = Address::create($requestData['address']);
+                $serviceOrder->address()->associate($newAddress);
+            }
+
+            $serviceOrder->customer->update($requestData['customer']);
+            $serviceOrder->update($requestData['serviceOrder']);
+        });
+
+        return $result;
     }
 
     public function remove($id)
     {
-        $this->serviceOrderRepository->removeServiceOrder($id);
+        ServiceOrder::destroy($id);
     }
 }

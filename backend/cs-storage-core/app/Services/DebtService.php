@@ -6,7 +6,6 @@ use App\Models\Customer;
 use App\Models\Address;
 use App\Http\Requests\DebtRequest;
 use App\Models\Debt;
-use Exception;
 use DB;
 class DebtService
 {
@@ -22,64 +21,59 @@ class DebtService
 
     public function create(DebtRequest $request)
     {
-        try {
-            $result = DB::transaction(function () use ($request) {
 
-                if (!empty($request->input('customer.address'))) {
-                    $address = Address::create($request->input('customer.address'));
-                }
+        $result = DB::transaction(function () use ($request) {
 
-                $customer = new Customer($request->input('customer'));
-                $customer->address()->associate($address);
-                $customer->save();
+            if (!empty($request->input('customer.address'))) {
+                $address = Address::create($request->input('customer.address'));
+            }
 
-                $debt = new Debt([
-                    "value" => $request->input('value'),
-                    "forecast" => $request->input('forecast')
-                ]);
+            $customer = new Customer($request->input('customer'));
+            $customer->address()->associate($address);
+            $customer->save();
 
-                $debt->customer()->associate($customer);
-                $debt->save();
+            $debt = new Debt([
+                "value" => $request->input('value'),
+                "forecast" => $request->input('forecast')
+            ]);
 
-                return $debt->load('customer.address');
-            });
+            $debt->customer()->associate($customer);
+            $debt->save();
 
-        } catch (Exception $e) {
-            throw $e;
-        }
+            return $debt->load('customer.address');
+        });
+
+        return $result;
     }
 
     public function update(DebtRequest $request)
     {
         $id = $request->input('id');
 
-        try {
-            $result = DB::transaction(function () use ($request, $id) {
-                $debt = Debt::with('customer.address')->findOrFail($id);
-                $customer = $debt->customer;
+        $result = DB::transaction(function () use ($request, $id) {
+            $debt = Debt::with('customer.address')->findOrFail($id);
+            $customer = $debt->customer;
 
-                if ($request->has('customer.address')) {
-                    if ($customer->address) {
-                        //if customer exists
-                        $customer->address->update($request->input('customer.address'));
-                    } else {
-                        //if customer does not exists
-                        $newAddress = Address::create($request->input('customer.address'));
-                        $customer->address()->associate($newAddress);
-                        $customer->save();
-                    }
+            if ($request->has('customer.address')) {
+                if ($customer->address) {
+                    //if customer exists
+                    $customer->address->update($request->input('customer.address'));
+                } else {
+                    //if customer does not exists
+                    $newAddress = Address::create($request->input('customer.address'));
+                    $customer->address()->associate($newAddress);
+                    $customer->save();
                 }
+            }
 
-                $customer->update($request->input('customer'));
-                $debt->update([
-                    "value" => $request->input('value'),
-                    "forecast" => $request->input('forecast')
-                ]);
+            $customer->update($request->input('customer'));
+            $debt->update([
+                "value" => $request->input('value'),
+                "forecast" => $request->input('forecast')
+            ]);
+        });
 
-            });
-        } catch (Exception $e) {
-            throw $e;
-        }
+        return $result;
     }
 
     public function remove($id)
