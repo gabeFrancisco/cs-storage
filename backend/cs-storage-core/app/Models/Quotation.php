@@ -33,4 +33,10 @@ class Quotation extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    public function total($id)
+    {
+        $quotation = $this->with('products')->find($id);
+        $total = $quotation->products->sum(fn($product) => $product->quantity * $product->price);
+    }
 }
