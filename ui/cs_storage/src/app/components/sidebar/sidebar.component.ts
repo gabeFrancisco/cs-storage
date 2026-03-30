@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-
+  user: any = null;
+  ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem("user")!).user
+  }
 }
