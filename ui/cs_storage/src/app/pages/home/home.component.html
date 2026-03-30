@@ -1,9 +1,10 @@
-<section>
-  <app-header />
+<section class="flex flex-row p-2 h-screen">
 
+  <app-sidebar />
 
   <!-- ----------------------------------------------------------------------- -->
-  <div class="p-3 flex flex-col justify-center">
+  <div class="px-2 flex flex-col items-start">
+    <app-header class="w-full" />
     <router-outlet />
   </div>
 </section>

@@ -27,6 +27,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UserComponent } from './pages/user/user.component';
 import { NgClickOutsideDirective} from 'ng-click-outside2';
 import { EstimatesComponent } from './pages/estimates/estimates.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EstimatesComponent } from './pages/estimates/estimates.component';
     DashboardComponent,
     UserComponent,
     EstimatesComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
