@@ -1,25 +1,31 @@
-<aside class="h-full z-50 bg-white shadow border-r text-slate-600 flex flex-col justify-between items-center">
-    <div class="flex flex-col items-center">
+<aside class="h-full z-50 bg-white shadow border-r text-slate-700 flex flex-col justify-between items-center">
+    <div class="flex py-5 flex-col items-center">
 
         <img src="logo.ico" alt="Logo" class="w-12 rounded" />
-        <div class="flex flex-col my-5">
+        <h3 class="my-3">Gerência Chaveiro Sul</h3>
+        <div>
+            <div class="border-b border-slate-300 px-16 w-full"></div>
+
+        </div>
+        <div class="flex flex-col my-2">
             <ul class="flex flex-col">
-                <li routerLink="" class="py-2 px-5 hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+                <li routerLink=""
+                    class="py-2 px-5 text-sm hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
                     <fa-icon [icon]="faChartLine" [fixedWidth]="true" class="w-4 text-center" />
                     Painel
                 </li>
                 <li routerLink="produtosEmFalta"
-                    class="py-2 px-5 text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+                    class="py-2 px-5 text-sm text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
                     <fa-icon [icon]="faBoxOpen" [fixedWidth]="true" class="w-4 text-center" />
                     Produtos em falta
                 </li>
                 <li routerLink="ordensDeServico"
-                    class="py-2 px-5 text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+                    class="py-2 px-5 text-sm text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
                     <fa-icon [icon]="faWrench" [fixedWidth]="true" class="w-4 text-center" />
                     Ordens de Serviço
                 </li>
                 <li routerLink="orcamentos"
-                    class="py-2 px-5 text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+                    class="py-2 px-5 text-sm text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
                     <fa-icon [icon]="faFile" [fixedWidth]="true" class="w-4 text-center" />
                     Orçamentos
                 </li>
