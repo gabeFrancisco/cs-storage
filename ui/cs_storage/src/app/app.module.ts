@@ -29,6 +29,7 @@ import { NgClickOutsideDirective} from 'ng-click-outside2';
 import { EstimatesComponent } from './pages/estimates/estimates.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Modal } from './components/modal/modal';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     UserComponent,
     EstimatesComponent,
     SidebarComponent,
+    Modal,
   ],
   imports: [
     BrowserModule,
