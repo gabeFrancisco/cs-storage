@@ -1,1 +1,14 @@
-<p>modal works!</p>
+@if (isOpen) {
+<div (click)="onBackdropClick($event)"
+    class="absolute top-0 left-0 w-screen z-50 h-screen bg-gray-200 bg-opacity-75 flex flex-col justify-center items-center">
+    <div (clickOutside)="close()" class="-mt-48 rounded-lg  border-gray-400 shadow-lg bg-gray-50">
+        <div class="py-1 px-3 bg-white flex flex-row rounded-lg border-b justify-between">
+            <h2>{{ title }}</h2>
+            <button (click)="close()">X</button>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-3">
+            <ng-content />
+        </div>
+    </div>
+</div>
+}
