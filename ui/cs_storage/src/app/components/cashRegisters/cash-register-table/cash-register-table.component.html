@@ -1,5 +1,5 @@
 <div class="w-full shadow border border-gray-200 rounded">
-  <div class="px-2 py-1 font-bold flex flex-row text-gray-600 border-b justify-between items-center bg-gray-100">
+  <div class="px-2 py-1 font-bold flex flex-row text-gray-600 border-b justify-between  rounded items-center bg-white">
     <span class="font-bold">Caixa</span>
     <div class="border font- pl-2 rounded-sm bg-white">
       <label for="date" class="mr-2">Data</label>
@@ -33,7 +33,7 @@
           <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
             Carregando...
           </tr>
-          <tr class="items-center hover:bg-gray-200 cursor-pointer" *ngFor="let item of registers">
+          <tr class="items-center bg-white hover:bg-gray-200 cursor-pointer" *ngFor="let item of registers">
             <td class="font-normal truncate border-r p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </td>

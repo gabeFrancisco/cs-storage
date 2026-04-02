@@ -1,5 +1,5 @@
 <div class="border shadow w-full border-gray-200 rounded">
-  <div class="p-2 font-bold flex flex-row text-gray-600 border-b justify-between items-baseline bg-gray-100">
+  <div class="p-2 font-bold flex flex-row text-gray-600 border-b rounded justify-between items-baseline bg-white">
     <span class="font-bold">Produtos em falta</span>
     <div class="flex flex-row items-center">
       <button type="button" (click)="fetchList()" class="btn-red py-1 text-md" (click)="deleteAllBought()">
@@ -32,8 +32,8 @@
           <tr *ngIf="loading" class="text-center text-gray-500 text-lg">
             Carregando...
           </tr>
-          <tr class="items-center even:bg-slate-100 hover:bg-gray-200 cursor-pointer" *ngFor="let item of products"
-            [ngClass]="{ 'text-gray-500 ': item.is_bought }">
+          <tr class="items-center bg-white even:bg-slate-100 hover:bg-gray-200 cursor-pointer"
+            *ngFor="let item of products" [ngClass]="{ 'text-gray-500 ': item.is_bought }">
             <td class="font-normal p-1.5 truncate">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </td>
