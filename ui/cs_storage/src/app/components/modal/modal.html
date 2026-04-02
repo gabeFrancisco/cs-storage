@@ -1,0 +1,15 @@
+@if (isOpen) {
+<div (click)="onBackdropClick($event)"
+    class="absolute top-0 left-0 w-screen z-50 h-screen bg-gray-200 bg-opacity-75 flex flex-col justify-center items-center">
+    <div (clickOutside)="close()" class="-mt-48 rounded-lg shadow-xl bg-gray-50">
+        <div class="py-2 px-3 bg-slate-100 flex flex-row rounded-tl-lg rounded-tr-lg border-b justify-between">
+            <h2>{{ title }}</h2>
+            <button class="px-2 bg-red-500 hover:bg-red-600 text-white rounded-lg ml-2" (click)="close()"><fa-icon
+                    [icon]="faX" /></button>
+        </div>
+        <div class="bg-white rounded-lg p-5">
+            <ng-content />
+        </div>
+    </div>
+</div>
+}

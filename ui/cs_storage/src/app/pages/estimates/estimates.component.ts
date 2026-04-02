@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './estimates.component.css'
 })
 export class EstimatesComponent {
+  isModalOpen = false;
 
+  openModal() { this.isModalOpen = true; }
+  closeModal() { this.isModalOpen = false; }
 }
