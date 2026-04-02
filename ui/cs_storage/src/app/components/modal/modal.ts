@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-modal',
@@ -7,6 +8,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrl: './modal.css',
 })
 export class Modal {
+  faX = faXmark;
+
   @Input() title: string = "";
   @Input() isOpen: boolean = false;
   @Output() closed = new EventEmitter<void>();
