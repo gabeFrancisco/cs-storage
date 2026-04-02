@@ -83,4 +83,8 @@ select {
   .form-label {
     @apply absolute z-10 px-1 ml-3 -mt-2 text-sm bg-gray-50 rounded;
   }
+
+  .form-btn {
+    @apply w-full mt-2 py-2 px-4;
+  }
 }
