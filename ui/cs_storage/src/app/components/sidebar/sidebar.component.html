@@ -1,38 +1,46 @@
-<aside class="h-full z-50 bg-white shadow border-r text-slate-600 flex flex-col justify-between items-center">
-	<div class="flex py-5 flex-col items-center">
+<aside class="h-full px-5 py-1 lg:px-0 z-50 bg-white shadow border-r text-slate-600 flex flex-row lg:flex-col justify-between items-center">
+	<div class="flex py-1 lg:py-5 flex-row lg:flex-col justify-evenly w-full items-center">
 
 		<img src="logo.ico" alt="Logo" class="w-12 rounded" />
-		<h3 class="my-3">Gerência Chaveiro Sul</h3>
-		<div>
+		<h3 class="my-3 hidden lg:block">Gerência Chaveiro Sul</h3>
+		<div class="hidden lg:block">
 			<div class="border-b border-slate-300 px-16 w-full"></div>
 
 		</div>
-		<div class="flex flex-col my-2">
-			<ul class="flex flex-col">
+		<div class="flex flex-row lg:flex-col lg:my-2">
+			<ul class="flex flex-row lg:flex-col">
 				<li routerLink=""
-					class="py-2 border-l-4 border-slate-400 px-5 text-sm hover:border-blue-200 transition-all hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+					class="py-2 lg:border-l-4 border-slate-400 px-2 lg:px-5 text-sm hover:border-blue-200 transition-all hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
 					<fa-icon [icon]="faChartLine" [fixedWidth]="true" class="w-4 text-center" />
-					Painel
+					<span class="hidden md:inline">
+						Painel
+					</span>
 				</li>
 				<li routerLink="produtosEmFalta"
-					class="py-2 px-5 border-l-4 border-slate-400 text-sm hover:border-blue-200 transition-all text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
-					<fa-icon [icon]="faBoxOpen" [fixedWidth]="true" class="w-4 text-center" />
-					Produtos em falta
+					class="py-2 px-2 lg:px-5 lg:border-l-4 border-slate-400 text-sm hover:border-blue-200 transition-all text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+					<fa-icon [icon]="faBoxOpen" [fixedWidth]="true" class="w-24 md:w-4 text-center" />
+					<span class="hidden md:inline">
+						Produtos em falta
+					</span>
 				</li>
 				<li routerLink="ordensDeServico"
-					class="py-2 px-5 border-l-4 border-slate-400 text-sm hover:border-blue-200 transition-all text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+					class="py-2 px-2 lg:px-5 lg:border-l-4 border-slate-400 text-sm hover:border-blue-200 transition-all text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
 					<fa-icon [icon]="faWrench" [fixedWidth]="true" class="w-4 text-center" />
-					Ordens de Serviço
+					<span class="hidden md:inline">
+						Ordens de Serviço
+					</span>
 				</li>
 				<li routerLink="orcamentos"
-					class="py-2 px-5 border-l-4 border-slate-400 text-sm hover:border-blue-200 transition-all text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+					class="py-2 px-2 lg:px-5 lg:border-l-4 border-slate-400 text-sm hover:border-blue-200 transition-all text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
 					<fa-icon [icon]="faFile" [fixedWidth]="true" class="w-4 text-center" />
-					Orçamentos
+					<span class="hidden md:inline">
+						Orçamentos
+					</span>
 				</li>
 			</ul>
 		</div>
 	</div>
-	<div class="text-sm mx-3 my-5">
+	<div class="text-sm text-nowrap mx-3 lg:my-5">
 		Olá <a href="usuario" class="hover:text-slate-300 underline">{{user.name}}</a>
 	</div>
 </aside>
