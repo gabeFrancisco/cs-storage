@@ -4,6 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property-read \App\Models\Customer|null $customer
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read int|null $products_count
+ * @property string $title
+ * @property string $observations
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Quotation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Quotation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Quotation query()
+ * @mixin \Eloquent
+ */
 class Quotation extends Model
 {
     // public $title;

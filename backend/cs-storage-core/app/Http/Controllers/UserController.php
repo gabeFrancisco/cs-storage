@@ -51,14 +51,15 @@ class UserController extends Controller
             $token = $user->createToken("access_token")->plainTextToken;
 
             $cookie = Cookie::create('access_token', $token)
-                // ->withSecure(true)
+                ->withSecure(true)
                 ->withHttpOnly(true)
                 ->withSameSite('Lax')
                 ->withExpires(time() + 60 * 60 * 24 * 180);
 
 
             return response()->json([
-                "user" => $user
+                "user" => $user,
+                "token" => $token
             ], 200)->withCookie($cookie);
 
             // ->cookie('access_token', $token, 262800, '/', null, false, true, false, 'None');

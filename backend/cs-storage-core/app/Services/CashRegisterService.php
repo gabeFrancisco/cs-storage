@@ -4,9 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\CashRegisterRequest;
 use App\Models\CashRegister;
-use App\Repository\CashRegisterRepository;
 use Error;
-use App\Enums\PaymentType;
 
 class CashRegisterService
 {

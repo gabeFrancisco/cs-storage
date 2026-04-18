@@ -28,6 +28,7 @@ export class LoginComponent {
       password: this.loginForm.get('password')!.value
     }).subscribe(({
       next: (data) => {
+        localStorage.setItem('token', data.token);
         localStorage.setItem("user", JSON.stringify(data));
         window.location.href = ""
       },
