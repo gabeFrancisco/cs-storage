@@ -9,6 +9,7 @@ import { ServiceOrderUpdateComponent } from './pages/service-order-update/servic
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EstimatesComponent } from './pages/estimates/estimates.component';
+import { ProductsComponent } from './pages/products/products-component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: "",
         component: DashboardComponent
+      },
+      {
+        path: "produtos",
+        component: ProductsComponent
       },
       {
         path: "produtosEmFalta",

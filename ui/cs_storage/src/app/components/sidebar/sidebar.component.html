@@ -1,4 +1,5 @@
-<aside class="h-full px-5 py-1 lg:px-0 z-50 bg-white shadow border-r text-slate-600 flex flex-row lg:flex-col justify-between items-center">
+<aside
+	class="h-full px-5 py-1 lg:px-0 z-50 bg-white shadow border-r text-slate-600 flex flex-row lg:flex-col justify-between items-center">
 	<div class="flex py-1 lg:py-5 flex-row lg:flex-col justify-evenly w-full items-center">
 
 		<img src="logo.ico" alt="Logo" class="w-12 rounded" />
@@ -16,9 +17,16 @@
 						Painel
 					</span>
 				</li>
+				<li routerLink="produtos"
+					class="py-2 lg:border-l-4 border-slate-400 px-2 lg:px-5 text-sm hover:border-blue-200 transition-all hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
+					<fa-icon [icon]="faProduct" [fixedWidth]="true" class="w-4 text-center" />
+					<span class="hidden md:inline">
+						Produtos
+					</span>
+				</li>
 				<li routerLink="produtosEmFalta"
 					class="py-2 px-2 lg:px-5 lg:border-l-4 border-slate-400 text-sm hover:border-blue-200 transition-all text-nowrap hover:bg-blue-500 hover:text-white w-full hover:cursor-pointer">
-					<fa-icon [icon]="faBoxOpen" [fixedWidth]="true" class="w-24 md:w-4 text-center" />
+					<fa-icon [icon]="faBoxOpen" [fixedWidth]="true" class="w-4 md:w-4 text-center" />
 					<span class="hidden md:inline">
 						Produtos em falta
 					</span>

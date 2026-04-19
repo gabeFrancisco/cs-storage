@@ -30,6 +30,8 @@ import { EstimatesComponent } from './pages/estimates/estimates.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Modal } from './components/modal/modal';
+import { ProductsComponent } from './pages/products/products-component';
+import { ProductsTableComponent } from './components/products/products-table.component/products-table.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { Modal } from './components/modal/modal';
     EstimatesComponent,
     SidebarComponent,
     Modal,
+    ProductsComponent,
+    ProductsTableComponent
   ],
   imports: [
     BrowserModule,
