@@ -31,6 +31,8 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     //Categories
     Route::get('categories', [CategoryController::class, 'getAll']);
     Route::post('categories', [CategoryController::class, 'post']);
+    Route::put('categories', [CategoryController::class, 'put']);
+    Route::delete('categories/{id}', [CategoryController::class, 'delete']);
 
     //Debts
     Route::get('debts', [DebtController::class, 'getAll']);

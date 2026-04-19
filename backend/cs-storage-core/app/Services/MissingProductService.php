@@ -43,7 +43,7 @@ class MissingProductService
 
     public function remove($id)
     {
-        MissingProduct::destroy($id);
+        return MissingProduct::destroy($id);
     }
 
     public function removeAllBought()

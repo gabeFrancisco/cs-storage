@@ -39,7 +39,13 @@ class ServiceOrderController extends Controller
         return response()->json($result, 200);
     }
 
-    public function delete($id){
-        $this->serviceOrderService->remove($id);
+    public function delete($id)
+    {
+        $result = $this->serviceOrderService->remove($id);
+        if (!$result) {
+            return response()->json("Service order not found!", 404);
+        }
+
+        return response()->json("Service order deleted with success!", 200);
     }
 }

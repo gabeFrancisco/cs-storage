@@ -78,7 +78,7 @@ class DebtService
 
     public function remove($id)
     {
-        Debt::destroy($id);
+        return Debt::destroy($id);
     }
 
     public function getDayAndMonthTotal()

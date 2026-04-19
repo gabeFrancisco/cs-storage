@@ -70,7 +70,7 @@ class CashRegisterService
 
     public function remove($id)
     {
-        CashRegister::destroy($id);
+        return CashRegister::destroy($id);
     }
 
     public function getDayAndMonthTotal()

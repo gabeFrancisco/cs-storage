@@ -52,10 +52,12 @@ class DebtController extends Controller
 
     public function delete($id)
     {
-        $this->_debtService->remove($id);
-
+        $result = $this->_debtService->remove($id);
+        if (!$result) {
+            return response()->json("Debt not found!", 404);
+        }
         return response()->json(
-            'The register was deleted with success!',
+            'Debt deleted with success!',
             200
         );
     }

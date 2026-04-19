@@ -80,6 +80,6 @@ class ServiceOrderService
 
     public function remove($id)
     {
-        ServiceOrder::destroy($id);
+        return ServiceOrder::destroy($id);
     }
 }

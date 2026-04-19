@@ -29,11 +29,10 @@ class MissingProductController extends Controller
 
     public function post(MissingProductRequest $request)
     {
-        try{
+        try {
             $missingProduct = $this->missingProductService->create($request);
             return response()->json($missingProduct);
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             error_log($e);
         }
     }
@@ -51,13 +50,19 @@ class MissingProductController extends Controller
     public function delete()
     {
         $id = request()->query('id');
-        $this->missingProductService->remove($id);
+        $result = $this->missingProductService->remove($id);
+
+        if (!$result) {
+            return response()->json("Missing product not found!", 404);
+        }
+
         return response()->json([
             "message" => 'Deleted with success!'
         ], 200);
     }
 
-    public function deleteAllBought(){
+    public function deleteAllBought()
+    {
         $this->missingProductService->removeAllBought();
         return response()->json([
             "message" => 'All bought products deleted with success!'

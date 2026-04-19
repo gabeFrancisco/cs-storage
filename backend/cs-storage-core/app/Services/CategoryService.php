@@ -46,6 +46,6 @@ class CategoryService
 
     public function remove($id)
     {
-        Category::destroy($id);
+        return Category::destroy($id);
     }
 }
