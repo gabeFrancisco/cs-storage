@@ -16,6 +16,10 @@ export class ProductService {
   private refreshList = new BehaviorSubject<void>(undefined);
   refreshList$ = this.refreshList.asObservable();
 
+  //modal variables
+  private productPostModalState = new BehaviorSubject<boolean>(false);
+  productPostModalState$ = this.productPostModalState.asObservable();
+
   triggerUpdate(){
     this.refreshList.next;
   }
@@ -23,4 +27,7 @@ export class ProductService {
   getProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(`${this.url}`).pipe(shareReplay(1))
   }
+
+  openProductPostModal() { this.productPostModalState.next(true)}
+  closeProductPostModal() { this.productPostModalState.next(false)}
 }

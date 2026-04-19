@@ -32,6 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Modal } from './components/modal/modal';
 import { ProductsComponent } from './pages/products/products-component';
 import { ProductsTableComponent } from './components/products/products-table.component/products-table.component';
+import { ProductModalComponent } from './components/products/product-modal/product-modal.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ProductsTableComponent } from './components/products/products-table.com
     SidebarComponent,
     Modal,
     ProductsComponent,
-    ProductsTableComponent
+    ProductsTableComponent,
+    ProductModalComponent
   ],
   imports: [
     BrowserModule,

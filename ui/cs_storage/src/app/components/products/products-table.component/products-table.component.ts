@@ -28,7 +28,9 @@ export class ProductsTableComponent implements OnInit {
     })
   }
 
-  openProductModal(){}
+  openProductModal(){
+    this.productService.openProductPostModal();
+  }
   openProductUpdateModal(id: number){}
   deleteProductModal(id: number){}
 }
