@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CashRegisterController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\MissingProductController;
@@ -26,6 +27,10 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::post("cashregisters", [CashRegisterController::class, 'post'], );
     Route::put("cashregisters", [CashRegisterController::class, 'put'], );
     Route::delete("cashregisters/{id}", [CashRegisterController::class, 'delete']);
+
+    //Categories
+    Route::get('categories', [CategoryController::class, 'getAll']);
+    Route::post('categories', [CategoryController::class, 'post']);
 
     //Debts
     Route::get('debts', [DebtController::class, 'getAll']);
@@ -59,4 +64,3 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::get('userpreferences', [UserPreferencesController::class, 'get']);
     Route::post('userpreferences', [UserPreferencesController::class, 'post']);
 });
-
