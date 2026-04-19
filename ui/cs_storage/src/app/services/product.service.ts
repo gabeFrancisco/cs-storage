@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
+import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { Product } from '../../models/Product';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ProductService {
-  private $list?: Observable<Product[]>;
+  private list$?: Observable<Product[]>;
 
   constructor(private http: HttpClient){ }
   private url = `${environment.apiUrl}/products`;
@@ -21,7 +21,7 @@ export class ProductService {
   productPostModalState$ = this.productPostModalState.asObservable();
 
   triggerUpdate(){
-    this.refreshList.next;
+    this.refreshList.next();
   }
 
   getProducts(): Observable<Product[]>{
@@ -30,4 +30,14 @@ export class ProductService {
 
   openProductPostModal() { this.productPostModalState.next(true)}
   closeProductPostModal() { this.productPostModalState.next(false)}
+
+  createProduct(payload: Product): Observable<any>{
+    return this.http.post(`${this.url}`, payload).pipe(
+      tap(() => this.clearCache())
+    )
+  }
+
+  clearCache(){
+    this.list$ = undefined
+  }
 }

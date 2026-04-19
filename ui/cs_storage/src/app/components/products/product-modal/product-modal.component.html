@@ -1,5 +1,6 @@
 <app-modal title="Novo produto" [isOpen]="show" (closed)="close()">
-	<form [formGroup]="productForm" #formDir="ngForm" class="max-w-xl mx-auto flex flex-col space-y-1">
+	<form (ngSubmit)="submit()" [formGroup]="productForm" #formDir="ngForm"
+		class="max-w-xl mx-auto flex flex-col space-y-1">
 		<div class="flex items-baseline">
 			<label class="w-20 text-sm text-right mr-2" for="name">Nome</label>
 			<div class="flex flex-col">
@@ -15,12 +16,15 @@
 			</div>
 		</div>
 		<div class="flex items-baseline">
-			<label class="w-20 text-sm text-right mr-2" for="description">Categoria</label>
-			<input list="categories" class="border border-gray-400" formControlName="categories" required />
-			<datalist id="categories">
-				<option [ngValue]="0">Produto</option>
-				<option [ngValue]="1">Serviço</option>
-			</datalist>
+			<label class="w-20 text-sm text-right mr-2" for="category_id">Categoria</label>
+			<div class="flex flex-col">
+				<select class="border border-gray-400 bg-white" formControlName="category_id" required>
+					<option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+				</select>
+				<small class="text-red-500" *ngIf="productForm.get('category_id')!.invalid && formDir.submitted">Nome é
+					obrigatório!</small>
+
+			</div>
 		</div>
 		<div class="flex items-baseline">
 			<label class="w-20 text-sm text-right mr-2" for="quantity">Quantidade</label>
