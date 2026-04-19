@@ -15,11 +15,12 @@
 			</div>
 		</div>
 		<div class="flex items-baseline">
-			<label class="text-sm w-20 text-right mr-2" for="category_id">Tipo</label>
-			<select class="bg-white border my-1 border-gray-400" formControlName="category_id">
+			<label class="w-20 text-sm text-right mr-2" for="description">Categoria</label>
+			<input list="categories" class="border border-gray-400" formControlName="categories" required />
+			<datalist id="categories">
 				<option [ngValue]="0">Produto</option>
 				<option [ngValue]="1">Serviço</option>
-			</select>
+			</datalist>
 		</div>
 		<div class="flex items-baseline">
 			<label class="w-20 text-sm text-right mr-2" for="quantity">Quantidade</label>
