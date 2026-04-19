@@ -1,14 +1,11 @@
-<!-- <div class="border shadow w-full border-gray-200 rounded">
+<div class="border shadow w-full border-gray-200 rounded">
     <div class="p-2 font-bold flex flex-row text-gray-600 border-b rounded justify-between items-baseline bg-white">
         <span class="font-bold">Produtos</span>
         <div class="flex flex-row items-center">
-            <button type="button" (click)="fetchList()" class="btn-red py-1 text-md" (click)="deleteAllBought()">
-                Remover Concluídos
-            </button>
             <button type="button" (click)="fetchList()" class="mx-1 text-gray-400 btn text-xl">
                 ↻
             </button>
-            <button type="button" class="btn-green px-4 font-bold text-xl" (click)="openMissingProductModal()">
+            <button type="button" class="btn-green px-4 font-bold text-xl" (click)="openProductModal()">
                 +
             </button>
         </div>
@@ -17,56 +14,51 @@
         <div>
             <table class="table-fixed w-full text-sm text-left rtl:text-right ">
                 <thead class="text-sm bg-gray-50  border-b shadow-sm ">
-
+                    <!-- Table header -->
                     <tr>
-                        <th class="font-normal p-2">Data</th>
-                        <th class="font-normal p-2">Ítem</th>
-                        <th class="font-normal p-2">Previsão</th>
-                        <th class="font-normal p-2">Cliente</th>
+                        <th class="font-normal p-2">Código</th>
+                        <th class="font-normal p-2">Nome</th>
+                        <th class="font-normal p-2">Quantidade</th>
+                        <th class="font-normal p-2">Categoria</th>
+                        <th class="font-normal p-2">Preço</th>
                         <th class="font-normal text-center p-2">Ações</th>
                     </tr>
                 </thead>
 
-
+                <!-- Table body -->
                 <tbody>
                     <tr *ngIf="loading" class="text-center text-gray-500 text-lg">
                         Carregando...
                     </tr>
                     <tr class="items-center bg-white even:bg-slate-100 hover:bg-gray-200 cursor-pointer"
-                        *ngFor="let item of products" [ngClass]="{ 'text-gray-500 ': item.is_bought }">
-                        <td class="font-normal p-1.5 truncate">
-                            {{ item.created_at | date : "dd/MM/yyyy" }}
+                        *ngFor="let item of products">
+                        <td class="font-normal p-1.5">
+                            {{ item.id }}
                         </td>
                         <td class="font-normal truncate p-1.5">{{ item.name }}</td>
-                        <td class="font-normal truncate p-1.5" [ngClass]="{
-                'text-red-600':
-                  getLateDate(item.needed_day) && !item.is_bought
-              }">
-                            {{ item.needed_day | date : "dd/MM/yyyy" }}
-                            @if(getLateDate(item.needed_day) && !item.is_bought) { - Atrasado! }
+                        <td class="font-normal truncate p-1.5">
+                            {{ item.quantity }}
                         </td>
                         <td class="font-normal truncate p-1.5">
-                            {{ item.customer_name }} - {{ item.customer_phone }}
+                            {{ item.category.name }}
+                        </td>
+                        <td class="font-normal truncate p-1.5">
+                            {{ item.price.toFixed(2) }}
                         </td>
 
-                        <td class="font-normal text-center truncate border-l border-gray-300 border-double py-1">
-                            <div *ngIf="!item.is_bought">
-                                <button type="button" title="Remover" class="btn-primary mr-1 py-0.5 px-3"
-                                    (click)="setBoughtState(item.id!)">
-                                    ✓
-                                </button>
-                                <button type="button" title="Remover" class="btn-red py-0.5 px-3 mr-1"
-                                    (click)="deleteMissingProduct(item.id!)">
-                                    𝘅
-                                </button>
-                            </div>
-                            <div *ngIf="item.is_bought">
-                                <p class="text-gray-500">Ítem comprado</p>
-                            </div>
+                        <td class="font-normal truncate text-center">
+                            <button (click)="openProductUpdateModal(item.id!)" title="Atualizar"
+                                class="btn-primary text-lg mr-1">
+                                ✎
+                            </button>
+                            <button type="button" title="Remover" (click)="deleteProductModal(item.id!)"
+                                class="btn-red text-lg mr-1">
+                                𝘅
+                            </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div> -->
+</div>
