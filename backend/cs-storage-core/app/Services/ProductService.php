@@ -38,4 +38,13 @@ class ProductService
 
         return $product;
     }
+
+    public function update(ProductRequest $request, int $id)
+    {
+        $product = $this->getById($id);
+        $product->update($request->validated());
+        $product->save();
+
+        return $product;
+    }
 }

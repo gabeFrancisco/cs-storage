@@ -24,4 +24,10 @@ class ProductController extends Controller
         $product = $this->_productService->create($request);
         return response()->json($product, 200);
     }
+
+    public function put(ProductRequest $request, int $id)
+    {
+        $product = $this->_productService->update($request, $id);
+        return response()->json($product, 200);
+    }
 }
