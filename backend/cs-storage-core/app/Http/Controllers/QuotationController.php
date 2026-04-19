@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EstimateCreationRequest;
-use App\Services\EstimateService;
-use Illuminate\Http\Request;
+use App\Http\Requests\quotationCreationRequest;
+use App\Services\QuotationService;
 use Exception;
 
-class EstimateController extends Controller
+class QuotationController extends Controller
 {
-    private EstimateService $estimateService;
-    public function __construct(EstimateService $estimateService)
+    private QuotationService $estimateService;
+    public function __construct(QuotationService $estimateService)
     {
         $this->estimateService = $estimateService;
     }
@@ -26,7 +25,7 @@ class EstimateController extends Controller
         }
     }
 
-    public function post(EstimateCreationRequest $request)
+    public function post(quotationCreationRequest $request)
     {
         $result = $this->estimateService->create($request);
         return response()->json($result)->setStatusCode(200);

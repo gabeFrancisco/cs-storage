@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class ProductRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -12,7 +12,10 @@ class CategoryRequest extends FormRequest
             'id' => 'numeric',
             'name' => 'required|string',
             'description' => 'string',
-            'color' => 'nullable|string'
+            'quantity' => 'required|numeric',
+            'price' => 'required|numeric',
+            'product_type' => 'required|numeric',
+            'category_id' => 'required|numeric'
         ];
     }
 }

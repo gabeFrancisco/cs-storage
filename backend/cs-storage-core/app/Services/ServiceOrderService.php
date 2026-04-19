@@ -58,7 +58,8 @@ class ServiceOrderService
         $requestData = $this->getRequestData($request);
 
         $result = DB::transaction(function () use ($requestData) {
-            $serviceOrder = ServiceOrder::with('customer', 'address')->findOrFail($requestData['serviceOrder']['id']);
+            $serviceOrder = ServiceOrder::with('customer', 'address')
+                ->findOrFail($requestData['serviceOrder']['id']);
 
             if ($serviceOrder->has('address')) {
                 if ($requestData['address'] != null) {

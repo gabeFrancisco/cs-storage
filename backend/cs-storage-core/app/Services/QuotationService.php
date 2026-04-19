@@ -21,7 +21,7 @@ class QuotationService
 
     public function getAll()
     {
-        return Quotation::with('product', 'customer', 'address')->get();
+        return Quotation::with('product.category', 'customer.adress')->get();
     }
 
     private function getRequestData(QuotationCreationRequest $request)
