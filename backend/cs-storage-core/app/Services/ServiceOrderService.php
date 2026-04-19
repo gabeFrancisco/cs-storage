@@ -53,13 +53,13 @@ class ServiceOrderService
         return $result;
     }
 
-    public function update(ServiceOrderRequest $request)
+    public function update(ServiceOrderRequest $request, int $id)
     {
         $requestData = $this->getRequestData($request);
 
-        $result = DB::transaction(function () use ($requestData) {
+        $result = DB::transaction(function () use ($requestData, $id) {
             $serviceOrder = ServiceOrder::with('customer', 'address')
-                ->findOrFail($requestData['serviceOrder']['id']);
+                ->findOrFail($id);
 
             if ($serviceOrder->has('address')) {
                 if ($requestData['address'] != null) {

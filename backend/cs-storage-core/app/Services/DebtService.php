@@ -46,10 +46,8 @@ class DebtService
         return $result;
     }
 
-    public function update(DebtRequest $request)
+    public function update(DebtRequest $request, int $id)
     {
-        $id = $request->input('id');
-
         $result = DB::transaction(function () use ($request, $id) {
             $debt = Debt::with('customer.address')->findOrFail($id);
             $customer = $debt->customer;

@@ -52,10 +52,8 @@ class CashRegisterService
         return $register;
     }
 
-    public function update(CashRegisterRequest $request)
+    public function update(CashRegisterRequest $request, int $id)
     {
-        $id = $request->input("id");
-
         $value = $request->input("value");
         $payment_type = $request->input('payment_type');
         $description = $request->input('description');

@@ -25,9 +25,9 @@ class CategoryController extends Controller
         return response()->json($category, 200);
     }
 
-    public function put(CategoryRequest $request)
+    public function put(CategoryRequest $request, int $id)
     {
-        $category = $this->_categoryService->update($request);
+        $category = $this->_categoryService->update($request, $id);
         return response()->json($category, 200);
     }
 

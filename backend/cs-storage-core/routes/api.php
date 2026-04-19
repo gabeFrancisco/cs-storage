@@ -26,13 +26,13 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::get('cashregisters/monthtotal', [CashRegisterController::class, 'getDayAndMonthTotal']);
     Route::get('cashregisters/{id}', [CashRegisterController::class, 'getById']);
     Route::post("cashregisters", [CashRegisterController::class, 'post'], );
-    Route::put("cashregisters", [CashRegisterController::class, 'put'], );
+    Route::put("cashregisters/{id}", [CashRegisterController::class, 'put'], );
     Route::delete("cashregisters/{id}", [CashRegisterController::class, 'delete']);
 
     //Categories
     Route::get('categories', [CategoryController::class, 'getAll']);
     Route::post('categories', [CategoryController::class, 'post']);
-    Route::put('categories', [CategoryController::class, 'put']);
+    Route::put('categories/{id}', [CategoryController::class, 'put']);
     Route::delete('categories/{id}', [CategoryController::class, 'delete']);
 
     //Products
@@ -45,7 +45,7 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::get('debts/monthtotal', [DebtController::class, 'getDayAndMonthTotal']);
     Route::get('debts/{id}', [DebtController::class, 'getById']);
     Route::post('debts', [DebtController::class, 'post']);
-    Route::put('debts', [DebtController::class, 'put']);
+    Route::put('debts/{id}', [DebtController::class, 'put']);
     Route::delete('debts/{id}', [DebtController::class, 'delete']);
 
     //MissingProducts
@@ -60,7 +60,7 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
     Route::get('serviceorders', [ServiceOrderController::class, 'getAll']);
     Route::get('serviceorders/{id}', [ServiceOrderController::class, 'getById']);
     Route::post('serviceorders', [ServiceOrderController::class, 'post']);
-    Route::put('serviceorders', [ServiceOrderController::class, 'put']);
+    Route::put('serviceorders/{id}', [ServiceOrderController::class, 'put']);
     Route::delete('serviceorders/{id}', [ServiceOrderController::class, 'delete']);
 
     //Quotations

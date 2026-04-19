@@ -9,7 +9,6 @@ class CashRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'numeric',
             'value' => 'required|numeric',
             'created_at' => 'required|date',
             'payment_type' => 'required|numeric',

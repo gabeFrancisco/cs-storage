@@ -33,9 +33,9 @@ class ServiceOrderController extends Controller
         return response()->json($result, 200);
     }
 
-    public function put(ServiceOrderRequest $request)
+    public function put(ServiceOrderRequest $request, int $id)
     {
-        $result = $this->serviceOrderService->update($request);
+        $result = $this->serviceOrderService->update($request, $id);
         return response()->json($result, 200);
     }
 

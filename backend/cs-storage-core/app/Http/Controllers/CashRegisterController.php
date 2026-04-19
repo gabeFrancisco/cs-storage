@@ -29,9 +29,9 @@ class CashRegisterController extends Controller
         return response()->json($register, 200);
     }
 
-    public function put(CashRegisterRequest $request)
+    public function put(CashRegisterRequest $request, int $id)
     {
-        $dbRegister = $this->_cashRegisterService->update($request);
+        $dbRegister = $this->_cashRegisterService->update($request, $id);
         return response()->json([
             "message" => "Succesfull update",
             "register" => $dbRegister

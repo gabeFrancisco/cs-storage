@@ -36,9 +36,10 @@ class CategoryService
         return Category::findOrFail($id);
     }
 
-    public function update(CategoryRequest $request)
+    public function update(CategoryRequest $request, int $id)
     {
-        $category = $this->getRequestData($request);
+        $category = $this->getById($id);
+        $category->update($request->validated());
         $category->save();
 
         return $category;
