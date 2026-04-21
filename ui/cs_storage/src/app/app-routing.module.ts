@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EstimatesComponent } from './pages/estimates/estimates.component';
 import { ProductsComponent } from './pages/products/products-component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: "",
         component: DashboardComponent
+      },
+      {
+        path: "categorias",
+        component: CategoriesComponent
       },
       {
         path: "produtos",

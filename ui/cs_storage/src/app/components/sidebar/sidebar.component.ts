@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faCartShopping, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faChartLine, faTags } from '@fortawesome/free-solid-svg-icons';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { faWrench } from '@fortawesome/free-solid-svg-icons';
 import { faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +17,7 @@ export class SidebarComponent {
   faWrench = faWrench;
   faFile = faFileInvoiceDollar
   faProduct = faCartShopping
+  faCategory = faTags
 
   user: any = null;
   ngOnInit(): void {

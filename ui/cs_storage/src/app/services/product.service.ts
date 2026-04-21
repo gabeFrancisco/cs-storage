@@ -41,7 +41,10 @@ export class ProductService {
   }
 
   getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(`${this.url}`).pipe(shareReplay(1))
+    if(!this.list$){
+      this.list$ = this.http.get<Product[]>(`${this.url}`).pipe(shareReplay(1))
+    }
+      return this.list$;
   }
 
   createProduct(payload: Product): Observable<any>{

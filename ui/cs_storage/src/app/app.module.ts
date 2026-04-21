@@ -34,6 +34,9 @@ import { ProductsComponent } from './pages/products/products-component';
 import { ProductsTableComponent } from './components/products/products-table.component/products-table.component';
 import { ProductCreationModalComponent } from './components/products/product-creation-modal/product-creation-modal.component';
 import { ProductShowModalComponent } from './components/products/product-show-modal.component/product-show-modal.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { CategoryTableComponent } from './components/categories/category-table.component/category-table.component';
+import { CategoryModalComponent } from './components/categories/category-modal.component/category-modal.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import { ProductShowModalComponent } from './components/products/product-show-mo
     ProductsComponent,
     ProductsTableComponent,
     ProductCreationModalComponent,
-    ProductShowModalComponent
+    ProductShowModalComponent,
+    CategoriesComponent,
+    CategoryTableComponent,
+    CategoryModalComponent,
   ],
   imports: [
     BrowserModule,

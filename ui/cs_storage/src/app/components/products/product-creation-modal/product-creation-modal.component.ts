@@ -38,7 +38,7 @@ export class ProductCreationModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.triggerUpdate();
-    this.categoryService.refreshList$.subscribe(() => this.fetchCategories())
+    this.categoryService.refreshList$.subscribe(() => this.fetchCategories()).unsubscribe();
   }
 
   fetchCategories(){
