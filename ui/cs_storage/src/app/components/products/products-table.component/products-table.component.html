@@ -15,11 +15,12 @@
             <table class="table-fixed w-full text-sm text-left rtl:text-right ">
                 <thead class="text-sm bg-gray-50  border-b shadow-sm ">
                     <!-- Table header -->
-                    <tr>
+                    <tr class="border-b">
                         <th class="font-normal border-r w-20 p-2">Código</th>
                         <th class="font-normal border-r p-2">Nome</th>
                         <th class="font-normal border-r w-24 p-2">Quantidade</th>
                         <th class="font-normal border-r p-2">Categoria</th>
+                        <th class="font-normal border-r w-32 p-2">Tipo</th>
                         <th class="font-normal border-r w-32 p-2">Preço</th>
                         <th class="font-normal border-r w-24 text-center p-2">Ações</th>
                     </tr>
@@ -32,7 +33,7 @@
                     </tr>
                     <tr class="items-center bg-white even:bg-slate-100 hover:bg-blue-200 cursor-pointer"
                         *ngFor="let item of products">
-                        <td class="border-r text-center font-bold w-20 p-1.5">
+                        <td class="border-r text-center text-neutral-500 w-20 p-1.5">
                             {{ item.id }}
                         </td>
                         <td class="font-normal border-r truncate p-1.5">{{ item.name }}</td>
@@ -42,7 +43,10 @@
                         <td class="font-normal border-r truncate p-1.5">
                             {{ item.category.name }}
                         </td>
-                        <td class="w-32 text-emerald-600 font-bold border-r truncate p-1.5">
+                        <td class="font-normal border-r truncate p-1.5">
+                            {{ parseProductType(item.product_type) }}
+                        </td>
+                        <td class="w-32 text-emerald-700 border-r truncate p-1.5">
                             R${{ item.price.toFixed(2) }}
                         </td>
 

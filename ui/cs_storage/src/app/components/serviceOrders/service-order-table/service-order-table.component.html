@@ -1,5 +1,6 @@
 <div class="w-full shadow border mt-3 border-gray-200 rounded">
-  <div class="px-2 py-1 font-bold flex flex-row text-gray-600 border-b rounded justify-between items-center bg-white">
+  <div
+    class="px-2 py-1 font-bold flex flex-row text-gray-600 border-b rounded-tl rounded-tr justify-between items-center bg-white">
     <span class="font-bold">Ordens de Serviço</span>
     <!-- <div class="border pl-2 rounded-sm bg-white">
       <label for="date" class="mr-2">Data</label>
@@ -19,15 +20,15 @@
       <table class="table-fixed w-full text-sm text-left rtl:text-right ">
         <thead class="text-sm bg-gray-50  ">
           <!-- Table header -->
-          <tr>
-            <th class="font-normal p-2">Criação</th>
-            <th class="font-normal w-1/4 p-2">Títutlo</th>
-            <th class="font-normal w-1/6 p-2">Data do serviço</th>
-            <th class="font-normal p-2">Prioridade</th>
-            <th class="font-normal p-2">Cliente</th>
-            <th class="font-normal w-1/6 p-2">Endereço</th>
-            <th class="font-normal p-2">Valor</th>
-            <th class="font-normal text-center p-2">Ações</th>
+          <tr class="border-b">
+            <th class="font-normal text-neutral-600 p-2">Criação</th>
+            <th class="font-normal text-neutral-600 w-1/4 p-2">Títutlo</th>
+            <th class="font-normal text-neutral-600 w-1/6 p-2">Data do serviço</th>
+            <th class="font-normal text-neutral-600 p-2">Prioridade</th>
+            <th class="font-normal text-neutral-600 p-2">Cliente</th>
+            <th class="font-normal text-neutral-600 w-1/6 p-2">Endereço</th>
+            <th class="font-normal text-neutral-600 p-2">Valor</th>
+            <th class="font-normal text-neutral-600 text-center p-2">Ações</th>
           </tr>
         </thead>
 
@@ -36,35 +37,38 @@
           <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
             Carregando...
           </tr>
-          <tr class="items-center bg-white hover:bg-gray-200 cursor-pointer" *ngFor="let item of serviceOrders"
+          <tr class="items-center border-b bg-white hover:bg-blue-200 cursor-pointer" *ngFor="let item of serviceOrders"
             (click)="show(item.id!)">
-            <td class="font-normal truncate p-1.5 text-gray-500">
+            <td class="font-normal border-r truncate p-1.5 text-gray-500">
               {{ item.created_at | date : "dd/MM/yyyy HH:mm" }}
             </td>
-            <td class="font-normal truncate p-1.5">{{ item.title }}</td>
-            <td class="font-normal truncate p-1.5 text-blue-700">
+            <td class="font-normal  truncate p-1.5">{{ item.title }}</td>
+            <td class="font-normal  truncate p-1.5 text-blue-700">
               {{ item.service_date | date : "dd/MM/yyyy" }}
             </td>
-            <td [ngClass]="{
-              'bg-sky-200': item.priority === 0,
-              'bg-gray-200': item.priority === 1,
-              'bg-red-200': item.priority === 2,
-            }" class="font-normal text-center rounded truncate p-1.5">
-              @if (item.priority === 0) { Baixa }
-              @if (item.priority === 1) { Normal }
-              @if (item.priority === 2) { Alta }
+            <td class="font-normal  text-center rounded truncate p-1.5">
+              <div class="rounded-xl p-0.5" [ngClass]="{
+              'bg-sky-500': item.priority === 0,
+              'bg-yellow-400': item.priority === 1,
+              'bg-red-500 text-white': item.priority === 2,
+            }">
+                @if (item.priority === 0) { Baixa }
+                @if (item.priority === 1) { Normal }
+                @if (item.priority === 2) { Alta }
+
+              </div>
             </td>
-            <td class="font-normal truncate text-gray-700 p-1.5">
+            <td class="font-normal  truncate text-gray-700 p-1.5">
               {{ item.customer.name }} - Tel: {{ item.customer.phone }}
             </td>
-            <td class="font-normal truncate text-gray-700 p-1.5">
+            <td class="font-normal  truncate text-gray-700 p-1.5">
               {{ item.address?.road }}, {{ item.address?.number }},
               {{ item.address?.complement }}
             </td>
-            <td class="font-normal truncate text-emerald-700 p-1.5">
+            <td class="font-normal  truncate text-emerald-700 p-1.5">
               R${{ item.value.toFixed(2) }}
             </td>
-            <td class="font-normal truncate text-center border-l">
+            <td class="font-normal  truncate text-center border-l">
               <button (click)="update(item.id!)" title="Atualizar" class="btn-primary text-lg mr-1">
                 ✎
               </button>

@@ -20,6 +20,22 @@ export class ProductService {
   private productPostModalState = new BehaviorSubject<boolean>(false);
   productPostModalState$ = this.productPostModalState.asObservable();
 
+  openProductPostModal() { this.productPostModalState.next(true)}
+  closeProductPostModal() { this.productPostModalState.next(false)}
+
+  private productViewModalState = new BehaviorSubject<boolean>(false);
+  productViewModalState$ = this.productViewModalState.asObservable();
+
+  openProductViewModal(id: number) {
+    this.productViewModalState.next(true)
+    this.productId.next(id)
+  }
+
+  closeProductViewModal() { this.productViewModalState.next(false)}
+
+  private productId = new BehaviorSubject<number | null>(null)
+  productId$ = this.productId.asObservable();
+
   triggerUpdate(){
     this.refreshList.next();
   }
@@ -27,9 +43,6 @@ export class ProductService {
   getProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(`${this.url}`).pipe(shareReplay(1))
   }
-
-  openProductPostModal() { this.productPostModalState.next(true)}
-  closeProductPostModal() { this.productPostModalState.next(false)}
 
   createProduct(payload: Product): Observable<any>{
     return this.http.post(`${this.url}`, payload).pipe(

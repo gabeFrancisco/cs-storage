@@ -1,5 +1,6 @@
 <div class="border shadow w-full border-gray-200 rounded">
-  <div class="p-2 font-bold flex flex-row text-gray-600 border-b rounded justify-between items-baseline bg-white">
+  <div
+    class="p-2 font-bold flex flex-row text-gray-600 border-b rounded-tl rounded-tr justify-between items-baseline bg-white">
     <span class="font-bold">Produtos em falta</span>
     <div class="flex flex-row items-center">
       <button type="button" (click)="fetchList()" class="btn-red py-1 text-md" (click)="deleteAllBought()">
@@ -18,12 +19,12 @@
       <table class="table-fixed w-full text-sm text-left rtl:text-right ">
         <thead class="text-sm bg-gray-50  border-b shadow-sm ">
           <!-- Table header -->
-          <tr>
-            <th class="font-normal p-2">Data</th>
-            <th class="font-normal p-2">Ítem</th>
-            <th class="font-normal p-2">Previsão</th>
-            <th class="font-normal p-2">Cliente</th>
-            <th class="font-normal text-center p-2">Ações</th>
+          <tr class="border-b">
+            <th class="font-normal border-r w-32 text-neutral-600 p-2">Data</th>
+            <th class="font-normal text-neutral-600 p-2">Ítem</th>
+            <th class="font-normal text-neutral-600 p-2">Previsão</th>
+            <th class="font-normal text-neutral-600 p-2">Cliente</th>
+            <th class="font-normal text-neutral-600 text-center p-2">Ações</th>
           </tr>
         </thead>
 
@@ -32,9 +33,9 @@
           <tr *ngIf="loading" class="text-center text-gray-500 text-lg">
             Carregando...
           </tr>
-          <tr class="items-center bg-white even:bg-slate-100 hover:bg-gray-200 cursor-pointer"
+          <tr class="items-center bg-white even:bg-slate-100 hover:bg-blue-200 cursor-pointer"
             *ngFor="let item of products" [ngClass]="{ 'text-gray-500 ': item.is_bought }">
-            <td class="font-normal p-1.5 truncate">
+            <td class="font-normal border-r p-1.5 truncate">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </td>
             <td class="font-normal truncate p-1.5">{{ item.name }}</td>

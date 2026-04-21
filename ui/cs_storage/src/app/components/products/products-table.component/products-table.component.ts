@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../../../models/Product';
 import { ProductService } from '../../../services/product.service';
+import { ProductType } from '../../../../models/enums/ProductType';
 
 @Component({
   selector: 'app-products-table',
@@ -11,6 +12,10 @@ import { ProductService } from '../../../services/product.service';
 export class ProductsTableComponent implements OnInit {
   products: Product[] = [];
   loading = true;
+
+  parseProductType(id: number){
+    return ProductType[id];
+  }
 
   constructor(private productService: ProductService){}
 

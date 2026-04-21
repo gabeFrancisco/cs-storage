@@ -6,12 +6,12 @@ import { Category } from '../../../../models/Category';
 import { Product } from '../../../../models/Product';
 
 @Component({
-  selector: 'app-product-modal',
+  selector: 'app-product-creation-modal',
   standalone: false,
-  templateUrl: './product-modal.component.html',
-  styleUrl: './product-modal.component.css',
+  templateUrl: './product-creation-modal.component.html',
+  styleUrl: './product-creation-modal.component.css',
 })
-export class ProductModalComponent implements OnInit {
+export class ProductCreationModalComponent implements OnInit {
   show = false;
   categories: Category[] = [];
 
