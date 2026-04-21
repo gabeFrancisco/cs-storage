@@ -19,22 +19,32 @@ export class CategoryModalComponent implements OnInit {
 
   constructor(private categoryService: CategoryService){
     this.categoryService.categoryModalState$.subscribe(value => this.show = value)
-    this.categoryService.categoryId$.subscribe(value => this.categoryId = value!)
     this.categoryService.modalType$.subscribe(value => {
       this.mode = value!;
       this.readOnly = (this.mode === 'read');
     })
 
-  }
+    this.categoryService.categoryId$.subscribe(value => {
+      this.categoryId = value!;
 
-  ngOnInit(): void {
+      if(this.categoryId && this.mode !== 'create'){
+        this.categoryService.getCategoryById(this.categoryId)
+          .subscribe(cat => this.categoryForm.patchValue(cat!))
+      } else {
+        this.categoryForm.reset(this.initialValues);
+      }
+
+    })
+
     this.categoryForm = new FormGroup({
       id: new FormControl(0),
       name: new FormControl("", Validators.required),
       description: new FormControl(""),
       color: new FormControl("#777"),
     })
-    this.initialValues = this.categoryForm.value;
+  }
+
+  ngOnInit(): void {
   }
 
 

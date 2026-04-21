@@ -28,7 +28,7 @@ export class CategoryTableComponent implements OnInit {
     })
   }
   openModal(mode: string, id?: number){
-    this.categoryService.openCategoryModal('create');
+    this.categoryService.openCategoryModal(mode, id);
   }
   deleteCategory(id: number){}
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, shareReplay, tap } from 'rxjs';
 import { Category } from '../../models/Category';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -55,6 +55,12 @@ export class CategoryService {
   createCategory(payload: Category): Observable<any>{
     return this.http.post(this.url, payload).pipe(
       tap(() => this.clearCache())
+    )
+  }
+
+  getCategoryById(id: number){
+    return this.getCategories().pipe(
+      map(cat => cat.find(c => c.id === id))
     )
   }
 
