@@ -17,7 +17,7 @@ export class CategoryModalComponent implements OnInit {
   readOnly = false;
   initialValues = null;
 
-  constructor(private categoryService: CategoryService){
+  constructor(private categoryService: CategoryService) {
     this.categoryService.categoryModalState$.subscribe(value => this.show = value)
     this.categoryService.modalType$.subscribe(value => {
       this.mode = value!;
@@ -27,7 +27,7 @@ export class CategoryModalComponent implements OnInit {
     this.categoryService.categoryId$.subscribe(value => {
       this.categoryId = value!;
 
-      if(this.categoryId && this.mode !== 'create'){
+      if (this.categoryId && this.mode !== 'create') {
         this.categoryService.getCategoryById(this.categoryId)
           .subscribe(cat => this.categoryForm.patchValue(cat!))
       } else {
@@ -48,19 +48,44 @@ export class CategoryModalComponent implements OnInit {
   }
 
 
-  close(){
+  close() {
     this.categoryService.closeCategoryModal()
   }
 
-  submit(){
-    let category = this.categoryForm.value as Category;
-    delete category.id;
-
-    if(this.categoryForm.invalid){
+  submit() {
+    if (this.mode === 'read') {
+      this.categoryService.setCategoryModalType('update');
       return;
     }
 
+    let category = this.categoryForm.value as Category;
+
+    if (this.categoryForm.invalid) {
+      return;
+    }
+
+    if (this.mode === 'create') {
+      delete category.id;
+      this.submitPost(category)
+    }
+    else if (this.mode === 'update') {
+      console.log(category)
+      this.submitUpdate(category);
+    }
+  }
+
+  private submitPost(category: Category) {
     this.categoryService.createCategory(category).subscribe({
+      next: () => {
+        this.categoryForm.reset(this.initialValues);
+        this.categoryService.closeCategoryModal();
+        this.categoryService.triggerUpdate();
+      }
+    })
+  }
+
+  private submitUpdate(category: Category) {
+    this.categoryService.updateCategory(category).subscribe({
       next: () => {
         this.categoryForm.reset(this.initialValues);
         this.categoryService.closeCategoryModal();

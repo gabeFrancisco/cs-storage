@@ -1,5 +1,5 @@
-<app-modal title="Novo registro" [isOpen]="show" (closed)="close()">
-    <p>modo: {{ mode }} | readOnly: {{ readOnly }} | categoryId: {{ categoryId }}</p>
+<app-modal title="Categoria" [isOpen]="show" (closed)="close()">
+    <!-- <p>modo: {{ mode }} | readOnly: {{ readOnly }} | categoryId: {{ categoryId }}</p> -->
     <form (ngSubmit)="submit()" [formGroup]="categoryForm" #formDir="ngForm"
         class="max-w-xl mx-auto flex-col space-y-1">
         <div class="flex items-baseline">
@@ -25,8 +25,18 @@
                     formControlName="color" />
             </div>
         </div>
-        <button type="submit" class="btn-green form-btn">
+        <button type="submit" class="btn-green mt-5 form-btn">
+            @switch (mode) {
+            @case ('read'){
+            Atualizar!
+            }
+            @case ('update') {
+            Confirmar atualização!
+            }
+            @case ('create'){
             Nova categoria!
+            }
+            }
         </button>
     </form>
 </app-modal>

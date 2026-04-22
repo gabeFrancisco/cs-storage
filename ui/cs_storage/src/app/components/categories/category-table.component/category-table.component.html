@@ -19,8 +19,8 @@
                 <tr class="border-b">
                     <th class="font-normal w-48 text-ellipsis text-neutral-600 p-2">Nome</th>
                     <th class="font-normal text-neutral-600 p-2">Descrição</th>
-                    <th class="font-normal w-10 text-neutral-600 p-2">Cor</th>
-                    <th class="font-normal text-neutral-600 w-1/5 text-center p-2">Ações</th>
+                    <th class="font-normal w-12 text-neutral-600 p-2">Cor</th>
+                    <th class="font-normal text-neutral-600 w-28 text-center p-2">Ações</th>
                 </tr>
             </thead>
 
@@ -29,7 +29,8 @@
                 <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
                     Carregando...
                 </tr>
-                <tr (click)="openModal('read', item.id)" class="items-center bg-white hover:bg-blue-200 cursor-pointer"
+                <tr (click)="openModal('read', item.id)"
+                    class="items-center bg-white even:bg-slate-100 hover:bg-blue-200 cursor-pointer"
                     *ngFor="let item of categories">
                     <td class="font-normal border-r w-48 truncate p-1.5">{{ item.name }}</td>
                     <td class="font-normal border-r truncate p-1.5"> {{ item.description }} </td>
@@ -37,10 +38,10 @@
                         <div class="p-3 rounded-full" [style.background-color]="item.color"></div>
                     </td>
                     <td class="font-normal text-center border-l">
-                        <button title="Atualizar" (click)="openModal('update', item.id!)"
+                        <button title="Atualizar" (click)="openModal('update', item.id!); $event.stopPropagation()"
                             class="btn-primary text-lg mr-1">✎</button>
-                        <button type="button" (click)="deleteCategory(item.id!)" title="Remover"
-                            class="btn-red text-lg mr-1">
+                        <button type="button" (click)="deleteCategory(item.id!); $event.stopPropagation()"
+                            title="Remover" class="btn-red text-lg mr-1">
                             𝘅
                         </button>
                     </td>
