@@ -1,11 +1,11 @@
-<section class="flex flex-col lg:flex-row h-screen">
+<section class="flex flex-col bg-slate-100 p-3 lg:flex-row h-screen">
 
   <app-sidebar />
 
   <!-- ----------------------------------------------------------------------- -->
-  <div class="flex w-full flex-col items-start bg-slate-100">
+  <div class="flex w-full flex-col ml-3 items-start bg-slate-100">
     <app-header class="w-full" />
-    <div class="p-3 w-full">
+    <div class="py-3 w-full overflow-x-auto">
       <router-outlet />
     </div>
   </div>
