@@ -7,7 +7,7 @@
             <div class="flex flex-col">
                 <input [readonly]="readOnly" type="text" class="border w-full border-gray-400" formControlName="name"
                     required />
-                <small class="text-red-500" *ngIf="categoryForm.get('name')!.invalid && formDir.submitted">Nome é
+                <small class="text-red-500" *ngIf="categoryForm.get('name')!.invalid && formDir">Nome é
                     obrigatório!</small>
             </div>
         </div>

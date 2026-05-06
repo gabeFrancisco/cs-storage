@@ -23,7 +23,6 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
   }
 
   categoryId = 0;
-  initialValues = null;
   private destroy$ = new Subject<void>;
 
   categoryForm = new FormGroup({
@@ -62,7 +61,7 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         filter(mode => mode === 'create')
       )
-      .subscribe(() => this.categoryForm.reset());
+      .subscribe(() => this.resetForm());
 
   }
 
@@ -98,8 +97,20 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
   }
 
   private onSuccess() {
-    this.categoryForm.reset();
+    this.resetForm();
     this.categoryService.closeCategoryModal();
     this.categoryService.triggerUpdate();
+  }
+
+  private resetForm() {
+    this.categoryForm.reset({
+      id: 0,
+      name: '',
+      description: '',
+      color: '#fff'
+    })
+
+    this.categoryForm.markAsPristine();
+    this.categoryForm.markAsUntouched();
   }
 }
