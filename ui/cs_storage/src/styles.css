@@ -39,6 +39,11 @@ tbody {
   overflow-y: auto;
 }
 
+.sidebar {
+  background: #3B82F6;
+  background: linear-gradient(174deg, rgba(59, 130, 246, 1) 0%, rgba(59, 130, 246, 1) 57%, rgb(100, 145, 218) 100%);
+}
+
 @layer components {
   .btn {
     @apply px-2 text-sm text-gray-700 rounded border border-gray-300 bg-white hover:bg-indigo-100;
