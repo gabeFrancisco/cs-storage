@@ -12,7 +12,7 @@ export class CategoryTableComponent implements OnInit {
   loading = true;
   categories: Category[] = []
 
-  constructor(private categoryService: CategoryService){ }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.categoryService.triggerUpdate();
@@ -21,14 +21,18 @@ export class CategoryTableComponent implements OnInit {
     })
   }
 
-  fetchList(){
+  fetchList() {
     this.categoryService.getCategories().subscribe({
       next: res => this.categories = res,
       complete: () => this.loading = false
     })
   }
-  openModal(mode: string, id?: number){
+  openModal(mode: string, id?: number) {
     this.categoryService.openCategoryModal(mode, id);
   }
-  deleteCategory(id: number){}
+  deleteCategory(id: number) {
+    if (confirm("Tem certeza que deseja remover essa categoria?")) {
+      this.categoryService.removeCategory(id).subscribe(() => this.fetchList());
+    }
+  }
 }

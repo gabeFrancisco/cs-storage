@@ -68,6 +68,17 @@ export class CategoryService {
     )
   }
 
+  removeCategory(id: number): Observable<any> {
+    return this.http.delete(`${this.url}/${id}`)
+      .pipe(catchError(handleNetworkError('remove-category')))
+      .pipe(
+        tap(() => {
+          this.clearCache()
+          this.triggerUpdate();
+        })
+      )
+  }
+
   updateCategory(payload: Category): Observable<any> {
     return this.http.put(`${this.url}/${payload.id}`, payload)
       .pipe(catchError(handleNetworkError('update-category-error')))

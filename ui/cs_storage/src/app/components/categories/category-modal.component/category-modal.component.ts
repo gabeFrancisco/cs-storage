@@ -18,11 +18,11 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
   show = false;
 
   mode: ModalMode = 'read';
+
   get readOnly() {
     return this.mode === 'read';
   }
 
-  categoryId = 0;
   private destroy$ = new Subject<void>;
 
   categoryForm = new FormGroup({
