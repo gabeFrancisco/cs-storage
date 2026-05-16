@@ -30,6 +30,10 @@ export class CashPostModalComponent {
     this.initialValues = this.cashForm.value;
   }
 
+  openProductModal() {
+    this.cashRegisterService.openCashProductModal();
+  }
+
   close() {
     this.cashRegisterService.closeCashPostModal();
   }

@@ -23,6 +23,9 @@ export class CashRegisterService {
   private cashUpdateModalState = new BehaviorSubject<boolean>(false);
   cashUpdateModalState$ = this.cashUpdateModalState.asObservable();
 
+  private cashProductModalState = new BehaviorSubject<boolean>(false);
+  cashProductModalState$ = this.cashProductModalState.asObservable();
+
   private cashRegisterId = new BehaviorSubject<number | null>(null)
   cashRegisterId$ = this.cashRegisterId.asObservable();
 
@@ -33,6 +36,12 @@ export class CashRegisterService {
     this.cashUpdateModalState.next(true)
     this.cashRegisterId.next(id);
   }
+
+  openCashProductModal() {
+    this.cashProductModalState.next(true);
+  }
+
+  closeCashProductModalState() { this.cashProductModalState.next(false) }
 
   closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
 

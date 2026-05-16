@@ -6,6 +6,7 @@
         <input type="text" class="border w-full border-gray-400" formControlName="description" required />
         <small class="text-red-500" *ngIf="description.invalid && formDir.submitted">Descrição é obrigatória!</small>
       </div>
+      <button (click)="openProductModal()" type="button">Selecionar produto!</button>
     </div>
 
     <div class="flex items-baseline">

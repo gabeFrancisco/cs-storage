@@ -37,6 +37,7 @@ import { ProductShowModalComponent } from './components/products/product-show-mo
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { CategoryTableComponent } from './components/categories/category-table.component/category-table.component';
 import { CategoryModalComponent } from './components/categories/category-modal.component/category-modal.component';
+import { CashRegisterProductModal } from './components/cashRegisters/cash-register-product-modal/cash-register-product-modal';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { CategoryModalComponent } from './components/categories/category-modal.c
     CategoriesComponent,
     CategoryTableComponent,
     CategoryModalComponent,
+    CashRegisterProductModal,
   ],
   imports: [
     BrowserModule,
