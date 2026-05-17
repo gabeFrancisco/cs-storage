@@ -17,6 +17,7 @@ export class CashRegisterProductModal implements OnInit {
   faSearch = faSearch;
   loading = true;
   products: Product[] = [];
+  selectedProduct?: Product;
 
   constructor(private cashRegisterService: CashRegisterService, private productsService: ProductService) { }
 
@@ -31,6 +32,10 @@ export class CashRegisterProductModal implements OnInit {
       },
       complete: () => this.loading = false
     })
+  }
+
+  selectProduct(id: number) {
+    this.selectedProduct = { ...this.products.find(el => el.id === id) } as Product;
   }
 
   close() {
