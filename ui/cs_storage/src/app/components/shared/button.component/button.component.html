@@ -1,0 +1,8 @@
+<button [type]="type" [disabled]="disabled" class="py-1 px-2" [ngClass]="{
+    'btn-primary': variant === 'primary',
+    'btn-green': variant === 'green',
+    'btn-yellow': variant === 'yellow',
+    'btn-red': variant === 'red'
+}">
+    <ng-content></ng-content>
+</button>

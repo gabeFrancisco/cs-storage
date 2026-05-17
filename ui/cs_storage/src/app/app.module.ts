@@ -25,7 +25,7 @@ import { authInterceptor } from '../utils/interceptor';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UserComponent } from './pages/user/user.component';
-import { NgClickOutsideDirective} from 'ng-click-outside2';
+import { NgClickOutsideDirective } from 'ng-click-outside2';
 import { EstimatesComponent } from './pages/estimates/estimates.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -38,6 +38,7 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { CategoryTableComponent } from './components/categories/category-table.component/category-table.component';
 import { CategoryModalComponent } from './components/categories/category-modal.component/category-modal.component';
 import { CashRegisterProductModal } from './components/cashRegisters/cash-register-product-modal/cash-register-product-modal';
+import { ButtonComponent } from './components/shared/button.component/button.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CashRegisterProductModal } from './components/cashRegisters/cash-regist
     CategoryTableComponent,
     CategoryModalComponent,
     CashRegisterProductModal,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,7 @@ import { CashRegisterProductModal } from './components/cashRegisters/cash-regist
     FontAwesomeModule
   ],
   providers: [provideHttpClient(),
-    provideHttpClient(withInterceptors([authInterceptor]))
+  provideHttpClient(withInterceptors([authInterceptor]))
   ],
   bootstrap: [AppComponent]
 })

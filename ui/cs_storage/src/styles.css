@@ -45,6 +45,7 @@ tbody {
 }
 
 @layer components {
+
   .btn {
     @apply px-2 text-sm text-gray-700 rounded border border-gray-300 bg-white hover:bg-indigo-100;
   }
