@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CashRegisterService } from '../../../services/cash-register.service';
 import { Subject, takeUntil } from 'rxjs';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ProductService } from '../../../services/product.service';
+import { Product } from '../../../../models/Product';
 
 @Component({
   selector: 'app-cash-register-product-modal',
@@ -11,13 +14,23 @@ import { Subject, takeUntil } from 'rxjs';
 export class CashRegisterProductModal implements OnInit {
   show = false;
   private destroy$ = new Subject<void>
+  faSearch = faSearch;
+  loading = true;
+  products: Product[] = [];
 
-  constructor(private cashRegisterService: CashRegisterService) { }
+  constructor(private cashRegisterService: CashRegisterService, private productsService: ProductService) { }
 
   ngOnInit(): void {
     this.cashRegisterService.cashProductModalState$
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => (this.show = value))
+
+    this.productsService.getProducts().subscribe({
+      next: res => {
+        this.products = res
+      },
+      complete: () => this.loading = false
+    })
   }
 
   close() {

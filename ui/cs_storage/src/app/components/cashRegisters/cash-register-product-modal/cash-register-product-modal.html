@@ -1,3 +1,38 @@
 <app-modal title="Selecionar produto" [isOpen]="show" (closed)="close()">
-    <app-button (click)="close()">Selecionar!</app-button>
+    <div class="w-full flex flex-row items-center align-center mb-2">
+        <label for="search" class="mr-2">Pesquisar</label>
+        <input type="text" name="search" id="search" class="txt-input">
+        <!-- <app-button (click)="close()"><fa-icon [icon]="faSearch" /></app-button> -->
+
+
+    </div>
+    <div class="overflow-y-auto relative max-height: 30dvh">
+        <table class="table-fixed text-sm text-left rtl:text-right ">
+            <thead class="text-sm bg-gray-50  border-b shadow-sm ">
+                <!-- Table header -->
+                <tr class="border-b">
+                    <th class="font-normal border-r w-20 p-2">Código</th>
+                    <th class="font-normal border-r w-56 p-2">Nome</th>
+                    <th class="font-normal border-r w-32 p-2">Preço</th>
+                </tr>
+            </thead>
+
+            <!-- Table body -->
+            <tbody class="overflow-y-auto">
+                <tr *ngIf="loading" class="text-center text-gray-500 text-lg">
+                    Carregando...
+                </tr>
+                <tr class="items-center bg-white even:bg-slate-100 hover:bg-blue-200 cursor-pointer"
+                    *ngFor="let item of products">
+                    <td class="border-r text-center text-neutral-500 w-20 p-1.5">
+                        {{ item.id }}
+                    </td>
+                    <td class="font-normal border-r truncate p-1.5">{{ item.name }}</td>
+                    <td class="w-32 text-emerald-700 border-r truncate p-1.5">
+                        R${{ item.price.toFixed(2) }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </app-modal>
