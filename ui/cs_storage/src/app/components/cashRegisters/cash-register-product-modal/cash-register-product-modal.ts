@@ -38,6 +38,11 @@ export class CashRegisterProductModal implements OnInit {
     this.selectedProduct = { ...this.products.find(el => el.id === id) } as Product;
   }
 
+  confirmProduct() {
+    this.cashRegisterService.selectProduct(this.selectedProduct!)
+    this.cashRegisterService.closeCashProductModalState();
+  }
+
   close() {
     this.cashRegisterService.closeCashProductModalState();
   }

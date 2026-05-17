@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, map, Observable, ReplaySubject, shareRepla
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 import { environment } from '../../environments/environment';
+import { Product } from '../../models/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,15 @@ import { environment } from '../../environments/environment';
 export class CashRegisterService {
   private list$?: Observable<CashRegister[]>;
   private dateList?: Observable<CashRegister[]>;
+  private selectedProduct = new BehaviorSubject<Product | null>(null);
+  selectedProduct$ = this.selectedProduct.asObservable();
 
   constructor(private http: HttpClient) { }
   private url = `${environment.apiUrl}/cashregisters`;
+
+  selectProduct(product: Product) {
+    this.selectedProduct.next(product!);
+  }
 
   //cash modal variables
   private cashPostModalState = new BehaviorSubject<boolean>(false);

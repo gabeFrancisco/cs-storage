@@ -1,13 +1,15 @@
 <app-modal title="Novo registro" [isOpen]="show" (closed)="close()">
   <form (ngSubmit)="submit()" [formGroup]="cashForm" #formDir="ngForm" class="max-w-xl mx-auto flex-col space-y-1">
     <div class="flex items-baseline">
-      <label class="w-16 text-sm text-right mr-2" for="description">Descrição</label>
+      <label class="w-16 text-sm text-right mr-2" for="productId">Produto:</label>
       <div class="flex flex-col">
-        <input type="text" class="border w-full border-gray-400" formControlName="description" required />
-        <small class="text-red-500" *ngIf="description.invalid && formDir.submitted">Descrição é obrigatória!</small>
+        <input type="hidden" class="border w-full border-gray-400" formControlName="productId" required />
+        <input type="text" readonly class="border border-slate-400 rounded px-1" [value]="product?.name">
       </div>
-      <button (click)="openProductModal()" type="button">Selecionar produto!</button>
+
+      <app-button (click)="openProductModal()"><fa-icon [icon]="faUp" /></app-button>
     </div>
+    <small class="text-red-500" *ngIf="productId.invalid && formDir.submitted">Descrição é obrigatória!</small>
 
     <div class="flex items-baseline">
       <label class="text-sm w-16 text-right mr-2" for="payment_type">Tipo</label>
