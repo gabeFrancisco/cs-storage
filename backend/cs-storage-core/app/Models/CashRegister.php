@@ -30,5 +30,8 @@ class CashRegister extends Model
         'description'
     ];
 
-
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }
