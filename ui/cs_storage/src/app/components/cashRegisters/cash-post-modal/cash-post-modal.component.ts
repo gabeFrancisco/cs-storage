@@ -25,7 +25,7 @@ export class CashPostModalComponent implements OnInit {
     })
 
     this.cashForm = new FormGroup({
-      productId: new FormControl(-1, Validators.required),
+      product_id: new FormControl(-1, Validators.required),
       quantity: new FormControl(1, Validators.required),
       payment_type: new FormControl(0),
       value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
@@ -38,7 +38,7 @@ export class CashPostModalComponent implements OnInit {
   ngOnInit(): void {
     this.cashRegisterService.selectedProduct$.subscribe(value => {
       this.product = value!
-      this.cashForm.get('productId')!.patchValue(value?.id)
+      this.cashForm.get('product_id')!.patchValue(value?.id)
     })
   }
 
@@ -50,8 +50,8 @@ export class CashPostModalComponent implements OnInit {
     this.cashRegisterService.closeCashPostModal();
   }
 
-  get productId() {
-    return this.cashForm.get('productId')!;
+  get product_id() {
+    return this.cashForm.get('product_id')!;
   }
 
   get quantity() {

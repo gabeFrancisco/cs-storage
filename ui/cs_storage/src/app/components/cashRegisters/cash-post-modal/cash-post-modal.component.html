@@ -9,7 +9,7 @@
 
       <app-button (click)="openProductModal()"><fa-icon [icon]="faUp" /></app-button>
     </div>
-    <small class="text-red-500" *ngIf="productId.invalid && formDir.submitted">Produto é obrigatório!</small>
+    <small class="text-red-500" *ngIf="product_id.invalid && formDir.submitted">Produto é obrigatório!</small>
 
     <div class="flex items-baseline">
       <label class="text-sm w-16 text-right mr-2" for="value">Qte.</label>

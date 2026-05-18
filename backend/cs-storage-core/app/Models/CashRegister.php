@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property numeric $value
+ * @property numeric $quantity
  * @property int $payment_type
  * @property string $description
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CashRegister newModelQuery()
@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
 class CashRegister extends Model
 {
     protected $fillable = [
+        'quantity',
         'value',
         'payment_type',
         'description'

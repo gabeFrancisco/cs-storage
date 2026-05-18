@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\CashRegisterRequest;
 use App\Models\CashRegister;
+use App\Models\Product;
 use Error;
 
 class CashRegisterService
@@ -30,24 +31,30 @@ class CashRegisterService
         return CashRegister::findOrFail($id);
     }
 
-    private function parseCashRegister($value, $payment_type, $description)
+    private function parseCashRegister($quantity, $payment_type, $description, $product_id, $value)
     {
         return [
-            'value' => $value,
+            'quantity' => $quantity,
             'payment_type' => $payment_type,
-            'description' => $description
+            'description' => $description,
+            'product_id' => $product_id,
+            'value' => $value
         ];
     }
 
     public function create(CashRegisterRequest $request)
     {
-        $value = $request->input("value");
+        $quantity = $request->input('quantity');
         $payment_type = $request->input('payment_type');
         $description = $request->input('description');
+        $productId = $request->input('product_id');
 
         $this->checkPaymentType($payment_type);
 
-        $register = CashRegister::create($this->parseCashRegister($value, $payment_type, $description));
+        $product = Product::findOrFail($productId);
+        $value = $quantity * $product->price;
+
+        $register = CashRegister::create($this->parseCashRegister($quantity, $payment_type, $description, $productId, $value));
 
         return $register;
     }
