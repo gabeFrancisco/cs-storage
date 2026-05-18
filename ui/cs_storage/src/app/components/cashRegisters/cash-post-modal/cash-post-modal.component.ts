@@ -26,6 +26,7 @@ export class CashPostModalComponent implements OnInit {
 
     this.cashForm = new FormGroup({
       productId: new FormControl(-1, Validators.required),
+      quantity: new FormControl(1, Validators.required),
       payment_type: new FormControl(0),
       value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
       created_at: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
@@ -51,6 +52,10 @@ export class CashPostModalComponent implements OnInit {
 
   get productId() {
     return this.cashForm.get('productId')!;
+  }
+
+  get quantity() {
+    return this.cashForm.get('quantity')!;
   }
 
   get value() {
