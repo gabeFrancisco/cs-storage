@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereProductType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product whereUpdatedAt($value)
+ * @property-read \App\Models\Category $category
  * @mixin \Eloquent
  */
 class Product extends Model

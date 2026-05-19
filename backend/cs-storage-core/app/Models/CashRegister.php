@@ -20,6 +20,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CashRegister wherePaymentType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CashRegister whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CashRegister whereValue($value)
+ * @property numeric $value
+ * @property int $product_id
+ * @property-read \App\Models\Product $product
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CashRegister whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|CashRegister whereQuantity($value)
  * @mixin \Eloquent
  */
 class CashRegister extends Model

@@ -48,11 +48,15 @@ class CashRegisterService
         $productId = $request->input('product_id');
 
         $this->checkPaymentType($payment_type);
-
         $product = Product::findOrFail($productId);
         $value = $quantity * $product->price;
 
-        $register = CashRegister::create($this->parseCashRegister($quantity, $payment_type, $productId, $value));
+        $register = new CashRegister();
+        $register->quantity = $quantity;
+        $register->payment_type = $payment_type;
+        $register->value = $value;
+        $register->product()->associate($product);
+        $register->save();
 
         return $register;
     }
