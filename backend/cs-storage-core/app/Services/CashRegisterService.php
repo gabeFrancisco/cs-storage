@@ -18,12 +18,14 @@ class CashRegisterService
 
     public function getAll()
     {
-        return CashRegister::all();
+        return CashRegister::with('product')->get();
     }
 
     public function getAllByDate($date)
     {
-        return CashRegister::whereDate('created_at', $date)->get();
+        return CashRegister::with('product')
+            ->whereDate('created_at', $date)
+            ->get();
     }
 
     public function getById($id)
