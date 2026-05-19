@@ -3,7 +3,8 @@ import { CashRegisterService } from '../../../services/cash-register.service';
 import { Component, OnInit } from '@angular/core';
 import { CashRegister } from '../../../../models/CashRegister';
 import { Product } from '../../../../models/Product';
-import { faArrowUp, faBoxOpen, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-cash-post-modal',
@@ -18,6 +19,9 @@ export class CashPostModalComponent implements OnInit {
   initialValues = null;
   product?: Product;
   faUp = faMagnifyingGlass;
+  private destroy$ = new Subject<void>();
+
+  productData = "";
 
   constructor(private cashRegisterService: CashRegisterService) {
     this.cashRegisterService.cashPostModalState$.subscribe((value) => {
@@ -28,7 +32,7 @@ export class CashPostModalComponent implements OnInit {
       product_id: new FormControl(-1, Validators.required),
       quantity: new FormControl(1, Validators.required),
       payment_type: new FormControl(0),
-      value: new FormControl(0, [Validators.required, Validators.min(0.1)]),
+      value: new FormControl(0, [Validators.min(0.1)]),
       created_at: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
     })
 
@@ -36,10 +40,25 @@ export class CashPostModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cashRegisterService.selectedProduct$.subscribe(value => {
-      this.product = value!
-      this.cashForm.get('product_id')!.patchValue(value?.id)
-    })
+    this.cashRegisterService.selectedProduct$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.product = value!
+        this.productData = `${this.product.id!} - ${this.product.name} - R\$${this.product.price.toFixed(2)}`
+
+        this.cashForm.get('product_id')!.patchValue(value?.id)
+        this.recalculateValue();
+      })
+
+    this.cashForm.get('quantity')!.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.recalculateValue())
+  }
+
+  private recalculateValue() {
+    if (!this.product) return;
+    const quantity = this.cashForm.get('quantity')!.value;
+    this.cashForm.get('value')!.patchValue(quantity * this.product!.price)
   }
 
   openProductModal() {
