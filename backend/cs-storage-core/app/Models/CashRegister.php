@@ -28,7 +28,6 @@ class CashRegister extends Model
         'quantity',
         'value',
         'payment_type',
-        'description'
     ];
 
     public function product()

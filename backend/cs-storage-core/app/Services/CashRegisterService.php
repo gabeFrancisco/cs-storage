@@ -31,12 +31,11 @@ class CashRegisterService
         return CashRegister::findOrFail($id);
     }
 
-    private function parseCashRegister($quantity, $payment_type, $description, $product_id, $value)
+    private function parseCashRegister($quantity, $payment_type, $product_id, $value)
     {
         return [
             'quantity' => $quantity,
             'payment_type' => $payment_type,
-            'description' => $description,
             'product_id' => $product_id,
             'value' => $value
         ];
@@ -46,7 +45,6 @@ class CashRegisterService
     {
         $quantity = $request->input('quantity');
         $payment_type = $request->input('payment_type');
-        $description = $request->input('description');
         $productId = $request->input('product_id');
 
         $this->checkPaymentType($payment_type);
@@ -54,7 +52,7 @@ class CashRegisterService
         $product = Product::findOrFail($productId);
         $value = $quantity * $product->price;
 
-        $register = CashRegister::create($this->parseCashRegister($quantity, $payment_type, $description, $productId, $value));
+        $register = CashRegister::create($this->parseCashRegister($quantity, $payment_type, $productId, $value));
 
         return $register;
     }
@@ -68,7 +66,7 @@ class CashRegisterService
         $this->checkPaymentType($payment_type);
 
         $register = CashRegister::where('id', $id)
-            ->update($this->parseCashRegister($value, $payment_type, $description));
+            ->update($this->parseCashRegister($value, $payment_type));
 
         return $register;
     }
