@@ -1,4 +1,4 @@
-<app-modal title="Novo produto" [isOpen]="show" (closed)="close()">
+<app-modal title="Novo produto" *ngIf="show" (closed)="close()">
 	<form (ngSubmit)="submit()" [formGroup]="productForm" #formDir="ngForm"
 		class="max-w-xl mx-auto flex flex-col space-y-1">
 		<div class="flex items-baseline">

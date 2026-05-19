@@ -1,4 +1,4 @@
-<app-modal title="Atualizar registro" [isOpen]="show" (closed)="close()">
+<app-modal title="Atualizar registro" *ngIf="show" (closed)="close()">
   <form (ngSubmit)="submit()" [formGroup]="cashForm" #formDir="ngForm" class="max-w-xl mx-auto flex-col space-y-1">
     <input type="hidden" formControlName="id">
     <div class="flex items-baseline">

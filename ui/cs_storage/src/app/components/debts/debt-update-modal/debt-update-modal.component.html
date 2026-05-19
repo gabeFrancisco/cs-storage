@@ -1,4 +1,4 @@
-<app-modal title="Atualizar débito" [isOpen]="show" (closed)="close()">
+<app-modal title="Atualizar débito" *ngIf="show" (closed)="close()">
 
   <form (ngSubmit)="submit()" [formGroup]="debtForm" #formDir="ngForm" class="">
     <input type="hidden" [value]="0" formControlName="id">

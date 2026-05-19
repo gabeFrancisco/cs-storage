@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CashRegisterService } from '../../../services/cash-register.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CashRegister } from '../../../../models/CashRegister';
 import { Product } from '../../../../models/Product';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './cash-post-modal.component.html',
   styleUrl: './cash-post-modal.component.css'
 })
-export class CashPostModalComponent implements OnInit {
+export class CashPostModalComponent implements OnInit, OnDestroy {
   show = false;
 
   cashForm!: FormGroup;
@@ -24,9 +24,11 @@ export class CashPostModalComponent implements OnInit {
   productData = "";
 
   constructor(private cashRegisterService: CashRegisterService) {
-    this.cashRegisterService.cashPostModalState$.subscribe((value) => {
-      this.show = value
-    })
+    this.cashRegisterService.cashPostModalState$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.show = value
+      })
 
     this.cashForm = new FormGroup({
       product_id: new FormControl(-1, Validators.required),
@@ -37,6 +39,11 @@ export class CashPostModalComponent implements OnInit {
     })
 
     this.initialValues = this.cashForm.value;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnInit(): void {

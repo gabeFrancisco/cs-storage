@@ -1,9 +1,9 @@
-<app-modal title="Novo registro" [isOpen]="show" (closed)="close()">
+<app-modal title="Novo registro" (closed)="close()">
   <form (ngSubmit)="submit()" [formGroup]="cashForm" #formDir="ngForm" class="max-w-xl mx-auto flex-col space-y-1">
     <div class="flex items-baseline">
-      <label class="w-16 text-sm text-right mr-2" for="productId">Produto:</label>
+      <label class="w-16 text-sm text-right mr-2" for="product_id">Produto:</label>
       <div class="flex flex-col">
-        <input type="hidden" class="border w-full border-gray-400" formControlName="productId" required />
+        <input type="hidden" class="border w-full border-gray-400" formControlName="product_id" required />
         <input type="text" readonly class="border border-slate-400 rounded px-1" [value]="productData">
       </div>
 

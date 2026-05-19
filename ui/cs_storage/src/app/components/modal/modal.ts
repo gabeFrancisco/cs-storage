@@ -11,7 +11,7 @@ export class Modal {
   faX = faXmark;
 
   @Input() title: string = "";
-  @Input() isOpen: boolean = false;
+  // @Input() isOpen: boolean = false;
   @Output() closed = new EventEmitter<void>();
 
   close() {

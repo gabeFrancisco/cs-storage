@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CashRegisterService } from '../../../services/cash-register.service';
 import { Subject, takeUntil } from 'rxjs';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,7 @@ import { Product } from '../../../../models/Product';
   templateUrl: './cash-register-product-modal.html',
   styleUrl: './cash-register-product-modal.css',
 })
-export class CashRegisterProductModal implements OnInit {
+export class CashRegisterProductModal implements OnInit, OnDestroy {
   show = false;
   private destroy$ = new Subject<void>
   faSearch = faSearch;
@@ -20,6 +20,11 @@ export class CashRegisterProductModal implements OnInit {
   selectedProduct?: Product;
 
   constructor(private cashRegisterService: CashRegisterService, private productsService: ProductService) { }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit(): void {
     this.cashRegisterService.cashProductModalState$

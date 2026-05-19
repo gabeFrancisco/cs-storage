@@ -1,4 +1,4 @@
-<app-modal title="Selecionar produto" [isOpen]="show" (closed)="close()">
+<app-modal title="Selecionar produto" *ngIf="show" (closed)="close()">
     <div class="w-full flex flex-row items-center align-center mb-2">
         <label for="search" class="mr-2">Pesquisar</label>
         <input placeholder="Digite aqui o produto" type="text" name="search" id="search" class="txt-input">
