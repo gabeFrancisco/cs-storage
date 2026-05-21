@@ -4,8 +4,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CashRegister } from '../../../../models/CashRegister';
 import { Product } from '../../../../models/Product';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { Subject, takeUntil } from 'rxjs';
+import { combineLatest, filter, Subject, switchMap, takeUntil } from 'rxjs';
 import { ModalMode } from '../../../../models/types/ModalMode';
+import { PaymentType } from '../../../../models/enums/PaymentType';
 
 @Component({
   selector: 'app-cash-post-modal',
@@ -47,6 +48,29 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
         this.show = value
       })
 
+    this.cashRegisterService.modalType$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => (this.mode = value as ModalMode))
+
+    combineLatest([
+      this.cashRegisterService.cashRegisterId$,
+      this.cashRegisterService.modalType$
+    ])
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(([id, mode]) => !!id && mode !== 'create'),
+        switchMap(([id]) => this.cashRegisterService.getCashRegisterById(id!))
+      )
+      .subscribe(cash => {
+        if (cash) this.cashForm.patchValue(cash)
+      })
+
+    this.cashRegisterService.modalType$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(mode => mode === 'create')
+      )
+      .subscribe(() => this.resetForm())
 
     this.cashRegisterService.selectedProduct$
       .pipe(takeUntil(this.destroy$))
@@ -54,7 +78,7 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
         this.product = value!
         this.productData = `${this.product.id!} - ${this.product.name} - R\$${this.product.price.toFixed(2)}`
 
-        this.cashForm.get('product_id')!.patchValue(value?.id)
+        this.cashForm.get('product_id')!.patchValue(value?.id!)
         this.recalculateValue();
       })
 
@@ -72,7 +96,7 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
   private recalculateValue() {
     if (!this.product) return;
     const quantity = this.cashForm.get('quantity')!.value;
-    this.cashForm.get('value')!.patchValue(quantity * this.product!.price)
+    this.cashForm.get('value')!.patchValue(quantity! * this.product!.price)
   }
 
   openProductModal() {
@@ -100,19 +124,39 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    let register = this.cashForm.value as CashRegister;
+    if (this.mode === 'read') {
+      this.cashRegisterService.setCashModalType('update');
+      return;
+    }
 
     if (this.cashForm.invalid) {
       return;
     }
 
-    this.cashRegisterService.createCashRegister(register).subscribe({
-      next: (item) => {
-        this.cashForm.reset(this.initialValues);
-        this.cashRegisterService.closeCashPostModal();
-        this.cashRegisterService.triggerUpdate();
-      }
-    }
-    )
+    const cashRegister = this.cashForm.value as CashRegister;
+    const request$ =
+      this.mode === 'create'
+        ? this.cashRegisterService.createCashRegister({ ...cashRegister, id: undefined })
+        : this.cashRegisterService.updateCashRegister(cashRegister);
+
+    request$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: () => this.onSuccess()
+    })
+  }
+
+  private onSuccess() {
+    this.resetForm();
+    this.cashRegisterService.closeCashModal();
+    this.cashRegisterService.triggerUpdate();
+  }
+
+  private resetForm() {
+    this.cashForm.reset({
+      product_id: 0,
+      quantity: 1,
+      payment_type: PaymentType.Cash,
+      value: 0,
+      created_at: ""
+    })
   }
 }

@@ -3,8 +3,10 @@
     <div class="flex items-baseline">
       <label class="w-16 text-sm text-right mr-2" for="product_id">Produto:</label>
       <div class="flex flex-col">
-        <input type="hidden" class="border w-full border-gray-400" formControlName="product_id" required />
-        <input type="text" readonly class="border border-slate-400 rounded px-1" [value]="productData">
+        <input type="hidden" [readOnly]="readOnly" class="border w-full border-gray-400" formControlName="product_id"
+          required />
+        <input type="text" [readOnly]="readOnly" readonly class="border border-slate-400 rounded px-1"
+          [value]="productData">
       </div>
 
       <app-button (click)="openProductModal()"><fa-icon [icon]="faUp" /></app-button>
@@ -14,7 +16,8 @@
     <div class="flex items-baseline">
       <label class="text-sm w-16 text-right mr-2" for="value">Qte.</label>
       <div class="flex flex-col">
-        <input type="number" formControlName="quantity" min="1" class="border w-24 border-gray-400 my-1" required />
+        <input [readOnly]="readOnly" type="number" formControlName="quantity" min="1"
+          class="border w-24 border-gray-400 my-1" required />
         <small class="text-red-500" *ngIf="quantity.invalid && formDir.submitted">Quantidade é obrigatória!</small>
       </div>
     </div>
@@ -22,7 +25,7 @@
 
     <div class="flex items-baseline">
       <label class="text-sm w-16 text-right mr-2" for="payment_type">Tipo</label>
-      <select class="bg-white border my-1 border-gray-400" formControlName="payment_type">
+      <select [disabled]="readOnly" class="bg-white border my-1 border-gray-400" formControlName="payment_type">
         <option [ngValue]="0">Dinheiro</option>
         <option [ngValue]="1">Débito</option>
         <option [ngValue]="2">Crédito</option>
@@ -33,7 +36,8 @@
     <div class="flex items-baseline">
       <label class="text-sm w-16 text-right mr-2" for="value">Valor</label>
       <div class="flex flex-col">
-        <input type="number" readonly formControlName="value" class="border border-gray-400 my-1" required />
+        <input [readOnly]="readOnly" type="number" readonly formControlName="value" class="border border-gray-400 my-1"
+          required />
       </div>
     </div>
     <div class="flex items-baseline">
@@ -41,7 +45,8 @@
       <div class="flex flex-col">
         <small class="text-red-500" *ngIf="created_at.invalid && formDir.submitted">Data não pode ser maior que a data
           atual!</small>
-        <input type="date" formControlName="created_at" class="h-6 border my-1 border-gray-400" required />
+        <input [readOnly]="readOnly" type="date" formControlName="created_at" class="h-6 border my-1 border-gray-400"
+          required />
       </div>
     </div>
     <button type="submit" class="btn-green form-btn">

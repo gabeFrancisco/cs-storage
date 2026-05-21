@@ -47,8 +47,8 @@ export class CashRegisterTableComponent implements OnInit {
     }
   }
 
-  openCashPostModal() {
-    this.cashService.openCashPostModal();
+  openCashPostModal(mode: string, id?: number) {
+    this.cashService.openCashModal(mode, id);
   }
 
   openCashUpdateModal(id: number) {
