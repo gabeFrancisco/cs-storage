@@ -3,8 +3,8 @@ import { Category } from '../../../../models/Category';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
 import { combineLatest, filter, pipe, Subject, switchMap, takeUntil } from 'rxjs';
+import { ModalMode } from '../../../../models/types/ModalMode';
 
-type ModalMode = 'read' | 'create' | 'update';
 
 @Component({
   selector: 'app-category-modal',

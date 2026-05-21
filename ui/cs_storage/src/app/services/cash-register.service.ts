@@ -23,6 +23,12 @@ export class CashRegisterService {
     this.selectedProduct.next(product!);
   }
 
+  private modalType = new BehaviorSubject<string | null>(null);
+  modalType$ = this.modalType.asObservable();
+
+  private cashModalState = new BehaviorSubject<boolean>(false);
+  cashModalState$ = this.cashModalState.asObservable();
+
   //cash modal variables
   private cashPostModalState = new BehaviorSubject<boolean>(false);
   cashPostModalState$ = this.cashPostModalState.asObservable();
@@ -35,6 +41,20 @@ export class CashRegisterService {
 
   private cashRegisterId = new BehaviorSubject<number | null>(null)
   cashRegisterId$ = this.cashRegisterId.asObservable();
+
+  openCashModal(mode: string, id?: number) {
+    this.cashModalState.next(true);
+    this.modalType.next(mode);
+    this.cashRegisterId.next(id!);
+  }
+
+  setCashModalType(mode: string) {
+    this.modalType.next(mode);
+  }
+
+  closeCashModal() {
+    this.cashModalState.next(false);
+  }
 
   openCashPostModal() { this.cashPostModalState.next(true) }
   closeCashPostModal() { this.cashPostModalState.next(false) }

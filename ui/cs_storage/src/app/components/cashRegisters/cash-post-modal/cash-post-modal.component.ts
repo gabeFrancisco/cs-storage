@@ -5,6 +5,7 @@ import { CashRegister } from '../../../../models/CashRegister';
 import { Product } from '../../../../models/Product';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
+import { ModalMode } from '../../../../models/types/ModalMode';
 
 @Component({
   selector: 'app-cash-post-modal',
@@ -15,38 +16,38 @@ import { Subject, takeUntil } from 'rxjs';
 export class CashPostModalComponent implements OnInit, OnDestroy {
   show = false;
 
-  cashForm!: FormGroup;
+  mode: ModalMode = 'read';
+
+  get readOnly() {
+    return this.mode === 'read'
+  }
+
+  private destroy$ = new Subject<void>();
+
+  cashForm = new FormGroup({
+    product_id: new FormControl(-1, Validators.required),
+    quantity: new FormControl(1, Validators.required),
+    payment_type: new FormControl(0),
+    value: new FormControl(0, [Validators.min(0.1)]),
+    created_at: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
+  })
+
   initialValues = null;
   product?: Product;
   faUp = faMagnifyingGlass;
-  private destroy$ = new Subject<void>();
 
   productData = "";
 
-  constructor(private cashRegisterService: CashRegisterService) {
+  constructor(private cashRegisterService: CashRegisterService) { }
+
+  ngOnInit(): void {
     this.cashRegisterService.cashPostModalState$
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.show = value
       })
 
-    this.cashForm = new FormGroup({
-      product_id: new FormControl(-1, Validators.required),
-      quantity: new FormControl(1, Validators.required),
-      payment_type: new FormControl(0),
-      value: new FormControl(0, [Validators.min(0.1)]),
-      created_at: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
-    })
 
-    this.initialValues = this.cashForm.value;
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  ngOnInit(): void {
     this.cashRegisterService.selectedProduct$
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
@@ -61,6 +62,12 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.recalculateValue())
   }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
 
   private recalculateValue() {
     if (!this.product) return;
