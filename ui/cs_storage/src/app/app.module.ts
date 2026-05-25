@@ -9,7 +9,6 @@ import { CashRegisterTableComponent } from './components/cashRegisters/cash-regi
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CashPostModalComponent } from './components/cashRegisters/cash-post-modal/cash-post-modal.component';
-import { CashUpdateModalComponent } from './components/cashRegisters/cash-update-modal/cash-update-modal.component';
 import { DebtPostModalComponent } from './components/debts/debt-post-modal/debt-post-modal.component'
 import { DebtTableComponent } from './components/debts/debt-table/debt-table.component';
 import { MissingProductsComponent } from './pages/missing-products/missing-products.component';
@@ -48,7 +47,6 @@ import { ButtonComponent } from './components/shared/button.component/button.com
     CashRegisterTableComponent,
     DebtTableComponent,
     CashPostModalComponent,
-    CashUpdateModalComponent,
     DebtPostModalComponent,
     MissingProductsComponent,
     MissingProductsTableComponent,

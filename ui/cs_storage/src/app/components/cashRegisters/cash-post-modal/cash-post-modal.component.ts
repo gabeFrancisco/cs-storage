@@ -104,7 +104,7 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
   }
 
   close() {
-    this.cashRegisterService.closeCashPostModal();
+    this.cashRegisterService.closeCashModal();
   }
 
   get product_id() {

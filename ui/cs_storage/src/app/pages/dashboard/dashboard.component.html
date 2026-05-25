@@ -1,7 +1,6 @@
 <div class="flex flex-col lg:flex-row w-full justify-stretch">
   <!-- ------------------------------Modals----------------------------------- -->
-  <app-cash-post-modal *ngIf="cashRegisterService.cashPostModalState$ | async" />
-  <app-cash-update-modal *ngIf="cashRegisterService.cashUpdateModalState$ | async" />
+  <app-cash-post-modal *ngIf="cashRegisterService.cashModalState$ | async" />
   <app-cash-register-product-modal *ngIf="cashRegisterService.cashProductModalState$ | async" />
   <app-debt-post-modal *ngIf="debtService.debtPostModalState$ | async" />
   <app-debt-update-modal *ngIf="debtService.debtUpdateModalState$ | async" />

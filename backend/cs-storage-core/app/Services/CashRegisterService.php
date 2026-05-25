@@ -30,7 +30,7 @@ class CashRegisterService
 
     public function getById($id)
     {
-        return CashRegister::findOrFail($id);
+        return CashRegister::with('product')->findOrFail($id);
     }
 
     private function parseCashRegister($quantity, $payment_type, $product_id, $value)

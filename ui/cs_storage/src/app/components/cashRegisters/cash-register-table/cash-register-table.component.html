@@ -10,7 +10,7 @@
       <button type="button" (click)="fetchList()" class="mx-1 text-gray-400 btn text-xl">
         ↻
       </button>
-      <button type="button" (click)="openCashPostModal('create')" class="btn-green px-4 font-bold text-xl">
+      <button type="button" (click)="openCashModal('create')" class="btn-green px-4 font-bold text-xl">
         +
       </button>
     </div>
@@ -34,7 +34,8 @@
           <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
             Carregando...
           </tr>
-          <tr class="items-center bg-white hover:bg-blue-200 cursor-pointer" *ngFor="let item of registers">
+          <tr (click)="openCashModal('read', item.id!)" class="items-center bg-white hover:bg-blue-200 cursor-pointer"
+            *ngFor="let item of registers">
             <td class="font-normal truncate border-r p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </td>
@@ -46,7 +47,7 @@
               R${{ item.value.toFixed(2) }}
             </td>
             <td class="font-normal truncate text-center">
-              <button (click)="openCashUpdateModal(item.id!)" title="Atualizar" class="btn-primary text-lg mr-1">
+              <button (click)="openCashModal('update', item.id!)" title="Atualizar" class="btn-primary text-lg mr-1">
                 ✎
               </button>
               <button type="button" title="Remover" (click)="deleteCashRegister(item.id!)" class="btn-red text-lg mr-1">
