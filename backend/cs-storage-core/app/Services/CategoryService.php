@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Product;
 
 class CategoryService
 {
@@ -47,6 +48,13 @@ class CategoryService
 
     public function remove($id)
     {
-        return Category::destroy($id);
+        $products = Product::where('category_id', $id);
+
+        if ($products->count() > 0) {
+            return false;
+        }
+
+        Category::destroy($id);
+        return true;
     }
 }

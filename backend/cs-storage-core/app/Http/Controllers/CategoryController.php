@@ -35,7 +35,7 @@ class CategoryController extends Controller
     {
         $result = $this->_categoryService->remove($id);
         if (!$result) {
-            return response()->json("Category not found!", 404);
+            return response()->json("Category with products!", 404);
         }
 
         return response()->json("Category deleted with success!", 200);
