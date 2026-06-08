@@ -19,6 +19,12 @@ class CategoryController extends Controller
         return response()->json($this->_categoryService->getAll(), 200);
     }
 
+    public function search(string $name)
+    {
+        $category = $this->_categoryService->findCategory($name);
+        return response()->json($category, 200);
+    }
+
     public function post(CategoryRequest $request)
     {
         $category = $this->_categoryService->create($request);

@@ -46,6 +46,11 @@ class CategoryService
         return $category;
     }
 
+    public function findCategory($name)
+    {
+        return Category::where('name', 'LIKE', "{$name}%")->get();
+    }
+
     public function remove($id)
     {
         $products = Product::where('category_id', $id);
