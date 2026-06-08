@@ -38,6 +38,7 @@ Route::middleware([CookieTokenMiddleware::class])->group(function () {
 
     //Products
     Route::get('products', [ProductController::class, 'getAll']);
+    Route::get('products/search/{name}', [ProductController::class, 'search']);
     Route::post('products', [ProductController::class, 'post']);
     Route::put('products/{id}', [ProductController::class, 'put']);
 

@@ -19,6 +19,12 @@ class ProductController extends Controller
         return response()->json($this->_productService->getAll(), 200);
     }
 
+    public function search(string $name)
+    {
+        $products = $this->_productService->search($name);
+        return response()->json($products, 200);
+    }
+
     public function post(ProductRequest $request)
     {
         $product = $this->_productService->create($request);

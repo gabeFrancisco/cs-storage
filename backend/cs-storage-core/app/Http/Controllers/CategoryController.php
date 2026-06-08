@@ -21,7 +21,7 @@ class CategoryController extends Controller
 
     public function search(string $name)
     {
-        $category = $this->_categoryService->findCategory($name);
+        $category = $this->_categoryService->search($name);
         return response()->json($category, 200);
     }
 

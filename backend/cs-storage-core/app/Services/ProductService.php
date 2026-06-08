@@ -31,6 +31,11 @@ class ProductService
             ->findOrFail($id);
     }
 
+    public function search($name)
+    {
+        return Product::where('name', 'LIKE', "{$name}%")->get();
+    }
+
     public function create(ProductRequest $request)
     {
         $product = $this->getRequestData($request);

@@ -46,7 +46,7 @@ class CategoryService
         return $category;
     }
 
-    public function findCategory($name)
+    public function search($name)
     {
         return Category::where('name', 'LIKE', "{$name}%")->get();
     }
