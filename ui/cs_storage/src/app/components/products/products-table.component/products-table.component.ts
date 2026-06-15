@@ -47,14 +47,10 @@ export class ProductsTableComponent implements OnInit {
         this.products = products;
         this.loading = false;
       });
-
-    this.productService.triggerUpdate();
-
-    this.productService.refreshList$
-      .subscribe(() => this.fetchList());
   }
 
   fetchList() {
+    this.search.patchValue("");
     this.productService.getProducts().subscribe({
       next: res => {
         this.products = res
