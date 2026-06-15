@@ -3,7 +3,7 @@ import { Product } from '../../../../models/Product';
 import { ProductService } from '../../../services/product.service';
 import { ProductType } from '../../../../models/enums/ProductType';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { combineLatest, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-products-table',
@@ -27,14 +27,31 @@ export class ProductsTableComponent implements OnInit {
     this.productService.triggerUpdate();
     this.productService.refreshList$.subscribe(() => this.fetchList())
 
-    this.search.valueChanges
-      .pipe(
+    combineLatest([
+      this.productService.getProducts(),
+      this.search.valueChanges.pipe(
+        startWith(''),
         debounceTime(500),
         distinctUntilChanged()
       )
-      .subscribe(value => {
+    ]).pipe(
+      map(([products, term]) => {
+        const searchTerm = (term ?? '').toLowerCase();
 
+        return products.filter(product =>
+          product.name.toLowerCase().includes(searchTerm)
+        );
       })
+    )
+      .subscribe(products => {
+        this.products = products;
+        this.loading = false;
+      });
+
+    this.productService.triggerUpdate();
+
+    this.productService.refreshList$
+      .subscribe(() => this.fetchList());
   }
 
   fetchList() {
