@@ -1,7 +1,11 @@
 <div class="border shadow w-full border-gray-200 rounded">
-    <div class="p-2 font-bold flex flex-row text-gray-600 border-b rounded justify-between items-baseline bg-white">
+    <div class="p-2 flex flex-row text-gray-600 border-b rounded justify-between items-baseline bg-white">
         <span class="font-bold">Produtos</span>
         <div class="flex flex-row items-center">
+            <div>
+                <input class="txt-input" [formControl]="search" type="text" name="search" id="search"
+                    placeholder="Pesquise um produto...">
+            </div>
             <button type="button" (click)="fetchList()" class="mx-1 text-gray-400 btn text-xl">
                 ↻
             </button>
