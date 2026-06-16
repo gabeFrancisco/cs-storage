@@ -5,7 +5,7 @@ import { CashRegister } from '../../../../models/CashRegister';
 import { Product } from '../../../../models/Product';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { combineLatest, filter, Subject, switchMap, takeUntil } from 'rxjs';
-import { ModalMode } from '../../../../models/types/ModalMode';
+import { FormMode } from '../../../../models/types/FormMode';
 import { PaymentType } from '../../../../models/enums/PaymentType';
 
 @Component({
@@ -17,7 +17,7 @@ import { PaymentType } from '../../../../models/enums/PaymentType';
 export class CashPostModalComponent implements OnInit, OnDestroy {
   show = false;
 
-  mode: ModalMode = 'read';
+  mode: FormMode = 'read';
 
   get readOnly() {
     return this.mode === 'read'
@@ -50,7 +50,7 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
 
     this.cashRegisterService.modalType$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => (this.mode = value as ModalMode))
+      .subscribe(value => (this.mode = value as FormMode))
 
     combineLatest([
       this.cashRegisterService.cashRegisterId$,

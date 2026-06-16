@@ -3,7 +3,7 @@ import { Category } from '../../../../models/Category';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
 import { combineLatest, filter, pipe, Subject, switchMap, takeUntil } from 'rxjs';
-import { ModalMode } from '../../../../models/types/ModalMode';
+import { FormMode } from '../../../../models/types/FormMode';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { ModalMode } from '../../../../models/types/ModalMode';
 export class CategoryModalComponent implements OnInit, OnDestroy {
   show = false;
 
-  mode: ModalMode = 'read';
+  mode: FormMode = 'read';
 
   get readOnly() {
     return this.mode === 'read';
@@ -41,7 +41,7 @@ export class CategoryModalComponent implements OnInit, OnDestroy {
 
     this.categoryService.modalType$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => (this.mode = value as ModalMode));
+      .subscribe(value => (this.mode = value as FormMode));
 
     combineLatest([
       this.categoryService.categoryId$,

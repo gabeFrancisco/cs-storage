@@ -16,7 +16,7 @@ export class ServiceOrderCreateComponent {
 
   serviceOrder!: ServiceOrder;
 
-  constructor(private serviceOrderService: ServiceOrderService,private router: Router) {
+  constructor(private serviceOrderService: ServiceOrderService, private router: Router) {
     this.serviceOrderForm = new FormGroup({
       hasAddress: new FormControl(false),
       title: new FormControl("", Validators.required),
@@ -35,12 +35,12 @@ export class ServiceOrderCreateComponent {
     })
   }
 
-  cancel(){
+  cancel() {
     this.router.navigate(["ordensDeServico"])
   }
 
-  submit(){
-    if(this.serviceOrderForm.invalid){
+  submit() {
+    if (this.serviceOrderForm.invalid) {
       return;
     }
     this.serviceOrder = {

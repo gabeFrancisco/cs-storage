@@ -1,0 +1,1 @@
+export type FormMode = 'read' | 'create' | 'update';

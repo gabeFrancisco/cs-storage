@@ -1,1 +1,0 @@
-export type ModalMode = 'read' | 'create' | 'update';
