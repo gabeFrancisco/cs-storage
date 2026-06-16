@@ -5,7 +5,7 @@ import { CashRegister } from '../../../../models/CashRegister';
 import { Product } from '../../../../models/Product';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { combineLatest, filter, Subject, switchMap, takeUntil } from 'rxjs';
-import { FormMode } from '../../../../models/types/FormMode';
+import { FormMode } from '../../../../models/types/FormMode'
 import { PaymentType } from '../../../../models/enums/PaymentType';
 
 @Component({

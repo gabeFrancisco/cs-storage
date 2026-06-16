@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServiceOrder } from '../../../models/ServiceOrder';
 import { ServiceOrderService } from '../../services/service-order.service';
+import { FormMode } from '../../../models/types/FormMode';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-service-order-create',
@@ -10,13 +12,23 @@ import { ServiceOrderService } from '../../services/service-order.service';
   templateUrl: './service-order-create.component.html',
   styleUrl: './service-order-create.component.css'
 })
-export class ServiceOrderCreateComponent {
+export class ServiceOrderCreateComponent implements OnInit, OnDestroy {
 
   serviceOrderForm!: FormGroup;
 
   serviceOrder!: ServiceOrder;
 
-  constructor(private serviceOrderService: ServiceOrderService, private router: Router) {
+  mode: FormMode = 'read';
+
+  get readonOnly() {
+    return this.mode === 'read'
+  }
+
+  private destroy$ = new Subject<void>();
+
+  constructor(private serviceOrderService: ServiceOrderService, private router: Router) { }
+
+  ngOnInit(): void {
     this.serviceOrderForm = new FormGroup({
       hasAddress: new FormControl(false),
       title: new FormControl("", Validators.required),
@@ -33,6 +45,11 @@ export class ServiceOrderCreateComponent {
       city: new FormControl(""),
       state: new FormControl("")
     })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   cancel() {
