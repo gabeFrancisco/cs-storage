@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../../models/Category';
+import { FormControl } from '@angular/forms';
+import { combineLatest, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-category-table',
@@ -12,6 +14,8 @@ export class CategoryTableComponent implements OnInit {
   loading = true;
   categories: Category[] = []
 
+  search = new FormControl('')
+
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
@@ -19,6 +23,27 @@ export class CategoryTableComponent implements OnInit {
     this.categoryService.refreshList$.subscribe(() => {
       this.fetchList()
     })
+
+    combineLatest([
+      this.categoryService.getCategories(),
+      this.search.valueChanges.pipe(
+        startWith(''),
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+    ]).pipe(
+      map(([categories, term]) => {
+        const searchTerm = (term ?? '').toLowerCase();
+
+        return categories.filter(cat =>
+          cat.name.toLowerCase().includes(searchTerm)
+        )
+      })
+    )
+      .subscribe(cats => {
+        this.categories = cats;
+        this.loading = false;
+      })
   }
 
   fetchList() {

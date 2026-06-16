@@ -1,8 +1,10 @@
 <div class="w-full border shadow border-gray-200 rounded">
     <div
-        class="px-2 py-1 font-bold flex flex-row text-gray-600 rounded-tl rounded-tr border-b justify-between items-center bg-white">
+        class="px-2 py-1 flex flex-row text-gray-600 rounded-tl rounded-tr border-b justify-between items-center bg-white">
         <span class="font-bold">Categorias</span>
-        <div>
+        <div class="flex flex-row items-center">
+            <input class="txt-input" [formControl]="search" type="text" name="search" id="search"
+                placeholder="Pesquise uma categoria...">
             <button type="button" (click)="fetchList()" class="mx-1 text-gray-400 btn text-xl">
                 ↻
             </button>
