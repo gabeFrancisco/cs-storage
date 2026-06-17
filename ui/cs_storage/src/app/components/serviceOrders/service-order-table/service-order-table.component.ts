@@ -32,13 +32,14 @@ export class ServiceOrderTableComponent implements OnInit {
   }
 
   newServiceOrder() {
+    this.serviceOrderService.setFormMode('create')
     this.router.navigate(["ordensDeServico/novo"])
   }
 
-  show(id:number){
+  show(id: number) {
     this.serviceOrderService.setEdit(false)
     this.router.navigate(["ordensDeServico/editar"], {
-      queryParams: { id: id}
+      queryParams: { id: id }
     })
   }
 

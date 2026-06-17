@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ServiceOrder } from '../../../models/ServiceOrder';
 import { ServiceOrderService } from '../../services/service-order.service';
 import { FormMode } from '../../../models/types/FormMode';
-import { Subject } from 'rxjs';
+import { combineLatest, filter, Subject, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-service-order-create',
@@ -13,8 +13,6 @@ import { Subject } from 'rxjs';
   styleUrl: './service-order-create.component.css'
 })
 export class ServiceOrderCreateComponent implements OnInit, OnDestroy {
-
-  serviceOrderForm!: FormGroup;
 
   serviceOrder!: ServiceOrder;
 
@@ -26,25 +24,49 @@ export class ServiceOrderCreateComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
+  serviceOrderForm = new FormGroup({
+    hasAddress: new FormControl(false),
+    title: new FormControl("", Validators.required),
+    description: new FormControl("", Validators.required),
+    priority: new FormControl(1, Validators.required),
+    service_date: new FormControl("", Validators.required),
+    value: new FormControl(0),
+    customer_name: new FormControl("", Validators.required),
+    customer_phone: new FormControl("", Validators.required),
+    road: new FormControl(""),
+    number: new FormControl(""),
+    complement: new FormControl(""),
+    neighborhood: new FormControl(""),
+    city: new FormControl(""),
+    state: new FormControl("")
+  })
+
   constructor(private serviceOrderService: ServiceOrderService, private router: Router) { }
 
   ngOnInit(): void {
-    this.serviceOrderForm = new FormGroup({
-      hasAddress: new FormControl(false),
-      title: new FormControl("", Validators.required),
-      description: new FormControl("", Validators.required),
-      priority: new FormControl(1, Validators.required),
-      service_date: new FormControl("", Validators.required),
-      value: new FormControl(0),
-      customer_name: new FormControl("", Validators.required),
-      customer_phone: new FormControl("", Validators.required),
-      road: new FormControl(""),
-      number: new FormControl(""),
-      complement: new FormControl(""),
-      neighborhood: new FormControl(""),
-      city: new FormControl(""),
-      state: new FormControl("")
-    })
+    this.serviceOrderService.formMode$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => (this.mode = value as FormMode))
+
+    combineLatest([
+      this.serviceOrderService.serviceOrderId$,
+      this.serviceOrderService.formMode$
+    ])
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(([id, mode]) => !!id && mode !== 'create'),
+        switchMap(([id]) => this.serviceOrderService.getCachedServiceOrderById(id!))
+      )
+      .subscribe(order => {
+        if (order) this.serviceOrderForm.patchValue(order!)
+      })
+
+    this.serviceOrderService.formMode$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(mode => mode === 'create')
+      )
+      .subscribe(() => this.resetForm())
   }
 
   ngOnDestroy(): void {
@@ -57,38 +79,49 @@ export class ServiceOrderCreateComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    if (this.mode === 'read') {
+      this.serviceOrderService.setFormMode('update');
+      return;
+    }
+
     if (this.serviceOrderForm.invalid) {
       return;
     }
-    this.serviceOrder = {
-      title: this.serviceOrderForm.get('title')!.value,
-      description: this.serviceOrderForm.get('description')!.value,
-      priority: this.serviceOrderForm.get('priority')!.value,
-      service_date: this.serviceOrderForm.get('service_date')!.value,
-      value: this.serviceOrderForm.get('value')!.value,
-      customer: {
-        name: this.serviceOrderForm.get('customer_name')!.value,
-        phone: this.serviceOrderForm.get('customer_phone')!.value,
-        cpf_cnpj: undefined,
-        address: undefined
-      },
-      address: {
-        road: this.serviceOrderForm.get('road')!.value ?? "",
-        number: this.serviceOrderForm.get('number')!.value ?? "",
-        complement: this.serviceOrderForm.get('complement')!.value ?? "",
-        neighborhood: this.serviceOrderForm.get('neighborhood')!.value ?? "",
-        city: this.serviceOrderForm.get('city')!.value ?? "",
-        state: this.serviceOrderForm.get('state')!.value ?? ""
-      }
-    }
 
-    this.serviceOrderService.createServiceOrder(this.serviceOrder).subscribe({
-      next: _ => {
-        this.serviceOrderForm.reset();
-        this.serviceOrderService.triggerUpdate();
-        this.router.navigate(["ordensDeServico"])
-      },
-      error: err => console.log(err)
+    const serviceOrder = this.serviceOrderForm.value as ServiceOrder;
+    const request$ =
+      this.mode === 'create'
+        ? this.serviceOrderService.createServiceOrder({ ...serviceOrder, id: undefined })
+        : this.serviceOrderService.updateServiceOrder(serviceOrder);
+
+    request$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: () => this.onSuccess()
     })
+  }
+
+  private resetForm() {
+    this.serviceOrderForm.reset({
+      hasAddress: false,
+      title: "",
+      description: "",
+      priority: 0,
+      service_date: "",
+      value: 0,
+      customer_name: "",
+      customer_phone: "",
+      road: "",
+      number: "",
+      complement: "",
+      neighborhood: "",
+      city: "",
+      state: ""
+    })
+  }
+
+  private onSuccess() {
+    this.resetForm();
+    this.serviceOrderService.triggerUpdate();
+    this.router.navigate(["ordensDeServico"])
+
   }
 }

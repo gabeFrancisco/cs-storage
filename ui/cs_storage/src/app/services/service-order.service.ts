@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ServiceOrder } from '../../models/ServiceOrder';
-import { BehaviorSubject, catchError, map, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { environment } from '../../environments/environment';
@@ -15,11 +15,25 @@ export class ServiceOrderService {
   private edit = new BehaviorSubject<boolean>(false);
   edit$ = this.edit.asObservable();
 
-  setEdit(value: boolean){
+  private serviceOrderId = new BehaviorSubject<number | null>(null);
+  serviceOrderId$ = this.serviceOrderId.asObservable();
+
+  private formMode = new BehaviorSubject<string | null>(null);
+  formMode$ = this.formMode.asObservable();
+
+  setEdit(value: boolean) {
     this.edit.next(value);
   }
 
   constructor(private http: HttpClient) { }
+
+
+  private refreshList = new BehaviorSubject<void>(undefined);
+  refreshList$ = this.refreshList.asObservable();
+
+  setFormMode(mode: string) {
+    this.formMode.next(mode);
+  }
 
   getServiceOrders(): Observable<ServiceOrder[]> {
     if (!this.list$) {
@@ -30,9 +44,6 @@ export class ServiceOrderService {
     return this.list$
   }
 
-  private refreshList = new BehaviorSubject<void>(undefined);
-  refreshList$ = this.refreshList.asObservable();
-
   triggerUpdate() {
     this.refreshList.next();
   }
@@ -41,8 +52,8 @@ export class ServiceOrderService {
     this.list$ = undefined;
   }
 
-  getCachedServiceOrderById(id: number) {
-    return this.list$?.pipe(
+  getCachedServiceOrderById(id: number): Observable<ServiceOrder | undefined> {
+    return this.list$!.pipe(
       map(so => so.find(x => x.id === id))
     )
   }
