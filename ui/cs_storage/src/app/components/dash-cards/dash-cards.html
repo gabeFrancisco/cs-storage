@@ -1,15 +1,7 @@
-<div class="p-3 grid grid-cols-5 rounded bg-white mb-2 shadow-lg">
-    <div class="bg-emerald-500 rounded m-1 shadow p-2">
-
+<div class="p-3 grid grid-cols-6 rounded bg-white mb-2 shadow-lg">
+    <div *ngFor="let item of items" [ngClass]="item.class" class="rounded m-1 shadow-lg p-3 text-white text-center">
+        <fa-icon [icon]="item.icon" class="text-xl" />
+        {{ item.name }}
+        <h4 class="text-2xl font-bold">{{ item.data }}</h4>
     </div>
-    <div class="bg-emerald-500 rounded m-1 shadow p-2">
-
-    </div>
-    <div class="bg-emerald-500 rounded m-1 shadow p-2">
-
-    </div>
-    <div class="bg-emerald-500 rounded m-1 shadow p-2">
-
-    </div>
-
 </div>
