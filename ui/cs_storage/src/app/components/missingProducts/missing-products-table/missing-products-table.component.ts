@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MissingProduct } from '../../../../models/MissingProduct';
 import { MissingProductService } from '../../../services/missing-product.service';
+import { faCheck, faPen, faX } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-missing-products-table',
@@ -8,11 +9,14 @@ import { MissingProductService } from '../../../services/missing-product.service
   templateUrl: './missing-products-table.component.html',
   styleUrl: './missing-products-table.component.css'
 })
-export class MissingProductsTableComponent implements OnInit{
+export class MissingProductsTableComponent implements OnInit {
   products: MissingProduct[] = [];
   loading = true;
 
-  constructor(private missingProductService: MissingProductService){}
+  faCheck = faCheck
+  faX = faX;
+
+  constructor(private missingProductService: MissingProductService) { }
 
   ngOnInit(): void {
     this.missingProductService.triggerUpdate();
@@ -21,7 +25,7 @@ export class MissingProductsTableComponent implements OnInit{
     })
   }
 
-  fetchList(){
+  fetchList() {
     this.missingProductService.getMissingProducts().subscribe({
       next: res => {
         this.products = res
@@ -29,39 +33,39 @@ export class MissingProductsTableComponent implements OnInit{
     })
   }
 
-  openMissingProductModal(){
+  openMissingProductModal() {
     this.missingProductService.setModalTypeToCreate();
     this.missingProductService.openMissingProductModal();
   }
 
-  setBoughtState(id: number){
-    if(confirm('Tem certeza que quer marcar este produto como "Comprado"?')){
-      this.missingProductService.setMissingProductBoughtState({id: id, state: true})
+  setBoughtState(id: number) {
+    if (confirm('Tem certeza que quer marcar este produto como "Comprado"?')) {
+      this.missingProductService.setMissingProductBoughtState({ id: id, state: true })
         .subscribe(() => {
           this.fetchList();
         })
     }
   }
 
-  getLateDate(date: string): boolean{
+  getLateDate(date: string): boolean {
     let formateDate = new Date(date);
-    if(formateDate.getTime() < new Date().getTime()){
+    if (formateDate.getTime() < new Date().getTime()) {
       return true;
     }
 
     return false;
   }
 
-  deleteMissingProduct(id: number){
-    if(confirm("Tem certeza que deseja remover este registro?")){
+  deleteMissingProduct(id: number) {
+    if (confirm("Tem certeza que deseja remover este registro?")) {
       this.missingProductService.removeMissingProduct(id).subscribe(() => {
         this.fetchList();
       })
     }
   }
 
-  deleteAllBought(){
-    if(confirm("Todos os produtos comprados irão ficar registrados em um log guardado no sistema. Procede com a remoção?")){
+  deleteAllBought() {
+    if (confirm("Todos os produtos comprados irão ficar registrados em um log guardado no sistema. Procede com a remoção?")) {
       this.missingProductService.removeAllBought().subscribe(() => {
         this.fetchList()
       })

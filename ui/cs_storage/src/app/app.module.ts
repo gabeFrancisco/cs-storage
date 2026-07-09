@@ -38,6 +38,7 @@ import { CategoryTableComponent } from './components/categories/category-table.c
 import { CategoryModalComponent } from './components/categories/category-modal.component/category-modal.component';
 import { CashRegisterProductModal } from './components/cashRegisters/cash-register-product-modal/cash-register-product-modal';
 import { ButtonComponent } from './components/shared/button.component/button.component';
+import { DashCards } from './components/dash-cards/dash-cards';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { ButtonComponent } from './components/shared/button.component/button.com
     CategoryModalComponent,
     CashRegisterProductModal,
     ButtonComponent,
+    DashCards,
   ],
   imports: [
     BrowserModule,

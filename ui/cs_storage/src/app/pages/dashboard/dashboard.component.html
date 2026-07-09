@@ -1,9 +1,15 @@
-<div class="flex flex-col w-full justify-stretch">
+<div>
   <!-- ------------------------------Modals----------------------------------- -->
   <app-cash-post-modal *ngIf="cashRegisterService.cashModalState$ | async" />
   <app-cash-register-product-modal *ngIf="cashRegisterService.cashProductModalState$ | async" />
   <app-debt-post-modal *ngIf="debtService.debtPostModalState$ | async" />
   <app-debt-update-modal *ngIf="debtService.debtUpdateModalState$ | async" />
-  <app-cash-register-table class="w-full sm:mb-3" />
-  <app-debt-table class="w-full sm:mb-3" />
+
+  <app-dash-cards />
+
+  <div class="flex flex-col md:flex-row w-full justify-stretch">
+    <app-cash-register-table class="w-full md:mr-1 sm:mb-3" />
+    <app-debt-table class="w-full md:ml-1 sm:mb-3" />
+  </div>
+
 </div>
