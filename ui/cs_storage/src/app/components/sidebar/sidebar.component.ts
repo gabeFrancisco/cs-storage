@@ -5,7 +5,6 @@ import { faWrench } from '@fortawesome/free-solid-svg-icons';
 import { faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons';
 
 interface SidebarItem {
-  id: number;
   icon: IconDefinition,
   text: string,
   url: string
@@ -28,23 +27,35 @@ export class SidebarComponent {
 
   items: SidebarItem[] = [
     {
-      id: 0,
-      icon: faChartLine,
+      icon: this.faChartLine,
       text: "Painel",
       url: "/"
     },
     {
-      id: 1,
       icon: this.faCategory,
       text: "Categorias",
       url: "categorias"
     },
     {
-      id: 2,
       icon: this.faProduct,
       text: "Produtos",
       url: "produtos"
-    }
+    },
+    {
+      icon: this.faBoxOpen,
+      text: "Produtos em Falta",
+      url: "produtosEmFalta"
+    },
+    {
+      icon: this.faWrench,
+      text: "Ordens de Serviço",
+      url: "ordensDeServico"
+    },
+    {
+      icon: this.faFile,
+      text: "Orçamentos",
+      url: "orcamentos"
+    },
   ]
 
   user: any = null;

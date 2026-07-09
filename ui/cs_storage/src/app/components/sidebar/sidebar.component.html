@@ -9,9 +9,9 @@
 			<ul class="flex flex-row lg:flex-col">
 				<li *ngFor="let item of items" [routerLink]="item.url" routerLinkActive="bg-white text-blue-500"
 					[routerLinkActiveOptions]="{ exact: true }"
-					class="py-2 lg:border-l-4 border-blue-100 px-2 lg:px-5 text-sm hover:border-blue-500 transition-all hover:bg-white hover:text-blue-500 w-full hover:cursor-pointer">
+					class="py-2 lg:border-l-4 text-nowrap border-blue-100 px-2 lg:px-5 text-sm hover:border-blue-500 transition-all hover:bg-white hover:text-blue-500 w-full hover:cursor-pointer">
 					<fa-icon [icon]="item.icon" [fixedWidth]="true" class="w-4 text-center" />
-					<span class="hidden md:inline">
+					<span class="hidden md:inline text-center text-nowrap">
 						{{ item.text }}
 					</span>
 				</li>
