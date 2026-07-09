@@ -3,6 +3,7 @@ import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../../models/Category';
 import { FormControl } from '@angular/forms';
 import { combineLatest, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
+import { faPen, faPencil, faX } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-category-table',
@@ -13,6 +14,9 @@ import { combineLatest, debounceTime, distinctUntilChanged, map, startWith } fro
 export class CategoryTableComponent implements OnInit {
   loading = true;
   categories: Category[] = []
+
+  faPen = faPen
+  faX = faX;
 
   search = new FormControl('')
 

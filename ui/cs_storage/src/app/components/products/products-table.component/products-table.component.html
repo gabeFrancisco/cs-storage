@@ -57,11 +57,11 @@
                         <td class="font-normal w-24 truncate text-center">
                             <button (click)="openProductUpdateModal(item.id!)" title="Atualizar"
                                 class="btn-primary text-lg mr-1">
-                                ✎
+                                <fa-icon class="text-sm" [icon]="faPen"></fa-icon>
                             </button>
                             <button type="button" title="Remover" (click)="deleteProductModal(item.id!)"
                                 class="btn-red text-lg mr-1">
-                                𝘅
+                                <fa-icon class="text-sm" [icon]="faX"></fa-icon>
                             </button>
                         </td>
                     </tr>

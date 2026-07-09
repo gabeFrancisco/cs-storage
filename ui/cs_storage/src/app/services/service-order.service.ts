@@ -58,6 +58,10 @@ export class ServiceOrderService {
     )
   }
 
+  setServiceOrderId(id: number | null) {
+    this.serviceOrderId.next(id);
+  }
+
   createServiceOrder(payload: ServiceOrder): Observable<any> {
     return this.http.post(this.url, payload)
       .pipe(catchError(handleNetworkError('create-service-order')))

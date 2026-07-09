@@ -31,8 +31,10 @@ export class ServiceOrderCreateComponent implements OnInit, OnDestroy {
     priority: new FormControl(1, Validators.required),
     service_date: new FormControl("", Validators.required),
     value: new FormControl(0),
-    customer_name: new FormControl("", Validators.required),
-    customer_phone: new FormControl("", Validators.required),
+    customer: new FormGroup({
+      name: new FormControl("", Validators.required),
+      phone: new FormControl("", Validators.required),
+    }),
     road: new FormControl(""),
     number: new FormControl(""),
     complement: new FormControl(""),
@@ -46,7 +48,13 @@ export class ServiceOrderCreateComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.serviceOrderService.formMode$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => (this.mode = value as FormMode))
+      .subscribe(value => { alert(this.mode), this.mode = value as FormMode })
+
+    const route = this.router.url.split('/').pop();
+
+    if (route === 'novo') {
+      this.mode = 'create'
+    }
 
     combineLatest([
       this.serviceOrderService.serviceOrderId$,
@@ -95,7 +103,7 @@ export class ServiceOrderCreateComponent implements OnInit, OnDestroy {
         : this.serviceOrderService.updateServiceOrder(serviceOrder);
 
     request$.pipe(takeUntil(this.destroy$)).subscribe({
-      next: () => this.onSuccess()
+      next: () => this.onSuccess
     })
   }
 
@@ -107,8 +115,7 @@ export class ServiceOrderCreateComponent implements OnInit, OnDestroy {
       priority: 0,
       service_date: "",
       value: 0,
-      customer_name: "",
-      customer_phone: "",
+      customer: { name: "", phone: "" },
       road: "",
       number: "",
       complement: "",

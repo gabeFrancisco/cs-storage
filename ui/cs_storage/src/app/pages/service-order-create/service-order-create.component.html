@@ -68,29 +68,32 @@
         </div>
 
         <div class="h-full lg:w-3/6 lg:ml-3">
-          <h5 class="text-start">Cliente</h5>
-          <hr class="py-1" />
-          <div class="flex items-baseline">
-            <label class="text-sm w-24 text-right mr-2" for="customer_name">Nome</label>
-            <div class="flex flex-col w-full">
-              <input type="text" formControlName="customer_name" class="border border-gray-400 my-1" />
-              <small class="text-red-500" *ngIf="
-                  serviceOrderForm.get('customer_name')!.invalid &&
-                  formDir.submitted
-                ">Nome é obrigatório!</small>
-            </div>
-          </div>
-          <div class="flex items-baseline pb-5">
-            <label class="text-sm w-24 text-right mr-2" for="customer_phone">Telefone</label>
-            <div class="flex flex-col w-full">
-              <input type="text" formControlName="customer_phone" class="border border-gray-400 my-1" />
-              <small class="text-red-500" *ngIf="
-                  serviceOrderForm.get('customer_phone')!.invalid &&
-                  formDir.submitted
-                ">Telefone é obrigatório!</small>
-            </div>
-          </div>
+          <div formGroupName="customer">
 
+            <h5 class="text-start">Cliente</h5>
+            <hr class="py-1" />
+            <div class="flex items-baseline">
+              <label class="text-sm w-24 text-right mr-2" for="customer_name">Nome</label>
+              <div class="flex flex-col w-full">
+                <input type="text" formControlName="name" class="border border-gray-400 my-1" />
+                <small class="text-red-500" *ngIf="
+              serviceOrderForm.get('customer.name')!.invalid &&
+              formDir.submitted
+              ">Nome é obrigatório!</small>
+              </div>
+            </div>
+            <div class="flex items-baseline pb-5">
+              <label class="text-sm w-24 text-right mr-2" for="customer_phone">Telefone</label>
+              <div class="flex flex-col w-full">
+                <input type="text" formControlName="phone" class="border border-gray-400 my-1" />
+                <small class="text-red-500" *ngIf="
+              serviceOrderForm.get('customer.phone')!.invalid &&
+              formDir.submitted
+              ">Telefone é obrigatório!</small>
+              </div>
+            </div>
+
+          </div>
           <div class="flex flex-row items-center">
             <label for="hasAddress" class="mr-2">Incluir endereço?</label>
             <input type="checkbox" name="hasAddress" formControlName="hasAddress" />

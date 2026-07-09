@@ -4,6 +4,7 @@ import { ProductService } from '../../../services/product.service';
 import { ProductType } from '../../../../models/enums/ProductType';
 import { FormControl } from '@angular/forms';
 import { combineLatest, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
+import { faPen, faX } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-products-table',
@@ -12,6 +13,9 @@ import { combineLatest, debounceTime, distinctUntilChanged, map, startWith } fro
   styleUrl: './products-table.component.css',
 })
 export class ProductsTableComponent implements OnInit {
+  faPen = faPen
+  faX = faX;
+
   products: Product[] = [];
   loading = true;
 

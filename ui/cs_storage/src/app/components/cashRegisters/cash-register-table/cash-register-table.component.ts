@@ -3,6 +3,7 @@ import { CashRegisterService } from '../../../services/cash-register.service';
 import { CashRegister } from '../../../../models/CashRegister';
 import { PaymentTypeDictionary } from '../../../../utils/paymentTypesDictionary';
 import { FormControl } from '@angular/forms';
+import { faPen, faX } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cash-register-table',
@@ -11,6 +12,10 @@ import { FormControl } from '@angular/forms';
   styleUrl: './cash-register-table.component.css'
 })
 export class CashRegisterTableComponent implements OnInit {
+
+  faPen = faPen
+  faX = faX;
+
   registers: CashRegister[] = [];
   payment_types = PaymentTypeDictionary
   date!: FormControl;

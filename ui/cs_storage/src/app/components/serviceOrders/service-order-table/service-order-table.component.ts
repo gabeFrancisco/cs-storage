@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceOrder } from '../../../../models/ServiceOrder';
 import { ServiceOrderService } from '../../../services/service-order.service';
 import { Router } from '@angular/router';
+import { faPen, faX } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-service-order-table',
@@ -10,6 +11,9 @@ import { Router } from '@angular/router';
   styleUrl: './service-order-table.component.css'
 })
 export class ServiceOrderTableComponent implements OnInit {
+  faPen = faPen
+  faX = faX;
+
   serviceOrders: ServiceOrder[] = [];
 
   loading = true;
@@ -33,6 +37,7 @@ export class ServiceOrderTableComponent implements OnInit {
 
   newServiceOrder() {
     this.serviceOrderService.setFormMode('create')
+    this.serviceOrderService.setServiceOrderId(null)
     this.router.navigate(["ordensDeServico/novo"])
   }
 

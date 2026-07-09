@@ -70,11 +70,11 @@
             </td>
             <td class="font-normal  truncate text-center border-l">
               <button (click)="update(item.id!)" title="Atualizar" class="btn-primary text-lg mr-1">
-                ✎
+                <fa-icon class="text-sm" [icon]="faPen"></fa-icon>
               </button>
               <button type="button" title="Remover" class="btn-red text-lg mr-1"
                 (click)="remove(item.id!); $event.stopPropagation()">
-                𝘅
+                <fa-icon class="text-sm" [icon]="faX"></fa-icon>
               </button>
             </td>
           </tr>

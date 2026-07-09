@@ -48,10 +48,10 @@
             </td>
             <td class="font-normal truncate text-center">
               <button (click)="openCashModal('update', item.id!)" title="Atualizar" class="btn-primary text-lg mr-1">
-                ✎
+                <fa-icon class="text-sm" [icon]="faPen"></fa-icon>
               </button>
               <button type="button" title="Remover" (click)="deleteCashRegister(item.id!)" class="btn-red text-lg mr-1">
-                𝘅
+                <fa-icon class="text-sm" [icon]="faX"></fa-icon>
               </button>
             </td>
           </tr>

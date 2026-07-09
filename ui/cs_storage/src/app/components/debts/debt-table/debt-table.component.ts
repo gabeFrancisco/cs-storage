@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Debt } from '../../../../models/Debt';
 import { DebtService } from '../../../services/debt.service';
 import { Subscription } from 'rxjs';
+import { faPen, faX } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-debt-table',
@@ -9,7 +10,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './debt-table.component.html',
   styleUrl: './debt-table.component.css'
 })
-export class DebtTableComponent implements OnInit{
+export class DebtTableComponent implements OnInit {
+  faPen = faPen
+  faX = faX;
+
   debts: Debt[] = [];
 
   loading = true;
@@ -19,7 +23,7 @@ export class DebtTableComponent implements OnInit{
   }
   ngOnInit(): void {
     this.debtService.triggerUpdate();
-    this.debtService.refreshList$.subscribe(()=>{
+    this.debtService.refreshList$.subscribe(() => {
       this.fetchList();
     })
   }

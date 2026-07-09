@@ -46,9 +46,10 @@
               {{ item.paid_date | date : "dd/MM/yyyy" }}
             </td>
             <td class="font-normal text-center border-l">
-              <button title="Atualizar" (click)="openDebtUpdate(item.id!)" class="btn-primary text-lg mr-1">✎</button>
+              <button title="Atualizar" (click)="openDebtUpdate(item.id!)" class="btn-primary text-lg mr-1"> <fa-icon
+                  class="text-sm" [icon]="faPen"></fa-icon></button>
               <button type="button" (click)="deleteDebt(item.id!)" title="Remover" class="btn-red text-lg mr-1">
-                𝘅
+                <fa-icon class="text-sm" [icon]="faX"></fa-icon>
               </button>
             </td>
           </tr>
