@@ -1,7 +1,16 @@
-<div class="p-3 grid grid-cols-6 rounded bg-white mb-2 shadow-lg">
-    <div *ngFor="let item of items" [ngClass]="item.class" class="rounded m-1 shadow-lg p-3 text-white text-center">
-        <fa-icon [icon]="item.icon" class="text-xl" />
-        {{ item.name }}
-        <h4 class="text-2xl font-bold">{{ item.data }}</h4>
+<div class="grid grid-cols-4 text-center p-2 gap-2 grid-flow-row rounded bg-white mb-2 shadow-lg">
+    <div *ngFor="let item of items" [ngClass]="item.class"
+        class="min-w-xs rounded m-1 shadow-lg text-white text-center">
+        <div class="border-b border-slate-100 border-opacity-25 p-2">
+            <fa-icon [icon]="item.icon" class="text-xl" />
+            {{ item.name }}
+
+        </div>
+        <div>
+            <h4 class="text-2xl p-2 font-bold">
+                {{ item.isCash ? "R$" : "" }}
+                {{ item.isFixed ? item.data?.toFixed(2) : item.data}}
+            </h4>
+        </div>
     </div>
 </div>
