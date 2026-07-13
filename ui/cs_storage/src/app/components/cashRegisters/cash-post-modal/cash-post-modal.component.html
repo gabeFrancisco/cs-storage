@@ -1,4 +1,4 @@
-<app-modal title="Novo registro" (closed)="close()">
+<app-modal title="Registro" (closed)="close()">
   <form (ngSubmit)="submit()" [formGroup]="cashForm" #formDir="ngForm" class="max-w-xl mx-auto flex-col space-y-1">
     <div class="flex items-baseline">
       <label class="w-16 text-sm text-right mr-2" for="product_id">Produto:</label>
@@ -36,8 +36,8 @@
     <div class="flex items-baseline">
       <label class="text-sm w-16 text-right mr-2" for="value">Valor</label>
       <div class="flex flex-col">
-        <input [readOnly]="readOnly" type="number" readonly formControlName="value" class="border border-gray-400 my-1"
-          required />
+        <input [readOnly]="true" type="number" readonly [disabled]="true" formControlName="value"
+          class="border border-gray-400 my-1" required />
       </div>
     </div>
     <div class="flex items-baseline">
@@ -49,8 +49,23 @@
           required />
       </div>
     </div>
-    <button type="submit" class="btn-green form-btn">
-      Novo registro!
-    </button>
+    <div class="text-center">
+      @if (mode === 'read') {
+      <app-button type="submit" variant="yellow" [disabled]="!readOnly">
+        Atualizar
+      </app-button>
+      }
+      @else if (mode === 'create') {
+      <app-button type="submit" variant="green" [disabled]="!readOnly">
+        Novo registro
+      </app-button>
+      }
+      @else {
+      <app-button type="submit" variant="primary" [disabled]="!readOnly">
+        Confirmar
+      </app-button>
+      }
+    </div>
+
   </form>
 </app-modal>

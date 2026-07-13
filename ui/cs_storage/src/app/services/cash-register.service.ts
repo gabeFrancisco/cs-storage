@@ -1,7 +1,7 @@
 import { CashRegister } from './../../models/CashRegister';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, ReplaySubject, shareReplay, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, shareReplay, tap } from 'rxjs';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 import { environment } from '../../environments/environment';
@@ -11,7 +11,7 @@ import { Product } from '../../models/Product';
   providedIn: 'root'
 })
 export class CashRegisterService {
-  private list$?: Observable<CashRegister[]>;
+  private list$? = new BehaviorSubject<CashRegister[]>([]);
   private dateList?: Observable<CashRegister[]>;
   private selectedProduct = new BehaviorSubject<Product | null>(null);
   selectedProduct$ = this.selectedProduct.asObservable();
@@ -82,12 +82,18 @@ export class CashRegisterService {
 
   getCashRegisters(date: string): Observable<CashRegister[]> {
     return this.http.get<CashRegister[]>(`${this.url}/getall/${date}`).pipe(
-      shareReplay(1)
+      shareReplay(1), tap(list => this.list$?.next(list))
     )
   }
 
   getCashRegisterById(id: number): Observable<CashRegister> {
     return this.http.get<CashRegister>(`${this.url}/${id}`)
+  }
+
+  getCachedRegisterById(id: number) {
+    return this.list$!.pipe(
+      map(c => c.find(x => x.id === id))
+    )
   }
 
   createCashRegister(payload: CashRegister): Observable<any> {
@@ -98,7 +104,7 @@ export class CashRegisterService {
   }
 
   clearCache() {
-    this.list$ = undefined;
+    this.list$?.next([])
   }
 
   updateCashRegister(payload: CashRegister): Observable<any> {

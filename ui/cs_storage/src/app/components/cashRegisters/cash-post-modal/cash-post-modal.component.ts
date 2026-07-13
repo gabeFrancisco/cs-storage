@@ -33,7 +33,6 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
     created_at: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
   })
 
-  initialValues = null;
   product?: Product;
   faUp = faMagnifyingGlass;
 
@@ -59,10 +58,11 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         filter(([id, mode]) => !!id && mode !== 'create'),
-        switchMap(([id]) => this.cashRegisterService.getCashRegisterById(id!))
+        switchMap(([id]) => this.cashRegisterService.getCachedRegisterById(id!))
       )
       .subscribe(cash => {
         if (cash) this.cashForm.patchValue(cash)
+        this.product = cash?.product
       })
 
     this.cashRegisterService.modalType$
@@ -156,7 +156,7 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
       quantity: 1,
       payment_type: PaymentType.Cash,
       value: 0,
-      created_at: ""
+      created_at: new Date().toISOString().split('T')[0]
     })
   }
 }
