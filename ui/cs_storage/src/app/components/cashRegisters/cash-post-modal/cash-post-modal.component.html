@@ -9,7 +9,7 @@
           [value]="productData">
       </div>
 
-      <app-button (click)="openProductModal()"><fa-icon [icon]="faUp" /></app-button>
+      <app-button [disabled]="readOnly" (click)="openProductModal()"><fa-icon [icon]="faUp" /></app-button>
     </div>
     <small class="text-red-500" *ngIf="product_id.invalid && formDir.submitted">Produto é obrigatório!</small>
 
@@ -25,7 +25,7 @@
 
     <div class="flex items-baseline">
       <label class="text-sm w-16 text-right mr-2" for="payment_type">Tipo</label>
-      <select [disabled]="readOnly" class="bg-white border my-1 border-gray-400" formControlName="payment_type">
+      <select class="bg-white border my-1 border-gray-400" formControlName="payment_type">
         <option [ngValue]="0">Dinheiro</option>
         <option [ngValue]="1">Débito</option>
         <option [ngValue]="2">Crédito</option>
@@ -51,17 +51,17 @@
     </div>
     <div class="text-center">
       @if (mode === 'read') {
-      <app-button type="submit" variant="yellow" [disabled]="!readOnly">
+      <app-button type="submit" variant="yellow">
         Atualizar
       </app-button>
       }
       @else if (mode === 'create') {
-      <app-button type="submit" variant="green" [disabled]="!readOnly">
+      <app-button type="submit" variant="green">
         Novo registro
       </app-button>
       }
       @else {
-      <app-button type="submit" variant="primary" [disabled]="!readOnly">
+      <app-button type="submit" variant="primary">
         Confirmar
       </app-button>
       }

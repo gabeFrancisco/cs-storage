@@ -15,10 +15,14 @@ import { PaymentType } from '../../../../models/enums/PaymentType';
   styleUrl: './cash-post-modal.component.css'
 })
 export class CashPostModalComponent implements OnInit, OnDestroy {
-  show = false;
+  //Icons
+  faUp = faMagnifyingGlass;
 
+  show = false;
   mode: FormMode = 'read';
 
+  //if the FormMode is setted to 'read', some inputs and buttons will be setted
+  //as readonly
   get readOnly() {
     return this.mode === 'read'
   }
@@ -28,29 +32,42 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
   cashForm = new FormGroup({
     product_id: new FormControl(-1, Validators.required),
     quantity: new FormControl(1, Validators.required),
-    payment_type: new FormControl(0),
+    payment_type: new FormControl({ value: 0, disabled: this.readOnly }),
     value: new FormControl(0, [Validators.min(0.1)]),
     created_at: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
   })
 
   product?: Product;
-  faUp = faMagnifyingGlass;
-
   productData = "";
 
   constructor(private cashRegisterService: CashRegisterService) { }
 
   ngOnInit(): void {
+
+    //Set the form show property
     this.cashRegisterService.cashPostModalState$
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.show = value
       })
 
+    //Set the modal type
     this.cashRegisterService.modalType$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(value => (this.mode = value as FormMode))
+      .subscribe(value => {
+        this.mode = value as FormMode
 
+        const paymentType = this.cashForm.get('payment_type')
+
+        if (this.readOnly) {
+          paymentType?.disable();
+        }
+        else {
+          paymentType?.enable()
+        }
+      })
+
+    //This rxjs operators fires when at least one of the objects in the array changes
     combineLatest([
       this.cashRegisterService.cashRegisterId$,
       this.cashRegisterService.modalType$
@@ -61,8 +78,10 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
         switchMap(([id]) => this.cashRegisterService.getCachedRegisterById(id!))
       )
       .subscribe(cash => {
-        if (cash) this.cashForm.patchValue(cash)
-        this.product = cash?.product
+        if (cash) {
+          this.cashForm.patchValue(cash)
+          this.cashRegisterService.selectProduct(cash.product)
+        }
       })
 
     this.cashRegisterService.modalType$
@@ -70,7 +89,10 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         filter(mode => mode === 'create')
       )
-      .subscribe(() => this.resetForm())
+      .subscribe(() => {
+        this.resetForm()
+        this.cashRegisterService.selectProduct(undefined!)
+      })
 
     this.cashRegisterService.selectedProduct$
       .pipe(takeUntil(this.destroy$))
