@@ -1,11 +1,12 @@
 import { CashRegister } from './../../models/CashRegister';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, reduce, shareReplay, tap } from 'rxjs';
 import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 import { environment } from '../../environments/environment';
 import { Product } from '../../models/Product';
+import { nowDateToString } from '../../utils/dateHandler';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faCashRegister, faDollarSign, faShoppingBasket, faWrench, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { CashRegisterService } from '../../services/cash-register.service';
 
 interface CardItem {
   icon: IconDefinition,
@@ -17,17 +18,31 @@ interface CardItem {
   styleUrl: './dash-cards.css',
 })
 
-export class DashCards {
-  faCategory = faDollarSign
+export class DashCards implements OnInit {
+  constructor(private cashRegisterService: CashRegisterService) { }
+
+  ngOnInit(): void {
+    this.cashRegisterService.triggerUpdate();
+    this.cashRegisterService.refreshList$.subscribe(() => {
+      this.fetchData()
+    })
+  }
+
+  private fetchData() {
+    this.cashRegisterService.getDayAndMonthValueData()
+      .subscribe((res) => this.items[0].data = res.day)
+  }
+
+  faDollar = faDollarSign
   faDebts = faCashRegister
   faProducts = faShoppingBasket
   faWrench = faWrench
 
   items: CardItem[] = [
     {
-      icon: this.faCategory,
+      icon: this.faDollar,
       name: "Caixa de Hoje",
-      data: 312,
+      data: 0,
       class: "bg-emerald-500 shadow-md shadow-emerald-300",
       isCash: true,
       isFixed: true
