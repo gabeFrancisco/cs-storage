@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # Frontend Angular
+  ui:
+    build:
+      context: ./ui/cs_storage
+      dockerfile: Dockerfile
+    container_name: angular_ui
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./ui:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  # Backend Laravel (PHP-FPM)
+  backend:
+    build:
+      context: ./backend/cs-storage-core
+      dockerfile: Dockerfile
+    container_name: laravel_backend
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./backend:/var/www
+
+  # Servidor Web (Nginx para o Laravel)
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - backend

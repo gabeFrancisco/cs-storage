@@ -44,69 +44,12 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    //Set the form show property
-    this.cashRegisterService.cashPostModalState$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        this.show = value
-      })
-
-    //Set the modal type
-    this.cashRegisterService.modalType$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(value => {
-        this.mode = value as FormMode
-
-        const paymentType = this.cashForm.get('payment_type')
-
-        if (this.readOnly) {
-          paymentType?.disable();
-        }
-        else {
-          paymentType?.enable()
-        }
-      })
-
-    //This rxjs operators fires when at least one of the objects in the array changes
-    combineLatest([
-      this.cashRegisterService.cashRegisterId$,
-      this.cashRegisterService.modalType$
-    ])
-      .pipe(
-        takeUntil(this.destroy$),
-        filter(([id, mode]) => !!id && mode !== 'create'),
-        switchMap(([id]) => this.cashRegisterService.getCachedRegisterById(id!))
-      )
-      .subscribe(cash => {
-        if (cash) {
-          this.cashForm.patchValue(cash)
-          this.cashRegisterService.selectProduct(cash.product)
-        }
-      })
-
-    this.cashRegisterService.modalType$
-      .pipe(
-        takeUntil(this.destroy$),
-        filter(mode => mode === 'create')
-      )
-      .subscribe(() => {
-        this.resetForm()
-        this.cashRegisterService.selectProduct(undefined!)
-      })
-
-    this.cashRegisterService.selectedProduct$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(value => {
-        this.product = value!
-        this.productData = `${this.product.id!} - ${this.product.name} - R\$${this.product.price.toFixed(2)}`
-
-        this.cashForm.get('product_id')!.patchValue(value?.id!)
-        this.recalculateValue();
-      })
-
-    this.cashForm.get('quantity')!.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.recalculateValue())
+    this.watchModalState();
+    this.watchModalType();
+    this.watchSelectedRegister();
+    this.watchCreateMode();
+    this.watchSelectedProduct();
+    this.watchQuantity();
   }
 
   ngOnDestroy(): void {
@@ -180,5 +123,83 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
       value: 0,
       created_at: new Date().toISOString().split('T')[0]
     })
+  }
+
+  private watchModalState() {
+    //Set the form show property
+    this.cashRegisterService.cashPostModalState$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.show = value
+      })
+  }
+
+  private watchModalType() {
+    //Set the modal type
+    this.cashRegisterService.modalType$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.mode = value as FormMode
+
+        const paymentType = this.cashForm.get('payment_type')
+
+        if (this.readOnly) {
+          paymentType?.disable();
+        }
+        else {
+          paymentType?.enable()
+        }
+      })
+  }
+
+  private watchSelectedRegister() {
+    //This rxjs operators fires when at least one of the objects in the array changes
+    combineLatest([
+      this.cashRegisterService.cashRegisterId$,
+      this.cashRegisterService.modalType$
+    ])
+      .pipe(
+        takeUntil(this.destroy$),
+
+        //Checks if the mode is different than 'create'
+        filter(([id, mode]) => !!id && mode !== 'create'),
+        switchMap(([id]) => this.cashRegisterService.getCachedRegisterById(id!))
+      )
+      .subscribe(cash => {
+        if (cash) {
+          this.cashForm.patchValue(cash)
+          this.cashRegisterService.selectProduct(cash.product)
+        }
+      })
+  }
+
+  private watchCreateMode() {
+    this.cashRegisterService.modalType$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(mode => mode === 'create')
+      )
+      .subscribe(() => {
+        this.resetForm()
+        this.cashRegisterService.selectProduct(undefined!)
+      })
+  }
+
+  private watchSelectedProduct() {
+    this.cashRegisterService.selectedProduct$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.product = value!
+        this.productData = `${this.product.id!} - ${this.product.name} - R\$${this.product.price.toFixed(2)}`
+
+        this.cashForm.get('product_id')!.patchValue(value?.id!)
+        this.recalculateValue();
+      })
+  }
+
+  private watchQuantity() {
+    this.cashForm.get('quantity')!.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.recalculateValue())
   }
 }
