@@ -7,7 +7,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { combineLatest, filter, Subject, switchMap, takeUntil } from 'rxjs';
 import { FormMode } from '../../../../models/types/FormMode'
 import { PaymentType } from '../../../../models/enums/PaymentType';
-import { sanitizedDateToString } from '../../../../utils/dateHandler';
+import { nowDateToString, sanitizedDateToString } from '../../../../utils/dateHandler';
 
 @Component({
   selector: 'app-cash-post-modal',
@@ -31,11 +31,12 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   cashForm = new FormGroup({
+    id: new FormControl(0),
     product_id: new FormControl(-1, Validators.required),
     quantity: new FormControl(1, Validators.required),
     payment_type: new FormControl({ value: 0, disabled: this.readOnly }),
     value: new FormControl(0, [Validators.min(0.1)]),
-    created_at: new FormControl(new Date().toISOString().split('T')[0], Validators.required)
+    created_at: new FormControl(nowDateToString(), Validators.required)
   })
 
   product?: Product;

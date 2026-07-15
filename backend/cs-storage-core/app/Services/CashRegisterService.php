@@ -33,6 +33,8 @@ class CashRegisterService
         return CashRegister::with('product')->findOrFail($id);
     }
 
+
+    //TODO - refactor this!!!!
     private function parseCashRegister($quantity, $payment_type, $product_id, $value)
     {
         return [
@@ -51,7 +53,7 @@ class CashRegisterService
 
         $this->checkPaymentType($payment_type);
         $product = Product::findOrFail($productId);
-        $value = $quantity * $product->price;
+        $value = $this->calculateProductPrice($quantity, $product);
 
         $register = new CashRegister();
         $register->quantity = $quantity;
@@ -65,14 +67,22 @@ class CashRegisterService
 
     public function update(CashRegisterRequest $request, int $id)
     {
-        $value = $request->input("value");
+        //Finds in the db the actual register
+        $register = CashRegister::findOrFail($id);
+
+        $quantity = $request->input('quantity');
         $payment_type = $request->input('payment_type');
-        $description = $request->input('description');
+        $productId = $request->input('product_id');
 
         $this->checkPaymentType($payment_type);
+        $product = Product::findOrFail($productId);
+        $value = $this->calculateProductPrice($quantity, $product);
 
-        $register = CashRegister::where('id', $id)
-            ->update($this->parseCashRegister($value, $payment_type));
+        $register->quantity = $quantity;
+        $register->payment_type = $payment_type;
+        $register->value = $value;
+        $register->product()->associate($product);
+        $register->save();
 
         return $register;
     }
@@ -91,5 +101,10 @@ class CashRegisterService
             "day" => $day != null ? $day : 0,
             "month" => $month != null ? $month : 0
         ];
+    }
+
+    private function calculateProductPrice(int $quantity, Product $product)
+    {
+        return $quantity * $product->price;
     }
 }

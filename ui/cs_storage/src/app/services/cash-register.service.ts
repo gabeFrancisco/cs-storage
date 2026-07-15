@@ -108,7 +108,7 @@ export class CashRegisterService {
   }
 
   updateCashRegister(payload: CashRegister): Observable<any> {
-    return this.http.put(`${this.url}`, payload)
+    return this.http.put(`${this.url}/${payload.id!}`, payload)
       .pipe(catchError(handleNetworkError('update-cash-register')))
       .pipe(
         tap(() => this.clearCache())
