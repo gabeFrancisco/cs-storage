@@ -7,6 +7,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { combineLatest, filter, Subject, switchMap, takeUntil } from 'rxjs';
 import { FormMode } from '../../../../models/types/FormMode'
 import { PaymentType } from '../../../../models/enums/PaymentType';
+import { sanitizedDateToString } from '../../../../utils/dateHandler';
 
 @Component({
   selector: 'app-cash-post-modal',
@@ -168,6 +169,7 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
       .subscribe(cash => {
         if (cash) {
           this.cashForm.patchValue(cash)
+          this.created_at.patchValue(sanitizedDateToString(cash.created_at!))
           this.cashRegisterService.selectProduct(cash.product)
         }
       })
