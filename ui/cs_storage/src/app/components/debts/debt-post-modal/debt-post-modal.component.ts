@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DebtService } from '../../../services/debt.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalType } from '../../../../utils/modalType';
-import { filter, first, Subject, Subscription, switchMap } from 'rxjs';
+import { filter, first, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { FormMode } from '../../../../models/types/FormMode';
 import { nowDateToString } from '../../../../utils/dateHandler';
 
@@ -13,7 +13,7 @@ import { nowDateToString } from '../../../../utils/dateHandler';
   templateUrl: './debt-post-modal.component.html',
   styleUrl: './debt-post-modal.component.css'
 })
-export class DebtPostModalComponent implements OnInit {
+export class DebtPostModalComponent implements OnInit, OnDestroy {
   show = false;
   mode: FormMode = 'read';
 
@@ -42,20 +42,41 @@ export class DebtPostModalComponent implements OnInit {
 
   constructor(private debtService: DebtService) { }
 
+
   ngOnInit(): void {
     this.watchModalState();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   close() {
     this.debtForm.reset();
     this.debtService.setDebtId(0);
-    this.debtService.closeDebtPostModal();
+    this.debtService.closeDebtModal();
   }
 
   submit() {
+    if (this.mode === 'read') {
+      this.debtService.setDebtModalType('update');
+      return;
+    }
+
     if (this.debtForm.invalid) {
       return;
     }
+
+    const debt = this.debtForm.value as Debt;
+    const request$ =
+      this.mode === 'create'
+        ? this.debtService.createDebt({ ...debt, id: undefined })
+        : this.debtService.updateDebt(debt)
+
+    request$.pipe(takeUntil(this.destroy$)).subscribe({
+      next: () => this.onSuccess()
+    })
 
     // this.debt = {
     //   id: this.debtForm.get('id')!.value! ?? 0,
@@ -88,7 +109,7 @@ export class DebtPostModalComponent implements OnInit {
   }
 
   private watchModalState() {
-    this.debtService.debtPostModalState$.subscribe((value) => {
+    this.debtService.debtModalState$.subscribe((value) => {
       this.show = value as boolean
     })
   }
@@ -112,7 +133,7 @@ export class DebtPostModalComponent implements OnInit {
 
   private onSuccess() {
     this.resetForm();
-    this.debtService.closeDebtPostModal();
+    this.debtService.closeDebtModal();
     this.debtService.triggerUpdate();
   }
 }

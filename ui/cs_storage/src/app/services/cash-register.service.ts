@@ -13,7 +13,7 @@ import { nowDateToString, sanitizedDateToString } from '../../utils/dateHandler'
 })
 export class CashRegisterService {
   private list$? = new BehaviorSubject<CashRegister[]>([]);
-  private dateList?: Observable<CashRegister[]>;
+  // private dateList?: Observable<CashRegister[]>;
   private selectedProduct = new BehaviorSubject<Product | null>(null);
   selectedProduct$ = this.selectedProduct.asObservable();
 
@@ -33,9 +33,6 @@ export class CashRegisterService {
   //cash modal variables
   private cashPostModalState = new BehaviorSubject<boolean>(false);
   cashPostModalState$ = this.cashPostModalState.asObservable();
-
-  private cashUpdateModalState = new BehaviorSubject<boolean>(false);
-  cashUpdateModalState$ = this.cashUpdateModalState.asObservable();
 
   private cashProductModalState = new BehaviorSubject<boolean>(false);
   cashProductModalState$ = this.cashProductModalState.asObservable();
@@ -60,18 +57,12 @@ export class CashRegisterService {
   openCashPostModal() { this.cashPostModalState.next(true) }
   closeCashPostModal() { this.cashPostModalState.next(false) }
 
-  openCashUpdateModal(id: number) {
-    this.cashUpdateModalState.next(true)
-    this.cashRegisterId.next(id);
-  }
-
   openCashProductModal() {
     this.cashProductModalState.next(true);
   }
 
   closeCashProductModalState() { this.cashProductModalState.next(false) }
 
-  closeUpdatePostModal() { this.cashUpdateModalState.next(false) }
 
   //handle update on registers list
   private refreshList = new BehaviorSubject<void>(undefined);

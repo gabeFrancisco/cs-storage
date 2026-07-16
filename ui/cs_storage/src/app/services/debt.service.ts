@@ -15,24 +15,27 @@ export class DebtService {
   constructor(private http: HttpClient) { }
   private url = `${environment.apiUrl}/debts`;
 
-  //Debt modal variables
-  private debtPostModalState = new BehaviorSubject<boolean>(false);
-  debtPostModalState$ = this.debtPostModalState.asObservable();
+  private modalType = new BehaviorSubject<string | null>(null);
+  modalType$ = this.modalType.asObservable();
 
-  private debtUpdateModalState = new BehaviorSubject<boolean>(false);
-  debtUpdateModalState$ = this.debtUpdateModalState.asObservable();
+  //Debt modal variables
+  private debtModalState = new BehaviorSubject<boolean>(false);
+  debtModalState$ = this.debtModalState.asObservable();
 
   private debtId = new BehaviorSubject<number | null>(null);
   debtId$ = this.debtId.asObservable();
 
-  openDebtPostModal() { this.debtPostModalState.next(true) }
-  closeDebtPostModal() { this.debtPostModalState.next(false) }
-
-  openDebtUpdateModal(id: number) {
-    this.debtUpdateModalState.next(true)
-    this.debtId.next(id);
+  openDebtModal(mode: string, id?: number) {
+    this.debtModalState.next(true)
+    this.modalType.next(mode)
+    this.debtId.next(id!);
   }
-  closeDebtUpdateModal(){ this.debtUpdateModalState.next(false)}
+
+  setDebtModalType(mode: string) {
+    this.modalType.next(mode);
+  }
+
+  closeDebtModal() { this.debtModalState.next(false) }
 
   setDebtId(id: number) {
     this.debtId.next(id)
@@ -81,7 +84,7 @@ export class DebtService {
       .pipe(tap(() => this.clearCache()))
   }
 
-  getDayAndMonthValueData(): Observable<DayAndMonthData>{
+  getDayAndMonthValueData(): Observable<DayAndMonthData> {
     return this.http.get<DayAndMonthData>(`${this.url}/monthtotal`)
   }
 }

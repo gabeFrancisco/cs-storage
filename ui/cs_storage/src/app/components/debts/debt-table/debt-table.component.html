@@ -6,7 +6,7 @@
       <button type="button" (click)="fetchList()" class="mx-1 text-gray-400 btn text-xl">
         ↻
       </button>
-      <button type="button" (click)="openDebtPostModal()" class="btn-green px-4 font-bold text-xl">
+      <button type="button" (click)="openDebtModal('create')" class="btn-green px-4 font-bold text-xl">
         +
       </button>
     </div>
@@ -31,7 +31,8 @@
           <tr *ngIf="loading" class="text-center text-gray-500 text-lg italic">
             Carregando...
           </tr>
-          <tr class="items-center bg-white hover:bg-blue-200 cursor-pointer" *ngFor="let item of debts">
+          <tr (click)="openDebtModal('read', item.id!)" class="items-center bg-white hover:bg-blue-200 cursor-pointer"
+            *ngFor="let item of debts">
             <td class="font-normal truncate border-r p-1.5">
               {{ item.created_at | date : "dd/MM/yyyy" }}
             </td>
@@ -46,8 +47,8 @@
               {{ item.paid_date | date : "dd/MM/yyyy" }}
             </td>
             <td class="font-normal text-center border-l">
-              <button title="Atualizar" (click)="openDebtUpdate(item.id!)" class="btn-primary text-lg mr-1"> <fa-icon
-                  class="text-sm" [icon]="faPen"></fa-icon></button>
+              <button title="Atualizar" (click)="openDebtModal('update', item.id!)" class="btn-primary text-lg mr-1">
+                <fa-icon class="text-sm" [icon]="faPen"></fa-icon></button>
               <button type="button" (click)="deleteDebt(item.id!)" title="Remover" class="btn-red text-lg mr-1">
                 <fa-icon class="text-sm" [icon]="faX"></fa-icon>
               </button>
