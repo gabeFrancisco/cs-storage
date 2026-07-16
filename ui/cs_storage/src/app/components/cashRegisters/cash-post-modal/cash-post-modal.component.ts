@@ -123,7 +123,7 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
       quantity: 1,
       payment_type: PaymentType.Cash,
       value: 0,
-      created_at: new Date().toISOString().split('T')[0]
+      created_at: new Date().toDateString()
     })
   }
 

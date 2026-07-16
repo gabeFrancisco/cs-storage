@@ -1,0 +1,15 @@
+@if (mode === 'read') {
+<app-button type="submit" variant="primary">
+    Atualizar
+</app-button>
+}
+@else if (mode === 'create') {
+<app-button type="submit" variant="green">
+    Criar!
+</app-button>
+}
+@else {
+<app-button type="submit" variant="green">
+    Confirmar!
+</app-button>
+}

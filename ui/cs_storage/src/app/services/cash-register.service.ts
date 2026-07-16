@@ -6,7 +6,7 @@ import { handleNetworkError } from '../../utils/errorHandler';
 import { DayAndMonthData } from '../../models/ValueObjects/DayAndMonthData';
 import { environment } from '../../environments/environment';
 import { Product } from '../../models/Product';
-import { nowDateToString } from '../../utils/dateHandler';
+import { nowDateToString, sanitizedDateToString } from '../../utils/dateHandler';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +82,7 @@ export class CashRegisterService {
   }
 
   getCashRegisters(date: string): Observable<CashRegister[]> {
+
     return this.http.get<CashRegister[]>(`${this.url}/getall/${date}`).pipe(
       shareReplay(1), tap(list => this.list$?.next(list))
     )

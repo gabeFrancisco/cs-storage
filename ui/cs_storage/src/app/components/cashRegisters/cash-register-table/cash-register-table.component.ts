@@ -26,7 +26,7 @@ export class CashRegisterTableComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.date = new FormControl(new Date().toISOString().split('T')[0])
+    this.date = new FormControl(new Intl.DateTimeFormat('sv-SE').format(new Date()))
 
     this.cashService.triggerUpdate();
     this.cashService.refreshList$.subscribe(() => {

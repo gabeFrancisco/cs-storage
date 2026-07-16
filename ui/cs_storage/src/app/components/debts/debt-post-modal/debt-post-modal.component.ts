@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalType } from '../../../../utils/modalType';
 import { filter, first, Subject, Subscription, switchMap } from 'rxjs';
 import { FormMode } from '../../../../models/types/FormMode';
+import { nowDateToString } from '../../../../utils/dateHandler';
 
 @Component({
   selector: 'app-debt-post-modal',
@@ -25,7 +26,7 @@ export class DebtPostModalComponent implements OnInit {
   debtForm = new FormGroup({
     id: new FormControl(0),
     value: new FormControl<number>(0, Validators.min(0.1)),
-    forecast: new FormControl(new Date().toISOString().split('T')[0], Validators.required),
+    forecast: new FormControl(nowDateToString(), Validators.required),
     name: new FormControl("", Validators.required),
     phone: new FormControl("", Validators.required),
     cpf_cnpj: new FormControl(" "),
@@ -90,5 +91,28 @@ export class DebtPostModalComponent implements OnInit {
     this.debtService.debtPostModalState$.subscribe((value) => {
       this.show = value as boolean
     })
+  }
+
+  private resetForm() {
+    this.debtForm.reset({
+      id: 0,
+      value: 0,
+      forecast: "",
+      name: "",
+      phone: "",
+      cpf_cnpj: "",
+      road: "",
+      number: "",
+      complement: "",
+      neighborhood: "",
+      city: "",
+      state: ""
+    });
+  }
+
+  private onSuccess() {
+    this.resetForm();
+    this.debtService.closeDebtPostModal();
+    this.debtService.triggerUpdate();
   }
 }
