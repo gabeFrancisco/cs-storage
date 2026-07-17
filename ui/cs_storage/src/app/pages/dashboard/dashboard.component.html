@@ -2,8 +2,7 @@
   <!-- ------------------------------Modals----------------------------------- -->
   <app-cash-post-modal *ngIf="cashRegisterService.cashModalState$ | async" />
   <app-cash-register-product-modal *ngIf="cashRegisterService.cashProductModalState$ | async" />
-  <app-debt-post-modal *ngIf="debtService.debtPostModalState$ | async" />
-  <app-debt-update-modal *ngIf="debtService.debtUpdateModalState$ | async" />
+  <app-debt-post-modal *ngIf="debtService.debtModalState$ | async" />
 
   <app-dash-cards />
 

@@ -15,7 +15,6 @@ import { MissingProductsComponent } from './pages/missing-products/missing-produ
 import { RouterModule } from '@angular/router';
 import { MissingProductsTableComponent } from './components/missingProducts/missing-products-table/missing-products-table.component';
 import { MissingProductsModalComponent } from './components/missingProducts/missing-products-modal/missing-products-modal.component';
-import { DebtUpdateModalComponent } from './components/debts/debt-update-modal/debt-update-modal.component';
 import { ServiceOrderTableComponent } from './components/serviceOrders/service-order-table/service-order-table.component';
 import { ServiceOrdersComponent } from './pages/service-orders/service-orders.component';
 import { ServiceOrderCreateComponent } from './pages/service-order-create/service-order-create.component';
@@ -53,7 +52,6 @@ import { FormButtonComponent } from './components/shared/form-button/form-button
     MissingProductsComponent,
     MissingProductsTableComponent,
     MissingProductsModalComponent,
-    DebtUpdateModalComponent,
     ServiceOrderTableComponent,
     ServiceOrdersComponent,
     ServiceOrderCreateComponent,
