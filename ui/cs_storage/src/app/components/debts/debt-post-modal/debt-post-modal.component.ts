@@ -45,6 +45,8 @@ export class DebtPostModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.watchModalState();
+    this.watchModalType();
+    this.watchCreateMode();
   }
 
   ngOnDestroy(): void {
@@ -112,6 +114,25 @@ export class DebtPostModalComponent implements OnInit, OnDestroy {
     this.debtService.debtModalState$.subscribe((value) => {
       this.show = value as boolean
     })
+  }
+
+  private watchModalType() {
+    this.debtService.modalType$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(value => {
+        this.mode = value as FormMode
+      })
+  }
+
+  private watchCreateMode() {
+    this.debtService.modalType$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(mode => mode === 'create')
+      )
+      .subscribe(() => {
+        this.resetForm()
+      })
   }
 
   private resetForm() {
