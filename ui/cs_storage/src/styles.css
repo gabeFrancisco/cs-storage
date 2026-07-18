@@ -50,23 +50,23 @@ tbody {
   }
 
   .btn {
-    @apply px-2 text-sm text-gray-700 rounded border border-gray-300 bg-white hover:bg-indigo-100;
+    @apply px-2 text-sm rounded-sm text-gray-700 border border-gray-300 bg-white hover:bg-indigo-100;
   }
 
   .btn-primary {
-    @apply px-2 text-sm text-white rounded bg-blue-500 hover:bg-blue-600;
+    @apply px-2 text-sm text-white rounded-sm border border-blue-600 bg-blue-500 hover:bg-blue-600;
   }
 
   .btn-green {
-    @apply px-2 text-sm text-white rounded bg-emerald-500 hover:bg-emerald-600;
+    @apply px-2 text-sm text-white rounded-sm border border-emerald-600 bg-emerald-500 hover:bg-emerald-600;
   }
 
   .btn-yellow {
-    @apply px-2 text-sm text-white rounded bg-yellow-500 hover:bg-yellow-600;
+    @apply px-2 text-sm text-white rounded-sm border border-yellow-600 bg-yellow-500 hover:bg-yellow-600;
   }
 
   .btn-red {
-    @apply px-2 text-sm text-white rounded bg-red-500 hover:bg-red-600;
+    @apply px-2 text-sm text-white rounded-sm border border-red-600 bg-red-500 hover:bg-red-600;
   }
 
   .btn-primary-i {

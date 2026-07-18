@@ -43,7 +43,7 @@ export class DashCards implements OnInit {
       icon: this.faDollar,
       name: "Caixa de Hoje",
       data: 0,
-      class: "bg-emerald-500 shadow-md shadow-emerald-300",
+      class: "bg-emerald-500 shadow-md rounded-sm border border-emerald-600 shadow-emerald-300",
       isCash: true,
       isFixed: true
     },
@@ -51,7 +51,7 @@ export class DashCards implements OnInit {
       icon: this.faDebts,
       name: "Débitos do Mês",
       data: 712,
-      class: "bg-blue-500 shadow-md shadow-blue-300",
+      class: "bg-blue-500 shadow-md rounded-sm border border-blue-600 shadow-blue-300",
       isCash: true,
       isFixed: true
     },
@@ -59,7 +59,7 @@ export class DashCards implements OnInit {
       icon: this.faProducts,
       name: "Produtos faltantes",
       data: 3,
-      class: "bg-orange-400 shadow-md shadow-orange-300",
+      class: "bg-orange-400 shadow-md rounded-sm border border-orange-500 shadow-orange-300",
       isCash: false,
       isFixed: false
     },
@@ -67,7 +67,7 @@ export class DashCards implements OnInit {
       icon: this.faWrench,
       name: "O.S. Ativas",
       data: 2,
-      class: "bg-indigo-500 shadow-md shadow-indigo-300",
+      class: "bg-indigo-500 shadow-md rounded-sm border border-indigo-600 shadow-indigo-300",
       isCash: false,
       isFixed: false
     }

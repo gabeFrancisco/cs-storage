@@ -27,9 +27,12 @@ export class DebtPostModalComponent implements OnInit, OnDestroy {
     id: new FormControl(0),
     value: new FormControl<number>(0, Validators.min(0.1)),
     forecast: new FormControl(nowDateToString(), Validators.required),
-    name: new FormControl("", Validators.required),
-    phone: new FormControl("", Validators.required),
-    cpf_cnpj: new FormControl(" "),
+    customer: new FormGroup({
+      name: new FormControl("", Validators.required),
+      phone: new FormControl("", Validators.required),
+      cpf_cnpj: new FormControl(" "),
+    }),
+
     road: new FormControl(" "),
     number: new FormControl(" "),
     complement: new FormControl(" "),
@@ -140,9 +143,11 @@ export class DebtPostModalComponent implements OnInit, OnDestroy {
       id: 0,
       value: 0,
       forecast: "",
-      name: "",
-      phone: "",
-      cpf_cnpj: "",
+      customer: {
+        name: "",
+        phone: "",
+        cpf_cnpj: ""
+      },
       road: "",
       number: "",
       complement: "",

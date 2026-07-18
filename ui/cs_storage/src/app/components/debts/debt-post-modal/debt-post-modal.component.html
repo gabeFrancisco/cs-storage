@@ -29,7 +29,7 @@
           <label class="w-16 text-sm text-right mr-2" for="description">Nome</label>
           <div class="flex flex-col">
             <input type="text" class="border w-full border-gray-400" formControlName="name" required />
-            <small class="text-red-500" *ngIf="debtForm.get('name')!.invalid && formDir.submitted">Nome é
+            <small class="text-red-500" *ngIf="debtForm.get('customer.name')!.invalid && formDir.submitted">Nome é
               obrigatório!</small>
           </div>
         </div>
@@ -37,7 +37,7 @@
           <label class="w-16 text-sm text-right mr-2" for="description">Telefone</label>
           <div class="flex flex-col">
             <input type="text" class="border w-full border-gray-400" formControlName="phone" required />
-            <small class="text-red-500" *ngIf="debtForm.get('phone')!.invalid && formDir.submitted">Telefone é
+            <small class="text-red-500" *ngIf="debtForm.get('customer.phone')!.invalid && formDir.submitted">Telefone é
               obrigatório!</small>
           </div>
         </div>
@@ -45,7 +45,7 @@
         <div class="flex items-baseline">
           <label class="w-16 text-sm text-right mr-2" for="description">CPF/CNPJ</label>
           <div class="flex flex-col">
-            <input type="text" class="border w-full border-gray-400" formControlName="cpf_cnpj" />
+            <input type="text" class="border w-full border-gray-400" formControlName="customer.cpf_cnpj" />
             <!-- <small
                 class="text-red-500"
                 *ngIf="description.invalid && formDir.submitted"
