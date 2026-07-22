@@ -6,6 +6,7 @@ import { faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons';
 
 interface SidebarItem {
   icon: IconDefinition,
+  iconColor: string,
   text: string,
   url: string
 }
@@ -28,31 +29,37 @@ export class SidebarComponent {
   items: SidebarItem[] = [
     {
       icon: this.faChartLine,
+      iconColor: "text-blue-400",
       text: "Painel",
       url: "/"
     },
     {
       icon: this.faCategory,
+      iconColor: "text-orange-400",
       text: "Categorias",
       url: "categorias"
     },
     {
       icon: this.faProduct,
+      iconColor: "text-indigo-400",
       text: "Produtos",
       url: "produtos"
     },
     {
       icon: this.faBoxOpen,
+      iconColor: "text-amber-400",
       text: "Produtos em Falta",
       url: "produtosEmFalta"
     },
     {
       icon: this.faWrench,
+      iconColor: "text-green-400",
       text: "Ordens de Serviço",
       url: "ordensDeServico"
     },
     {
       icon: this.faFile,
+      iconColor: "text-purple-400",
       text: "Orçamentos",
       url: "orcamentos"
     },

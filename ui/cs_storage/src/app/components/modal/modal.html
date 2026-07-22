@@ -1,10 +1,9 @@
 <div
     class="absolute top-0 left-0 w-screen z-50 h-screen bg-gray-200 bg-opacity-75 flex flex-col justify-center items-center">
-    <div class="-mt-20 border border-slate-300 rounded-lg shadow-xl bg-gray-50">
-        <div
-            class="py-2 px-3 bg-neutral-50 text-slate-600 flex flex-row rounded-tl-lg rounded-tr-lg border-b justify-between">
-            <h2>{{ title }}</h2>
-            <button class="px-2 bg-red-500 hover:bg-red-600 text-white rounded shadow ml-2" (click)="close()"><fa-icon
+    <div class="-mt-20 border border-slate-300 rounded shadow-xl bg-gray-50">
+        <div class="bg-neutral-100 text-slate-600 flex flex-row rounded-t-sm rounded-tr-sm border-b justify-between">
+            <h2 class="ml-3 py-0.5">{{ title }}</h2>
+            <button class="px-2 bg-red-500 text-white rounded-tr-sm ml-2" (click)="close()"><fa-icon
                     [icon]="faX" /></button>
         </div>
         <div class="bg-white rounded-lg p-5">

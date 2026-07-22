@@ -30,7 +30,7 @@ export class DebtPostModalComponent implements OnInit, OnDestroy {
     customer: new FormGroup({
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.required),
-      cpf_cnpj: new FormControl(" "),
+      cpf_cnpj: new FormControl(""),
     }),
 
     road: new FormControl(" "),

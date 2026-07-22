@@ -1,12 +1,14 @@
-<section class="flex flex-col bg-slate-200 lg:flex-row h-screen">
+<section class="flex flex-col bg-slate-200 h-screen">
 
-  <app-sidebar />
 
   <!-- ----------------------------------------------------------------------- -->
-  <div class="flex w-full flex-col lg:ml-3 items-start">
-    <app-header class="w-full mb-3" />
-    <div class="w-full pr-3 lg:pr-3 overflow-x-auto rounded-lg">
+  <app-header class="w-full" />
+
+  <div class="w-full flex flex-row flex-1 h-full pr-3 overflow-x-auto">
+    <app-sidebar />
+    <div class="overflow-y-scroll p-3">
       <router-outlet />
+
     </div>
   </div>
 </section>

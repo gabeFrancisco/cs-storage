@@ -1,17 +1,14 @@
 <aside
-	class="h-full px-5 py-1 lg:px-0 z-50 bg-blue-500 shadow-md shadow-blue-400 text-white flex flex-row lg:flex-col justify-between items-center">
-	<div class="flex py-1 lg:py-3 flex-row lg:flex-col justify-evenly w-full items-center">
-		<div class="w-full hidden pb-3 lg:flex flex-row justify-center items-center">
-			<img src="logo.ico" alt="Logo" class="w-10  rounded" />
-			<h3 class="hidden lg:block">Chaveiro Sul</h3>
-		</div>
+	class="px-5 sticky h-full top-0 lg:px-0 z-40 bg-slate-800 shadow-lg shadow-slate-400 text-slate-50 flex flex-row lg:flex-col justify-between items-center">
+	<div class="flex flex-row lg:flex-col justify-evenly w-full items-center">
 		<div class="flex flex-row lg:flex-col">
 			<ul class="flex flex-row lg:flex-col">
 				<li *ngFor="let item of items" [routerLink]="item.url"
-					routerLinkActive="bg-white rounded-lg lg:rounded-none text-blue-500"
-					[routerLinkActiveOptions]="{ exact: true }"
-					class="py-2 lg:border-l-4 text-nowrap border-blue-100 px-2 lg:px-5 text-sm hover:border-blue-500 transition-all hover:bg-white hover:rounded-lg hover:lg:rounded-none hover:text-blue-500 w-full hover:cursor-pointer">
-					<fa-icon [icon]="item.icon" [fixedWidth]="true" class="w-4 text-center" />
+					routerLinkActive="bg-blue-600 text-white rounded-lg lg:rounded-none text-blue-500"
+					class="py-2 text-nowrap px-2 lg:px-5 text-sm transition-all hover:bg-blue-700 hover:lg:rounded-none hover:text-white w-full hover:cursor-pointer"
+					[routerLinkActiveOptions]="{ exact: true }">
+					<fa-icon [icon]="item.icon" [fixedWidth]="true" [ngClass]="item.iconColor"
+						class="w-4 text-center" />
 					<span class="hidden md:inline text-center text-nowrap">
 						{{ item.text }}
 					</span>
