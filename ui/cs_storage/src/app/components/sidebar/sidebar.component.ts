@@ -41,7 +41,7 @@ export class SidebarComponent {
     },
     {
       icon: this.faProduct,
-      iconColor: "text-indigo-400",
+      iconColor: "text-indigo-300",
       text: "Produtos",
       url: "produtos"
     },

@@ -1,7 +1,7 @@
 <app-modal title="Registro" (closed)="close()">
   <form (ngSubmit)="submit()" [formGroup]="cashForm" #formDir="ngForm" class="max-w-xl mx-auto flex-col space-y-1">
     <input type="hidden" formControlName="id">
-    <div class="flex items-baseline">
+    <div class="flex items-start">
       <label class="w-16 text-sm text-right mr-2" for="product_id">Produto:</label>
       <div class="flex flex-col">
         <input type="hidden" [readOnly]="readOnly" class="border w-full border-gray-400" formControlName="product_id"
@@ -10,7 +10,8 @@
           [value]="productData">
       </div>
 
-      <app-button [disabled]="readOnly" (click)="openProductModal()"><fa-icon [icon]="faUp" /></app-button>
+      <button [disabled]="readOnly" class="bg-blue-500 border border-blue-600 text-white p-0.5 rounded px-2"
+        (click)="openProductModal()"><fa-icon [icon]="faUp" /></button>
     </div>
     <small class="text-red-500" *ngIf="product_id.invalid && formDir.submitted">Produto é obrigatório!</small>
 
