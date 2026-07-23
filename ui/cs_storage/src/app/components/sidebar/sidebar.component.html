@@ -1,10 +1,10 @@
 <aside
-	class="px-5 sticky h-full top-0 lg:px-0 z-40 bg-slate-800 shadow-lg shadow-slate-400 border-r border-slate-600 text-slate-50 flex flex-row lg:flex-col justify-between items-center">
+	class="px-5 sticky h-full top-0 lg:px-0 z-40 bg-neutral-800 shadow-lg shadow-slate-400 border-r border-slate-600 text-slate-50 flex flex-row lg:flex-col justify-between items-center">
 	<div class="flex flex-row lg:flex-col justify-evenly w-full items-center">
 		<div class="flex flex-row lg:flex-col">
 			<ul class="flex flex-row lg:flex-col">
 				<li *ngFor="let item of items" [routerLink]="item.url"
-					routerLinkActive="bg-blue-700 text-white rounded-lg lg:rounded-none text-blue-500"
+					routerLinkActive="bg-blue-800 text-white rounded-lg lg:rounded-none text-blue-500"
 					class="py-2 text-nowrap px-2 lg:px-5 text-sm transition-all hover:bg-blue-700 hover:lg:rounded-none hover:text-white w-full hover:cursor-pointer"
 					[routerLinkActiveOptions]="{ exact: true }">
 					<fa-icon [icon]="item.icon" [fixedWidth]="true" [ngClass]="item.iconColor"
