@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
 export class Button {
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
   @Input() disabled = false;
-  @Input() variant?: 'primary' | 'green' | 'yellow' | 'red' = 'primary';
+  @Input() variant?: 'primary' | 'green' | 'yellow' | 'orange' | 'red' = 'primary';
 }

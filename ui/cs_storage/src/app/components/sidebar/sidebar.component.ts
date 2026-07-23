@@ -33,15 +33,15 @@ export class SidebarComponent {
       text: "Painel",
       url: "/"
     },
-    {
-      icon: this.faCategory,
-      iconColor: "text-orange-400",
-      text: "Categorias",
-      url: "categorias"
-    },
+    // {
+    //   icon: this.faCategory,
+    //   iconColor: "text-orange-400",
+    //   text: "Categorias",
+    //   url: "categorias"
+    // },
     {
       icon: this.faProduct,
-      iconColor: "text-indigo-300",
+      iconColor: "text-orange-400",
       text: "Produtos",
       url: "produtos"
     },

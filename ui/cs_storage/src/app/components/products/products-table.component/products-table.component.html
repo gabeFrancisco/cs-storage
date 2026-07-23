@@ -2,6 +2,9 @@
     <div class="px-2 py-1 flex flex-row text-gray-600 border-b rounded justify-between items-baseline bg-white">
         <span class="font-bold">Produtos</span>
         <div class="flex flex-row items-center">
+            <app-button routerLink="/categorias" class="mr-2" type="button" variant="orange">
+                Categorias
+            </app-button>
             <div>
                 <input class="txt-input" [formControl]="search" type="text" name="search" id="search"
                     placeholder="Pesquise um produto...">
