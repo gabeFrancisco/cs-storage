@@ -4,9 +4,9 @@ import { FormMode } from '../../../../models/types/FormMode';
 @Component({
   selector: 'app-form-button',
   standalone: false,
-  templateUrl: './form-button.component.html',
-  styleUrl: './form-button.component.css',
+  templateUrl: './form-button.html',
+  styleUrl: './form-button.css',
 })
-export class FormButtonComponent {
+export class FormButton {
   @Input() mode: FormMode | undefined = undefined
 }

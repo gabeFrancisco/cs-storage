@@ -45,6 +45,10 @@ tbody {
 }
 
 @layer components {
+  .card {
+    @apply border border-slate-300 rounded-sm bg-white
+  }
+
   tr {
     @apply text-slate-800
   }

@@ -27,7 +27,7 @@ import { NgClickOutsideDirective } from 'ng-click-outside2';
 import { EstimatesComponent } from './pages/estimates/estimates.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Modal } from './components/modal/modal';
+import { Modal } from './components/shared/modal/modal';
 import { ProductsComponent } from './pages/products/products-component';
 import { ProductsTableComponent } from './components/products/products-table.component/products-table.component';
 import { ProductCreationModalComponent } from './components/products/product-creation-modal/product-creation-modal.component';
@@ -36,9 +36,9 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { CategoryTableComponent } from './components/categories/category-table.component/category-table.component';
 import { CategoryModalComponent } from './components/categories/category-modal.component/category-modal.component';
 import { CashRegisterProductModal } from './components/cashRegisters/cash-register-product-modal/cash-register-product-modal';
-import { ButtonComponent } from './components/shared/button.component/button.component';
+import { Button } from './components/shared/button/button';
 import { DashCards } from './components/dash-cards/dash-cards';
-import { FormButtonComponent } from './components/shared/form-button/form-button.component';
+import { FormButton } from './components/shared/form-button/form-button';
 
 @NgModule({
   declarations: [
@@ -70,9 +70,9 @@ import { FormButtonComponent } from './components/shared/form-button/form-button
     CategoryTableComponent,
     CategoryModalComponent,
     CashRegisterProductModal,
-    ButtonComponent,
+    Button,
     DashCards,
-    FormButtonComponent,
+    FormButton,
   ],
   imports: [
     BrowserModule,
