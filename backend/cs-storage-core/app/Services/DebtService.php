@@ -24,12 +24,13 @@ class DebtService
 
         $result = DB::transaction(function () use ($request) {
 
+            $customer = new Customer($request->input('customer'));
+
             if (!empty($request->input('customer.address'))) {
                 $address = Address::create($request->input('customer.address'));
+                $customer->address()->associate($address);
             }
 
-            $customer = new Customer($request->input('customer'));
-            $customer->address()->associate($address);
             $customer->save();
 
             $debt = new Debt([

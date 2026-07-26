@@ -69,11 +69,13 @@ export class DebtPostModalComponent implements OnInit, OnDestroy {
       return;
     }
 
+
     if (this.debtForm.invalid) {
       return;
     }
 
     const debt = this.debtForm.value as Debt;
+    console.log(debt)
     const request$ =
       this.mode === 'create'
         ? this.debtService.createDebt({ ...debt, id: undefined })
