@@ -94,7 +94,7 @@ tbody {
   }
 
   .txt-input {
-    @apply w-full px-1 py-1 transition-all bg-white border border-slate-300 rounded;
+    @apply w-full px-1 py-0.5 transition-all bg-white border border-slate-300 rounded-sm;
   }
 
   .txt-label {

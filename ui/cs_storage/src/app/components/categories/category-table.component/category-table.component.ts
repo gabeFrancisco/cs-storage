@@ -3,7 +3,8 @@ import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../../models/Category';
 import { FormControl } from '@angular/forms';
 import { combineLatest, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
-import { faPen, faPencil, faX } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPen, faPencil, faX } from '@fortawesome/free-solid-svg-icons';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-category-table',
@@ -13,6 +14,8 @@ import { faPen, faPencil, faX } from '@fortawesome/free-solid-svg-icons';
 })
 export class CategoryTableComponent implements OnInit {
   loading = true;
+  faBack = faArrowLeft
+
   categories: Category[] = []
 
   faPen = faPen
@@ -20,7 +23,11 @@ export class CategoryTableComponent implements OnInit {
 
   search = new FormControl('')
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private location: Location) { }
+
+  back() {
+    this.location.back();
+  }
 
   ngOnInit(): void {
     this.categoryService.triggerUpdate();
