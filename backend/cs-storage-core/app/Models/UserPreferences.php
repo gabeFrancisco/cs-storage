@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Enums\EmailInterval;
+use Illuminate\Database\Eloquent\Model;
 
-class UserPreferences extends BaseModel
+class UserPreferences extends Model
 {
-    public $user_id;
-    public $log_email;
-    public EmailInterval $email_interval;
+    protected $fillable = [
+        ''
+    ];
 }

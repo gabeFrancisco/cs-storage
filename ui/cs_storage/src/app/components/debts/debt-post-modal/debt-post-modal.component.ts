@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DebtService } from '../../../services/debt.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalType } from '../../../../utils/modalType';
-import { filter, first, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
+import { combineLatest, filter, first, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { FormMode } from '../../../../models/types/FormMode';
 import { nowDateToString } from '../../../../utils/dateHandler';
 
@@ -49,6 +49,7 @@ export class DebtPostModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.watchModalState();
     this.watchModalType();
+    this.watchSelectedDebt();
     this.watchCreateMode();
   }
 
@@ -126,6 +127,23 @@ export class DebtPostModalComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
         this.mode = value as FormMode
+      })
+  }
+
+  private watchSelectedDebt() {
+    combineLatest([
+      this.debtService.debtId$,
+      this.debtService.modalType$
+    ])
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(([id, mode]) => !!id && mode !== 'create'),
+        switchMap(([id]) => this.debtService.getDebtById(id!))
+      )
+      .subscribe(debt => {
+        if (debt) {
+          this.debtForm.patchValue(debt)
+        }
       })
   }
 
