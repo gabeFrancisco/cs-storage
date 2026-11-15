@@ -9,11 +9,11 @@
     <div class="flex text-end w-full flex-row justify-end text-green items-center">
       <div class="p-2 font-bold rounded text-white">
         <span><span class="text-sm mr-2">Caixa</span>
-          <span class="rounded border shadow border-white p-1 mr-1"><span class="text-sm">Dia:</span> R${{
-            cashRegisterValues.day.toFixed(2)
+          <span class="rounded border shadow border-white p-1 mr-1"><span class="text-sm">Dia:</span>{{
+            cashRegisterValues.day | money
             }}</span>
-          <span class="rounded border shadow border-white p-1 ml-1"><span class="text-sm">Mês:</span> R${{
-            cashRegisterValues.month.toFixed(2)
+          <span class="rounded border shadow border-white p-1 ml-1"><span class="text-sm">Mês:</span>{{
+            cashRegisterValues.month | money
             }}</span></span>
       </div>
       <!-- <span class="text-red-500">

@@ -44,7 +44,7 @@
               {{ payment_types[item.payment_type] }}
             </td>
             <td class="font-normal truncate text-emerald-700 p-1.5">
-              R${{ item.value.toFixed(2) }}
+              {{ item.value | money }}
             </td>
             <td class="font-normal truncate text-center">
               <button (click)="$event.stopPropagation(); openCashModal('update', item.id!)" title="Atualizar"

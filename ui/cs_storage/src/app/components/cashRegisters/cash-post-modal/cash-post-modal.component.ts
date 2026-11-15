@@ -193,7 +193,7 @@ export class CashPostModalComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
         this.product = value!
-        this.productData = `${this.product.id!} - ${this.product.name} - R\$${this.product.price.toFixed(2)}`
+        this.productData = `${this.product.id!} - ${this.product.name} - R\$${this.product.price}`
 
         this.cashForm.get('product_id')!.patchValue(value?.id!)
         this.recalculateValue();

@@ -11,7 +11,7 @@ class CategoryService
     private function getRequestData(CategoryRequest $request)
     {
         $category = new Category();
-        $category->id = $request['id'];
+        // $category->id = $request['id'];
         $category->name = $request['name'];
         $category->description = $request['description'];
 

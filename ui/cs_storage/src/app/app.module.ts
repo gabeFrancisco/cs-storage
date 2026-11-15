@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +39,11 @@ import { CashRegisterProductModal } from './components/cashRegisters/cash-regist
 import { Button } from './components/shared/button/button';
 import { DashCards } from './components/dash-cards/dash-cards';
 import { FormButton } from './components/shared/form-button/form-button';
+import { MoneyPipe } from './pipes/money-pipe';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [
@@ -73,6 +78,7 @@ import { FormButton } from './components/shared/form-button/form-button';
     Button,
     DashCards,
     FormButton,
+    MoneyPipe,
   ],
   imports: [
     BrowserModule,
@@ -83,8 +89,10 @@ import { FormButton } from './components/shared/form-button/form-button';
     NgClickOutsideDirective,
     FontAwesomeModule
   ],
-  providers: [provideHttpClient(),
-  provideHttpClient(withInterceptors([authInterceptor]))
+  providers: [
+    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })
